@@ -1,5 +1,8 @@
 import { PaginateCondition } from "./pagination.ts";
 
+/**
+ * 活动展示对象
+ */
 export interface Activity {
     // 活动id
     id: string;
@@ -34,6 +37,9 @@ export interface Activity {
     }]
 }
 
+/**
+ * 活动查询对象
+ */
 export interface ActivityCondition extends PaginateCondition {
     // 活动id
     id?: string;
