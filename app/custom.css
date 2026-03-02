@@ -1,0 +1,22 @@
+@layer components {
+  .editable-field {
+    /* 基础过渡 */
+    @apply inline transition-all duration-200 ring-offset-background;
+    
+    /* 展示模式 (Disabled/ReadOnly) */
+    &:disabled, &[data-disabled], &.is-viewing {
+      @apply bg-transparent border-transparent shadow-none cursor-default px-0;
+      @apply text-slate-900 dark:text-slate-100 opacity-100;
+      /* 隐藏 Select 的小箭头 */
+      & svg { @apply hidden; }
+      /* 禁用点击事件 */
+      @apply pointer-events-none;
+    }
+
+    /* 编辑模式 (Enabled) */
+    &:not(:disabled):not([data-disabled]):not(.is-viewing) {
+      @apply bg-white dark:bg-slate-950 border-slate-200 dark:border-slate-800 shadow-sm px-3;
+      @apply cursor-text focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
+    }
+  }
+}

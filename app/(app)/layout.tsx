@@ -1,0 +1,39 @@
+import { ReactNode } from 'react'
+import '@/app/globals.css';
+import { Metadata } from 'next'
+import { ThemeProvider } from '@/components/theme-provider';
+import { SidebarProvider } from '@/components/ui/sidebar';
+import AppSidebar from '@/components/web/sidebar';
+import Header from '@/components/web/header';
+
+export const metadata: Metadata = {
+    title: "My Website"
+}
+const RootLayout = ({ children }: { children: ReactNode }) => {
+    return (
+        <html suppressHydrationWarning>
+            <body>
+                <ThemeProvider
+                    attribute="class"
+                    defaultTheme="system"
+                    enableSystem
+                    disableTransitionOnChange
+                >
+                    <SidebarProvider className='border-amber-50'>
+                        <AppSidebar />
+                        <main className='px-4 md:px-6 lg:px-8 w-full mx-auto flex flex-col'>
+                            <div className='flex justify-between items-start py-5 gap-5 w-full'>
+                                <Header />
+                            </div>
+                            <div className='flex-1 flex items-center justify-center'>
+                                {children}
+                            </div>
+                        </main>
+                    </SidebarProvider>
+                </ThemeProvider>
+            </body>
+        </html>
+    )
+}
+
+export default RootLayout
