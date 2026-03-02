@@ -23,7 +23,8 @@
     "dbmr": "NODE_ENV=development prisma migrate reset -f --skip-seed",
     "dbms": "NODE_ENV=development prisma migrate dev",
     "dbmrs": "NODE_ENV=development prisma migrate reset -f",
-    "dbs": "prisma db seed"
+    "dbs": "prisma db seed",
+    "postinstall": "pnpm run dbm && pnpm run dbs && pnpm run dbg"
   },
   "dependencies": {
     "@ant-design/icons": "^6.1.0",

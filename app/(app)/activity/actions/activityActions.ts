@@ -1,9 +1,10 @@
 'use server'
 
 import { ActivityDao } from '@/database/activityDao';
-import { BaseDao, pagination } from '@/database/pagination';
+import { pagination } from '@/utils/pageHelper';
 import { ActivityCondition } from '@/types/activity';
 import { PageResult, PaginateCondition, PaginateMeta } from '@/types/pagination';
+import { BaseDao } from '@/database/IDao';
 
 type DaoFactory = () => BaseDao<any, PaginateCondition>;
 const daoRegistry: Record<string, DaoFactory> = {

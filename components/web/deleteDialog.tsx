@@ -2,19 +2,12 @@
 import { FC } from "react";
 import { AlertDialogHeader, AlertDialogFooter, AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogTitle, AlertDialogDescription, AlertDialogCancel, AlertDialogAction } from "../ui/alert-dialog"
 import { Button } from "../ui/button"
-// import { deleteActivityById } from "@/app/(app)/activity/actions/activityActions";
 import { deleteById } from "@/app/(app)/activity/actions/activityActions";
-// import {PaginationService} from "@/database/pagination.tsx";
-// import {ActivityDao} from "@/database/activityDao.ts";
-// import {Activity, ActivityCondition} from "@/types/activity.ts";
 
 const DeleteDialog: FC<{ id: string, title: string, reloadActivity: () => void }> = ({ id, title, reloadActivity }) => {
 
     const deleteActivity = async () => {
         const actionResult = await deleteById('activity', id);
-        // const activityDao = new ActivityDao();
-        // const activityServer = new PaginationService<Activity, ActivityCondition>(activityDao);
-        // const actionResult = await activityServer.deleteById(id);
         if (actionResult) {
             reloadActivity()
         }

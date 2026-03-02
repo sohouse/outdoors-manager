@@ -2,7 +2,7 @@ import {Activity, ActivityCondition, ActivityStatus, ActivityTypes} from '../typ
 import {getRandomInt} from '../utils/random.ts';
 import {base, en, Faker, zh_CN} from '@faker-js/faker';
 import {client} from "./client.ts"
-import {BaseDao} from "./pagination.tsx";
+import {BaseDao} from "./IDao.tsx";
 
 const faker = new Faker({
     locale: [zh_CN, en, base]
@@ -38,7 +38,7 @@ const generatorActivities = async () => {
     await Promise.all(promises);
 };
 
-export const initActivity = async (data?: Activity[]): Promise<void> => {
+export const initActivity = async (): Promise<void> => {
     try {
         await client.activity.deleteMany();
         await generatorActivities();
@@ -49,7 +49,7 @@ export const initActivity = async (data?: Activity[]): Promise<void> => {
 }
 
 const readActivity = async (condition: ActivityCondition): Promise<Activity[]> => {
-    const {page, pageSize, limit, start, ...cleanCondition} = condition;
+    const {page: _page, pageSize: _pageSize, limit, start, ...cleanCondition} = condition;
     const activities = await client.activity.findMany({
         where: cleanCondition,
         skip: start,
@@ -80,6 +80,7 @@ export class ActivityDao implements BaseDao<Activity, ActivityCondition> {
             })
             return true;
         } catch (e) {
+            console.error(e);
             return false;
         }
     }
@@ -118,6 +119,7 @@ export class ActivityDao implements BaseDao<Activity, ActivityCondition> {
             })
             return true;
         } catch (e) {
+            console.error(e);
             return false;
         }
     }

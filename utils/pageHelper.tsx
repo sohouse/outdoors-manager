@@ -11,11 +11,3 @@ export const pagination = (condition: PaginateCondition) => {
     condition.limit = limit;
     condition.page = page;
 }
-
-export interface BaseDao<T, Condition extends PaginateCondition> {
-    findByCondition(condition?: Condition): Promise<{items: T[], totalCount:number}>;
-    insertObj(obj: T): Promise<boolean>;
-    countByCondition(condition?: Condition): Promise<number>;
-    editObj(updateObj: T): Promise<boolean>;
-    deleteById(id: string): Promise<boolean>;
-}
