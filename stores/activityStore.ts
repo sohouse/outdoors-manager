@@ -12,7 +12,7 @@ type activityStoreType = {
 }
 
 const useActivityStore = create<activityStoreType>((set) => ({
-    condition: {page: 1, limit:5, pageSize:5},
+    condition: {page: 1, limit:5},
     paginateMeta: {totalCount:0, currentCount:0, pageSize:0, totalPage:0, currentPage:0},
     refreshFlag: 0,
     setPaginateMeta: (page) => set(() => ({
