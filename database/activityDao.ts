@@ -1,8 +1,8 @@
-import {Activity, ActivityCondition, ActivityStatus, ActivityTypes} from '../types/activity.ts';
-import {getRandomInt} from '../utils/random.ts';
-import {base, en, Faker, zh_CN} from '@faker-js/faker';
-import {client} from "./client.ts"
-import {BaseDao} from "./IDao.tsx";
+import { Activity, ActivityCondition, ActivityStatus, ActivityTypes } from '../types/activity.ts';
+import { getRandomInt } from '../utils/random.ts';
+import { base, en, Faker, zh_CN } from '@faker-js/faker';
+import { client } from "./client.ts"
+import { BaseDao } from "./IDao.tsx";
 
 const faker = new Faker({
     locale: [zh_CN, en, base]
@@ -18,13 +18,13 @@ const activityStatueFilter = Object.values(ActivityStatus).filter(
 const createRandomActivity = async () => {
     await client.activity.create({
         data: {
-            title: faker.lorem.paragraph({min: 1, max: 3}),
+            title: faker.lorem.paragraph({ min: 1, max: 3 }),
             content: faker.lorem.paragraphs(getRandomInt(3, 6), '\n'),
             author: faker.person.fullName(),
             create_time: faker.date.anytime(),
             leader_id: faker.string.uuid(),
             type: faker.helpers.arrayElement(activityTypesFilter),
-            desc: faker.lorem.paragraph({min: 5, max: 7}),
+            desc: faker.lorem.paragraph({ min: 5, max: 7 }),
             status: faker.helpers.arrayElement(activityStatueFilter),
             start_time: faker.date.anytime(),
             end_time: faker.date.anytime()
@@ -34,7 +34,7 @@ const createRandomActivity = async () => {
 }
 
 const generatorActivities = async () => {
-    const promises = Array.from({length: 22}).map(() => createRandomActivity());
+    const promises = Array.from({ length: 22 }).map(() => createRandomActivity());
     await Promise.all(promises);
 };
 
@@ -46,30 +46,6 @@ export const initActivity = async (): Promise<void> => {
         console.error(error);
         throw error;
     }
-}
-
-const readActivity = async (condition: ActivityCondition): Promise<Activity[]> => {
-    const {page: _page, pageSize: _pageSize, limit, start, ...cleanCondition} = condition;
-    const activities = await client.activity.findMany({
-        where: cleanCondition,
-        skip: start,
-        take: limit
-    })
-    // 转换为 Activity 类型
-    const mappedActivities = activities.map(activity => ({
-        id: activity.id,
-        content: activity.content || undefined,
-        author: activity.author || undefined,
-        create_time: activity.create_time || undefined,
-        title: activity.title || undefined,
-        leader_id: activity.leader_id || undefined,
-        type: activity.type || undefined,
-        desc: activity.desc || undefined,
-        status: activity.status || undefined,
-        start_time: activity.start_time || undefined,
-        end_time: activity.end_time || undefined
-    }));
-    return mappedActivities as Activity[];
 }
 
 export class ActivityDao implements BaseDao<Activity, ActivityCondition> {
@@ -85,29 +61,49 @@ export class ActivityDao implements BaseDao<Activity, ActivityCondition> {
         }
     }
 
-    countByCondition = async (condition?: ActivityCondition): Promise<number> => {
-        const {page: _page, pageSize: _pageSize, limit: _limit, start: _start, ...cleanCondition} = condition ?? {};
+    countByCondition = async (condition: ActivityCondition): Promise<number> => {
+        const { page: _page, limit: _limit, start: _start, ...cleanCondition } = condition ?? {};
         return client.activity.count({
             where: cleanCondition
         });
     }
 
     findByCondition = async (condition: ActivityCondition): Promise<{ items: Activity[], totalCount: number }> => {
-        const readData: Activity[] = await readActivity(condition) || [];
-        if (!Array.isArray(readData)) {
+        const { page: _page, limit, start, ...cleanCondition } = condition;
+        const activities = await client.activity.findMany({
+            where: cleanCondition,
+            skip: start,
+            take: limit
+        })
+        // 转换为 Activity 类型
+        const mappedActivities = activities.map(activity => ({
+            id: activity.id,
+            content: activity.content || undefined,
+            author: activity.author || undefined,
+            create_time: activity.create_time || undefined,
+            title: activity.title || undefined,
+            leader_id: activity.leader_id || undefined,
+            type: activity.type || undefined,
+            desc: activity.desc || undefined,
+            status: activity.status || undefined,
+            start_time: activity.start_time || undefined,
+            end_time: activity.end_time || undefined
+        }));
+
+        if (!Array.isArray(mappedActivities)) {
             throw new Error('读取数据失败');
         }
         const totalCount = await this.countByCondition(condition);
         return {
-            items: readData,
+            items: mappedActivities as Activity[],
             totalCount
         };
     }
 
     // todo 完成修改逻辑
     editObj = async (updateActivity: Activity): Promise<boolean> => {
-        const activities: Activity[] = await readActivity({id: updateActivity.id}) || [];
-        if (!Array.isArray(activities)) {
+        const {items} = await this.findByCondition({ id: updateActivity.id }) || [];
+        if (!Array.isArray(items)) {
             throw new Error('读取数据失败');
         }
         try {
@@ -123,11 +119,11 @@ export class ActivityDao implements BaseDao<Activity, ActivityCondition> {
             return false;
         }
     }
-    
+
     deleteById = async (id: string): Promise<boolean> => {
         try {
-            const activities: Activity[] = await readActivity({id: id}) || [];
-            if (activities.length > 0) {
+            const {items} = await this.findByCondition({ id: id }) || [];
+            if (items.length > 0) {
                 await client.activity.delete({
                     where: {
                         id: id

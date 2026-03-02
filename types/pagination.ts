@@ -3,7 +3,7 @@
  */
 export interface PaginateCondition {
   page?: number;
-  pageSize?: number;
+  // pageSize?: number;
   limit?: number;
   start?: number;
 }
