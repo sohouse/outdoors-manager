@@ -21,7 +21,7 @@ const Header = () => {
   }, [searchParams]);
 
   return (
-    <nav className="w-full flex items-start justify-between">
+    <nav className="w-full flex items-center justify-between h-full transition-[background-color] ease-in-out duration-300 border-b-2 border-gray-500 border-solid">
       <div className="flex items-center gap-8">
         <Link href="/">
           <h1 className="text-3xl font-bold">
