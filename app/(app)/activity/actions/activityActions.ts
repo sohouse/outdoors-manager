@@ -6,7 +6,7 @@ import { ActivityCondition } from '@/types/activity';
 import { PageResult, PaginateCondition, PaginateMeta } from '@/types/pagination';
 import { BaseDao } from '@/database/IDao';
 
-type DaoFactory = () => BaseDao<any, PaginateCondition>;
+type DaoFactory = () => BaseDao<unknown, PaginateCondition>;
 const daoRegistry: Record<string, DaoFactory> = {
   activity: () => new ActivityDao(),
 }
@@ -36,7 +36,7 @@ export async function findByCondition<T, ConditionType extends PaginateCondition
 
   return {
     meta,
-    items
+    items: items as T[]
   };
 }
 

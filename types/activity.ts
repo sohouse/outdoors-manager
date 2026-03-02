@@ -13,7 +13,7 @@ export interface Activity {
     // 活动创建时间
     create_time?: Date;
     // 活动标题
-    title?: string,
+    title: string,
     // 活动领队id
     leader_id?: string;
     // 车辆id
@@ -23,9 +23,9 @@ export interface Activity {
     // 活动描述
     desc?: string;
     // 活动类型
-    type?: ActivityTypes;
+    type: ActivityTypes;
     // 活动状态
-    status?: ActivityStatus;
+    status: ActivityStatus;
     // 开始时间
     start_time?:Date;
     // 结束时间

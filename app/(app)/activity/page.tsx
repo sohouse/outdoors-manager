@@ -1,7 +1,7 @@
 'use client'
 
 import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
-import { ActivityStatus, ActivityTypes, Activity } from "@/types/activity";
+import { ActivityStatus, ActivityTypes, Activity, ActivityCondition } from "@/types/activity";
 import dayjs from 'dayjs'
 import { FC, useEffect, useState } from "react";
 import ActivityFilterBar from "@/components/web/activitySearch";
@@ -19,7 +19,7 @@ const ActivityPage: FC = () => {
   const [activities, setActivities] = useState<Activity[]>([]);
   useEffect(() => {
     const loadActivities = async () => {
-      const { items, meta } = await findByCondition('activity', condition);
+      const { items, meta } = await findByCondition<Activity, ActivityCondition>('activity', condition);
       setActivities(items);
       setPaginateMeta(meta);
     }
@@ -27,7 +27,7 @@ const ActivityPage: FC = () => {
   }, [condition, setPaginateMeta, refreshFlag])
 
   const reloadActivity = async () => {
-    const { items, meta } = await findByCondition('activity', condition);
+    const { items, meta } = await findByCondition<Activity, ActivityCondition>('activity', condition);
     setActivities(items);
     setPaginateMeta(meta);
   }
