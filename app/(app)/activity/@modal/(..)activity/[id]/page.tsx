@@ -1,7 +1,8 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
-import { use, useEffect, useState } from 'react'
+import { getObjById, updateObj } from '@/app/(app)/activity/actions/activityActions'
+import { editActivityCheck } from '@/app/auth/login/zodCheck'
+import { Button } from '@/components/ui/button'
 import {
   Dialog,
   DialogClose,
@@ -10,19 +11,18 @@ import {
   DialogHeader,
   DialogTitle,
 } from '@/components/ui/dialog'
-import { ActivityStatus, ActivityTypes, Activity } from '@/types/activity'
-import { getObjById, updateObj } from '@/app/(app)/activity/actions/activityActions'
-import dayjs from 'dayjs'
-import { Button } from '@/components/ui/button'
+import { Field, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field'
 import { Input } from '@/components/ui/input'
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { Textarea } from '@/components/ui/textarea'
-import { Field, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field'
-import { Controller, useForm } from 'react-hook-form'
-import { zodResolver } from '@hookform/resolvers/zod'
-import { editActivityCheck } from '@/app/auth/login/zodCheck'
-import z from 'zod'
 import { useActivityStore } from '@/stores/activityStore'
+import { Activity, ActivityStatus, ActivityTypes } from '@/types/activity'
+import { zodResolver } from '@hookform/resolvers/zod'
+import dayjs from 'dayjs'
+import { useRouter } from 'next/navigation'
+import { use, useEffect, useState } from 'react'
+import { Controller, useForm } from 'react-hook-form'
+import z from 'zod'
 
 export default function ActivityDetailModal({
   params,
@@ -50,7 +50,7 @@ export default function ActivityDetailModal({
   const form = useForm({
     resolver: zodResolver(editActivityCheck),
     defaultValues: {
-      name: "",
+      title: "", // 改为title
       start_time: undefined,
       end_time: undefined,
       type: ActivityTypes.徒步, // 提供默认值
@@ -66,10 +66,10 @@ export default function ActivityDetailModal({
     const fetchActivity = async (id: string) => {
       const fetchData = await getObjById('activity', id);
       setActivity(fetchData);
-      form.reset({ 
-        ...fetchData, 
-        start_time: dayjs(fetchData.start_time).format('YYYY-MM-DDTHH:mm'), 
-        end_time: dayjs(fetchData.end_time).format('YYYY-MM-DDTHH:mm') 
+      form.reset({
+        ...fetchData,
+        start_time: dayjs(fetchData.start_time).format('YYYY-MM-DDTHH:mm'),
+        end_time: dayjs(fetchData.end_time).format('YYYY-MM-DDTHH:mm')
       })
     }
 
@@ -85,7 +85,6 @@ export default function ActivityDetailModal({
   }
 
   const activityEditSubmit = async (data: z.infer<typeof editActivityCheck>) => {
-console.log('aaaaaaaaaaaaaaaaaaaaaa')
     try {
       const editActivity: Activity = {
         ...data,
@@ -128,7 +127,10 @@ console.log('aaaaaaaaaaaaaaaaaaaaaa')
           </DialogTitle>
         </DialogHeader>
         {activity && (
-          <form id='activity-edit-form' onSubmit={form.handleSubmit(activityEditSubmit)}>
+          <form id='activity-edit-form' onSubmit={form.handleSubmit(
+              (data) => { activityEditSubmit(data) },
+              (error) => { console.error(error) }
+            )}>
             <FieldGroup>
               <Field>
                 <Controller

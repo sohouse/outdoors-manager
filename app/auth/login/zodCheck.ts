@@ -16,7 +16,7 @@ export const signUpCheck = z.object({
 })
 
 export const editActivityCheck = z.object({
-    name: z.string(),
+    title: z.string(), // 改为title而不是name
     start_time: z.string().optional().refine(
         (val) => !val || !isNaN(Date.parse(val)),
         {message: "Invalid date format"}
@@ -25,10 +25,10 @@ export const editActivityCheck = z.object({
         (val) => !val || !isNaN(Date.parse(val)),
         {message: "Invalid date format"}
     ),
-    type: z.enum(ActivityTypes),
-    status: z.enum(ActivityStatus),
-    desc: z.string(),
-    author: z.string(),
-    content: z.string(),
+    type: z.enum(ActivityTypes).optional(), // 改为可选
+    status: z.enum(ActivityStatus).optional(), // 改为可选
+    desc: z.string().optional(), // 改为可选
+    author: z.string().optional(), // 改为可选
+    content: z.string().optional(), // 改为可选
     id: z.string()
 })
