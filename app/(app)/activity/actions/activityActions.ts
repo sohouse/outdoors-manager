@@ -2,7 +2,7 @@
 
 import { ActivityDao } from '@/database/activityDao';
 import { pagination } from '@/utils/pageHelper';
-import { ActivityCondition } from '@/types/activity';
+import { Activity, ActivityCondition } from '@/types/activity';
 import { PageResult, PaginateCondition, PaginateMeta } from '@/types/pagination';
 import { BaseDao } from '@/database/IDao';
 
@@ -40,11 +40,11 @@ export async function findByCondition<T, ConditionType extends PaginateCondition
   };
 }
 
-export async function getObjById(daoType: string, id: string) {
+export async function getObjById(daoType: string, id: string): Promise<Activity> {
   const dao = daoRegistry[daoType]();
   try {
 
-    const { items } = await dao.findByCondition({ id: id } as ActivityCondition);
+    const { items } = await dao.findByCondition<Activity>({ id: id } as ActivityCondition);
     return items[0] ?? null;
   } catch (error) {
     console.error('Error fetching activity:', error);
