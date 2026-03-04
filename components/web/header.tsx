@@ -5,6 +5,8 @@ import { buttonVariants } from "../ui/button"
 import { ModeToggle } from "./modeToggle"
 import { useSearchParams } from "next/navigation"
 import { useMemo } from "react"
+import { useScroll } from "@/hooks/useScroll"
+import { cn } from "@/lib/utils"
 
 const Header = () => {
 
@@ -20,29 +22,33 @@ const Header = () => {
     return query ? `?${query}` : '';
   }, [searchParams]);
 
+  const scrolled = useScroll(10);
+
   return (
-    <nav className="w-full flex items-center justify-between h-full transition-[background-color] ease-in-out duration-300 border-b-2 border-gray-500 border-solid">
-      <div className="flex items-center gap-8">
-        <Link href="/">
-          <h1 className="text-3xl font-bold">
-            My<span className="text-blue-500">Website</span>
-          </h1>
-        </Link>
+    <div className="flex justify-between items-center pb-5 gap-5 w-full min-h-30 sticky top-0 z-10 ">
+      <nav className={cn('main-header', { 'main-header-scroll': scrolled, 'main-header-unscroll': !scrolled })}>
+        <div className="flex items-center gap-8">
+          <Link href="/">
+            <h1 className="text-3xl font-bold">
+              My<span className="text-blue-500">Website</span>
+            </h1>
+          </Link>
+
+          <div className="flex gap-5">
+            <Link className={buttonVariants({ variant: "destructive" })} href="/">Home</Link>
+            <Link className={buttonVariants({ variant: "destructive" })} href={`/activity${urlQuery}`}>Activity</Link>
+            <Link className={buttonVariants({ variant: "destructive" })} href="/topics/create">Create</Link>
+          </div>
+        </div>
 
         <div className="flex gap-5">
-          <Link className={buttonVariants({ variant: "destructive" })} href="/">Home</Link>
-          <Link className={buttonVariants({ variant: "destructive" })} href={`/activity${urlQuery}`}>Activity</Link>
-          <Link className={buttonVariants({ variant: "destructive" })} href="/topics/create">Create</Link>
+          <Link className={buttonVariants({ variant: "destructive" })} href="/auth/sign-up">Sign up</Link>
+          <Link className={buttonVariants({ variant: "destructive" })} href="/auth/login">Login</Link>
+          <ModeToggle />
         </div>
-      </div>
 
-      <div className="flex gap-5">
-        <Link className={buttonVariants({ variant: "destructive" })} href="/auth/sign-up">Sign up</Link>
-        <Link className={buttonVariants({ variant: "destructive" })} href="/auth/login">Login</Link>
-        <ModeToggle />
-      </div>
-
-    </nav>
+      </nav>
+    </div>
   )
 }
 

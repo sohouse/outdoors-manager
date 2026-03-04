@@ -22,9 +22,7 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
                     <SidebarProvider className='border-amber-50'>
                         <AppSidebar />
                         <main className='px-4 md:px-6 lg:px-8 w-full mx-auto flex flex-col'>
-                            <div className='flex justify-between items-center py-5 gap-5 w-full min-h-30'>
-                                <Header />
-                            </div>
+                            <Header />
                             <div className='flex-1 flex items-center justify-center'>
                                 {children}
                             </div>
