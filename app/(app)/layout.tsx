@@ -1,5 +1,5 @@
 import { ReactNode } from 'react'
-import '@/app/globals.css';
+import '@/app/styles/globals.css';
 import { Metadata } from 'next'
 import { ThemeProvider } from '@/components/theme-provider';
 import { SidebarProvider } from '@/components/ui/sidebar';
