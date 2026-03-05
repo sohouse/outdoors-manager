@@ -1,15 +1,9 @@
 'use server'
 
-import { ActivityDao } from '@/database/activityDao';
 import { pagination } from '@/utils/pageHelper';
 import { Activity, ActivityCondition } from '@/types/activity';
 import { PageResult, PaginateCondition, PaginateMeta } from '@/types/pagination';
-import { BaseDao } from '@/database/IDao';
-
-type DaoFactory = () => BaseDao<unknown, PaginateCondition>;
-const daoRegistry: Record<string, DaoFactory> = {
-  activity: () => new ActivityDao(),
-}
+import { daoRegistry } from '@/database/IDao';
 
 export async function deleteById(
   daoType: string,
@@ -19,7 +13,7 @@ export async function deleteById(
   return daoFactory.deleteById(id)
 }
 
-export async function findByCondition<T, ConditionType extends PaginateCondition>(daoType: string, condition: ConditionType): Promise<PageResult<T>> {
+export async function findByCondition<ConditionType extends PaginateCondition>(daoType: string, condition: ConditionType): Promise<PageResult<Activity>> {
   // 组装分页条件
   pagination(condition);
   const daoFactory = daoRegistry[daoType]();
@@ -36,23 +30,23 @@ export async function findByCondition<T, ConditionType extends PaginateCondition
 
   return {
     meta,
-    items: items as T[]
+    items: items as Activity[]
   };
 }
 
-export async function getObjById(daoType: string, id: string): Promise<Activity> {
+export async function getObjById(daoType: string, id: string): Promise<Activity | null> {
   const dao = daoRegistry[daoType]();
   try {
 
-    const { items } = await dao.findByCondition<Activity>({ id: id } as ActivityCondition);
-    return items[0] ?? null;
+    const { items } = await dao.findByCondition({ id: id } as ActivityCondition);
+    return (items[0] as Activity) ?? null;
   } catch (error) {
     console.error('Error fetching activity:', error);
     throw error;
   }
 }
 
-export async function updateObj<T>(daoType: string, activity: T) {
+export async function updateObj<Activity>(daoType: string, activity: Activity) {
   const dao = daoRegistry[daoType]();
   try {
     const success = await dao.editObj(activity);
@@ -63,7 +57,7 @@ export async function updateObj<T>(daoType: string, activity: T) {
   }
 }
 
-export async function createObj<T>(daoType: string, activity: T) {
+export async function createObj<Activity>(daoType: string, activity: Activity) {
 
   const dao = daoRegistry[daoType]();
   try {
