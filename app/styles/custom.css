@@ -24,7 +24,7 @@
   }
 
   .main-header-scroll {
-    @apply bg-white/70 backdrop-blur-lg px-6 py-4 rounded-xl shadow-md border border-white/20
+    @apply bg-white/70 backdrop-blur-lg py-4 rounded-xl shadow-md border border-white/20
   }
   
   .main-header-unscroll {

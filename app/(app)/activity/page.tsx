@@ -19,7 +19,7 @@ const ActivityPage: FC = () => {
   const [activities, setActivities] = useState<Activity[]>([]);
   useEffect(() => {
     const loadActivities = async () => {
-      const { items, meta } = await findByCondition<Activity, ActivityCondition>('activity', condition);
+      const { items, meta } = await findByCondition<ActivityCondition>('activity', condition);
       setActivities(items);
       setPaginateMeta(meta);
     }
@@ -27,7 +27,7 @@ const ActivityPage: FC = () => {
   }, [condition, setPaginateMeta, refreshFlag])
 
   const reloadActivity = async () => {
-    const { items, meta } = await findByCondition<Activity, ActivityCondition>('activity', condition);
+    const { items, meta } = await findByCondition<ActivityCondition>('activity', condition);
     setActivities(items);
     setPaginateMeta(meta);
   }
@@ -39,46 +39,46 @@ const ActivityPage: FC = () => {
   }
 
   return (
-    <div className="w-full flex flex-col gap-5">
+    <div className="w-full flex flex-col gap-5 max-w-4xl mx-auto md:gap-5">
       <ActivityFilterBar />
-      {
-        activities.map(item => (
-          <Card
-            key={item.id}
-            className="bg-no-repeat cursor-pointer"
-            style={{
-              backgroundImage: `url(/images/activity/${item.type}.png)`
-            }}
-            onClick={() => goActivityDetail(item.id)}
-          >
-            <CardHeader>
-              <h2 className="truncate ...">
-                {item.title}
-              </h2>
-              <div>
-                {`${dayjs(item.start_time).format('YYYY-MM-DD HH:mm:ss')} 
+        {
+          activities.map(item => (
+            <Card
+              key={item.id}
+              className="bg-no-repeat cursor-pointer"
+              style={{
+                backgroundImage: `url(/images/activity/${item.type}.png)`
+              }}
+              onClick={() => goActivityDetail(item.id)}
+            >
+              <CardHeader>
+                <h2 className="text-lg md:text-xl truncate ...">
+                  {item.title}
+                </h2>
+                <div className="text-xs md:text-sm">
+                  {`${dayjs(item.start_time).format('YYYY-MM-DD HH:mm:ss')} 
               - ${dayjs(item.end_time).format('YYYY-MM-DD HH:mm:ss')}`}
-              </div>
-              <div>
-                {`${ActivityTypes[item.type]} - ${ActivityStatus[item.status]}`}
-              </div>
-            </CardHeader>
-            <CardContent>
-              {item.desc}
-            </CardContent>
-            <CardFooter className="flex flex-row justify-between">
-              <div>
-                {item.author} - {dayjs(item.create_time).format('YYYY-MM-DD HH:mm:ss')}
-              </div>
-              <DeleteDialog 
-              id={item.id} 
-              title={item.title} 
-              reloadActivity={reloadActivity} 
-              />
-            </CardFooter>
-          </Card>
-        ))
-      }
+                </div>
+                <div>
+                  {`${ActivityTypes[item.type]} - ${ActivityStatus[item.status]}`}
+                </div>
+              </CardHeader>
+              <CardContent className="line-clamp-2 md:line-clamp-3 text-sm">
+                {item.desc}
+              </CardContent>
+              <CardFooter className="flex-row justify-between text-xs hidden md:block">
+                <div>
+                  {item.author} - {dayjs(item.create_time).format('YYYY-MM-DD HH:mm:ss')}
+                </div>
+                <DeleteDialog
+                  id={item.id}
+                  title={item.title}
+                  reloadActivity={reloadActivity}
+                />
+              </CardFooter>
+            </Card>
+          ))
+        }
       <PageProvider />
     </div>
   )

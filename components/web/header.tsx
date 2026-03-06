@@ -4,11 +4,14 @@ import Link from "next/link"
 import { buttonVariants } from "../ui/button"
 import { ModeToggle } from "./modeToggle"
 import { useSearchParams } from "next/navigation"
-import { useMemo } from "react"
+import { useMemo, useState } from "react"
 import { useScroll } from "@/hooks/useScroll"
 import { cn } from "@/lib/utils"
+import { Home, LogInIcon, UserPlus } from "lucide-react"
 
 const Header = () => {
+
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   // 保存当前路径
   const searchParams = useSearchParams();
@@ -25,29 +28,55 @@ const Header = () => {
   const scrolled = useScroll(10);
 
   return (
-    <div className="flex justify-between items-center pb-5 gap-5 w-full min-h-30 sticky top-0 z-10 ">
-      <nav className={cn('main-header', { 'main-header-scroll': scrolled, 'main-header-unscroll': !scrolled })}>
-        <div className="flex items-center gap-8">
-          <Link href="/">
-            <h1 className="text-3xl font-bold">
-              My<span className="text-blue-500">Website</span>
-            </h1>
-          </Link>
+    <div className="flex justify-between items-center w-full min-h-30 sticky top-0 z-10 flex-row">
+      <button
+        className="md:hidden flex"
+        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+      >
+        ☰
+      </button>
+      <div className={`${mobileMenuOpen ? 'flex' : 'hidden'} 
+        md:flex md:flex-row md:relative md:bg-transparent md:p-0 md:shadow-none md:w-full md:top-0
+        flex-col top-auto w-full px-4`}>
+        <nav className={cn('main-header', { 'main-header-scroll': scrolled, 'main-header-unscroll': !scrolled })}>
+          <div className="flex items-center gap-8">
+            <Link href="/">
+              <h1 className="md:text-3xl font-bold text-base">
+                My<span className="text-blue-500">Website</span>
+              </h1>
+            </Link>
+
+            <div className="flex gap-5">
+              <Link className={buttonVariants({ variant: "destructive" })} href="/">
+                <div>
+                  <Home className="w-5 h-5 md:hidden" />
+                  <span className="hidden md:inline">Home</span>
+                </div>
+              </Link>
+
+              <Link className={`${buttonVariants({ variant: "destructive" })} hidden! md:inline!`} href={`/activity${urlQuery}`}>Activity</Link>
+              <Link className={`${buttonVariants({ variant: "destructive" })} hidden! md:inline!`} href="/topics/create">Create</Link>
+            </div>
+          </div>
 
           <div className="flex gap-5">
-            <Link className={buttonVariants({ variant: "destructive" })} href="/">Home</Link>
-            <Link className={buttonVariants({ variant: "destructive" })} href={`/activity${urlQuery}`}>Activity</Link>
-            <Link className={buttonVariants({ variant: "destructive" })} href="/topics/create">Create</Link>
+            <Link className={buttonVariants({ variant: "destructive" })} href="/auth/sign-up">
+              <div>
+                <UserPlus className="w-5 h-5 md:hidden" />
+                <span className="hidden md:inline">Sign Up</span>
+              </div>
+            </Link>
+            <Link className={buttonVariants({ variant: "destructive" })} href="/auth/login">
+              <div>
+                <LogInIcon className="w-5 h-5 md:hidden" />
+                <span className="hidden md:inline">Login</span>
+              </div>
+            </Link>
+            <ModeToggle />
           </div>
-        </div>
 
-        <div className="flex gap-5">
-          <Link className={buttonVariants({ variant: "destructive" })} href="/auth/sign-up">Sign up</Link>
-          <Link className={buttonVariants({ variant: "destructive" })} href="/auth/login">Login</Link>
-          <ModeToggle />
-        </div>
-
-      </nav>
+        </nav>
+      </div>
     </div>
   )
 }
