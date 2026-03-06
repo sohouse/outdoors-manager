@@ -76,14 +76,14 @@ const ActivityPage: FC = () => {
             onClick={() => goActivityDetail(item.id)}
           >
               {/* 模糊背景层 */}
-              {/* <div
-                className="absolute inset-0 bg-cover bg-no-repeat bg-center blur-2xl scale-110 -z-10"
+              <div
+                className="absolute inset-0 bg-cover bg-no-repeat bg-center blur-2xl scale-110 -z-10 pointer-events-none"
                 style={{ backgroundImage: `url(/images/activity/${item.type}.png)` }}
-              /> */}
+              />
               {/* 亮色主题渐变覆盖层 */}
-              {/* <div className="absolute inset-0 bg-linear-to-r from-background/90 via-background/30 to-transparent md:from-background/60 md:via-background/10" /> */}
+              <div className="absolute inset-0 bg-linear-to-r from-background/90 via-background/30 to-transparent md:from-background/60 md:via-background/10 pointer-events-none" />
               {/* 暗色主题渐变覆盖层 */}
-              {/* <div className="absolute inset-0 bg-linear-to-r dark:from-foreground/80 dark:via-foreground/20 dark:to-transparent md:dark:from-foreground/40 md:dark:via-foreground/5" /> */}
+              <div className="absolute inset-0 bg-linear-to-r dark:from-foreground/80 dark:via-foreground/20 dark:to-transparent md:dark:from-foreground/40 md:dark:via-foreground/5 pointer-events-none" />
               <CardHeader className={`${getTextColor(item.type)} ${getDarkTextColor(item.type)} opacity-80`}>
                 <h2 className="text-lg md:text-xl truncate">
                   {item.title}
