@@ -1,24 +1,29 @@
 'use client'
-import { FC } from "react";
+import React, { FC } from "react";
 import { AlertDialogHeader, AlertDialogFooter, AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogTitle, AlertDialogDescription, AlertDialogCancel, AlertDialogAction } from "../ui/alert-dialog"
 import { Button } from "../ui/button"
 import { deleteById } from "@/app/(app)/activity/actions/activityActions";
 
 const DeleteDialog: FC<{ id: string, title: string, reloadActivity: () => void }> = ({ id, title, reloadActivity }) => {
 
-    const deleteActivity = async () => {
+    const deleteActivity = async (event:React.MouseEvent) => {
+        stopPopup(event);
         const actionResult = await deleteById('activity', id);
         if (actionResult) {
             reloadActivity()
         }
     }
 
+    const stopPopup = (event:React.MouseEvent) => {
+        event.stopPropagation();
+    }
+
     return (
         <AlertDialog>
             <AlertDialogTrigger asChild>
-                <Button variant="destructive" onClick={(e) => {e.stopPropagation();}}>删除</Button>
+                <Button variant="destructive" onClick={stopPopup}>删除</Button>
             </AlertDialogTrigger>
-            <AlertDialogContent onClick={(e) => e.stopPropagation()}>
+            <AlertDialogContent>
                 <AlertDialogHeader>
                     <AlertDialogTitle>确定删除活动：{title}?</AlertDialogTitle>
                     <AlertDialogDescription>
@@ -26,7 +31,7 @@ const DeleteDialog: FC<{ id: string, title: string, reloadActivity: () => void }
                     </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                    <AlertDialogCancel onClick={stopPopup}>Cancel</AlertDialogCancel>
                     <AlertDialogAction variant="destructive" onClick={deleteActivity}>Continue</AlertDialogAction>
                 </AlertDialogFooter>
             </AlertDialogContent>
