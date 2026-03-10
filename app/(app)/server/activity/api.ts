@@ -1,6 +1,3 @@
-// import { daoRegistry } from '@/database/IDao';
-// import {Hono} from 'hono';
-
 import { daoRegistry } from "@/database/IDao";
 import { Activity } from "@/types/activity";
 import { simpleObjCover } from "@/utils/ObjectHelper";
@@ -8,18 +5,6 @@ import { PaginateMeta } from "@/types/pagination";
 import { pagination } from "@/utils/pageHelper";
 import { Hono } from "hono";
 
-// const app = new Hono();
-// // 具体的业务处理方法
-// export const activityApi = app.get('/list', async(c) => {
-//   const daoFactory = daoRegistry['activity']();
-
-//   const { items, totalCount } = await daoFactory.findByCondition({});
-
-//     return c.json({data: {message: items}})
-// })
-
-// src/server/post/api.ts
-// ...
 const app = new Hono();
 export const activityApi = app
   .get('/findByCondition', async (context) => {
@@ -50,16 +35,16 @@ export const activityApi = app
       // return c.json(createErrorResult('查询文章分页数据失败', error), 500);
     }
   })
-  // .get('/page-numbers', async (c) => {
-  //     try {
-  //         const query = c.req.query();
-  //         const limit = query.limit ? Number(query.limit) : undefined;
-  //         const result = await queryPostTotalPages(limit);
-  //         return c.json({ result }, 200);
-  //     } catch (error) {
-  //         return c.json(createErrorResult('查询页面总数失败', error), 500);
-  //     }
-  // })
+  .get('/getObjById', async (context) => {
+      try {
+          const query = context.req.query();
+          const limit = query.limit ? Number(query.limit) : undefined;
+          const result = await queryPostTotalPages(limit);
+          return context.json({ result }, 200);
+      } catch (error) {
+          return context.json(createErrorResult('查询页面总数失败', error), 500);
+      }
+  })
   // .get('/:item', async (c) => {
   //     try {
   //         const { item } = c.req.param();
