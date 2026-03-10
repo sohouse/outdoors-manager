@@ -50,9 +50,8 @@ const ActivityPage: FC = () => {
       //     query: condition,
       //   }),);
 
-      const res = await honoClient.findByCondition.$get({ query: condition });
-      const { items, meta } = res.json();
-      console.log('111-' + JSON.stringify(items));
+      const res = await honoClient.api.findByCondition.$get({ query: condition });
+      const { items, meta } = await res.json();
       // const { items, meta } = await findByCondition<ActivityCondition>('activity', condition);
       setActivities(items);
       setPaginateMeta(meta);
