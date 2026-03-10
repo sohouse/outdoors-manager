@@ -10,8 +10,7 @@ import { useActivityStore } from "@/stores/activityStore";
 import { findByCondition } from "./actions/activityActions";
 import DeleteDialog from "@/components/web/deleteDialog";
 import { useRouter } from "next/navigation";
-import { fetchApi } from "@/config/app";
-import { honoClient } from "../api/[[...route]]/route";
+import { app, honoClient } from "../server/main";
 
 // 根据活动类型获取文字颜色（在对应背景图片上显示效果好）
 const getTextColor = (type: number): string => {
@@ -45,12 +44,8 @@ const ActivityPage: FC = () => {
   const [activities, setActivities] = useState<Activity[]>([]);
   useEffect(() => {
     const loadActivities = async () => {
-      // const { items, meta } = await fetchApi(async (context) =>
-      //   context.api.activity['findByCondition'].$get({
-      //     query: condition,
-      //   }),);
 
-      const res = await honoClient.api.findByCondition.$get({ query: condition });
+      const res = await honoClient.api.activity['findByCondition'].$get({ query: condition });
       const { items, meta } = await res.json();
       // const { items, meta } = await findByCondition<ActivityCondition>('activity', condition);
       setActivities(items);

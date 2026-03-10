@@ -2,11 +2,11 @@
 // import {Hono} from 'hono';
 
 import { daoRegistry } from "@/database/IDao";
-import { createHonoApp } from "../common/app";
 import { Activity } from "@/types/activity";
 import { simpleObjCover } from "@/utils/ObjectHelper";
 import { PaginateMeta } from "@/types/pagination";
 import { pagination } from "@/utils/pageHelper";
+import { Hono } from "hono";
 
 // const app = new Hono();
 // // 具体的业务处理方法
@@ -20,7 +20,7 @@ import { pagination } from "@/utils/pageHelper";
 
 // src/server/post/api.ts
 // ...
-const app = createHonoApp();
+const app = new Hono();
 export const activityApi = app
   .get('/findByCondition', async (context) => {
     try {
