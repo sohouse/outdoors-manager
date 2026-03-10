@@ -1,6 +1,7 @@
 'use client'
 
 import { getObjById, updateObj } from '@/app/(app)/activity/actions/activityActions'
+import { honoClient } from '@/app/(app)/server/main'
 import { editActivityCheck } from '@/app/auth/login/zodCheck'
 import { Button } from '@/components/ui/button'
 import {
@@ -64,7 +65,10 @@ export default function ActivityDetailModal({
 
   useEffect(() => {
     const fetchActivity = async (id: string) => {
-      const fetchData = await getObjById('activity', id);
+      const res = await honoClient.api.activity['getObjById'].$get({ id: id });
+      const { result: fetchData } = await res.json() as { result: Activity };
+
+      // const fetchData = await getObjById('activity', id);
       setActivity(fetchData);
       form.reset({
         ...fetchData,
@@ -92,9 +96,11 @@ export default function ActivityDetailModal({
         end_time: data.end_time ? new Date(data.end_time) : undefined
       };
 
+      const res = await honoClient.api.activity['updateObj'].$post({json: editActivity});
+      const { result: success } = await res.json() as { result: boolean };
 
-      const result = await updateObj('activity', editActivity);
-      const success = result.success;
+      // const result = await updateObj('activity', editActivity);
+      // const success = result.success;
 
       if (success) {
         // 关闭模态框（触发onOpenChange）
@@ -128,9 +134,9 @@ export default function ActivityDetailModal({
         </DialogHeader>
         {activity && (
           <form id='activity-edit-form' onSubmit={form.handleSubmit(
-              (data) => { activityEditSubmit(data) },
-              (error) => { console.error(error) }
-            )}>
+            (data) => { activityEditSubmit(data) },
+            (error) => { console.error(error) }
+          )}>
             <FieldGroup>
               <Field>
                 <Controller

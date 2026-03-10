@@ -1,7 +1,8 @@
 import { getObjById } from '../actions/activityActions'
-import { ActivityStatus, ActivityTypes } from '@/types/activity'
+import { Activity, ActivityStatus, ActivityTypes } from '@/types/activity'
 import dayjs from 'dayjs'
 import { notFound } from 'next/navigation'
+import { honoClient } from '../../server/main'
 
 // 而没有在并行路由中的page页面则处理直接的activity/[id]路由访问
 export default async function ActivityDetailPage({
@@ -10,7 +11,9 @@ export default async function ActivityDetailPage({
   params: Promise<{ id: string }>
 }) {
   const { id } = await params
-  const activity = await getObjById('activity', id)
+  // const activity = await getObjById('activity', id);
+  const res = await honoClient.api.activity['getObjById'].$get({ id: id });
+        const {result: activity} = await res.json() as {result: Activity};
   if (!activity) notFound()
 
   return (
