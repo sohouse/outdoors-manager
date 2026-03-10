@@ -10,6 +10,8 @@ import { useActivityStore } from "@/stores/activityStore";
 import { findByCondition } from "./actions/activityActions";
 import DeleteDialog from "@/components/web/deleteDialog";
 import { useRouter } from "next/navigation";
+import { fetchApi } from "@/config/app";
+import { honoClient } from "../api/[[...route]]/route";
 
 // 根据活动类型获取文字颜色（在对应背景图片上显示效果好）
 const getTextColor = (type: number): string => {
@@ -43,7 +45,15 @@ const ActivityPage: FC = () => {
   const [activities, setActivities] = useState<Activity[]>([]);
   useEffect(() => {
     const loadActivities = async () => {
-      const { items, meta } = await findByCondition<ActivityCondition>('activity', condition);
+      // const { items, meta } = await fetchApi(async (context) =>
+      //   context.api.activity['findByCondition'].$get({
+      //     query: condition,
+      //   }),);
+
+      const res = await honoClient.findByCondition.$get({ query: condition });
+      const { items, meta } = res.json();
+      console.log('111-' + JSON.stringify(items));
+      // const { items, meta } = await findByCondition<ActivityCondition>('activity', condition);
       setActivities(items);
       setPaginateMeta(meta);
     }
@@ -75,40 +85,40 @@ const ActivityPage: FC = () => {
             }}
             onClick={() => goActivityDetail(item.id)}
           >
-              {/* 模糊背景层 */}
-              <div
-                className="absolute inset-0 bg-cover bg-no-repeat bg-center blur-2xl scale-110 -z-10 pointer-events-none"
-                style={{ backgroundImage: `url(/images/activity/${item.type}.png)` }}
-              />
-              {/* 亮色主题渐变覆盖层 */}
-              <div className="absolute inset-0 bg-linear-to-r from-background/90 via-background/30 to-transparent md:from-background/60 md:via-background/10 pointer-events-none" />
-              {/* 暗色主题渐变覆盖层 */}
-              <div className="absolute inset-0 bg-linear-to-r dark:from-foreground/80 dark:via-foreground/20 dark:to-transparent md:dark:from-foreground/40 md:dark:via-foreground/5 pointer-events-none" />
-              <CardHeader className={`${getTextColor(item.type)} ${getDarkTextColor(item.type)} opacity-80`}>
-                <h2 className="text-lg md:text-xl truncate">
-                  {item.title}
-                </h2>
-                <div className="text-xs md:text-sm opacity-80">
-                  {`${dayjs(item.start_time).format('YYYY-MM-DD HH:mm:ss')}
+            {/* 模糊背景层 */}
+            <div
+              className="absolute inset-0 bg-cover bg-no-repeat bg-center blur-2xl scale-110 -z-10 pointer-events-none"
+              style={{ backgroundImage: `url(/images/activity/${item.type}.png)` }}
+            />
+            {/* 亮色主题渐变覆盖层 */}
+            <div className="absolute inset-0 bg-linear-to-r from-background/90 via-background/30 to-transparent md:from-background/60 md:via-background/10 pointer-events-none" />
+            {/* 暗色主题渐变覆盖层 */}
+            <div className="absolute inset-0 bg-linear-to-r dark:from-foreground/80 dark:via-foreground/20 dark:to-transparent md:dark:from-foreground/40 md:dark:via-foreground/5 pointer-events-none" />
+            <CardHeader className={`${getTextColor(item.type)} ${getDarkTextColor(item.type)} opacity-80`}>
+              <h2 className="text-lg md:text-xl truncate">
+                {item.title}
+              </h2>
+              <div className="text-xs md:text-sm opacity-80">
+                {`${dayjs(item.start_time).format('YYYY-MM-DD HH:mm:ss')}
               - ${dayjs(item.end_time).format('YYYY-MM-DD HH:mm:ss')}`}
-                </div>
-                <div className="opacity-80">
-                  {`${ActivityTypes[item.type]} - ${ActivityStatus[item.status]}`}
-                </div>
-              </CardHeader>
-              <CardContent className={`line-clamp-2 md:line-clamp-3 text-sm ${getTextColor(item.type)} ${getDarkTextColor(item.type)} opacity-90`}>
-                {item.desc}
-              </CardContent>
-              <CardFooter className={`flex flex-row justify-between text-xs`}>
-                <div className={`${getTextColor(item.type)} ${getDarkTextColor(item.type)} opacity-90 inline`}>
-                  {item.author} - {dayjs(item.create_time).format('YYYY-MM-DD HH:mm:ss')}
-                </div>
-                <DeleteDialog
-                  id={item.id}
-                  title={item.title}
-                  reloadActivity={reloadActivity}
-                />
-              </CardFooter>
+              </div>
+              <div className="opacity-80">
+                {`${ActivityTypes[item.type]} - ${ActivityStatus[item.status]}`}
+              </div>
+            </CardHeader>
+            <CardContent className={`line-clamp-2 md:line-clamp-3 text-sm ${getTextColor(item.type)} ${getDarkTextColor(item.type)} opacity-90`}>
+              {item.desc}
+            </CardContent>
+            <CardFooter className={`flex flex-row justify-between text-xs`}>
+              <div className={`${getTextColor(item.type)} ${getDarkTextColor(item.type)} opacity-90 inline`}>
+                {item.author} - {dayjs(item.create_time).format('YYYY-MM-DD HH:mm:ss')}
+              </div>
+              <DeleteDialog
+                id={item.id}
+                title={item.title}
+                reloadActivity={reloadActivity}
+              />
+            </CardFooter>
           </Card>
         ))
       }
