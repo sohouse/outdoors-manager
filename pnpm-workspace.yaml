@@ -9,3 +9,9 @@ ignoredBuiltDependencies:
 
 onlyBuiltDependencies:
   - '@prisma/client'
+
+peerDependencyRules:
+    allowAny:
+        - '@hono/zod-validator'
+        - 'zod'
+        - 'zod-openapi'
