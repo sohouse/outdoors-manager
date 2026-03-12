@@ -1,5 +1,3 @@
-'use route'
-
 import { pagination } from '@/lib/utils/page-helper.tsx';
 import { Activity, ActivityCondition } from '@/lib/types/activity.ts';
 import { PageResult, PaginateCondition, PaginateMeta } from '@/lib/types/pagination.ts';
