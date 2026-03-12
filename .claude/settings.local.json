@@ -1,7 +1,0 @@
-{
-  "permissions": {
-    "allow": [
-      "Bash(cat /home/will/workspace/my-website/app/\\\\\\(app\\\\\\)/activity/page.tsx)"
-    ]
-  }
-}
