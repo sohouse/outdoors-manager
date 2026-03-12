@@ -121,7 +121,7 @@ export default function ActivityDetailModal({
   // 模态框的返回根据条件返回前置路由：activity
   return (
     <Dialog open={true} onOpenChange={onOpenChange}>
-      <DialogContent>
+      <DialogContent className='w-full !max-w-4xl'>
         <DialogHeader>
           <DialogTitle>
             {
@@ -132,7 +132,7 @@ export default function ActivityDetailModal({
           </DialogTitle>
         </DialogHeader>
         {activity && (
-          <form id='activity-edit-form' onSubmit={form.handleSubmit(
+          <form id='activity-edit-form' className='max-h-[70vh] overflow-y-auto' onSubmit={form.handleSubmit(
             (data) => { activityEditSubmit(data) },
             (error) => { console.error(error) }
           )}>
