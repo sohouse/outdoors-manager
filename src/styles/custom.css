@@ -2,13 +2,19 @@
   .editable-field {
     /* 基础过渡 */
     @apply inline transition-all duration-200 ring-offset-background;
-    
+
     /* 展示模式 (Disabled/ReadOnly) */
-    &:disabled, &[data-disabled], &.is-viewing {
+    &:disabled,
+    &[data-disabled],
+    &.is-viewing {
       @apply bg-transparent border-transparent shadow-none cursor-default px-0;
       @apply text-slate-900 dark:text-slate-100 opacity-100;
+
       /* 隐藏 Select 的小箭头 */
-      & svg { @apply hidden; }
+      & svg {
+        @apply hidden;
+      }
+
       /* 禁用点击事件 */
       @apply pointer-events-none;
     }
@@ -19,15 +25,27 @@
       @apply cursor-text focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2;
     }
   }
+
   .main-header {
-    @apply w-full flex items-center justify-between h-full transition-[background-color] ease-in-out duration-300 border-b-2 border-gray-500 border-solid
+    @apply w-full flex items-center justify-between h-full transition-[background-color] ease-in-out duration-300 border-b-2 border-gray-500 border-solid;
   }
 
   .main-header-scroll {
-    @apply bg-white/70 backdrop-blur-lg py-4 rounded-xl shadow-md border border-white/20
+    @apply bg-white/70 backdrop-blur-lg py-4 rounded-xl shadow-md border border-white/20;
   }
-  
+
   .main-header-unscroll {
-    @apply opacity-100
+    @apply opacity-100;
+  }
+}
+
+@layer utilities {
+  .scroll-hide {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .scroll-hide::-webkit-scrollbar {
+    display: none;
   }
 }

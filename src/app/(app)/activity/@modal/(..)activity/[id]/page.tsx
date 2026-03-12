@@ -132,7 +132,7 @@ export default function ActivityDetailModal({
           </DialogTitle>
         </DialogHeader>
         {activity && (
-          <form id='activity-edit-form' className='max-h-[70vh] overflow-y-auto' onSubmit={form.handleSubmit(
+          <form id='activity-edit-form' className='max-h-[70vh] overflow-y-auto scroll-hide' onSubmit={form.handleSubmit(
             (data) => { activityEditSubmit(data) },
             (error) => { console.error(error) }
           )}>
