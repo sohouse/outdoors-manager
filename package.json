@@ -4,10 +4,10 @@
   "type": "module",
   "private": true,
   "prisma": {
-    "schema": "/src/lib/database/schema/schema.prisma",
-    "seed": "node --trace-warnings --loader ts-node/esm src/lib/database/seed/activitySeed.ts",
+    "schema": "src/lib/database/schema/schema.prisma",
+    "seed": "node --trace-warnings --loader ts-node/esm src/lib/database/seed/activity-seed.ts",
     "migrations": {
-      "path": "/src/lib/database/schema/migrations"
+      "path": "src/lib/database/schema/migrations"
     }
   },
   "scripts": {

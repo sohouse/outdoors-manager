@@ -1,5 +1,4 @@
-@import "../../node_modules/tailwindcss/dist/lib.d.mts";
-@import "../../node_modules/tw-animate-css/dist/tw-animate.css";
+@import "tailwindcss";
 @import "./custom.css";
 
 
