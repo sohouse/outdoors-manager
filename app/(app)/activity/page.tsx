@@ -1,14 +1,14 @@
 'use client'
 
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
-import { ActivityStatus, ActivityTypes, Activity, ActivityCondition } from "@/types/activity";
+import { Card, CardContent, CardFooter, CardHeader } from "@/lib/components/ui/card";
+import { ActivityStatus, ActivityTypes, Activity, ActivityCondition } from "@/lib/types/activity";
 import dayjs from 'dayjs'
 import { FC, useEffect, useState } from "react";
-import ActivityFilterBar from "@/components/web/activitySearch";
-import PageProvider from "@/components/web/pageProvider";
-import { useActivityStore } from "@/stores/activityStore";
+import ActivityFilterBar from "@/lib/components/web/activitySearch";
+import PageProvider from "@/lib/components/web/pageProvider";
+import { useActivityStore } from "@/lib/stores/activityStore";
 import { findByCondition } from "./actions/activityActions";
-import DeleteDialog from "@/components/web/deleteDialog";
+import DeleteDialog from "@/lib/components/web/deleteDialog";
 import { useRouter } from "next/navigation";
 import { app, honoClient } from "../server/main";
 

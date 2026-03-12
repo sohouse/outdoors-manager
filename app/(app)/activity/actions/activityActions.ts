@@ -1,9 +1,9 @@
 'use server'
 
-import { pagination } from '@/utils/pageHelper';
-import { Activity, ActivityCondition } from '@/types/activity';
-import { PageResult, PaginateCondition, PaginateMeta } from '@/types/pagination';
-import { daoRegistry } from '@/database/IDao';
+import { pagination } from '@/lib/utils/pageHelper';
+import { Activity, ActivityCondition } from '@/lib/types/activity';
+import { PageResult, PaginateCondition, PaginateMeta } from '@/lib/types/pagination';
+import { daoRegistry } from '@/lib/database/IDao';
 
 export async function deleteById(
   daoType: string,

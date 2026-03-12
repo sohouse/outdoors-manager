@@ -1,10 +1,10 @@
 import { ReactNode } from 'react'
 import '@/app/styles/globals.css';
 import { Metadata } from 'next'
-import { ThemeProvider } from '@/components/theme-provider';
-import { SidebarProvider } from '@/components/ui/sidebar';
-import AppSidebar from '@/components/web/sidebar';
-import Header from '@/components/web/header';
+import { ThemeProvider } from '@/lib/components/theme-provider';
+import { SidebarProvider } from '@/lib/components/ui/sidebar';
+import AppSidebar from '@/lib/components/web/sidebar';
+import Header from '@/lib/components/web/header';
 
 export const metadata: Metadata = {
     title: "My Website"

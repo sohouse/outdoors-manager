@@ -1,4 +1,4 @@
-import { ActivityStatus, ActivityTypes } from "@/types/activity";
+import { ActivityStatus, ActivityTypes } from "@/lib/types/activity";
 import * as z from "zod";
 
 export const signUpCheck = z.object({

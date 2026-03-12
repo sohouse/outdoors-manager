@@ -1,5 +1,5 @@
 import { getObjById } from '../actions/activityActions'
-import { Activity, ActivityStatus, ActivityTypes } from '@/types/activity'
+import { Activity, ActivityStatus, ActivityTypes } from '@/lib/types/activity'
 import dayjs from 'dayjs'
 import { notFound } from 'next/navigation'
 import { honoClient } from '../../server/main'

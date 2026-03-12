@@ -3,7 +3,7 @@
 import { getObjById, updateObj } from '@/app/(app)/activity/actions/activityActions'
 import { honoClient } from '@/app/(app)/server/main'
 import { editActivityCheck } from '@/app/auth/login/zodCheck'
-import { Button } from '@/components/ui/button'
+import { Button } from '@/lib/components/ui/button'
 import {
   Dialog,
   DialogClose,
@@ -11,13 +11,13 @@ import {
   DialogFooter,
   DialogHeader,
   DialogTitle,
-} from '@/components/ui/dialog'
-import { Field, FieldError, FieldGroup, FieldLabel } from '@/components/ui/field'
-import { Input } from '@/components/ui/input'
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
-import { Textarea } from '@/components/ui/textarea'
-import { useActivityStore } from '@/stores/activityStore'
-import { Activity, ActivityStatus, ActivityTypes } from '@/types/activity'
+} from '@/lib/components/ui/dialog'
+import { Field, FieldError, FieldGroup, FieldLabel } from '@/lib/components/ui/field'
+import { Input } from '@/lib/components/ui/input'
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/lib/components/ui/select'
+import { Textarea } from '@/lib/components/ui/textarea'
+import { useActivityStore } from '@/lib/stores/activityStore'
+import { Activity, ActivityStatus, ActivityTypes } from '@/lib/types/activity'
 import { zodResolver } from '@hookform/resolvers/zod'
 import dayjs from 'dayjs'
 import { useRouter } from 'next/navigation'

@@ -1,12 +1,12 @@
 'use client'
-import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card"
+import { Card, CardContent, CardFooter, CardHeader } from "@/lib/components/ui/card"
 import * as z from 'zod'
 import { signUpCheck } from "./sign-up-check"
 import { Controller, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import { Field, FieldError, FieldGroup, FieldLabel } from "@/components/ui/field"
-import { Input } from "@/components/ui/input"
-import { Button } from "@/components/ui/button"
+import { Field, FieldError, FieldGroup, FieldLabel } from "@/lib/components/ui/field"
+import { Input } from "@/lib/components/ui/input"
+import { Button } from "@/lib/components/ui/button"
 
 const SignUp = () => {
   const form = useForm<z.infer<typeof signUpCheck>>({

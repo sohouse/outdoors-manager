@@ -1,6 +1,6 @@
 'use client'
 import AModal from "../../login/page"
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog"
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/lib/components/ui/dialog"
 import { useRouter } from "next/navigation"
 
 const BModal = () => {
