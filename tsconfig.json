@@ -21,7 +21,7 @@
       }
     ],
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./src/*"]
     }
   },
   "include": [
@@ -31,7 +31,9 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts",
-    "lib/types/**/*.ts"
-, "app/(app)/activity/mdxs/page.tsx"  ],
+    "src/lib/types/**/*.ts"
+,
+    "src/app/(app)/activity/mdxs/page.tsx"
+  ],
   "exclude": ["node_modules"]
 }
