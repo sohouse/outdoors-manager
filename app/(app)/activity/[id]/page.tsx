@@ -1,8 +1,8 @@
-import { getObjById } from '../actions/activityActions'
+import { getObjById } from '@/lib/service/activityService.ts'
 import { Activity, ActivityStatus, ActivityTypes } from '@/lib/types/activity'
 import dayjs from 'dayjs'
 import { notFound } from 'next/navigation'
-import { honoClient } from '../../server/main'
+import { honoClient } from '@/lib/api/main.ts'
 
 // 而没有在并行路由中的page页面则处理直接的activity/[id]路由访问
 export default async function ActivityDetailPage({

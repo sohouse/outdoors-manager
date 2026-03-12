@@ -1,6 +1,6 @@
 import MDXTitle from './mdx-title.tsx';
 import Content from './mdx-content.mdx';
-import '@/app/styles/hightlight.css'
+import '@/styles/hightlight.css'
 
 const MDXPage = () => {
   return (

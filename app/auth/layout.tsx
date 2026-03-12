@@ -3,7 +3,7 @@
 import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import { MouseEventHandler, ReactNode, useCallback, useEffect, useState } from "react"
-import '@/app/styles/globals.css'
+import '@/styles/globals.css'
 import { ThemeProvider } from "@/lib/components/theme-provider"
 import { useRouter } from "next/navigation"
 

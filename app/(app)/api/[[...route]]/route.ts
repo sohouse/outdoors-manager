@@ -1,6 +1,6 @@
 // next解析用户请求，配置请求类型对应的处理方法，此处都是app
 import { handle } from "hono/vercel";
-import { app } from "../../server/main";
+import { honoApp as app } from "@/lib/api/main.ts";
 
 // nextjs用于拦截GET请求
 export const GET = handle(app);

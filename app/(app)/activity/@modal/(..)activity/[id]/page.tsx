@@ -1,7 +1,7 @@
 'use client'
 
-import { getObjById, updateObj } from '@/app/(app)/activity/actions/activityActions'
-import { honoClient } from '@/app/(app)/server/main'
+import { getObjById, updateObj } from '@/lib/service/activityService.ts'
+import { honoClient } from '@/lib/api/main.ts'
 import { editActivityCheck } from '@/app/auth/login/zodCheck'
 import { Button } from '@/lib/components/ui/button'
 import {

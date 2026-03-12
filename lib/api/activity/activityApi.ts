@@ -1,8 +1,8 @@
-import { daoRegistry } from "@/lib/database/IDao";
-import { Activity, ActivityCondition } from "@/lib/types/activity";
+import { daoRegistry } from "@/lib/database/IDao.tsx";
+import { Activity, ActivityCondition } from "@/lib/types/activity.ts";
 import { simpleObjCover } from "@/lib/utils/objectHelper.ts";
-import { PaginateMeta } from "@/lib/types/pagination";
-import { pagination } from "@/lib/utils/pageHelper";
+import { PaginateMeta } from "@/lib/types/pagination.ts";
+import { pagination } from "@/lib/utils/pageHelper.tsx";
 import { Hono } from "hono";
 
 const app = new Hono();

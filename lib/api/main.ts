@@ -1,4 +1,4 @@
-import { activityApi } from "@/app/(app)/server/activity/api";
+import { activityApi } from "@/lib/api/activity/activityApi.ts";
 import { OpenAPIHono } from '@hono/zod-openapi';
 import { hc } from 'hono/client';
 // 为了使用导入值的具名导入
@@ -7,14 +7,14 @@ import { openapiApp } from "./openapi.ts";
 
 // 路由注册中心，接收动态兜底路由转过来的业务请求，在注册路由中进行分发
 // const app = new Hono().basePath('/api');
-const app = new OpenAPIHono().basePath('/api');
-app.use(prettyJSON());
-app.get('/', (c) => c.text('main api'));
-app.notFound((c) => c.json({ message: 'not found', ok: false }, 404));
+const honoApp = new OpenAPIHono().basePath('/api');
+honoApp.use(prettyJSON());
+honoApp.get('/', (c) => c.text('main api'));
+honoApp.notFound((c) => c.json({ message: 'not found', ok: false }, 404));
 // 分发业务路由请求
-const routes = app.route('activity', activityApi);
+const routes = honoApp.route('activity', activityApi);
 // 挂载openapi文档到 /api/openapi 前缀
-app.route('/openapi', openapiApp);
+honoApp.route('/openapi', openapiApp);
 type AppType = typeof routes;
 const honoClient = hc<AppType>(process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3002');
 
@@ -23,4 +23,4 @@ const honoClient = hc<AppType>(process.env.NEXT_PUBLIC_BASE_URL || 'http://local
 // 静态副作用导入： import '' -> 模块加载时提前执行
 // 动态副作用导入： import ('') -> 顺序执行
 
-export { app, honoClient };
+export { honoApp, honoClient };

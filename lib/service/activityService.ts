@@ -1,9 +1,9 @@
-'use server'
+'use route'
 
-import { pagination } from '@/lib/utils/pageHelper';
-import { Activity, ActivityCondition } from '@/lib/types/activity';
-import { PageResult, PaginateCondition, PaginateMeta } from '@/lib/types/pagination';
-import { daoRegistry } from '@/lib/database/IDao';
+import { pagination } from '@/lib/utils/pageHelper.tsx';
+import { Activity, ActivityCondition } from '@/lib/types/activity.ts';
+import { PageResult, PaginateCondition, PaginateMeta } from '@/lib/types/pagination.ts';
+import { daoRegistry } from '@/lib/database/IDao.tsx';
 
 export async function deleteById(
   daoType: string,

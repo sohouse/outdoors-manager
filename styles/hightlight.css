@@ -1,4 +1,4 @@
-@import 'prism-themes/themes/prism-one-dark.css';
+@import '../node_modules/prism-themes/themes/prism-one-dark.css';
 
 @reference "tailwindcss";
 

@@ -7,10 +7,10 @@ import { FC, useEffect, useState } from "react";
 import ActivityFilterBar from "@/lib/components/web/activitySearch";
 import PageProvider from "@/lib/components/web/pageProvider";
 import { useActivityStore } from "@/lib/stores/activityStore";
-import { findByCondition } from "./actions/activityActions";
+import { findByCondition } from "@/lib/service/activityService.ts";
 import DeleteDialog from "@/lib/components/web/deleteDialog";
 import { useRouter } from "next/navigation";
-import { app, honoClient } from "../server/main";
+import { honoApp, honoClient } from "@/lib/api/main.ts";
 
 // 根据活动类型获取文字颜色（在对应背景图片上显示效果好）
 const getTextColor = (type: number): string => {
