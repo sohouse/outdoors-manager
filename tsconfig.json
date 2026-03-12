@@ -33,7 +33,7 @@
     "**/*.mts",
     "src/lib/types/**/*.ts"
 ,
-    "src/app/(app)/activity/mdxs/page.tsx"
+    "src/lib/mdxs/page.tsx"
   ],
   "exclude": ["node_modules"]
 }

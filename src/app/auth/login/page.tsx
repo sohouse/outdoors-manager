@@ -1,7 +1,7 @@
 'use client'
 import { Card, CardContent, CardFooter, CardHeader } from "@/lib/components/ui/card.tsx"
 import * as z from 'zod'
-import { signUpCheck } from "./zod-check.ts"
+import {signUpCheck} from '@/lib/validators/sign-up-check.ts'
 import { Controller, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Field, FieldError, FieldGroup, FieldLabel } from "@/lib/components/ui/field.tsx"

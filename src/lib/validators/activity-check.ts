@@ -1,19 +1,5 @@
-import { ActivityStatus, ActivityTypes } from "@/lib/types/activity.ts";
-import * as z from "zod";
-
-export const signUpCheck = z.object({
-    name: z
-        .string()
-        .min(5, 'name must be at least 5 characters.'),
-
-    email: z
-        .email(),
-
-    pwd: z
-        .string()
-        .min(8, 'password must be at least 8 characters.')
-        .regex(/^(?=.*[a-zA-Z])(?=.*\d).+$/, 'must include letter and number.')
-})
+import z from "zod";
+import { ActivityStatus, ActivityTypes } from "../types/activity";
 
 export const editActivityCheck = z.object({
     title: z.string().describe('活动标题'), // 改为title而不是name

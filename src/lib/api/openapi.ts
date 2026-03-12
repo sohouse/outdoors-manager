@@ -1,5 +1,6 @@
 import { createRoute, OpenAPIHono, z } from "@hono/zod-openapi";
-import { editActivityCheck } from "@/app/auth/login/zod-check.ts";
+import { editActivityCheck } from "@/lib/validators/activity-check";
+
 
 // 创建独立的 OpenAPIHono 实例
 const openapiApp = new OpenAPIHono();

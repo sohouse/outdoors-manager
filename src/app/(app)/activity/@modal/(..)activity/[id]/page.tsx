@@ -1,7 +1,7 @@
 'use client'
 
 import { honoClient } from '@/lib/api/main.ts'
-import { editActivityCheck } from '@/app/auth/login/zod-check.ts'
+import {editActivityCheck} from '@/lib/validators/activity-check'
 import { Button } from '@/lib/components/ui/button.tsx'
 import {
   Dialog,
