@@ -1,39 +1,15 @@
-// This is your main Prisma schema file
-// All models are defined in this file for Prisma 6.x compatibility
 
 generator client {
   provider = "prisma-client-js"
-  // output   = "../../node_modules/.prisma/client"
-  previewFeatures = [ "driverAdapters"]
 }
 
 datasource db {
-  // provider = "sqlite"
-  // url      = env("DATABASE_URL")
-  provider  = "postgresql"
-  url       = env("DATABASE_URL")
-  directUrl = env("DIRECT_URL")
-}
-
-// Activity model - originally from ./models/activity.prisma
-model Activity {
-  id          String    @id @default(uuid())
-  title       String?
-  content     String?
-  author      String?
-  create_time DateTime? @default(now())
-  leader_id   String?
-  type        Int?      @default(0)
-  desc        String?
-  status      Int?      @default(0)
-  start_time  DateTime? @default(now())
-  end_time    DateTime? @default(now())
-
-  @@map("activity")
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
 }
 
 model User {
-  id            String    @id @default(uuid())
+  id            String    @id
   name          String
   email         String
   emailVerified Boolean   @default(false)
@@ -48,7 +24,7 @@ model User {
 }
 
 model Session {
-  id        String   @id @default(uuid())
+  id        String   @id
   expiresAt DateTime
   token     String
   createdAt DateTime @default(now())
@@ -64,7 +40,7 @@ model Session {
 }
 
 model Account {
-  id                    String    @id @default(uuid())
+  id                    String    @id
   accountId             String
   providerId            String
   userId                String
@@ -84,7 +60,7 @@ model Account {
 }
 
 model Verification {
-  id         String   @id @default(uuid())
+  id         String   @id
   identifier String
   value      String
   expiresAt  DateTime
