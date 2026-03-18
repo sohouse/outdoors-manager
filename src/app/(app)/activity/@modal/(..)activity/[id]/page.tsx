@@ -53,7 +53,7 @@ export default function ActivityDetailModal({
   });
   const [isEdit, setEdit] = useState(false);
 
-  const { setPageRefresh } = useActivityStore()
+  const { setPageRefresh } = useActivityStore();
 
   const form = useForm({
     resolver: zodResolver(editActivityCheck),
@@ -73,6 +73,10 @@ export default function ActivityDetailModal({
   useEffect(() => {
     const fetchActivity = async (id: string) => {
       const res = await honoClient.api.activity['getObjById'].$get({ id: id });
+      if (res.status === 401) {
+        alert({message: '用户未登录'})
+        router.push('/login')
+      }
       const { result: fetchData } = await res.json() as { result: Activity };
 
       // const fetchData = await getObjById('activity', id);
