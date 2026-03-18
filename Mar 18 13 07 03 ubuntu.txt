@@ -1,0 +1,1357 @@
+Mar 18 13:07:03 ubuntu subiquity_event.5752[5752]: subiquity/load_cloud_config/extract_autoinstall: 
+Mar 18 13:07:04 ubuntu subiquity_event.5752[5752]: subiquity/load_cloud_config/extract_autoinstall: 
+Mar 18 13:07:05 ubuntu subiquity_event.5752[5752]: subiquity/Early/apply_autoinstall_config: 
+Mar 18 13:07:05 ubuntu subiquity_event.5752[5752]: subiquity/Early/apply_autoinstall_config: 
+Mar 18 13:07:05 ubuntu subiquity_event.5752[5752]: subiquity/Reporting/apply_autoinstall_config: 
+Mar 18 13:07:05 ubuntu subiquity_event.5752[5752]: subiquity/Reporting/apply_autoinstall_config: 
+Mar 18 13:07:05 ubuntu subiquity_event.5752[5752]: subiquity/Error/apply_autoinstall_config: 
+Mar 18 13:07:05 ubuntu subiquity_event.5752[5752]: subiquity/Error/apply_autoinstall_config: 
+Mar 18 13:07:05 ubuntu subiquity_event.5752[5752]: subiquity/Userdata/apply_autoinstall_config: 
+Mar 18 13:07:05 ubuntu subiquity_event.5752[5752]: subiquity/Userdata/apply_autoinstall_config: 
+Mar 18 13:07:05 ubuntu subiquity_event.5752[5752]: subiquity/Package/apply_autoinstall_config: 
+Mar 18 13:07:05 ubuntu subiquity_event.5752[5752]: subiquity/Package/apply_autoinstall_config: 
+Mar 18 13:07:05 ubuntu subiquity_event.5752[5752]: subiquity/Debconf/apply_autoinstall_config: 
+Mar 18 13:07:05 ubuntu subiquity_event.5752[5752]: subiquity/Debconf/apply_autoinstall_config: 
+Mar 18 13:07:05 ubuntu subiquity_event.5752[5752]: subiquity/Kernel/apply_autoinstall_config: 
+Mar 18 13:07:05 ubuntu subiquity_event.5752[5752]: subiquity/Kernel/apply_autoinstall_config: 
+Mar 18 13:07:05 ubuntu subiquity_event.5752[5752]: subiquity/Zdev/apply_autoinstall_config: 
+Mar 18 13:07:05 ubuntu subiquity_event.5752[5752]: subiquity/Zdev/apply_autoinstall_config: 
+Mar 18 13:07:05 ubuntu subiquity_event.5752[5752]: subiquity/Ad/apply_autoinstall_config: 
+Mar 18 13:07:05 ubuntu subiquity_event.5752[5752]: subiquity/Ad/apply_autoinstall_config: 
+Mar 18 13:07:05 ubuntu subiquity_event.5752[5752]: subiquity/Late/apply_autoinstall_config: 
+Mar 18 13:07:05 ubuntu subiquity_event.5752[5752]: subiquity/Late/apply_autoinstall_config: 
+Mar 18 13:07:38 ubuntu subiquity_event.5752[5752]: subiquity/Ad/has_support_GET: 
+Mar 18 13:08:01 ubuntu subiquity_event.5752[5752]: configuring apt
+Mar 18 13:08:01 ubuntu subiquity_log.5752[6826]: start: cmd-apt-config: curtin command apt-config
+Mar 18 13:08:01 ubuntu subiquity_log.5752[6826]: Handling apt to target /tmp/tmpt1zkqyzd/mount with config {'debconf_selections': {'subiquity': ''}, 'disable_components': [], 'disable_suites': ['security'], 'preserve_sources_list': False, 'primary': [{'arches': ['default'], 'uri': 'http://hk.archive.ubuntu.com/ubuntu/'}], 'security': [{'arches': ['amd64', 'i386'], 'uri': 'http://security.ubuntu.com/ubuntu/'}, {'arches': ['s390x', 'arm64', 'armhf', 'powerpc', 'ppc64el', 'riscv64'], 'uri': 'http://ports.ubuntu.com/ubuntu-ports'}]}
+Mar 18 13:08:01 ubuntu subiquity_log.5752[6826]: Running command ['mount', '--bind', '/dev', '/tmp/tmpt1zkqyzd/mount/dev'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:01 ubuntu subiquity_log.5752[6826]: Running command ['mount', '--bind', '/proc', '/tmp/tmpt1zkqyzd/mount/proc'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:01 ubuntu subiquity_log.5752[6826]: Running command ['mount', '--bind', '/run', '/tmp/tmpt1zkqyzd/mount/run'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:01 ubuntu subiquity_log.5752[6826]: Running command ['mount', '--bind', '/sys', '/tmp/tmpt1zkqyzd/mount/sys'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:01 ubuntu subiquity_log.5752[6826]: Running command ['mount', '--bind', '/tmp/tmpt1zkqyzd/mount/usr/bin/true', '/tmp/tmpt1zkqyzd/mount/usr/bin/ischroot'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:01 ubuntu subiquity_log.5752[6826]: Running command ['unshare', '--help'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:01 ubuntu subiquity_log.5752[6826]: Checking if target_proc (/tmp/tmpt1zkqyzd/mount/proc) is a mount
+Mar 18 13:08:01 ubuntu subiquity_log.5752[6826]: It is, so unshare will use --mount-proc=/tmp/tmpt1zkqyzd/mount/proc
+Mar 18 13:08:01 ubuntu subiquity_log.5752[6826]: Running command ['unshare', '--fork', '--pid', '--mount-proc=/tmp/tmpt1zkqyzd/mount/proc', '--', 'chroot', '/tmp/tmpt1zkqyzd/mount', 'lsb_release', '--all'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:01 ubuntu subiquity_log.5752[6826]: Checking if target_proc (/tmp/tmpt1zkqyzd/mount/proc) is a mount
+Mar 18 13:08:01 ubuntu subiquity_log.5752[6826]: It is, so unshare will use --mount-proc=/tmp/tmpt1zkqyzd/mount/proc
+Mar 18 13:08:01 ubuntu subiquity_log.5752[6826]: Running command ['unshare', '--fork', '--pid', '--mount-proc=/tmp/tmpt1zkqyzd/mount/proc', '--', 'chroot', '/tmp/tmpt1zkqyzd/mount', 'dpkg', '--print-architecture'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:01 ubuntu subiquity_log.5752[6826]: got primary mirror: http://hk.archive.ubuntu.com/ubuntu/
+Mar 18 13:08:01 ubuntu subiquity_log.5752[6826]: got security mirror: http://security.ubuntu.com/ubuntu/
+Mar 18 13:08:01 ubuntu subiquity_log.5752[6826]: Apt Mirror info: {'PRIMARY': 'http://hk.archive.ubuntu.com/ubuntu/', 'SECURITY': 'http://security.ubuntu.com/ubuntu/', 'MIRROR': 'http://hk.archive.ubuntu.com/ubuntu/'}
+Mar 18 13:08:01 ubuntu subiquity_log.5752[6826]: Applying debconf selections
+Mar 18 13:08:01 ubuntu subiquity_log.5752[6826]: Checking if target_proc (/tmp/tmpt1zkqyzd/mount/proc) is a mount
+Mar 18 13:08:01 ubuntu subiquity_log.5752[6826]: It is, so unshare will use --mount-proc=/tmp/tmpt1zkqyzd/mount/proc
+Mar 18 13:08:01 ubuntu subiquity_log.5752[6826]: Running command ['unshare', '--fork', '--pid', '--mount-proc=/tmp/tmpt1zkqyzd/mount/proc', '--', 'chroot', '/tmp/tmpt1zkqyzd/mount', 'debconf-set-selections'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: Checking if target_proc (/tmp/tmpt1zkqyzd/mount/proc) is a mount
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: It is, so unshare will use --mount-proc=/tmp/tmpt1zkqyzd/mount/proc
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: Running command ['unshare', '--fork', '--pid', '--mount-proc=/tmp/tmpt1zkqyzd/mount/proc', '--', 'chroot', '/tmp/tmpt1zkqyzd/mount', 'dpkg-query', '--list'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: No custom template provided, fall back to modifymirrors in /etc/apt/sources.list.d/ubuntu.sources on the target system
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: Checking if target_proc (/tmp/tmpt1zkqyzd/mount/proc) is a mount
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: It is, so unshare will use --mount-proc=/tmp/tmpt1zkqyzd/mount/proc
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: Running command ['unshare', '--fork', '--pid', '--mount-proc=/tmp/tmpt1zkqyzd/mount/proc', '--', 'chroot', '/tmp/tmpt1zkqyzd/mount', 'dpkg', '--print-architecture'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: Checking if target_proc (/tmp/tmpt1zkqyzd/mount/proc) is a mount
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: It is, so unshare will use --mount-proc=/tmp/tmpt1zkqyzd/mount/proc
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: Running command ['unshare', '--fork', '--pid', '--mount-proc=/tmp/tmpt1zkqyzd/mount/proc', '--', 'chroot', '/tmp/tmpt1zkqyzd/mount', 'dpkg-query', '--show', '--showformat', '${Version}', 'cloud-init'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: Set preserve_sources_list to True in /etc/cloud/cloud.cfg.d/curtin-preserve-sources.cfg with: {'apt': {'preserve_sources_list': True}}
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: Checking if target_proc (/tmp/tmpt1zkqyzd/mount/proc) is a mount
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: It is, so unshare will use --mount-proc=/tmp/tmpt1zkqyzd/mount/proc
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: Running command ['unshare', '--fork', '--pid', '--mount-proc=/tmp/tmpt1zkqyzd/mount/proc', '--', 'chroot', '/tmp/tmpt1zkqyzd/mount', 'dpkg', '--print-architecture'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: Renaming apt list /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble-updates_InRelease to /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble-updates_InRelease
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: Renaming apt list /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble-updates_main_binary-amd64_Packages to /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble-updates_main_binary-amd64_Packages
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: Renaming apt list /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble-updates_main_cnf_Commands-amd64 to /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble-updates_main_cnf_Commands-amd64
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: Renaming apt list /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble-updates_main_dep11_Components-amd64.yml.gz to /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble-updates_main_dep11_Components-amd64.yml.gz
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: Renaming apt list /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble-updates_main_dep11_icons-48x48.tar.gz to /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble-updates_main_dep11_icons-48x48.tar.gz
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: Renaming apt list /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble-updates_main_dep11_icons-64x64%402.tar.gz to /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble-updates_main_dep11_icons-64x64%402.tar.gz
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: Renaming apt list /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble-updates_main_dep11_icons-64x64.tar.gz to /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble-updates_main_dep11_icons-64x64.tar.gz
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: Renaming apt list /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble-updates_main_i18n_Translation-en to /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble-updates_main_i18n_Translation-en
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: Renaming apt list /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble-updates_restricted_binary-amd64_Packages to /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble-updates_restricted_binary-amd64_Packages
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: Renaming apt list /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble-updates_restricted_cnf_Commands-amd64 to /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble-updates_restricted_cnf_Commands-amd64
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: Renaming apt list /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble-updates_restricted_dep11_Components-amd64.yml.gz to /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble-updates_restricted_dep11_Components-amd64.yml.gz
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: Renaming apt list /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble-updates_restricted_dep11_icons-48x48.tar.gz to /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble-updates_restricted_dep11_icons-48x48.tar.gz
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: Renaming apt list /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble-updates_restricted_dep11_icons-64x64%402.tar.gz to /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble-updates_restricted_dep11_icons-64x64%402.tar.gz
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: Renaming apt list /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble-updates_restricted_dep11_icons-64x64.tar.gz to /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble-updates_restricted_dep11_icons-64x64.tar.gz
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: Renaming apt list /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble-updates_restricted_i18n_Translation-en to /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble-updates_restricted_i18n_Translation-en
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: Renaming apt list /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble_InRelease to /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble_InRelease
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: Renaming apt list /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble_main_binary-amd64_Packages to /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble_main_binary-amd64_Packages
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: Renaming apt list /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble_main_cnf_Commands-amd64 to /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble_main_cnf_Commands-amd64
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: Renaming apt list /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble_main_dep11_Components-amd64.yml.gz to /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble_main_dep11_Components-amd64.yml.gz
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: Renaming apt list /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble_main_dep11_icons-48x48.tar.gz to /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble_main_dep11_icons-48x48.tar.gz
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: Renaming apt list /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble_main_dep11_icons-64x64%402.tar.gz to /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble_main_dep11_icons-64x64%402.tar.gz
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: Renaming apt list /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble_main_dep11_icons-64x64.tar.gz to /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble_main_dep11_icons-64x64.tar.gz
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: Renaming apt list /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble_main_i18n_Translation-en to /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble_main_i18n_Translation-en
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: Renaming apt list /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble_restricted_binary-amd64_Packages to /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble_restricted_binary-amd64_Packages
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: Renaming apt list /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble_restricted_cnf_Commands-amd64 to /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble_restricted_cnf_Commands-amd64
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: Renaming apt list /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble_restricted_i18n_Translation-en to /tmp/tmpt1zkqyzd/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble_restricted_i18n_Translation-en
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: Running command ['udevadm', 'settle'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: TIMED subp(['udevadm', 'settle']): 0.011
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: Running command ['mount', '--make-private', '/tmp/tmpt1zkqyzd/mount/usr/bin/ischroot'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: Running command ['umount', '/tmp/tmpt1zkqyzd/mount/usr/bin/ischroot'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: Running command ['mount', '--make-private', '/tmp/tmpt1zkqyzd/mount/sys'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: Running command ['umount', '/tmp/tmpt1zkqyzd/mount/sys'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: Running command ['mount', '--make-private', '/tmp/tmpt1zkqyzd/mount/run'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: Running command ['umount', '/tmp/tmpt1zkqyzd/mount/run'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: Running command ['mount', '--make-private', '/tmp/tmpt1zkqyzd/mount/proc'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: Running command ['umount', '/tmp/tmpt1zkqyzd/mount/proc'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: Running command ['mount', '--make-private', '/tmp/tmpt1zkqyzd/mount/dev'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: Running command ['umount', '/tmp/tmpt1zkqyzd/mount/dev'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:02 ubuntu subiquity_log.5752[6826]: finish: cmd-apt-config: SUCCESS: curtin command apt-config
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: start: cmd-apt-config: curtin command apt-config
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Handling apt to target /tmp/tmph692kdsm/mount with config {'debconf_selections': {'subiquity': ''}, 'disable_components': [], 'preserve_sources_list': False, 'primary': [{'arches': ['default'], 'uri': 'http://hk.archive.ubuntu.com/ubuntu/'}], 'security': [{'arches': ['amd64', 'i386'], 'uri': 'http://security.ubuntu.com/ubuntu/'}, {'arches': ['s390x', 'arm64', 'armhf', 'powerpc', 'ppc64el', 'riscv64'], 'uri': 'http://ports.ubuntu.com/ubuntu-ports'}]}
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Running command ['mount', '--bind', '/dev', '/tmp/tmph692kdsm/mount/dev'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Running command ['mount', '--bind', '/proc', '/tmp/tmph692kdsm/mount/proc'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Running command ['mount', '--bind', '/run', '/tmp/tmph692kdsm/mount/run'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Running command ['mount', '--bind', '/sys', '/tmp/tmph692kdsm/mount/sys'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Running command ['mount', '--bind', '/tmp/tmph692kdsm/mount/usr/bin/true', '/tmp/tmph692kdsm/mount/usr/bin/ischroot'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Running command ['unshare', '--help'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Checking if target_proc (/tmp/tmph692kdsm/mount/proc) is a mount
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: It is, so unshare will use --mount-proc=/tmp/tmph692kdsm/mount/proc
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Running command ['unshare', '--fork', '--pid', '--mount-proc=/tmp/tmph692kdsm/mount/proc', '--', 'chroot', '/tmp/tmph692kdsm/mount', 'lsb_release', '--all'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Checking if target_proc (/tmp/tmph692kdsm/mount/proc) is a mount
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: It is, so unshare will use --mount-proc=/tmp/tmph692kdsm/mount/proc
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Running command ['unshare', '--fork', '--pid', '--mount-proc=/tmp/tmph692kdsm/mount/proc', '--', 'chroot', '/tmp/tmph692kdsm/mount', 'dpkg', '--print-architecture'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: got primary mirror: http://hk.archive.ubuntu.com/ubuntu/
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: got security mirror: http://security.ubuntu.com/ubuntu/
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Apt Mirror info: {'PRIMARY': 'http://hk.archive.ubuntu.com/ubuntu/', 'SECURITY': 'http://security.ubuntu.com/ubuntu/', 'MIRROR': 'http://hk.archive.ubuntu.com/ubuntu/'}
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Applying debconf selections
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Checking if target_proc (/tmp/tmph692kdsm/mount/proc) is a mount
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: It is, so unshare will use --mount-proc=/tmp/tmph692kdsm/mount/proc
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Running command ['unshare', '--fork', '--pid', '--mount-proc=/tmp/tmph692kdsm/mount/proc', '--', 'chroot', '/tmp/tmph692kdsm/mount', 'debconf-set-selections'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Checking if target_proc (/tmp/tmph692kdsm/mount/proc) is a mount
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: It is, so unshare will use --mount-proc=/tmp/tmph692kdsm/mount/proc
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Running command ['unshare', '--fork', '--pid', '--mount-proc=/tmp/tmph692kdsm/mount/proc', '--', 'chroot', '/tmp/tmph692kdsm/mount', 'dpkg-query', '--list'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: No custom template provided, fall back to modifymirrors in /etc/apt/sources.list.d/ubuntu.sources on the target system
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Checking if target_proc (/tmp/tmph692kdsm/mount/proc) is a mount
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: It is, so unshare will use --mount-proc=/tmp/tmph692kdsm/mount/proc
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Running command ['unshare', '--fork', '--pid', '--mount-proc=/tmp/tmph692kdsm/mount/proc', '--', 'chroot', '/tmp/tmph692kdsm/mount', 'dpkg', '--print-architecture'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Checking if target_proc (/tmp/tmph692kdsm/mount/proc) is a mount
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: It is, so unshare will use --mount-proc=/tmp/tmph692kdsm/mount/proc
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Running command ['unshare', '--fork', '--pid', '--mount-proc=/tmp/tmph692kdsm/mount/proc', '--', 'chroot', '/tmp/tmph692kdsm/mount', 'dpkg-query', '--show', '--showformat', '${Version}', 'cloud-init'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Set preserve_sources_list to True in /etc/cloud/cloud.cfg.d/curtin-preserve-sources.cfg with: {'apt': {'preserve_sources_list': True}}
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Checking if target_proc (/tmp/tmph692kdsm/mount/proc) is a mount
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: It is, so unshare will use --mount-proc=/tmp/tmph692kdsm/mount/proc
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Running command ['unshare', '--fork', '--pid', '--mount-proc=/tmp/tmph692kdsm/mount/proc', '--', 'chroot', '/tmp/tmph692kdsm/mount', 'dpkg', '--print-architecture'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Renaming apt list /tmp/tmph692kdsm/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble-updates_InRelease to /tmp/tmph692kdsm/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble-updates_InRelease
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Renaming apt list /tmp/tmph692kdsm/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble-updates_main_binary-amd64_Packages to /tmp/tmph692kdsm/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble-updates_main_binary-amd64_Packages
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Renaming apt list /tmp/tmph692kdsm/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble-updates_main_cnf_Commands-amd64 to /tmp/tmph692kdsm/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble-updates_main_cnf_Commands-amd64
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Renaming apt list /tmp/tmph692kdsm/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble-updates_main_dep11_Components-amd64.yml.gz to /tmp/tmph692kdsm/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble-updates_main_dep11_Components-amd64.yml.gz
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Renaming apt list /tmp/tmph692kdsm/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble-updates_main_dep11_icons-48x48.tar.gz to /tmp/tmph692kdsm/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble-updates_main_dep11_icons-48x48.tar.gz
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Renaming apt list /tmp/tmph692kdsm/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble-updates_main_dep11_icons-64x64%402.tar.gz to /tmp/tmph692kdsm/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble-updates_main_dep11_icons-64x64%402.tar.gz
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Renaming apt list /tmp/tmph692kdsm/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble-updates_main_dep11_icons-64x64.tar.gz to /tmp/tmph692kdsm/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble-updates_main_dep11_icons-64x64.tar.gz
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Renaming apt list /tmp/tmph692kdsm/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble-updates_main_i18n_Translation-en to /tmp/tmph692kdsm/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble-updates_main_i18n_Translation-en
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Renaming apt list /tmp/tmph692kdsm/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble-updates_restricted_binary-amd64_Packages to /tmp/tmph692kdsm/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble-updates_restricted_binary-amd64_Packages
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Renaming apt list /tmp/tmph692kdsm/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble-updates_restricted_cnf_Commands-amd64 to /tmp/tmph692kdsm/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble-updates_restricted_cnf_Commands-amd64
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Renaming apt list /tmp/tmph692kdsm/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble-updates_restricted_dep11_Components-amd64.yml.gz to /tmp/tmph692kdsm/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble-updates_restricted_dep11_Components-amd64.yml.gz
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Renaming apt list /tmp/tmph692kdsm/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble-updates_restricted_dep11_icons-48x48.tar.gz to /tmp/tmph692kdsm/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble-updates_restricted_dep11_icons-48x48.tar.gz
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Renaming apt list /tmp/tmph692kdsm/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble-updates_restricted_dep11_icons-64x64%402.tar.gz to /tmp/tmph692kdsm/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble-updates_restricted_dep11_icons-64x64%402.tar.gz
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Renaming apt list /tmp/tmph692kdsm/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble-updates_restricted_dep11_icons-64x64.tar.gz to /tmp/tmph692kdsm/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble-updates_restricted_dep11_icons-64x64.tar.gz
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Renaming apt list /tmp/tmph692kdsm/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble-updates_restricted_i18n_Translation-en to /tmp/tmph692kdsm/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble-updates_restricted_i18n_Translation-en
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Renaming apt list /tmp/tmph692kdsm/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble_InRelease to /tmp/tmph692kdsm/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble_InRelease
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Renaming apt list /tmp/tmph692kdsm/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble_main_binary-amd64_Packages to /tmp/tmph692kdsm/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble_main_binary-amd64_Packages
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Renaming apt list /tmp/tmph692kdsm/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble_main_cnf_Commands-amd64 to /tmp/tmph692kdsm/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble_main_cnf_Commands-amd64
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Renaming apt list /tmp/tmph692kdsm/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble_main_dep11_Components-amd64.yml.gz to /tmp/tmph692kdsm/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble_main_dep11_Components-amd64.yml.gz
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Renaming apt list /tmp/tmph692kdsm/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble_main_dep11_icons-48x48.tar.gz to /tmp/tmph692kdsm/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble_main_dep11_icons-48x48.tar.gz
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Renaming apt list /tmp/tmph692kdsm/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble_main_dep11_icons-64x64%402.tar.gz to /tmp/tmph692kdsm/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble_main_dep11_icons-64x64%402.tar.gz
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Renaming apt list /tmp/tmph692kdsm/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble_main_dep11_icons-64x64.tar.gz to /tmp/tmph692kdsm/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble_main_dep11_icons-64x64.tar.gz
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Renaming apt list /tmp/tmph692kdsm/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble_main_i18n_Translation-en to /tmp/tmph692kdsm/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble_main_i18n_Translation-en
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Renaming apt list /tmp/tmph692kdsm/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble_restricted_binary-amd64_Packages to /tmp/tmph692kdsm/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble_restricted_binary-amd64_Packages
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Renaming apt list /tmp/tmph692kdsm/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble_restricted_cnf_Commands-amd64 to /tmp/tmph692kdsm/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble_restricted_cnf_Commands-amd64
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Renaming apt list /tmp/tmph692kdsm/mount/var/lib/apt/lists/archive.ubuntu.com_ubuntu_dists_noble_restricted_i18n_Translation-en to /tmp/tmph692kdsm/mount/var/lib/apt/lists/hk.archive.ubuntu.com_ubuntu_dists_noble_restricted_i18n_Translation-en
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Running command ['udevadm', 'settle'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: TIMED subp(['udevadm', 'settle']): 0.008
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Running command ['mount', '--make-private', '/tmp/tmph692kdsm/mount/usr/bin/ischroot'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Running command ['umount', '/tmp/tmph692kdsm/mount/usr/bin/ischroot'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Running command ['mount', '--make-private', '/tmp/tmph692kdsm/mount/sys'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Running command ['umount', '/tmp/tmph692kdsm/mount/sys'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Running command ['mount', '--make-private', '/tmp/tmph692kdsm/mount/run'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Running command ['umount', '/tmp/tmph692kdsm/mount/run'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Running command ['mount', '--make-private', '/tmp/tmph692kdsm/mount/proc'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Running command ['umount', '/tmp/tmph692kdsm/mount/proc'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Running command ['mount', '--make-private', '/tmp/tmph692kdsm/mount/dev'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: Running command ['umount', '/tmp/tmph692kdsm/mount/dev'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:08 ubuntu subiquity_log.5752[7112]: finish: cmd-apt-config: SUCCESS: curtin command apt-config
+Mar 18 13:08:09 ubuntu subiquity_log.5752[7174]: start: cmd-in-target: curtin command in-target
+Mar 18 13:08:09 ubuntu subiquity_log.5752[7174]: Running command ['mount', '--bind', '/dev', '/tmp/tmpfl2iy3z8/mount/dev'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:09 ubuntu subiquity_log.5752[7174]: Running command ['mount', '--bind', '/proc', '/tmp/tmpfl2iy3z8/mount/proc'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:09 ubuntu subiquity_log.5752[7174]: Running command ['mount', '--bind', '/run', '/tmp/tmpfl2iy3z8/mount/run'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:09 ubuntu subiquity_log.5752[7174]: Running command ['mount', '--bind', '/sys', '/tmp/tmpfl2iy3z8/mount/sys'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:09 ubuntu subiquity_log.5752[7174]: Running command ['mount', '--bind', '/tmp/tmpfl2iy3z8/mount/usr/bin/true', '/tmp/tmpfl2iy3z8/mount/usr/bin/ischroot'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:09 ubuntu subiquity_log.5752[7174]: Running command ['unshare', '--help'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:09 ubuntu subiquity_log.5752[7174]: Checking if target_proc (/tmp/tmpfl2iy3z8/mount/proc) is a mount
+Mar 18 13:08:09 ubuntu subiquity_log.5752[7174]: It is, so unshare will use --mount-proc=/tmp/tmpfl2iy3z8/mount/proc
+Mar 18 13:08:09 ubuntu subiquity_log.5752[7174]: Running command ['unshare', '--fork', '--pid', '--mount-proc=/tmp/tmpfl2iy3z8/mount/proc', '--', 'chroot', '/tmp/tmpfl2iy3z8/mount', 'apt-get', 'update'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:09 ubuntu subiquity_log.5752[7186]: 获取:1 file:/cdrom noble InRelease
+Mar 18 13:08:09 ubuntu subiquity_log.5752[7186]: 忽略:1 file:/cdrom noble InRelease
+Mar 18 13:08:09 ubuntu subiquity_log.5752[7186]: 获取:2 file:/cdrom noble Release [1,072 B]
+Mar 18 13:08:09 ubuntu subiquity_log.5752[7186]: 获取:2 file:/cdrom noble Release [1,072 B]
+Mar 18 13:08:09 ubuntu subiquity_log.5752[7186]: 获取:3 file:/cdrom noble Release.gpg [833 B]
+Mar 18 13:08:09 ubuntu subiquity_log.5752[7186]: 获取:3 file:/cdrom noble Release.gpg [833 B]
+Mar 18 13:08:09 ubuntu subiquity_log.5752[7186]: 获取:4 file:/cdrom noble/main amd64 Packages [54.0 kB]
+Mar 18 13:08:09 ubuntu subiquity_log.5752[7186]: 忽略:4 file:/cdrom noble/main amd64 Packages
+Mar 18 13:08:09 ubuntu subiquity_log.5752[7186]: 获取:5 file:/cdrom noble/restricted amd64 Packages [18.3 kB]
+Mar 18 13:08:09 ubuntu subiquity_log.5752[7186]: 忽略:5 file:/cdrom noble/restricted amd64 Packages
+Mar 18 13:08:09 ubuntu subiquity_log.5752[7186]: 获取:4 file:/cdrom noble/main amd64 Packages [54.0 kB]
+Mar 18 13:08:10 ubuntu subiquity_log.5752[7186]: 获取:5 file:/cdrom noble/restricted amd64 Packages [18.3 kB]
+Mar 18 13:08:10 ubuntu subiquity_event.5752[5752]:  curtin command in-target
+Mar 18 13:08:10 ubuntu subiquity_log.5752[7186]: 命中:6 http://hk.archive.ubuntu.com/ubuntu noble InRelease
+Mar 18 13:08:10 ubuntu subiquity_log.5752[7186]: 获取:7 http://hk.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+Mar 18 13:08:10 ubuntu subiquity_log.5752[7186]: 获取:8 http://hk.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+Mar 18 13:08:10 ubuntu subiquity_log.5752[7186]: 获取:9 http://hk.archive.ubuntu.com/ubuntu noble/main Translation-zh_CN [130 kB]
+Mar 18 13:08:10 ubuntu subiquity_log.5752[7186]: 获取:10 http://hk.archive.ubuntu.com/ubuntu noble/restricted Translation-zh_CN [592 B]
+Mar 18 13:08:10 ubuntu subiquity_log.5752[7186]: 获取:11 http://hk.archive.ubuntu.com/ubuntu noble/universe amd64 Packages [15.0 MB]
+Mar 18 13:08:10 ubuntu subiquity_log.5752[7186]: 获取:12 http://security.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+Mar 18 13:08:11 ubuntu subiquity_log.5752[7186]: 获取:13 http://security.ubuntu.com/ubuntu noble-security/main amd64 Packages [1,540 kB]
+Mar 18 13:08:13 ubuntu subiquity_log.5752[7186]: 获取:14 http://security.ubuntu.com/ubuntu noble-security/main Translation-en [246 kB]
+Mar 18 13:08:13 ubuntu subiquity_log.5752[7186]: 获取:15 http://security.ubuntu.com/ubuntu noble-security/main amd64 Components [21.5 kB]
+Mar 18 13:08:13 ubuntu subiquity_log.5752[7186]: 获取:16 http://security.ubuntu.com/ubuntu noble-security/main amd64 c-n-f Metadata [10.5 kB]
+Mar 18 13:08:13 ubuntu subiquity_log.5752[7186]: 获取:17 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [2,683 kB]
+Mar 18 13:08:15 ubuntu subiquity_log.5752[7186]: 获取:18 http://hk.archive.ubuntu.com/ubuntu noble/universe Translation-en [5,982 kB]
+Mar 18 13:08:16 ubuntu subiquity_log.5752[7186]: 获取:19 http://security.ubuntu.com/ubuntu noble-security/restricted Translation-en [623 kB]
+Mar 18 13:08:17 ubuntu subiquity_log.5752[7186]: 获取:20 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 Components [212 B]
+Mar 18 13:08:17 ubuntu subiquity_log.5752[7186]: 获取:21 http://security.ubuntu.com/ubuntu noble-security/restricted amd64 c-n-f Metadata [544 B]
+Mar 18 13:08:17 ubuntu subiquity_log.5752[7186]: 获取:22 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Packages [976 kB]
+Mar 18 13:08:17 ubuntu subiquity_log.5752[7186]: 获取:23 http://security.ubuntu.com/ubuntu noble-security/universe Translation-en [219 kB]
+Mar 18 13:08:18 ubuntu subiquity_log.5752[7186]: 获取:24 http://security.ubuntu.com/ubuntu noble-security/universe amd64 Components [74.1 kB]
+Mar 18 13:08:18 ubuntu subiquity_log.5752[7186]: 获取:25 http://security.ubuntu.com/ubuntu noble-security/universe Icons (48x48) [49.8 kB]
+Mar 18 13:08:18 ubuntu subiquity_log.5752[7186]: 获取:26 http://security.ubuntu.com/ubuntu noble-security/universe Icons (64x64) [78.3 kB]
+Mar 18 13:08:18 ubuntu subiquity_log.5752[7186]: 获取:27 http://security.ubuntu.com/ubuntu noble-security/universe Icons (64x64@2) [29 B]
+Mar 18 13:08:18 ubuntu subiquity_log.5752[7186]: 获取:28 http://security.ubuntu.com/ubuntu noble-security/universe amd64 c-n-f Metadata [20.8 kB]
+Mar 18 13:08:18 ubuntu subiquity_log.5752[7186]: 获取:29 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Packages [28.8 kB]
+Mar 18 13:08:18 ubuntu subiquity_log.5752[7186]: 获取:30 http://security.ubuntu.com/ubuntu noble-security/multiverse Translation-en [6,732 B]
+Mar 18 13:08:18 ubuntu subiquity_log.5752[7186]: 获取:31 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 Components [212 B]
+Mar 18 13:08:18 ubuntu subiquity_log.5752[7186]: 获取:32 http://security.ubuntu.com/ubuntu noble-security/multiverse Icons (48x48) [29 B]
+Mar 18 13:08:18 ubuntu subiquity_log.5752[7186]: 获取:33 http://security.ubuntu.com/ubuntu noble-security/multiverse Icons (64x64) [29 B]
+Mar 18 13:08:18 ubuntu subiquity_log.5752[7186]: 获取:34 http://security.ubuntu.com/ubuntu noble-security/multiverse Icons (64x64@2) [29 B]
+Mar 18 13:08:18 ubuntu subiquity_log.5752[7186]: 获取:35 http://security.ubuntu.com/ubuntu noble-security/multiverse amd64 c-n-f Metadata [396 B]
+Mar 18 13:08:18 ubuntu subiquity_log.5752[7186]: 获取:36 http://hk.archive.ubuntu.com/ubuntu noble/universe Translation-zh_CN [574 kB]
+Mar 18 13:08:18 ubuntu subiquity_log.5752[7186]: 获取:37 http://hk.archive.ubuntu.com/ubuntu noble/universe amd64 Components [3,871 kB]
+Mar 18 13:08:20 ubuntu subiquity_log.5752[7186]: 获取:38 http://hk.archive.ubuntu.com/ubuntu noble/universe Icons (48x48) [3,717 kB]
+Mar 18 13:08:22 ubuntu subiquity_log.5752[7186]: 获取:39 http://hk.archive.ubuntu.com/ubuntu noble/universe Icons (64x64) [7,747 kB]
+Mar 18 13:08:25 ubuntu subiquity_log.5752[7186]: 获取:40 http://hk.archive.ubuntu.com/ubuntu noble/universe Icons (64x64@2) [75.0 kB]
+Mar 18 13:08:25 ubuntu subiquity_log.5752[7186]: 获取:41 http://hk.archive.ubuntu.com/ubuntu noble/universe amd64 c-n-f Metadata [301 kB]
+Mar 18 13:08:25 ubuntu subiquity_log.5752[7186]: 获取:42 http://hk.archive.ubuntu.com/ubuntu noble/multiverse amd64 Packages [269 kB]
+Mar 18 13:08:25 ubuntu subiquity_log.5752[7186]: 获取:43 http://hk.archive.ubuntu.com/ubuntu noble/multiverse Translation-zh_CN [4,640 B]
+Mar 18 13:08:25 ubuntu subiquity_log.5752[7186]: 获取:44 http://hk.archive.ubuntu.com/ubuntu noble/multiverse Translation-en [118 kB]
+Mar 18 13:08:25 ubuntu subiquity_log.5752[7186]: 获取:45 http://hk.archive.ubuntu.com/ubuntu noble/multiverse amd64 Components [35.0 kB]
+Mar 18 13:08:25 ubuntu subiquity_log.5752[7186]: 获取:46 http://hk.archive.ubuntu.com/ubuntu noble/multiverse Icons (48x48) [56.1 kB]
+Mar 18 13:08:25 ubuntu subiquity_log.5752[7186]: 获取:47 http://hk.archive.ubuntu.com/ubuntu noble/multiverse Icons (64x64) [186 kB]
+Mar 18 13:08:25 ubuntu subiquity_log.5752[7186]: 获取:48 http://hk.archive.ubuntu.com/ubuntu noble/multiverse Icons (64x64@2) [904 B]
+Mar 18 13:08:25 ubuntu subiquity_log.5752[7186]: 获取:49 http://hk.archive.ubuntu.com/ubuntu noble/multiverse amd64 c-n-f Metadata [8,328 B]
+Mar 18 13:08:25 ubuntu subiquity_log.5752[7186]: 获取:50 http://hk.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1,837 kB]
+Mar 18 13:08:26 ubuntu subiquity_log.5752[7186]: 获取:51 http://hk.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [336 kB]
+Mar 18 13:08:26 ubuntu subiquity_log.5752[7186]: 获取:52 http://hk.archive.ubuntu.com/ubuntu noble-updates/main amd64 Components [177 kB]
+Mar 18 13:08:26 ubuntu subiquity_log.5752[7186]: 获取:53 http://hk.archive.ubuntu.com/ubuntu noble-updates/main Icons (48x48) [36.0 kB]
+Mar 18 13:08:26 ubuntu subiquity_log.5752[7186]: 获取:54 http://hk.archive.ubuntu.com/ubuntu noble-updates/main Icons (64x64) [51.0 kB]
+Mar 18 13:08:26 ubuntu subiquity_log.5752[7186]: 获取:55 http://hk.archive.ubuntu.com/ubuntu noble-updates/main amd64 c-n-f Metadata [16.7 kB]
+Mar 18 13:08:26 ubuntu subiquity_log.5752[7186]: 获取:56 http://hk.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [2,819 kB]
+Mar 18 13:08:27 ubuntu subiquity_log.5752[7186]: 获取:57 http://hk.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [652 kB]
+Mar 18 13:08:28 ubuntu subiquity_log.5752[7186]: 获取:58 http://hk.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Components [212 B]
+Mar 18 13:08:28 ubuntu subiquity_log.5752[7186]: 获取:59 http://hk.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 c-n-f Metadata [556 B]
+Mar 18 13:08:28 ubuntu subiquity_log.5752[7186]: 获取:60 http://hk.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1,566 kB]
+Mar 18 13:08:28 ubuntu subiquity_log.5752[7186]: 获取:61 http://hk.archive.ubuntu.com/ubuntu noble-updates/universe Translation-en [319 kB]
+Mar 18 13:08:29 ubuntu subiquity_log.5752[7186]: 获取:62 http://hk.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Components [386 kB]
+Mar 18 13:08:29 ubuntu subiquity_log.5752[7186]: 获取:63 http://hk.archive.ubuntu.com/ubuntu noble-updates/universe Icons (48x48) [236 kB]
+Mar 18 13:08:29 ubuntu subiquity_log.5752[7186]: 获取:64 http://hk.archive.ubuntu.com/ubuntu noble-updates/universe Icons (64x64) [370 kB]
+Mar 18 13:08:29 ubuntu subiquity_log.5752[7186]: 获取:65 http://hk.archive.ubuntu.com/ubuntu noble-updates/universe Icons (64x64@2) [29 B]
+Mar 18 13:08:29 ubuntu subiquity_log.5752[7186]: 获取:66 http://hk.archive.ubuntu.com/ubuntu noble-updates/universe amd64 c-n-f Metadata [33.0 kB]
+Mar 18 13:08:29 ubuntu subiquity_log.5752[7186]: 获取:67 http://hk.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Packages [32.1 kB]
+Mar 18 13:08:29 ubuntu subiquity_log.5752[7186]: 获取:68 http://hk.archive.ubuntu.com/ubuntu noble-updates/multiverse Translation-en [7,044 B]
+Mar 18 13:08:29 ubuntu subiquity_log.5752[7186]: 获取:69 http://hk.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Components [940 B]
+Mar 18 13:08:29 ubuntu subiquity_log.5752[7186]: 获取:70 http://hk.archive.ubuntu.com/ubuntu noble-updates/multiverse Icons (48x48) [1,867 B]
+Mar 18 13:08:29 ubuntu subiquity_log.5752[7186]: 获取:71 http://hk.archive.ubuntu.com/ubuntu noble-updates/multiverse Icons (64x64) [2,497 B]
+Mar 18 13:08:29 ubuntu subiquity_log.5752[7186]: 获取:72 http://hk.archive.ubuntu.com/ubuntu noble-updates/multiverse Icons (64x64@2) [29 B]
+Mar 18 13:08:29 ubuntu subiquity_log.5752[7186]: 获取:73 http://hk.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 c-n-f Metadata [496 B]
+Mar 18 13:08:29 ubuntu subiquity_log.5752[7186]: 获取:74 http://hk.archive.ubuntu.com/ubuntu noble-backports/main amd64 Packages [40.4 kB]
+Mar 18 13:08:29 ubuntu subiquity_log.5752[7186]: 获取:75 http://hk.archive.ubuntu.com/ubuntu noble-backports/main Translation-en [9,208 B]
+Mar 18 13:08:29 ubuntu subiquity_log.5752[7186]: 获取:76 http://hk.archive.ubuntu.com/ubuntu noble-backports/main amd64 Components [7,348 B]
+Mar 18 13:08:29 ubuntu subiquity_log.5752[7186]: 获取:77 http://hk.archive.ubuntu.com/ubuntu noble-backports/main Icons (48x48) [9,537 B]
+Mar 18 13:08:29 ubuntu subiquity_log.5752[7186]: 获取:78 http://hk.archive.ubuntu.com/ubuntu noble-backports/main Icons (64x64) [11.3 kB]
+Mar 18 13:08:29 ubuntu subiquity_log.5752[7186]: 获取:79 http://hk.archive.ubuntu.com/ubuntu noble-backports/main Icons (64x64@2) [29 B]
+Mar 18 13:08:29 ubuntu subiquity_log.5752[7186]: 获取:80 http://hk.archive.ubuntu.com/ubuntu noble-backports/main amd64 c-n-f Metadata [368 B]
+Mar 18 13:08:29 ubuntu subiquity_log.5752[7186]: 获取:81 http://hk.archive.ubuntu.com/ubuntu noble-backports/restricted amd64 Components [212 B]
+Mar 18 13:08:29 ubuntu subiquity_log.5752[7186]: 获取:82 http://hk.archive.ubuntu.com/ubuntu noble-backports/restricted Icons (48x48) [29 B]
+Mar 18 13:08:29 ubuntu subiquity_log.5752[7186]: 获取:83 http://hk.archive.ubuntu.com/ubuntu noble-backports/restricted Icons (64x64) [29 B]
+Mar 18 13:08:29 ubuntu subiquity_log.5752[7186]: 获取:84 http://hk.archive.ubuntu.com/ubuntu noble-backports/restricted Icons (64x64@2) [29 B]
+Mar 18 13:08:29 ubuntu subiquity_log.5752[7186]: 获取:85 http://hk.archive.ubuntu.com/ubuntu noble-backports/restricted amd64 c-n-f Metadata [116 B]
+Mar 18 13:08:29 ubuntu subiquity_log.5752[7186]: 获取:86 http://hk.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Packages [30.7 kB]
+Mar 18 13:08:29 ubuntu subiquity_log.5752[7186]: 获取:87 http://hk.archive.ubuntu.com/ubuntu noble-backports/universe Translation-en [18.2 kB]
+Mar 18 13:08:29 ubuntu subiquity_log.5752[7186]: 获取:88 http://hk.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Components [13.1 kB]
+Mar 18 13:08:29 ubuntu subiquity_log.5752[7186]: 获取:89 http://hk.archive.ubuntu.com/ubuntu noble-backports/universe Icons (48x48) [23.3 kB]
+Mar 18 13:08:29 ubuntu subiquity_log.5752[7186]: 获取:90 http://hk.archive.ubuntu.com/ubuntu noble-backports/universe Icons (64x64) [32.3 kB]
+Mar 18 13:08:29 ubuntu subiquity_log.5752[7186]: 获取:91 http://hk.archive.ubuntu.com/ubuntu noble-backports/universe Icons (64x64@2) [29 B]
+Mar 18 13:08:29 ubuntu subiquity_log.5752[7186]: 获取:92 http://hk.archive.ubuntu.com/ubuntu noble-backports/universe amd64 c-n-f Metadata [1,480 B]
+Mar 18 13:08:29 ubuntu subiquity_log.5752[7186]: 获取:93 http://hk.archive.ubuntu.com/ubuntu noble-backports/multiverse amd64 Packages [780 B]
+Mar 18 13:08:29 ubuntu subiquity_log.5752[7186]: 获取:94 http://hk.archive.ubuntu.com/ubuntu noble-backports/multiverse Translation-en [372 B]
+Mar 18 13:08:29 ubuntu subiquity_log.5752[7186]: 获取:95 http://hk.archive.ubuntu.com/ubuntu noble-backports/multiverse amd64 Components [212 B]
+Mar 18 13:08:29 ubuntu subiquity_log.5752[7186]: 获取:96 http://hk.archive.ubuntu.com/ubuntu noble-backports/multiverse Icons (48x48) [29 B]
+Mar 18 13:08:29 ubuntu subiquity_log.5752[7186]: 获取:97 http://hk.archive.ubuntu.com/ubuntu noble-backports/multiverse Icons (64x64) [29 B]
+Mar 18 13:08:29 ubuntu subiquity_log.5752[7186]: 获取:98 http://hk.archive.ubuntu.com/ubuntu noble-backports/multiverse Icons (64x64@2) [29 B]
+Mar 18 13:08:29 ubuntu subiquity_log.5752[7186]: 获取:99 http://hk.archive.ubuntu.com/ubuntu noble-backports/multiverse amd64 c-n-f Metadata [116 B]
+Mar 18 13:08:36 ubuntu subiquity_log.5752[7186]: 已下载 54.2 MB，耗时 20秒 (2,708 kB/s)
+Mar 18 13:08:38 ubuntu subiquity_log.5752[7186]: 正在读取软件包列表...
+Mar 18 13:08:38 ubuntu subiquity_log.5752[7174]: Running command ['udevadm', 'settle'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:38 ubuntu subiquity_log.5752[7174]: TIMED subp(['udevadm', 'settle']): 0.006
+Mar 18 13:08:38 ubuntu subiquity_log.5752[7174]: Running command ['mount', '--make-private', '/tmp/tmpfl2iy3z8/mount/usr/bin/ischroot'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:38 ubuntu subiquity_log.5752[7174]: Running command ['umount', '/tmp/tmpfl2iy3z8/mount/usr/bin/ischroot'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:38 ubuntu subiquity_log.5752[7174]: Running command ['mount', '--make-private', '/tmp/tmpfl2iy3z8/mount/sys'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:38 ubuntu subiquity_log.5752[7174]: Running command ['umount', '/tmp/tmpfl2iy3z8/mount/sys'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:38 ubuntu subiquity_log.5752[7174]: Running command ['mount', '--make-private', '/tmp/tmpfl2iy3z8/mount/run'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:38 ubuntu subiquity_log.5752[7174]: Running command ['umount', '/tmp/tmpfl2iy3z8/mount/run'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:38 ubuntu subiquity_log.5752[7174]: Running command ['mount', '--make-private', '/tmp/tmpfl2iy3z8/mount/proc'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:38 ubuntu subiquity_log.5752[7174]: Running command ['umount', '/tmp/tmpfl2iy3z8/mount/proc'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:38 ubuntu subiquity_log.5752[7174]: Running command ['mount', '--make-private', '/tmp/tmpfl2iy3z8/mount/dev'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:38 ubuntu subiquity_log.5752[7174]: Running command ['umount', '/tmp/tmpfl2iy3z8/mount/dev'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:38 ubuntu subiquity_log.5752[7174]: finish: cmd-in-target: SUCCESS: curtin command in-target
+Mar 18 13:08:38 ubuntu subiquity_event.5752[5752]:  curtin command in-target
+Mar 18 13:08:38 ubuntu subiquity_event.5752[5752]: configuring apt
+Mar 18 13:08:38 ubuntu subiquity_event.5752[5752]: installing system
+Mar 18 13:08:38 ubuntu subiquity_event.5752[5752]:  executing curtin install initial step
+Mar 18 13:08:38 ubuntu subiquity_log.5752[7606]: /usr/bin/ubuntu-drivers
+Mar 18 13:08:38 ubuntu subiquity_log.5752[7607]: /usr/bin/ubuntu-drivers
+Mar 18 13:08:39 ubuntu subiquity_log.5752[7599]: start: cmd-install: curtin command install
+Mar 18 13:08:39 ubuntu subiquity_log.5752[7599]: curtin: Installation started. (24.0.0-41-g8bc0121d6)
+Mar 18 13:08:39 ubuntu subiquity_log.5752[7599]: LANG=zh_CN.UTF-8
+Mar 18 13:08:39 ubuntu subiquity_log.5752[7599]: 'reporter' not found in config file.
+Mar 18 13:08:39 ubuntu subiquity_log.5752[7599]: curtin: Installation started. (24.0.0-41-g8bc0121d6)
+Mar 18 13:08:39 ubuntu subiquity_log.5752[7599]: Exporting resume data to /tmp/tmpcu92udyz/resume-data.json so that further stages can be executed in a later invocation.
+Mar 18 13:08:39 ubuntu subiquity_log.5752[7599]: {'WORKING_DIR': '/tmp/tmp4sk0ukk2/scratch', 'OUTPUT_FSTAB': '/tmp/tmp4sk0ukk2/state/fstab', 'OUTPUT_INTERFACES': '/tmp/tmp4sk0ukk2/state/interfaces', 'OUTPUT_NETWORK_CONFIG': '/tmp/tmp4sk0ukk2/state/network_config', 'OUTPUT_NETWORK_STATE': '/tmp/tmp4sk0ukk2/state/network_state', 'TARGET_MOUNT_POINT': '/target', 'CONFIG': '/tmp/tmp4sk0ukk2/state/config'}
+Mar 18 13:08:39 ubuntu subiquity_log.5752[7599]: curtin: Installation finished.
+Mar 18 13:08:39 ubuntu subiquity_log.5752[7599]: Skipping unmount: config disabled target unmounting
+Mar 18 13:08:39 ubuntu subiquity_log.5752[7599]: TIMED INSTALL_COMMAND: 0.002
+Mar 18 13:08:39 ubuntu subiquity_log.5752[7599]: finish: cmd-install: SUCCESS: curtin command install
+Mar 18 13:08:39 ubuntu subiquity_event.5752[5752]:  executing curtin install initial step
+Mar 18 13:08:39 ubuntu subiquity_event.5752[5752]:  executing curtin install partitioning step
+Mar 18 13:08:39 ubuntu subiquity_log.5752[7628]: start: cmd-install: curtin command install
+Mar 18 13:08:39 ubuntu subiquity_log.5752[7628]: unknown type for url 'cp:///tmp/tmpfl2iy3z8/mount', assuming type 'tgz'
+Mar 18 13:08:39 ubuntu subiquity_log.5752[7628]: curtin: Installation started. (24.0.0-41-g8bc0121d6)
+Mar 18 13:08:39 ubuntu subiquity_log.5752[7628]: LANG=zh_CN.UTF-8
+Mar 18 13:08:39 ubuntu subiquity_log.5752[7628]: 'reporter' not found in config file.
+Mar 18 13:08:39 ubuntu subiquity_log.5752[7628]: curtin: Installation started. (24.0.0-41-g8bc0121d6)
+Mar 18 13:08:39 ubuntu subiquity_log.5752[7628]: {'WORKING_DIR': '/tmp/tmp4sk0ukk2/scratch', 'OUTPUT_FSTAB': '/tmp/tmp4sk0ukk2/state/fstab', 'OUTPUT_INTERFACES': '/tmp/tmp4sk0ukk2/state/interfaces', 'OUTPUT_NETWORK_CONFIG': '/tmp/tmp4sk0ukk2/state/network_config', 'OUTPUT_NETWORK_STATE': '/tmp/tmp4sk0ukk2/state/network_state', 'TARGET_MOUNT_POINT': '/target', 'CONFIG': '/tmp/tmp4sk0ukk2/state/config'}
+Mar 18 13:08:39 ubuntu subiquity_log.5752[7628]: start: cmd-install/stage-partitioning: configuring storage
+Mar 18 13:08:40 ubuntu subiquity_log.5752[7628]: start: cmd-install/stage-partitioning/builtin: running 'curtin block-meta simple'
+Mar 18 13:08:40 ubuntu subiquity_event.5752[5752]:   curtin command install
+Mar 18 13:08:40 ubuntu subiquity_event.5752[5752]:    configuring storage
+Mar 18 13:08:40 ubuntu subiquity_event.5752[5752]:     running 'curtin block-meta simple'
+Mar 18 13:08:40 ubuntu subiquity_log.5752[7628]: start: cmd-install/stage-partitioning/builtin/cmd-block-meta: curtin command block-meta
+Mar 18 13:08:40 ubuntu subiquity_log.5752[7628]: get_path_to_storage_volume for volume disk-sda({'ptable': 'gpt', 'path': '/dev/sda', 'wipe': 'superblock-recursive', 'preserve': False, 'name': '', 'grub_device': True, 'id': 'disk-sda', 'type': 'disk'})
+Mar 18 13:08:40 ubuntu subiquity_log.5752[7628]: Running command ['udevadm', 'info', '--query=property', '--export', '/dev/sda'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:40 ubuntu subiquity_log.5752[7628]: /dev/sda is multipath device member? False
+Mar 18 13:08:40 ubuntu subiquity_log.5752[7628]: Running command ['partprobe', '/dev/sda'] with allowed return codes [0, 1] (capture=False)
+Mar 18 13:08:40 ubuntu subiquity_log.5752[7628]: Running command ['udevadm', 'settle'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:40 ubuntu subiquity_log.5752[7628]: TIMED udevadm_settle(): 0.060
+Mar 18 13:08:40 ubuntu subiquity_log.5752[7628]: devsync happy - path /dev/sda now exists
+Mar 18 13:08:40 ubuntu subiquity_log.5752[7628]: return volume path /dev/sda
+Mar 18 13:08:40 ubuntu subiquity_log.5752[7628]: get_path_to_storage_volume for volume partition-1({'device': 'disk-sda', 'size': 214745219072, 'wipe': 'superblock', 'number': 2, 'preserve': False, 'offset': 2097152, 'id': 'partition-1', 'type': 'partition'})
+Mar 18 13:08:40 ubuntu subiquity_event.5752[5752]:      curtin command block-meta
+Mar 18 13:08:40 ubuntu subiquity_log.5752[7628]: get_path_to_storage_volume for volume disk-sda({'ptable': 'gpt', 'path': '/dev/sda', 'wipe': 'superblock-recursive', 'preserve': False, 'name': '', 'grub_device': True, 'id': 'disk-sda', 'type': 'disk'})
+Mar 18 13:08:40 ubuntu subiquity_log.5752[7628]: Running command ['udevadm', 'info', '--query=property', '--export', '/dev/sda'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:40 ubuntu subiquity_log.5752[7628]: /dev/sda is multipath device member? False
+Mar 18 13:08:40 ubuntu subiquity_log.5752[7628]: Running command ['partprobe', '/dev/sda'] with allowed return codes [0, 1] (capture=False)
+Mar 18 13:08:40 ubuntu subiquity_log.5752[7628]: Running command ['udevadm', 'settle'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:40 ubuntu subiquity_log.5752[7628]: TIMED udevadm_settle(): 0.039
+Mar 18 13:08:40 ubuntu subiquity_log.5752[7628]: devsync happy - path /dev/sda now exists
+Mar 18 13:08:40 ubuntu subiquity_log.5752[7628]: return volume path /dev/sda
+Mar 18 13:08:40 ubuntu subiquity_log.5752[7628]: block-meta: extracted devices to clear: ['/dev/sda']
+Mar 18 13:08:40 ubuntu subiquity_log.5752[7628]: Declared block devices: ['/dev/sda']
+Mar 18 13:08:40 ubuntu subiquity_log.5752[7628]: clearing devices=['/dev/sda']
+Mar 18 13:08:40 ubuntu subiquity_log.5752[7628]: start: cmd-install/stage-partitioning/builtin/cmd-block-meta/clear-holders: removing previous storage devices
+Mar 18 13:08:40 ubuntu subiquity_log.5752[7628]: Running command ['mdadm', '--assemble', '--scan', '-v'] with allowed return codes [0, 1, 2] (capture=True)
+Mar 18 13:08:41 ubuntu subiquity_event.5752[5752]:       removing previous storage devices
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: mdadm assemble scan results:
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: mdadm: looking for devices for further assembly
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: mdadm: no recogniseable superblock on /dev/loop15
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: mdadm: no recogniseable superblock on /dev/loop14
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: mdadm: no recogniseable superblock on /dev/loop13
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: mdadm: no recogniseable superblock on /dev/loop12
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: mdadm: no recogniseable superblock on /dev/loop11
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: mdadm: no recogniseable superblock on /dev/loop10
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: mdadm: no recogniseable superblock on /dev/loop9
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: mdadm: no recogniseable superblock on /dev/loop8
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: mdadm: no recogniseable superblock on /dev/sr1
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: mdadm: no recogniseable superblock on /dev/sr0
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: mdadm: no recogniseable superblock on /dev/sda
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: mdadm: Cannot assemble mbr metadata on /dev/fd0
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: mdadm: no recogniseable superblock on /dev/loop7
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: mdadm: no recogniseable superblock on /dev/loop6
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: mdadm: no recogniseable superblock on /dev/loop5
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: mdadm: no recogniseable superblock on /dev/loop4
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: mdadm: no recogniseable superblock on /dev/loop3
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: mdadm: no recogniseable superblock on /dev/loop2
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: mdadm: no recogniseable superblock on /dev/loop1
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: mdadm: no recogniseable superblock on /dev/loop0
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: mdadm: No arrays found in config file or automatically
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Running command ['mdadm', '--detail', '--scan', '-v'] with allowed return codes [0, 1] (capture=True)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: mdadm detail scan after assemble:
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Running command ['udevadm', 'settle'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: TIMED udevadm_settle(): 0.008
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Running command ['pvscan'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Running command ['vgscan'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Running command ['vgchange', '--activate=y'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Running command ['udevadm', 'settle'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: TIMED udevadm_settle(): 0.008
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Loading kernel module bcache via modprobe
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Running command ['modprobe', '--use-blacklist', 'bcache'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Generating device storage trees for path(s): ['/dev/sda']
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: devname '/sys/class/block/sda' had holders: []
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: /dev/sda is multipath device partition? False
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: /dev/sda is multipath device partition? False
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: /dev/sda is multipath device partition? False
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Current device storage tree:
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: sda
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Shutdown Plan:
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: {'level': 0, 'device': '/sys/class/block/sda', 'dev_type': 'disk'}
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: shutdown running on holder type: 'disk' syspath: '/sys/class/block/sda'
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Running command ['lsblk', '--noheadings', '--bytes', '--pairs', '--output=ALIGNMENT,DISC-ALN,DISC-GRAN,DISC-MAX,DISC-ZERO,FSTYPE,GROUP,KNAME,LABEL,LOG-SEC,MAJ:MIN,MIN-IO,MODE,MODEL,MOUNTPOINT,NAME,OPT-IO,OWNER,PHY-SEC,RM,RO,ROTA,RQ-SIZE,SIZE,STATE,TYPE,UUID', '/dev/sda'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: get_blockdev_sector_size: info:
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: {
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:  "sda": {
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "ALIGNMENT": "0",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "DISC-ALN": "0",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "DISC-GRAN": "512",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "DISC-MAX": "0",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "DISC-ZERO": "0",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "FSTYPE": "",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "GROUP": "disk",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "KNAME": "sda",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "LABEL": "",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "LOG-SEC": "512",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "MAJ:MIN": "8:0",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "MIN-IO": "512",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "MODE": "brw-rw----",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "MODEL": "VMware Virtual S",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "MOUNTPOINT": "",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "NAME": "sda",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "OPT-IO": "4194304",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "OWNER": "root",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "PHY-SEC": "512",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "RM": "0",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "RO": "0",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "ROTA": "1",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "RQ-SIZE": "236",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "SIZE": "214748364800",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "STATE": "running",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "TYPE": "disk",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "UUID": "",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "device_path": "/dev/sda"
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:  }
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: }
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: get_blockdev_sector_size: (log=512, phys=512)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Running command ['fdasd', '--table', '/dev/sda'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Running command ['lsblk', '--noheadings', '--bytes', '--pairs', '--output=ALIGNMENT,DISC-ALN,DISC-GRAN,DISC-MAX,DISC-ZERO,FSTYPE,GROUP,KNAME,LABEL,LOG-SEC,MAJ:MIN,MIN-IO,MODE,MODEL,MOUNTPOINT,NAME,OPT-IO,OWNER,PHY-SEC,RM,RO,ROTA,RQ-SIZE,SIZE,STATE,TYPE,UUID'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Checking if /dev/sda is a swap device
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Found swap magic: b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: wiping superblock on /dev/sda
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: wiping /dev/sda attempt 1/4
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Running command ['wipefs', '--all', '--force', '/dev/sda'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: wiping 1M on /dev/sda at offsets [0, -1048576]
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: successfully wiped device /dev/sda on attempt 1/4
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: devname '/sys/class/block/sda' had holders: []
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: /dev/sda is multipath device partition? False
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: /dev/sda is multipath device partition? False
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: /dev/sda is multipath device partition? False
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: finish: cmd-install/stage-partitioning/builtin/cmd-block-meta/clear-holders: SUCCESS: removing previous storage devices
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: blockmeta: detected storage config, using mode=custom
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: start: cmd-install/stage-partitioning/builtin/cmd-block-meta: configuring disk: disk-sda
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: get_path_to_storage_volume for volume disk-sda({'ptable': 'gpt', 'path': '/dev/sda', 'wipe': 'superblock-recursive', 'preserve': False, 'name': '', 'grub_device': True, 'id': 'disk-sda', 'type': 'disk'})
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: /dev/sda is multipath device member? False
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: found candidate disks [{'/dev/sda'}]
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Running command ['partprobe', '/dev/sda'] with allowed return codes [0, 1] (capture=False)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Running command ['udevadm', 'settle'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: TIMED udevadm_settle(): 0.037
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: devsync happy - path /dev/sda now exists
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: return volume path /dev/sda
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Acquiring fcntl LOCK_EX on /dev/sda
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Running command ['wipefs', '--all', '--force', '/dev/sda'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: wiping 1M on /dev/sda at offsets [0, -1048576]
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: labeling device: '/dev/sda' with 'gpt' partition table
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Running command ['wipefs', '--all', '--force', '/dev/sda'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: wiping 1M on /dev/sda at offsets [0, -1048576]
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: devname '/dev/sda' had holders: []
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Releasing fcntl LOCK_EX on /dev/sda
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: get_path_to_storage_volume for volume disk-sda({'ptable': 'gpt', 'path': '/dev/sda', 'wipe': 'superblock-recursive', 'preserve': False, 'name': '', 'grub_device': True, 'id': 'disk-sda', 'type': 'disk'})
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: /dev/sda is multipath device member? False
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: found candidate disks [{'/dev/sda'}]
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Running command ['partprobe', '/dev/sda'] with allowed return codes [0, 1] (capture=False)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Running command ['udevadm', 'settle'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:41 ubuntu subiquity_event.5752[5752]:       removing previous storage devices
+Mar 18 13:08:41 ubuntu subiquity_event.5752[5752]:       configuring disk: disk-sda
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: TIMED udevadm_settle(): 0.029
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: devsync happy - path /dev/sda now exists
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: return volume path /dev/sda
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Running command ['lsblk', '--noheadings', '--bytes', '--pairs', '--output=ALIGNMENT,DISC-ALN,DISC-GRAN,DISC-MAX,DISC-ZERO,FSTYPE,GROUP,KNAME,LABEL,LOG-SEC,MAJ:MIN,MIN-IO,MODE,MODEL,MOUNTPOINT,NAME,OPT-IO,OWNER,PHY-SEC,RM,RO,ROTA,RQ-SIZE,SIZE,STATE,TYPE,UUID', '/dev/sda'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: get_blockdev_sector_size: info:
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: {
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:  "sda": {
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "ALIGNMENT": "0",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "DISC-ALN": "0",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "DISC-GRAN": "512",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "DISC-MAX": "0",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "DISC-ZERO": "0",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "FSTYPE": "",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "GROUP": "disk",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "KNAME": "sda",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "LABEL": "",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "LOG-SEC": "512",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "MAJ:MIN": "8:0",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "MIN-IO": "512",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "MODE": "brw-rw----",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "MODEL": "VMware Virtual S",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "MOUNTPOINT": "",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "NAME": "sda",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "OPT-IO": "4194304",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "OWNER": "root",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "PHY-SEC": "512",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "RM": "0",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "RO": "0",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "ROTA": "1",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "RQ-SIZE": "236",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "SIZE": "214748364800",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "STATE": "running",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "TYPE": "disk",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "UUID": "",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   "device_path": "/dev/sda"
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:  }
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: }
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: get_blockdev_sector_size: (log=512, phys=512)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: sfdisk input:
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: ---
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: label: gpt
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: 1:  start=2048 size=2048 type=21686148-6449-6E6F-744E-656564454649
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: 2:  start=4096 size=419424256
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: ---
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Running command ['losetup', '--version'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Running command ['sfdisk', '--no-reread', '/dev/sda'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Disk /dev/sda：200 GiB，214748364800 字节，419430400 个扇区
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Disk model: VMware Virtual S
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: 单元：扇区 / 1 * 512 = 512 字节
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: 扇区大小(逻辑/物理)：512 字节 / 512 字节
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: I/O 大小(最小/最佳)：512 字节 / 4194304 字节
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: >>> 已接受脚本标头(header)。
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: >>> 已创建新的 GPT 磁盘标签(GUID: 85AEC24E-81B3-4077-A87F-F61736C2352B)。
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: /dev/sda1: 扇区 2048 已使用。
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Failed to add #1 partition: 数值结果超出值域
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: 离开中。
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: An error occured handling 'disk-sda': ProcessExecutionError - Unexpected error while running command.
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Command: ['sfdisk', '--no-reread', '/dev/sda']
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Exit code: 1
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Reason: -
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Stdout: ''
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Stderr: ''
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: finish: cmd-install/stage-partitioning/builtin/cmd-block-meta: FAIL: configuring disk: disk-sda
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: TIMED BLOCK_META: 1.215
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: finish: cmd-install/stage-partitioning/builtin/cmd-block-meta: FAIL: curtin command block-meta
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Traceback (most recent call last):
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   File "/snap/ubuntu-desktop-bootstrap/502/lib/python3.10/site-packages/curtin/commands/main.py", line 202, in main
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:     ret = args.func(args)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   File "/snap/ubuntu-desktop-bootstrap/502/lib/python3.10/site-packages/curtin/log.py", line 97, in wrapper
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:     return log_time("TIMED %s: " % msg, func, *args, **kwargs)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   File "/snap/ubuntu-desktop-bootstrap/502/lib/python3.10/site-packages/curtin/log.py", line 79, in log_time
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:     return func(*args, **kwargs)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   File "/snap/ubuntu-desktop-bootstrap/502/lib/python3.10/site-packages/curtin/commands/block_meta.py", line 127, in block_meta
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:     return meta_custom(args)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   File "/snap/ubuntu-desktop-bootstrap/502/lib/python3.10/site-packages/curtin/commands/block_meta.py", line 2283, in meta_custom
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:     handler(command, storage_config_dict, context)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   File "/snap/ubuntu-desktop-bootstrap/502/lib/python3.10/site-packages/curtin/commands/block_meta_v2.py", line 519, in disk_handler_v2
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:     table.apply(disk)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   File "/snap/ubuntu-desktop-bootstrap/502/lib/python3.10/site-packages/curtin/commands/block_meta_v2.py", line 177, in apply
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:     util.subp(cmd, data=sfdisk_script.encode('ascii'))
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   File "/snap/ubuntu-desktop-bootstrap/502/lib/python3.10/site-packages/curtin/util.py", line 331, in subp
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:     return _subp(*args, **kwargs)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:   File "/snap/ubuntu-desktop-bootstrap/502/lib/python3.10/site-packages/curtin/util.py", line 175, in _subp
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:     raise ProcessExecutionError(stdout=out, stderr=err,
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: curtin.util.ProcessExecutionError: Unexpected error while running command.
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Command: ['sfdisk', '--no-reread', '/dev/sda']
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Exit code: 1
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Reason: -
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Stdout: ''
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Stderr: ''
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Unexpected error while running command.
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Command: ['sfdisk', '--no-reread', '/dev/sda']
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Exit code: 1
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Reason: -
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Stdout: ''
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Stderr: ''
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: builtin command failed
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: finish: cmd-install/stage-partitioning/builtin: FAIL: running 'curtin block-meta simple'
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: builtin took 1.812 seconds
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: stage_partitioning took 1.812 seconds
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: finish: cmd-install/stage-partitioning: FAIL: configuring storage
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: curtin: Installation failed with exception: Unexpected error while running command.
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Command: ['curtin', 'block-meta', 'simple']
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Exit code: 3
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Reason: -
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Stdout: start: cmd-install/stage-partitioning/builtin/cmd-block-meta: curtin command block-meta
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         get_path_to_storage_volume for volume disk-sda({'ptable': 'gpt', 'path': '/dev/sda', 'wipe': 'superblock-recursive', 'preserve': False, 'name': '', 'grub_device': True, 'id': 'disk-sda', 'type': 'disk'})
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Running command ['udevadm', 'info', '--query=property', '--export', '/dev/sda'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         /dev/sda is multipath device member? False
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Running command ['partprobe', '/dev/sda'] with allowed return codes [0, 1] (capture=False)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Running command ['udevadm', 'settle'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         TIMED udevadm_settle(): 0.060
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         devsync happy - path /dev/sda now exists
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         return volume path /dev/sda
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         get_path_to_storage_volume for volume partition-1({'device': 'disk-sda', 'size': 214745219072, 'wipe': 'superblock', 'number': 2, 'preserve': False, 'offset': 2097152, 'id': 'partition-1', 'type': 'partition'})
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         get_path_to_storage_volume for volume disk-sda({'ptable': 'gpt', 'path': '/dev/sda', 'wipe': 'superblock-recursive', 'preserve': False, 'name': '', 'grub_device': True, 'id': 'disk-sda', 'type': 'disk'})
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Running command ['udevadm', 'info', '--query=property', '--export', '/dev/sda'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         /dev/sda is multipath device member? False
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Running command ['partprobe', '/dev/sda'] with allowed return codes [0, 1] (capture=False)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Running command ['udevadm', 'settle'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         TIMED udevadm_settle(): 0.039
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         devsync happy - path /dev/sda now exists
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         return volume path /dev/sda
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         block-meta: extracted devices to clear: ['/dev/sda']
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Declared block devices: ['/dev/sda']
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         clearing devices=['/dev/sda']
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         start: cmd-install/stage-partitioning/builtin/cmd-block-meta/clear-holders: removing previous storage devices
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Running command ['mdadm', '--assemble', '--scan', '-v'] with allowed return codes [0, 1, 2] (capture=True)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         mdadm assemble scan results:
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         mdadm: looking for devices for further assembly
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/loop15
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/loop14
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/loop13
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/loop12
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/loop11
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/loop10
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/loop9
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/loop8
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/sr1
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/sr0
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/sda
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         mdadm: Cannot assemble mbr metadata on /dev/fd0
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/loop7
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/loop6
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/loop5
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/loop4
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/loop3
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/loop2
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/loop1
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/loop0
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         mdadm: No arrays found in config file or automatically
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Running command ['mdadm', '--detail', '--scan', '-v'] with allowed return codes [0, 1] (capture=True)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         mdadm detail scan after assemble:
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Running command ['udevadm', 'settle'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         TIMED udevadm_settle(): 0.008
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Running command ['pvscan'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Running command ['vgscan'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Running command ['vgchange', '--activate=y'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Running command ['udevadm', 'settle'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         TIMED udevadm_settle(): 0.008
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Loading kernel module bcache via modprobe
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Running command ['modprobe', '--use-blacklist', 'bcache'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Generating device storage trees for path(s): ['/dev/sda']
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         devname '/sys/class/block/sda' had holders: []
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         /dev/sda is multipath device partition? False
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         /dev/sda is multipath device partition? False
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         /dev/sda is multipath device partition? False
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Current device storage tree:
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         sda
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Shutdown Plan:
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         {'level': 0, 'device': '/sys/class/block/sda', 'dev_type': 'disk'}
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         shutdown running on holder type: 'disk' syspath: '/sys/class/block/sda'
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Running command ['lsblk', '--noheadings', '--bytes', '--pairs', '--output=ALIGNMENT,DISC-ALN,DISC-GRAN,DISC-MAX,DISC-ZERO,FSTYPE,GROUP,KNAME,LABEL,LOG-SEC,MAJ:MIN,MIN-IO,MODE,MODEL,MOUNTPOINT,NAME,OPT-IO,OWNER,PHY-SEC,RM,RO,ROTA,RQ-SIZE,SIZE,STATE,TYPE,UUID', '/dev/sda'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         get_blockdev_sector_size: info:
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         {
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:          "sda": {
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "ALIGNMENT": "0",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "DISC-ALN": "0",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "DISC-GRAN": "512",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "DISC-MAX": "0",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "DISC-ZERO": "0",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "FSTYPE": "",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "GROUP": "disk",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "KNAME": "sda",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "LABEL": "",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "LOG-SEC": "512",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "MAJ:MIN": "8:0",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "MIN-IO": "512",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "MODE": "brw-rw----",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "MODEL": "VMware Virtual S",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "MOUNTPOINT": "",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "NAME": "sda",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "OPT-IO": "4194304",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "OWNER": "root",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "PHY-SEC": "512",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "RM": "0",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "RO": "0",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "ROTA": "1",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "RQ-SIZE": "236",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "SIZE": "214748364800",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "STATE": "running",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "TYPE": "disk",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "UUID": "",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "device_path": "/dev/sda"
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:          }
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         }
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         get_blockdev_sector_size: (log=512, phys=512)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Running command ['fdasd', '--table', '/dev/sda'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Running command ['lsblk', '--noheadings', '--bytes', '--pairs', '--output=ALIGNMENT,DISC-ALN,DISC-GRAN,DISC-MAX,DISC-ZERO,FSTYPE,GROUP,KNAME,LABEL,LOG-SEC,MAJ:MIN,MIN-IO,MODE,MODEL,MOUNTPOINT,NAME,OPT-IO,OWNER,PHY-SEC,RM,RO,ROTA,RQ-SIZE,SIZE,STATE,TYPE,UUID'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Checking if /dev/sda is a swap device
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Found swap magic: b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         wiping superblock on /dev/sda
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         wiping /dev/sda attempt 1/4
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Running command ['wipefs', '--all', '--force', '/dev/sda'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         wiping 1M on /dev/sda at offsets [0, -1048576]
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         successfully wiped device /dev/sda on attempt 1/4
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         devname '/sys/class/block/sda' had holders: []
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         /dev/sda is multipath device partition? False
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         /dev/sda is multipath device partition? False
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         /dev/sda is multipath device partition? False
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         finish: cmd-install/stage-partitioning/builtin/cmd-block-meta/clear-holders: SUCCESS: removing previous storage devices
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         blockmeta: detected storage config, using mode=custom
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         start: cmd-install/stage-partitioning/builtin/cmd-block-meta: configuring disk: disk-sda
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         get_path_to_storage_volume for volume disk-sda({'ptable': 'gpt', 'path': '/dev/sda', 'wipe': 'superblock-recursive', 'preserve': False, 'name': '', 'grub_device': True, 'id': 'disk-sda', 'type': 'disk'})
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         /dev/sda is multipath device member? False
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         found candidate disks [{'/dev/sda'}]
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Running command ['partprobe', '/dev/sda'] with allowed return codes [0, 1] (capture=False)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Running command ['udevadm', 'settle'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         TIMED udevadm_settle(): 0.037
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         devsync happy - path /dev/sda now exists
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         return volume path /dev/sda
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Acquiring fcntl LOCK_EX on /dev/sda
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Running command ['wipefs', '--all', '--force', '/dev/sda'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         wiping 1M on /dev/sda at offsets [0, -1048576]
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         labeling device: '/dev/sda' with 'gpt' partition table
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Running command ['wipefs', '--all', '--force', '/dev/sda'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         wiping 1M on /dev/sda at offsets [0, -1048576]
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         devname '/dev/sda' had holders: []
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Releasing fcntl LOCK_EX on /dev/sda
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         get_path_to_storage_volume for volume disk-sda({'ptable': 'gpt', 'path': '/dev/sda', 'wipe': 'superblock-recursive', 'preserve': False, 'name': '', 'grub_device': True, 'id': 'disk-sda', 'type': 'disk'})
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         /dev/sda is multipath device member? False
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         found candidate disks [{'/dev/sda'}]
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Running command ['partprobe', '/dev/sda'] with allowed return codes [0, 1] (capture=False)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Running command ['udevadm', 'settle'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         TIMED udevadm_settle(): 0.029
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         devsync happy - path /dev/sda now exists
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         return volume path /dev/sda
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Running command ['lsblk', '--noheadings', '--bytes', '--pairs', '--output=ALIGNMENT,DISC-ALN,DISC-GRAN,DISC-MAX,DISC-ZERO,FSTYPE,GROUP,KNAME,LABEL,LOG-SEC,MAJ:MIN,MIN-IO,MODE,MODEL,MOUNTPOINT,NAME,OPT-IO,OWNER,PHY-SEC,RM,RO,ROTA,RQ-SIZE,SIZE,STATE,TYPE,UUID', '/dev/sda'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         get_blockdev_sector_size: info:
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         {
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:          "sda": {
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "ALIGNMENT": "0",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "DISC-ALN": "0",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "DISC-GRAN": "512",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "DISC-MAX": "0",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "DISC-ZERO": "0",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "FSTYPE": "",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "GROUP": "disk",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "KNAME": "sda",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "LABEL": "",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "LOG-SEC": "512",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "MAJ:MIN": "8:0",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "MIN-IO": "512",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "MODE": "brw-rw----",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "MODEL": "VMware Virtual S",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "MOUNTPOINT": "",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "NAME": "sda",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "OPT-IO": "4194304",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "OWNER": "root",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "PHY-SEC": "512",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "RM": "0",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "RO": "0",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "ROTA": "1",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "RQ-SIZE": "236",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "SIZE": "214748364800",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "STATE": "running",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "TYPE": "disk",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "UUID": "",
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           "device_path": "/dev/sda"
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:          }
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         }
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         get_blockdev_sector_size: (log=512, phys=512)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         sfdisk input:
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         ---
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         label: gpt
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         1:  start=2048 size=2048 type=21686148-6449-6E6F-744E-656564454649
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         2:  start=4096 size=419424256
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         ---
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Running command ['losetup', '--version'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Running command ['sfdisk', '--no-reread', '/dev/sda'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Disk /dev/sda：200 GiB，214748364800 字节，419430400 个扇区
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Disk model: VMware Virtual S
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         单元：扇区 / 1 * 512 = 512 字节
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         扇区大小(逻辑/物理)：512 字节 / 512 字节
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         I/O 大小(最小/最佳)：512 字节 / 4194304 字节
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         >>> 已接受脚本标头(header)。
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         >>> 已创建新的 GPT 磁盘标签(GUID: 85AEC24E-81B3-4077-A87F-F61736C2352B)。
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         /dev/sda1: 扇区 2048 已使用。
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Failed to add #1 partition: 数值结果超出值域
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         离开中。
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         An error occured handling 'disk-sda': ProcessExecutionError - Unexpected error while running command.
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Command: ['sfdisk', '--no-reread', '/dev/sda']
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Exit code: 1
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Reason: -
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Stdout: ''
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Stderr: ''
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         finish: cmd-install/stage-partitioning/builtin/cmd-block-meta: FAIL: configuring disk: disk-sda
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         TIMED BLOCK_META: 1.215
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         finish: cmd-install/stage-partitioning/builtin/cmd-block-meta: FAIL: curtin command block-meta
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Traceback (most recent call last):
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           File "/snap/ubuntu-desktop-bootstrap/502/lib/python3.10/site-packages/curtin/commands/main.py", line 202, in main
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:             ret = args.func(args)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           File "/snap/ubuntu-desktop-bootstrap/502/lib/python3.10/site-packages/curtin/log.py", line 97, in wrapper
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:             return log_time("TIMED %s: " % msg, func, *args, **kwargs)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           File "/snap/ubuntu-desktop-bootstrap/502/lib/python3.10/site-packages/curtin/log.py", line 79, in log_time
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:             return func(*args, **kwargs)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           File "/snap/ubuntu-desktop-bootstrap/502/lib/python3.10/site-packages/curtin/commands/block_meta.py", line 127, in block_meta
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:             return meta_custom(args)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           File "/snap/ubuntu-desktop-bootstrap/502/lib/python3.10/site-packages/curtin/commands/block_meta.py", line 2283, in meta_custom
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:             handler(command, storage_config_dict, context)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           File "/snap/ubuntu-desktop-bootstrap/502/lib/python3.10/site-packages/curtin/commands/block_meta_v2.py", line 519, in disk_handler_v2
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:             table.apply(disk)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           File "/snap/ubuntu-desktop-bootstrap/502/lib/python3.10/site-packages/curtin/commands/block_meta_v2.py", line 177, in apply
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:             util.subp(cmd, data=sfdisk_script.encode('ascii'))
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           File "/snap/ubuntu-desktop-bootstrap/502/lib/python3.10/site-packages/curtin/util.py", line 331, in subp
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:             return _subp(*args, **kwargs)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:           File "/snap/ubuntu-desktop-bootstrap/502/lib/python3.10/site-packages/curtin/util.py", line 175, in _subp
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:             raise ProcessExecutionError(stdout=out, stderr=err,
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         curtin.util.ProcessExecutionError: Unexpected error while running command.
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Command: ['sfdisk', '--no-reread', '/dev/sda']
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Exit code: 1
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Reason: -
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Stdout: ''
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Stderr: ''
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Unexpected error while running command.
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Command: ['sfdisk', '--no-reread', '/dev/sda']
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Exit code: 1
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Reason: -
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Stdout: ''
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         Stderr: ''
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]:         
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Stderr: ''
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Running command ['uname', '-a'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:41 ubuntu subiquity_log.5752[7628]: Running command ['sudo', 'lshw'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:42 ubuntu subiquity_event.5752[5752]:       configuring disk: disk-sda
+Mar 18 13:08:42 ubuntu subiquity_event.5752[5752]:     running 'curtin block-meta simple'
+Mar 18 13:08:42 ubuntu subiquity_event.5752[5752]:    configuring storage
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]: Running command ['ip', '--oneline', 'address', 'list'] with allowed return codes [0] (capture=combine)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]: Running command ['ip', '--oneline', '-6', 'address', 'list'] with allowed return codes [0] (capture=combine)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]: Running command ['ip', '--oneline', 'route', 'list'] with allowed return codes [0] (capture=combine)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]: Running command ['ip', '--oneline', '-6', 'route', 'list'] with allowed return codes [0] (capture=combine)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]: Running command ['tar', '-cvf', '/var/log/installer/curtin-errors.tar', 'curtin-logs-2026-03-18-05-08'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]: Wrote: /var/log/installer/curtin-errors.tar
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]: Skipping unmount: config disabled target unmounting
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]: TIMED INSTALL_COMMAND: 2.909
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]: finish: cmd-install: FAIL: curtin command install
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]: Traceback (most recent call last):
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:   File "/snap/ubuntu-desktop-bootstrap/502/lib/python3.10/site-packages/curtin/commands/main.py", line 202, in main
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:     ret = args.func(args)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:   File "/snap/ubuntu-desktop-bootstrap/502/lib/python3.10/site-packages/curtin/log.py", line 97, in wrapper
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:     return log_time("TIMED %s: " % msg, func, *args, **kwargs)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:   File "/snap/ubuntu-desktop-bootstrap/502/lib/python3.10/site-packages/curtin/log.py", line 79, in log_time
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:     return func(*args, **kwargs)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:   File "/snap/ubuntu-desktop-bootstrap/502/lib/python3.10/site-packages/curtin/commands/install.py", line 538, in cmd_install
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:     raise e
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:   File "/snap/ubuntu-desktop-bootstrap/502/lib/python3.10/site-packages/curtin/commands/install.py", line 523, in cmd_install
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:     stage.run()
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:   File "/snap/ubuntu-desktop-bootstrap/502/lib/python3.10/site-packages/curtin/commands/install.py", line 295, in run
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:     raise util.ProcessExecutionError(
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]: curtin.util.ProcessExecutionError: Unexpected error while running command.
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]: Command: ['curtin', 'block-meta', 'simple']
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]: Exit code: 3
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]: Reason: -
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]: Stdout: start: cmd-install/stage-partitioning/builtin/cmd-block-meta: curtin command block-meta
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         get_path_to_storage_volume for volume disk-sda({'ptable': 'gpt', 'path': '/dev/sda', 'wipe': 'superblock-recursive', 'preserve': False, 'name': '', 'grub_device': True, 'id': 'disk-sda', 'type': 'disk'})
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['udevadm', 'info', '--query=property', '--export', '/dev/sda'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         /dev/sda is multipath device member? False
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['partprobe', '/dev/sda'] with allowed return codes [0, 1] (capture=False)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['udevadm', 'settle'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         TIMED udevadm_settle(): 0.060
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         devsync happy - path /dev/sda now exists
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         return volume path /dev/sda
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         get_path_to_storage_volume for volume partition-1({'device': 'disk-sda', 'size': 214745219072, 'wipe': 'superblock', 'number': 2, 'preserve': False, 'offset': 2097152, 'id': 'partition-1', 'type': 'partition'})
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         get_path_to_storage_volume for volume disk-sda({'ptable': 'gpt', 'path': '/dev/sda', 'wipe': 'superblock-recursive', 'preserve': False, 'name': '', 'grub_device': True, 'id': 'disk-sda', 'type': 'disk'})
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['udevadm', 'info', '--query=property', '--export', '/dev/sda'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         /dev/sda is multipath device member? False
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['partprobe', '/dev/sda'] with allowed return codes [0, 1] (capture=False)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['udevadm', 'settle'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         TIMED udevadm_settle(): 0.039
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         devsync happy - path /dev/sda now exists
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         return volume path /dev/sda
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         block-meta: extracted devices to clear: ['/dev/sda']
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Declared block devices: ['/dev/sda']
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         clearing devices=['/dev/sda']
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         start: cmd-install/stage-partitioning/builtin/cmd-block-meta/clear-holders: removing previous storage devices
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['mdadm', '--assemble', '--scan', '-v'] with allowed return codes [0, 1, 2] (capture=True)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         mdadm assemble scan results:
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         mdadm: looking for devices for further assembly
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/loop15
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/loop14
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/loop13
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/loop12
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/loop11
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/loop10
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/loop9
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/loop8
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/sr1
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/sr0
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/sda
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         mdadm: Cannot assemble mbr metadata on /dev/fd0
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/loop7
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/loop6
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/loop5
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/loop4
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/loop3
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/loop2
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/loop1
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/loop0
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         mdadm: No arrays found in config file or automatically
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['mdadm', '--detail', '--scan', '-v'] with allowed return codes [0, 1] (capture=True)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         mdadm detail scan after assemble:
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['udevadm', 'settle'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         TIMED udevadm_settle(): 0.008
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['pvscan'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['vgscan'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['vgchange', '--activate=y'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['udevadm', 'settle'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         TIMED udevadm_settle(): 0.008
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Loading kernel module bcache via modprobe
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['modprobe', '--use-blacklist', 'bcache'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Generating device storage trees for path(s): ['/dev/sda']
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         devname '/sys/class/block/sda' had holders: []
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         /dev/sda is multipath device partition? False
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         /dev/sda is multipath device partition? False
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         /dev/sda is multipath device partition? False
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Current device storage tree:
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         sda
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Shutdown Plan:
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         {'level': 0, 'device': '/sys/class/block/sda', 'dev_type': 'disk'}
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         shutdown running on holder type: 'disk' syspath: '/sys/class/block/sda'
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['lsblk', '--noheadings', '--bytes', '--pairs', '--output=ALIGNMENT,DISC-ALN,DISC-GRAN,DISC-MAX,DISC-ZERO,FSTYPE,GROUP,KNAME,LABEL,LOG-SEC,MAJ:MIN,MIN-IO,MODE,MODEL,MOUNTPOINT,NAME,OPT-IO,OWNER,PHY-SEC,RM,RO,ROTA,RQ-SIZE,SIZE,STATE,TYPE,UUID', '/dev/sda'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         get_blockdev_sector_size: info:
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         {
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:          "sda": {
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "ALIGNMENT": "0",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "DISC-ALN": "0",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "DISC-GRAN": "512",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "DISC-MAX": "0",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "DISC-ZERO": "0",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "FSTYPE": "",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "GROUP": "disk",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "KNAME": "sda",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "LABEL": "",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "LOG-SEC": "512",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "MAJ:MIN": "8:0",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "MIN-IO": "512",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "MODE": "brw-rw----",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "MODEL": "VMware Virtual S",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "MOUNTPOINT": "",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "NAME": "sda",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "OPT-IO": "4194304",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "OWNER": "root",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "PHY-SEC": "512",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "RM": "0",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "RO": "0",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "ROTA": "1",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "RQ-SIZE": "236",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "SIZE": "214748364800",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "STATE": "running",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "TYPE": "disk",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "UUID": "",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "device_path": "/dev/sda"
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:          }
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         }
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         get_blockdev_sector_size: (log=512, phys=512)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['fdasd', '--table', '/dev/sda'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['lsblk', '--noheadings', '--bytes', '--pairs', '--output=ALIGNMENT,DISC-ALN,DISC-GRAN,DISC-MAX,DISC-ZERO,FSTYPE,GROUP,KNAME,LABEL,LOG-SEC,MAJ:MIN,MIN-IO,MODE,MODEL,MOUNTPOINT,NAME,OPT-IO,OWNER,PHY-SEC,RM,RO,ROTA,RQ-SIZE,SIZE,STATE,TYPE,UUID'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Checking if /dev/sda is a swap device
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Found swap magic: b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         wiping superblock on /dev/sda
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         wiping /dev/sda attempt 1/4
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['wipefs', '--all', '--force', '/dev/sda'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         wiping 1M on /dev/sda at offsets [0, -1048576]
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         successfully wiped device /dev/sda on attempt 1/4
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         devname '/sys/class/block/sda' had holders: []
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         /dev/sda is multipath device partition? False
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         /dev/sda is multipath device partition? False
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         /dev/sda is multipath device partition? False
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         finish: cmd-install/stage-partitioning/builtin/cmd-block-meta/clear-holders: SUCCESS: removing previous storage devices
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         blockmeta: detected storage config, using mode=custom
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         start: cmd-install/stage-partitioning/builtin/cmd-block-meta: configuring disk: disk-sda
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         get_path_to_storage_volume for volume disk-sda({'ptable': 'gpt', 'path': '/dev/sda', 'wipe': 'superblock-recursive', 'preserve': False, 'name': '', 'grub_device': True, 'id': 'disk-sda', 'type': 'disk'})
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         /dev/sda is multipath device member? False
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         found candidate disks [{'/dev/sda'}]
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['partprobe', '/dev/sda'] with allowed return codes [0, 1] (capture=False)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['udevadm', 'settle'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         TIMED udevadm_settle(): 0.037
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         devsync happy - path /dev/sda now exists
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         return volume path /dev/sda
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Acquiring fcntl LOCK_EX on /dev/sda
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['wipefs', '--all', '--force', '/dev/sda'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         wiping 1M on /dev/sda at offsets [0, -1048576]
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         labeling device: '/dev/sda' with 'gpt' partition table
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['wipefs', '--all', '--force', '/dev/sda'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         wiping 1M on /dev/sda at offsets [0, -1048576]
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         devname '/dev/sda' had holders: []
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Releasing fcntl LOCK_EX on /dev/sda
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         get_path_to_storage_volume for volume disk-sda({'ptable': 'gpt', 'path': '/dev/sda', 'wipe': 'superblock-recursive', 'preserve': False, 'name': '', 'grub_device': True, 'id': 'disk-sda', 'type': 'disk'})
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         /dev/sda is multipath device member? False
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         found candidate disks [{'/dev/sda'}]
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['partprobe', '/dev/sda'] with allowed return codes [0, 1] (capture=False)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['udevadm', 'settle'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         TIMED udevadm_settle(): 0.029
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         devsync happy - path /dev/sda now exists
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         return volume path /dev/sda
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['lsblk', '--noheadings', '--bytes', '--pairs', '--output=ALIGNMENT,DISC-ALN,DISC-GRAN,DISC-MAX,DISC-ZERO,FSTYPE,GROUP,KNAME,LABEL,LOG-SEC,MAJ:MIN,MIN-IO,MODE,MODEL,MOUNTPOINT,NAME,OPT-IO,OWNER,PHY-SEC,RM,RO,ROTA,RQ-SIZE,SIZE,STATE,TYPE,UUID', '/dev/sda'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         get_blockdev_sector_size: info:
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         {
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:          "sda": {
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "ALIGNMENT": "0",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "DISC-ALN": "0",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "DISC-GRAN": "512",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "DISC-MAX": "0",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "DISC-ZERO": "0",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "FSTYPE": "",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "GROUP": "disk",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "KNAME": "sda",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "LABEL": "",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "LOG-SEC": "512",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "MAJ:MIN": "8:0",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "MIN-IO": "512",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "MODE": "brw-rw----",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "MODEL": "VMware Virtual S",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "MOUNTPOINT": "",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "NAME": "sda",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "OPT-IO": "4194304",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "OWNER": "root",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "PHY-SEC": "512",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "RM": "0",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "RO": "0",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "ROTA": "1",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "RQ-SIZE": "236",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "SIZE": "214748364800",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "STATE": "running",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "TYPE": "disk",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "UUID": "",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "device_path": "/dev/sda"
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:          }
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         }
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         get_blockdev_sector_size: (log=512, phys=512)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         sfdisk input:
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         ---
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         label: gpt
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         1:  start=2048 size=2048 type=21686148-6449-6E6F-744E-656564454649
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         2:  start=4096 size=419424256
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         ---
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['losetup', '--version'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['sfdisk', '--no-reread', '/dev/sda'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Disk /dev/sda：200 GiB，214748364800 字节，419430400 个扇区
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Disk model: VMware Virtual S
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         单元：扇区 / 1 * 512 = 512 字节
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         扇区大小(逻辑/物理)：512 字节 / 512 字节
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         I/O 大小(最小/最佳)：512 字节 / 4194304 字节
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         >>> 已接受脚本标头(header)。
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         >>> 已创建新的 GPT 磁盘标签(GUID: 85AEC24E-81B3-4077-A87F-F61736C2352B)。
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         /dev/sda1: 扇区 2048 已使用。
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Failed to add #1 partition: 数值结果超出值域
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         离开中。
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         An error occured handling 'disk-sda': ProcessExecutionError - Unexpected error while running command.
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Command: ['sfdisk', '--no-reread', '/dev/sda']
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Exit code: 1
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Reason: -
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Stdout: ''
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Stderr: ''
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         finish: cmd-install/stage-partitioning/builtin/cmd-block-meta: FAIL: configuring disk: disk-sda
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         TIMED BLOCK_META: 1.215
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         finish: cmd-install/stage-partitioning/builtin/cmd-block-meta: FAIL: curtin command block-meta
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Traceback (most recent call last):
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           File "/snap/ubuntu-desktop-bootstrap/502/lib/python3.10/site-packages/curtin/commands/main.py", line 202, in main
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:             ret = args.func(args)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           File "/snap/ubuntu-desktop-bootstrap/502/lib/python3.10/site-packages/curtin/log.py", line 97, in wrapper
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:             return log_time("TIMED %s: " % msg, func, *args, **kwargs)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           File "/snap/ubuntu-desktop-bootstrap/502/lib/python3.10/site-packages/curtin/log.py", line 79, in log_time
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:             return func(*args, **kwargs)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           File "/snap/ubuntu-desktop-bootstrap/502/lib/python3.10/site-packages/curtin/commands/block_meta.py", line 127, in block_meta
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:             return meta_custom(args)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           File "/snap/ubuntu-desktop-bootstrap/502/lib/python3.10/site-packages/curtin/commands/block_meta.py", line 2283, in meta_custom
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:             handler(command, storage_config_dict, context)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           File "/snap/ubuntu-desktop-bootstrap/502/lib/python3.10/site-packages/curtin/commands/block_meta_v2.py", line 519, in disk_handler_v2
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:             table.apply(disk)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           File "/snap/ubuntu-desktop-bootstrap/502/lib/python3.10/site-packages/curtin/commands/block_meta_v2.py", line 177, in apply
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:             util.subp(cmd, data=sfdisk_script.encode('ascii'))
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           File "/snap/ubuntu-desktop-bootstrap/502/lib/python3.10/site-packages/curtin/util.py", line 331, in subp
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:             return _subp(*args, **kwargs)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           File "/snap/ubuntu-desktop-bootstrap/502/lib/python3.10/site-packages/curtin/util.py", line 175, in _subp
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:             raise ProcessExecutionError(stdout=out, stderr=err,
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         curtin.util.ProcessExecutionError: Unexpected error while running command.
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Command: ['sfdisk', '--no-reread', '/dev/sda']
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Exit code: 1
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Reason: -
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Stdout: ''
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Stderr: ''
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Unexpected error while running command.
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Command: ['sfdisk', '--no-reread', '/dev/sda']
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Exit code: 1
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Reason: -
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Stdout: ''
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Stderr: ''
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]: Stderr: ''
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]: Unexpected error while running command.
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]: Command: ['curtin', 'block-meta', 'simple']
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]: Exit code: 3
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]: Reason: -
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]: Stdout: start: cmd-install/stage-partitioning/builtin/cmd-block-meta: curtin command block-meta
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         get_path_to_storage_volume for volume disk-sda({'ptable': 'gpt', 'path': '/dev/sda', 'wipe': 'superblock-recursive', 'preserve': False, 'name': '', 'grub_device': True, 'id': 'disk-sda', 'type': 'disk'})
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['udevadm', 'info', '--query=property', '--export', '/dev/sda'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         /dev/sda is multipath device member? False
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['partprobe', '/dev/sda'] with allowed return codes [0, 1] (capture=False)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['udevadm', 'settle'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         TIMED udevadm_settle(): 0.060
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         devsync happy - path /dev/sda now exists
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         return volume path /dev/sda
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         get_path_to_storage_volume for volume partition-1({'device': 'disk-sda', 'size': 214745219072, 'wipe': 'superblock', 'number': 2, 'preserve': False, 'offset': 2097152, 'id': 'partition-1', 'type': 'partition'})
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         get_path_to_storage_volume for volume disk-sda({'ptable': 'gpt', 'path': '/dev/sda', 'wipe': 'superblock-recursive', 'preserve': False, 'name': '', 'grub_device': True, 'id': 'disk-sda', 'type': 'disk'})
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['udevadm', 'info', '--query=property', '--export', '/dev/sda'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         /dev/sda is multipath device member? False
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['partprobe', '/dev/sda'] with allowed return codes [0, 1] (capture=False)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['udevadm', 'settle'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         TIMED udevadm_settle(): 0.039
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         devsync happy - path /dev/sda now exists
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         return volume path /dev/sda
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         block-meta: extracted devices to clear: ['/dev/sda']
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Declared block devices: ['/dev/sda']
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         clearing devices=['/dev/sda']
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         start: cmd-install/stage-partitioning/builtin/cmd-block-meta/clear-holders: removing previous storage devices
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['mdadm', '--assemble', '--scan', '-v'] with allowed return codes [0, 1, 2] (capture=True)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         mdadm assemble scan results:
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         mdadm: looking for devices for further assembly
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/loop15
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/loop14
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/loop13
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/loop12
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/loop11
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/loop10
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/loop9
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/loop8
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/sr1
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/sr0
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/sda
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         mdadm: Cannot assemble mbr metadata on /dev/fd0
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/loop7
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/loop6
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/loop5
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/loop4
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/loop3
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/loop2
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/loop1
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         mdadm: no recogniseable superblock on /dev/loop0
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         mdadm: No arrays found in config file or automatically
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['mdadm', '--detail', '--scan', '-v'] with allowed return codes [0, 1] (capture=True)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         mdadm detail scan after assemble:
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['udevadm', 'settle'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         TIMED udevadm_settle(): 0.008
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['pvscan'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['vgscan'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['vgchange', '--activate=y'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['udevadm', 'settle'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         TIMED udevadm_settle(): 0.008
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Loading kernel module bcache via modprobe
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['modprobe', '--use-blacklist', 'bcache'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Generating device storage trees for path(s): ['/dev/sda']
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         devname '/sys/class/block/sda' had holders: []
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         /dev/sda is multipath device partition? False
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         /dev/sda is multipath device partition? False
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         /dev/sda is multipath device partition? False
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Current device storage tree:
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         sda
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Shutdown Plan:
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         {'level': 0, 'device': '/sys/class/block/sda', 'dev_type': 'disk'}
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         shutdown running on holder type: 'disk' syspath: '/sys/class/block/sda'
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['lsblk', '--noheadings', '--bytes', '--pairs', '--output=ALIGNMENT,DISC-ALN,DISC-GRAN,DISC-MAX,DISC-ZERO,FSTYPE,GROUP,KNAME,LABEL,LOG-SEC,MAJ:MIN,MIN-IO,MODE,MODEL,MOUNTPOINT,NAME,OPT-IO,OWNER,PHY-SEC,RM,RO,ROTA,RQ-SIZE,SIZE,STATE,TYPE,UUID', '/dev/sda'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         get_blockdev_sector_size: info:
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         {
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:          "sda": {
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "ALIGNMENT": "0",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "DISC-ALN": "0",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "DISC-GRAN": "512",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "DISC-MAX": "0",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "DISC-ZERO": "0",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "FSTYPE": "",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "GROUP": "disk",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "KNAME": "sda",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "LABEL": "",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "LOG-SEC": "512",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "MAJ:MIN": "8:0",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "MIN-IO": "512",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "MODE": "brw-rw----",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "MODEL": "VMware Virtual S",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "MOUNTPOINT": "",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "NAME": "sda",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "OPT-IO": "4194304",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "OWNER": "root",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "PHY-SEC": "512",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "RM": "0",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "RO": "0",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "ROTA": "1",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "RQ-SIZE": "236",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "SIZE": "214748364800",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "STATE": "running",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "TYPE": "disk",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "UUID": "",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "device_path": "/dev/sda"
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:          }
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         }
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         get_blockdev_sector_size: (log=512, phys=512)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['fdasd', '--table', '/dev/sda'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['lsblk', '--noheadings', '--bytes', '--pairs', '--output=ALIGNMENT,DISC-ALN,DISC-GRAN,DISC-MAX,DISC-ZERO,FSTYPE,GROUP,KNAME,LABEL,LOG-SEC,MAJ:MIN,MIN-IO,MODE,MODEL,MOUNTPOINT,NAME,OPT-IO,OWNER,PHY-SEC,RM,RO,ROTA,RQ-SIZE,SIZE,STATE,TYPE,UUID'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Checking if /dev/sda is a swap device
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Found swap magic: b'\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00'
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         wiping superblock on /dev/sda
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         wiping /dev/sda attempt 1/4
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['wipefs', '--all', '--force', '/dev/sda'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         wiping 1M on /dev/sda at offsets [0, -1048576]
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         successfully wiped device /dev/sda on attempt 1/4
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         devname '/sys/class/block/sda' had holders: []
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         /dev/sda is multipath device partition? False
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         /dev/sda is multipath device partition? False
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         /dev/sda is multipath device partition? False
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         finish: cmd-install/stage-partitioning/builtin/cmd-block-meta/clear-holders: SUCCESS: removing previous storage devices
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         blockmeta: detected storage config, using mode=custom
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         start: cmd-install/stage-partitioning/builtin/cmd-block-meta: configuring disk: disk-sda
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         get_path_to_storage_volume for volume disk-sda({'ptable': 'gpt', 'path': '/dev/sda', 'wipe': 'superblock-recursive', 'preserve': False, 'name': '', 'grub_device': True, 'id': 'disk-sda', 'type': 'disk'})
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         /dev/sda is multipath device member? False
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         found candidate disks [{'/dev/sda'}]
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['partprobe', '/dev/sda'] with allowed return codes [0, 1] (capture=False)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['udevadm', 'settle'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         TIMED udevadm_settle(): 0.037
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         devsync happy - path /dev/sda now exists
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         return volume path /dev/sda
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Acquiring fcntl LOCK_EX on /dev/sda
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['wipefs', '--all', '--force', '/dev/sda'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         wiping 1M on /dev/sda at offsets [0, -1048576]
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         labeling device: '/dev/sda' with 'gpt' partition table
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['wipefs', '--all', '--force', '/dev/sda'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         wiping 1M on /dev/sda at offsets [0, -1048576]
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         devname '/dev/sda' had holders: []
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Releasing fcntl LOCK_EX on /dev/sda
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         get_path_to_storage_volume for volume disk-sda({'ptable': 'gpt', 'path': '/dev/sda', 'wipe': 'superblock-recursive', 'preserve': False, 'name': '', 'grub_device': True, 'id': 'disk-sda', 'type': 'disk'})
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         /dev/sda is multipath device member? False
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         found candidate disks [{'/dev/sda'}]
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['partprobe', '/dev/sda'] with allowed return codes [0, 1] (capture=False)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['udevadm', 'settle'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         TIMED udevadm_settle(): 0.029
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         devsync happy - path /dev/sda now exists
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         return volume path /dev/sda
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['lsblk', '--noheadings', '--bytes', '--pairs', '--output=ALIGNMENT,DISC-ALN,DISC-GRAN,DISC-MAX,DISC-ZERO,FSTYPE,GROUP,KNAME,LABEL,LOG-SEC,MAJ:MIN,MIN-IO,MODE,MODEL,MOUNTPOINT,NAME,OPT-IO,OWNER,PHY-SEC,RM,RO,ROTA,RQ-SIZE,SIZE,STATE,TYPE,UUID', '/dev/sda'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         get_blockdev_sector_size: info:
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         {
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:          "sda": {
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "ALIGNMENT": "0",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "DISC-ALN": "0",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "DISC-GRAN": "512",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "DISC-MAX": "0",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "DISC-ZERO": "0",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "FSTYPE": "",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "GROUP": "disk",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "KNAME": "sda",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "LABEL": "",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "LOG-SEC": "512",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "MAJ:MIN": "8:0",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "MIN-IO": "512",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "MODE": "brw-rw----",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "MODEL": "VMware Virtual S",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "MOUNTPOINT": "",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "NAME": "sda",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "OPT-IO": "4194304",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "OWNER": "root",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "PHY-SEC": "512",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "RM": "0",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "RO": "0",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "ROTA": "1",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "RQ-SIZE": "236",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "SIZE": "214748364800",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "STATE": "running",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "TYPE": "disk",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "UUID": "",
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           "device_path": "/dev/sda"
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:          }
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         }
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         get_blockdev_sector_size: (log=512, phys=512)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         sfdisk input:
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         ---
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         label: gpt
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         1:  start=2048 size=2048 type=21686148-6449-6E6F-744E-656564454649
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         2:  start=4096 size=419424256
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         ---
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['losetup', '--version'] with allowed return codes [0] (capture=True)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Running command ['sfdisk', '--no-reread', '/dev/sda'] with allowed return codes [0] (capture=False)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Disk /dev/sda：200 GiB，214748364800 字节，419430400 个扇区
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Disk model: VMware Virtual S
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         单元：扇区 / 1 * 512 = 512 字节
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         扇区大小(逻辑/物理)：512 字节 / 512 字节
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         I/O 大小(最小/最佳)：512 字节 / 4194304 字节
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         >>> 已接受脚本标头(header)。
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         >>> 已创建新的 GPT 磁盘标签(GUID: 85AEC24E-81B3-4077-A87F-F61736C2352B)。
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         /dev/sda1: 扇区 2048 已使用。
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Failed to add #1 partition: 数值结果超出值域
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         离开中。
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         An error occured handling 'disk-sda': ProcessExecutionError - Unexpected error while running command.
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Command: ['sfdisk', '--no-reread', '/dev/sda']
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Exit code: 1
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Reason: -
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Stdout: ''
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Stderr: ''
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         finish: cmd-install/stage-partitioning/builtin/cmd-block-meta: FAIL: configuring disk: disk-sda
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         TIMED BLOCK_META: 1.215
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         finish: cmd-install/stage-partitioning/builtin/cmd-block-meta: FAIL: curtin command block-meta
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Traceback (most recent call last):
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           File "/snap/ubuntu-desktop-bootstrap/502/lib/python3.10/site-packages/curtin/commands/main.py", line 202, in main
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:             ret = args.func(args)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           File "/snap/ubuntu-desktop-bootstrap/502/lib/python3.10/site-packages/curtin/log.py", line 97, in wrapper
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:             return log_time("TIMED %s: " % msg, func, *args, **kwargs)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           File "/snap/ubuntu-desktop-bootstrap/502/lib/python3.10/site-packages/curtin/log.py", line 79, in log_time
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:             return func(*args, **kwargs)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           File "/snap/ubuntu-desktop-bootstrap/502/lib/python3.10/site-packages/curtin/commands/block_meta.py", line 127, in block_meta
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:             return meta_custom(args)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           File "/snap/ubuntu-desktop-bootstrap/502/lib/python3.10/site-packages/curtin/commands/block_meta.py", line 2283, in meta_custom
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:             handler(command, storage_config_dict, context)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           File "/snap/ubuntu-desktop-bootstrap/502/lib/python3.10/site-packages/curtin/commands/block_meta_v2.py", line 519, in disk_handler_v2
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:             table.apply(disk)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           File "/snap/ubuntu-desktop-bootstrap/502/lib/python3.10/site-packages/curtin/commands/block_meta_v2.py", line 177, in apply
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:             util.subp(cmd, data=sfdisk_script.encode('ascii'))
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           File "/snap/ubuntu-desktop-bootstrap/502/lib/python3.10/site-packages/curtin/util.py", line 331, in subp
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:             return _subp(*args, **kwargs)
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:           File "/snap/ubuntu-desktop-bootstrap/502/lib/python3.10/site-packages/curtin/util.py", line 175, in _subp
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:             raise ProcessExecutionError(stdout=out, stderr=err,
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         curtin.util.ProcessExecutionError: Unexpected error while running command.
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Command: ['sfdisk', '--no-reread', '/dev/sda']
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Exit code: 1
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Reason: -
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Stdout: ''
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Stderr: ''
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Unexpected error while running command.
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Command: ['sfdisk', '--no-reread', '/dev/sda']
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Exit code: 1
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Reason: -
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Stdout: ''
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         Stderr: ''
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]:         
+Mar 18 13:08:42 ubuntu subiquity_log.5752[7628]: Stderr: ''
+Mar 18 13:08:42 ubuntu subiquity_event.5752[5752]:  executing curtin install partitioning step
+Mar 18 13:08:42 ubuntu subiquity_event.5752[5752]: installing system
+Mar 18 13:08:42 ubuntu subiquity_event.5752[5752]: 
+Mar 18 13:08:43 ubuntu subiquity_event.5752[5752]:   curtin command install
