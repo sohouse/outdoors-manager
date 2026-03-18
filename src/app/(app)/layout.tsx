@@ -5,11 +5,17 @@ import { ThemeProvider } from '@/lib/components/ThemeProvider.tsx';
 import { SidebarProvider } from '@/lib/components/ui/sidebar.tsx';
 import AppSidebar from '@/lib/components/web/Sidebar.tsx';
 import Header from '@/lib/components/web/Header.tsx';
+import {auth} from "@/lib/auth.ts";
+import {headers} from "next/headers";
+import {redirect} from "next/navigation";
 
 export const metadata: Metadata = {
     title: "My Website"
 }
-const RootLayout = ({ children }: { children: ReactNode }) => {
+const RootLayout = async ({ children }: { children: ReactNode }) => {
+    const session = await auth.api.getSession({headers: await headers(),})
+
+    if (!session) redirect('/auth/login')
     return (
         <html suppressHydrationWarning>
             <body>
