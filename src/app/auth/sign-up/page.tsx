@@ -7,8 +7,9 @@ import { Input } from "@/lib/components/ui/input.tsx"
 import { Button } from "@/lib/components/ui/button.tsx"
 import { signUpCheck } from "@/lib/validators/sign-up-check"
 import z from "zod"
-import { authClient } from "@/lib/auth-client"
+import { auth } from "@/lib/auth-client"
 import { useRouter } from "next/navigation"
+import { signUp } from "@/lib/service/auth-service"
 
 const SignUp = () => {
   const form = useForm<z.infer<typeof signUpCheck>>({
@@ -22,21 +23,8 @@ const SignUp = () => {
 
   const route = useRouter();
   const submitForm = async () => {
-    const {} = await authClient.signUp.email({
-      email: form.getValues('email'), 
-      password: form.getValues('pwd'), 
-      name: form.getValues('name'),
-    }, {
-      onRequest: (ctc) => {},
-      onSuccess: (ctc) => {
-        console.log(JSON.stringify(ctc));
-        alert('注册成功');
-        route.push('/');
-      },
-      onError: (ctc) => {
-        alert(ctc.error.message);
-      },
-    });
+    signUp(form);
+    route.push('/activity');
   }
 
   return (

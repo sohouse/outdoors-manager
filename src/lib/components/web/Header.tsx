@@ -7,7 +7,8 @@ import { useSearchParams } from "next/navigation"
 import { useMemo, useState } from "react"
 import { useScroll } from "@/lib/hooks/use-scroll.ts"
 import { cn } from "@/lib/utils/tailwind-helper.ts"
-import { Home, LogInIcon, UserPlus } from "lucide-react"
+import { Home, LogInIcon, LogOutIcon, UserPlus } from "lucide-react"
+import { logOut } from "@/lib/service/auth-service.ts"
 
 const Header = () => {
 
@@ -70,6 +71,12 @@ const Header = () => {
               <div>
                 <LogInIcon className="w-5 h-5 md:hidden" />
                 <span className="hidden md:inline">Login</span>
+              </div>
+            </Link>
+            <Link className={buttonVariants({ variant: "destructive" })} href="" onClick={logOut}>
+              <div>
+                <LogOutIcon className="w-5 h-5 md:hidden" />
+                <span className="hidden md:inline">LogOut</span>
               </div>
             </Link>
             <ModeToggle />

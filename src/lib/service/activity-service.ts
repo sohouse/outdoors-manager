@@ -37,7 +37,8 @@ export async function getObjById(daoType: string, id: string): Promise<Activity 
   try {
 
     const { items } = await dao.findByCondition({ id: id } as ActivityCondition);
-    return (items[0] as Activity) ?? null;
+    const [item] = items;
+    return (item as Activity) ?? null;
   } catch (error) {
     console.error('Error fetching activity:', error);
     throw error;

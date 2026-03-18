@@ -23,6 +23,14 @@ import { useRouter } from 'next/navigation'
 import { use, useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import z from 'zod'
+import {Prisma, Activity as PrismaActivity} from '@prisma/client'
+
+const createInput: Prisma.ActivityCreateInput = {
+  title: "周末徒步",
+  author: "Will",
+  type: 1,
+  status: 0,
+};
 
 export default function ActivityDetailModal({
   params,

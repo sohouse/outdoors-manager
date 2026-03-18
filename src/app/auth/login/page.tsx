@@ -7,9 +7,8 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Field, FieldError, FieldGroup, FieldLabel } from "@/lib/components/ui/field.tsx"
 import { Input } from "@/lib/components/ui/input.tsx"
 import { Button } from "@/lib/components/ui/button.tsx"
-import { authClient } from "@/lib/auth-client"
-import { auth } from "@/lib/auth"
 import { useRouter } from "next/navigation"
+import { logIn } from "@/lib/service/auth-service"
 
 const SignUp = () => {
   const route = useRouter();
@@ -22,34 +21,9 @@ const SignUp = () => {
   });
 
   const submitForm = async () => {
-    const loginKey = form.getValues('name');
-    if (loginKey.includes('@')) {
-      await auth.signIn.email({
-        email: loginKey,
-        password: form.getValues('pwd'),
-        rememberMe: true
-      }, {
-        onSuccess(ctx) { loginSuccess(); },
-        onError(ctx) {
-          alert(ctx.error.message);
-        },
-      });
-    } else {
-      await auth.signIn.username({
-        username: loginKey,
-        password: form.getValues('pwd')
-      }, {
-        onSuccess(ctx) { loginSuccess() },
-        onError(ctx) {
-          alert(ctx.error.message);
-        },
-      })
-    }
-
-  }
-
-  const loginSuccess = () => {
+    logIn(form);
     route.push('/');
+
   }
 
   return (
