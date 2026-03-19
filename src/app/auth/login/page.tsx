@@ -22,9 +22,8 @@ const SignUp = () => {
   });
 
   const submitForm = async () => {
-    logIn(form);
+    await logIn(form);
     route.push('/');
-
   }
 
     return (
