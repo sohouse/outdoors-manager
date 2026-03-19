@@ -10,6 +10,7 @@ import z from "zod"
 import { auth } from "@/lib/auth-client"
 import { useRouter } from "next/navigation"
 import { signUp } from "@/lib/service/auth-service"
+import Link from "next/link";
 
 const SignUp = () => {
   const form = useForm<z.infer<typeof signUpCheck>>({
@@ -57,6 +58,12 @@ const SignUp = () => {
               </Field>
             )} />
           <Button type="submit">Submit</Button>
+              <div className="flex flex-row justify-end">
+                  <span>已有账号?</span>
+                  <Link href={'/auth/login'} rel="noopener noreferrer" className="text-blue-500 pl-1" >
+                      登陆
+                  </Link>
+              </div>
           </FieldGroup>
         </form>
         <CardFooter>

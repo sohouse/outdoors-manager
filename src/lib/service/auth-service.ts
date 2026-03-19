@@ -4,10 +4,12 @@ import { signInCheck, signUpCheck } from "../validators/sign-up-check";
 import z from "zod";
 
 export const signUp = async (form: UseFormReturn<z.infer<typeof signUpCheck>>) => {
+    const loginKey = form.getValues('name');
     const { } = await auth.signUp.email({
         email: form.getValues('email'),
         password: form.getValues('pwd'),
-        name: form.getValues('name'),
+        name: loginKey,
+        username: loginKey,
     }, {
         onRequest: (ctc) => { },
         onSuccess: (ctc) => {

@@ -9,6 +9,7 @@ import { Input } from "@/lib/components/ui/input.tsx"
 import { Button } from "@/lib/components/ui/button.tsx"
 import { useRouter } from "next/navigation"
 import { logIn } from "@/lib/service/auth-service"
+import Link from "next/link";
 
 const SignUp = () => {
   const route = useRouter();
@@ -26,37 +27,45 @@ const SignUp = () => {
 
   }
 
-  return (
-    <Card>
-      <CardHeader>
-        Login
-      </CardHeader>
-      <CardContent>
-        <form onSubmit={form.handleSubmit(submitForm)}>
-          <FieldGroup>
-            <Controller name="name" control={form.control} render={({ field, fieldState }) => (
-              <Field data-invalid={fieldState.invalid}>
-                <FieldLabel>your name:</FieldLabel>
-                <Input {...field} id="sign-up-name" aria-invalid={fieldState.invalid} placeholder="name or email" />
-                {fieldState.invalid && (<FieldError errors={[fieldState.error]} />)}
-              </Field>
-            )} />
-            <Controller name="pwd" control={form.control} render={({ field, fieldState }) => (
-              <Field data-invalid={fieldState.invalid}>
-                <FieldLabel>your password:</FieldLabel>
-                <Input {...field} id="sign-up-name" aria-invalid={fieldState.invalid} placeholder="input your password" />
-                {fieldState.invalid && (<FieldError errors={[fieldState.error]} />)}
-              </Field>
-            )} />
-            <Button type="submit">Submit</Button>
-          </FieldGroup>
-        </form>
-        <CardFooter>
-        </CardFooter>
-      </CardContent>
+    return (
+        <Card>
+            <CardHeader>
+                Login
+            </CardHeader>
+            <CardContent>
+                <form onSubmit={form.handleSubmit(submitForm)}>
+                    <FieldGroup>
+                        <Controller name="name" control={form.control} render={({field, fieldState}) => (
+                            <Field data-invalid={fieldState.invalid}>
+                                <FieldLabel>your name:</FieldLabel>
+                                <Input {...field} id="sign-up-name" aria-invalid={fieldState.invalid}
+                                       placeholder="name or email"/>
+                                {fieldState.invalid && (<FieldError errors={[fieldState.error]}/>)}
+                            </Field>
+                        )}/>
+                        <Controller name="pwd" control={form.control} render={({field, fieldState}) => (
+                            <Field data-invalid={fieldState.invalid}>
+                                <FieldLabel>your password:</FieldLabel>
+                                <Input {...field} id="sign-up-name" aria-invalid={fieldState.invalid}
+                                       placeholder="input your password"/>
+                                {fieldState.invalid && (<FieldError errors={[fieldState.error]}/>)}
+                            </Field>
+                        )}/>
+                        <Button type="submit">Submit</Button>
+                        <div className="flex flex-row justify-end">
+                            <span>没有账号?</span>
+                            <Link href={'/auth/sign-up'} rel="noopener noreferrer" className="text-blue-500 pl-1" >
+                                注册
+                            </Link>
+                        </div>
+                    </FieldGroup>
+                </form>
+                <CardFooter>
+                </CardFooter>
+            </CardContent>
 
-    </Card>
-  )
+        </Card>
+    );
 }
 
 export default SignUp
