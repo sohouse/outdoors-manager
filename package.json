@@ -15,6 +15,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "type": "tsc --noEmit --project tsconfig.ts",
     "------------------ db command": "----",
     "generate: 生成客户端": "----",
     "dbg": "NODE_ENV=development prisma generate",
