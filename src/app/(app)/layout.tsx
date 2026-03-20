@@ -29,7 +29,7 @@ const RootLayout = async ({ children }: { children: ReactNode }) => {
                         <AppSidebar />
                         <main className='px-4 md:px-6 lg:px-8 w-full mx-auto flex flex-col'>
                             <Header />
-                            <div className='flex-1 flex items-center justify-center'>
+                            <div className='flex-1 flex flex-col items-center justify-center'>
                                 {children}
                             </div>
                         </main>
