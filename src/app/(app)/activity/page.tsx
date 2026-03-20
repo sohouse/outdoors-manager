@@ -11,6 +11,7 @@ import { findByCondition } from "@/lib/service/activity-service.ts";
 import DeleteDialog from "@/lib/components/web/DeleteDialog.tsx";
 import { useRouter } from "next/navigation";
 import { honoClient } from "@/lib/api/main.ts";
+import {ACTIVITY_ROUTES} from "@/lib/config/routes.ts";
 
 // 根据活动类型获取文字颜色（在对应背景图片上显示效果好）
 const getTextColor = (type: number): string => {
@@ -63,7 +64,7 @@ const ActivityPage: FC = () => {
   // 路由被(..)activity拦截，到了并行modal路由下的activity/[id]/page.tsx中，
   // 展示page中的Dialog模态框
   const goActivityDetail = (id: string) => {
-    router.push(`/activity/${id}`)
+    router.push(ACTIVITY_ROUTES.GET_BY_ID(id))
   }
 
   return (

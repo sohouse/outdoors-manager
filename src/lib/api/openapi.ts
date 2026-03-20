@@ -1,5 +1,5 @@
 import { createRoute, OpenAPIHono, z } from "@hono/zod-openapi";
-import { editActivityCheck } from "@/lib/validators/activity-check";
+import { editActivityCheck } from "@/lib/zod-check/activity-check";
 
 
 // 创建独立的 OpenAPIHono 实例

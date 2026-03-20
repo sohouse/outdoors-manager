@@ -1,7 +1,7 @@
 'use client'
 
 import { honoClient } from '@/lib/api/main.ts'
-import {editActivityCheck} from '@/lib/validators/activity-check'
+import {editActivityCheck} from '@/lib/zod-check/activity-check'
 import { Button } from '@/lib/components/ui/button.tsx'
 import {
   Dialog,
@@ -24,6 +24,7 @@ import { use, useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import z from 'zod'
 import {Prisma, Activity as PrismaActivity} from '@prisma/client'
+import {COMMON_ROUTES} from "@/lib/config/routes.ts";
 
 const createInput: Prisma.ActivityCreateInput = {
   title: "周末徒步",
@@ -75,7 +76,7 @@ export default function ActivityDetailModal({
       const res = await honoClient.api.activity['getObjById'].$get({ id: id });
       if (res.status === 401) {
         alert({message: '用户未登录'})
-        router.push('/login')
+        router.push(COMMON_ROUTES.LOGIN)
       }
       const { result: fetchData } = await res.json() as { result: Activity };
 

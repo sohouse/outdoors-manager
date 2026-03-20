@@ -11,6 +11,7 @@ import {Home, LogInIcon, LogOutIcon, UserPlus} from "lucide-react"
 import {logOut} from "@/lib/service/auth-service.ts"
 import {auth} from "@/lib/auth-client.ts";
 import Image from "next/image";
+import {COMMON_ROUTES} from "@/lib/config/routes.ts";
 
 type loginUser = {
     id: string;
@@ -59,7 +60,7 @@ const Header = () => {
     const userLogOut = (e: React.MouseEvent) => {
         e.preventDefault();
         logOut();
-        route.push('/auth/login')
+        route.push(COMMON_ROUTES.LOGIN)
     }
 
     return (

@@ -5,12 +5,13 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Field, FieldError, FieldGroup, FieldLabel } from "@/lib/components/ui/field.tsx"
 import { Input } from "@/lib/components/ui/input.tsx"
 import { Button } from "@/lib/components/ui/button.tsx"
-import { signUpCheck } from "@/lib/validators/sign-up-check"
+import { signUpCheck } from "@/lib/zod-check/sign-up-check"
 import z from "zod"
 import { auth } from "@/lib/auth-client"
 import { useRouter } from "next/navigation"
 import { signUp } from "@/lib/service/auth-service"
 import Link from "next/link";
+import {ACTIVITY_ROUTES} from "@/lib/config/routes.ts";
 
 const SignUp = () => {
   const form = useForm<z.infer<typeof signUpCheck>>({
@@ -24,8 +25,8 @@ const SignUp = () => {
 
   const route = useRouter();
   const submitForm = async () => {
-    signUp(form);
-    route.push('/activity');
+    await signUp(form);
+    route.push(ACTIVITY_ROUTES.LIST);
   }
 
   return (
