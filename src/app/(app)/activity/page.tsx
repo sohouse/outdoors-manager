@@ -1,17 +1,18 @@
 'use client'
 
-import { Card, CardContent, CardFooter, CardHeader } from "@/lib/components/ui/card.tsx";
-import { ActivityStatus, ActivityTypes, Activity, ActivityCondition } from "@/lib/types/activity.ts";
+import {Card, CardContent, CardFooter, CardHeader} from "@/lib/components/ui/card.tsx";
+import {Activity, ActivityCondition, ActivityStatus, ActivityTypes} from "@/lib/types/activity.ts";
 import dayjs from 'dayjs'
-import { FC, useEffect, useState } from "react";
+import {FC, useEffect, useState} from "react";
 import ActivityFilterBar from "@/lib/components/web/ActivitySearch.tsx";
 import PageProvider from "@/lib/components/web/PageProvider.tsx";
-import { useActivityStore } from "@/lib/stores/activity-store.ts";
-import { findByCondition } from "@/lib/service/activity-service.ts";
+import {useActivityStore} from "@/lib/stores/activity-store.ts";
+import {findByCondition} from "@/lib/service/activity-service.ts";
 import DeleteDialog from "@/lib/components/web/DeleteDialog.tsx";
-import { useRouter } from "next/navigation";
-import { honoClient } from "@/lib/api/main.ts";
+import {useRouter} from "next/navigation";
+import {honoClient} from "@/lib/api/main.ts";
 import {ACTIVITY_ROUTES} from "@/lib/config/routes.ts";
+import {clsx} from "clsx";
 
 // 根据活动类型获取文字颜色（在对应背景图片上显示效果好）
 const getTextColor = (type: number): string => {
@@ -90,7 +91,9 @@ const ActivityPage: FC = () => {
             {/* 暗色主题渐变覆盖层 */}
             <div className="absolute inset-0 bg-linear-to-r dark:from-foreground/80 dark:via-foreground/20 dark:to-transparent md:dark:from-foreground/40 md:dark:via-foreground/5 pointer-events-none" />
             <CardHeader className={`${getTextColor(item.type)} ${getDarkTextColor(item.type)} opacity-80`}>
-              <h2 className="text-lg md:text-xl truncate">
+              <h2 className={clsx("text-lg md:text-xl truncate", {
+                "line-through": item.status === ActivityStatus.已取消
+              })}>
                 {item.title}
               </h2>
               <div className="text-xs md:text-sm opacity-80">
