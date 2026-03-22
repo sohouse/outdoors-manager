@@ -1,36 +1,123 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Outdoors Manager
 
-## Getting Started
+一个面向户外活动场景的活动管理平台原型项目，聚焦活动发布、筛选查询、详情查看、用户注册登录与基础权限控制等核心流程。项目基于 Next.js App Router 构建，结合 Hono、Prisma、PostgreSQL 与 Better Auth，目标是实现一个支撑前端体验的后端工程化的全栈项目。
 
-First, run the development server:
+## Overview
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+这个项目的核心目标，是围绕“户外活动管理”场景，构建一个具备实际业务雏形的全栈应用。当前已实现活动列表、详情查看、条件筛选、基础编辑能力，以及用户注册登录和接口鉴权等模块。
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+相比单纯的页面展示项目，这个项目更强调完整链路：从前端页面、服务层、接口层，到数据库访问、认证授权与文档化接口定义，尽量形成一个可运行、可扩展、可继续演进的工程结构。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Demo
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- 本地开发地址：`http://localhost:3000`
+- API 路径前缀：`/api`
+- OpenAPI 文档入口：`/api/openapi`
+- 演示截图：可补充活动列表页、登录页、详情页截图
+- 在线演示：如后续部署，可补充 Vercel / 自建地址
 
-## Learn More
+## Why This Project
 
-To learn more about Next.js, take a look at the following resources:
+这个项目来源于一个比较明确的业务想法：户外活动管理通常不只是“发一条活动信息”这么简单，背后会涉及活动组织、用户参与、时间安排、领队与资源分配等一整套流程。
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+我选择以这个方向做项目，主要有三个原因：
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. 它比博客、待办清单这类经典练手项目更接近真实业务场景。
+2. 它天然适合拆分出多角色、多模块、多状态流转等工程问题，能体现系统设计能力。
+3. 它可以覆盖我希望重点训练的全栈能力，包括前端交互、接口设计、数据库建模、认证鉴权和项目工程化。
 
-## Deploy on Vercel
+当前版本先聚焦“活动管理”这条主线，优先完成活动展示与用户认证等关键链路，后续再逐步扩展订单、车辆、领队、排期等模块。
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## Features
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+当前已完成的功能包括：
+
+- 用户注册与登录
+- 基于 Better Auth 的会话认证
+- API 接口鉴权中间件
+- 活动列表展示
+- 活动详情查看
+- 活动条件筛选与分页查询
+- 活动编辑 / 删除的基础能力
+- 基于 Prisma 的数据库访问层封装
+- 基于 Hono 的 API 路由组织
+- OpenAPI 文档的初步接入
+- MDX 能力与基础内容渲染支持
+- 基础主题切换与部分通用 UI 组件抽象
+
+计划中的功能包括：
+
+- 活动创建流程完善
+- 活动报名 / 订单能力
+- 用户个人中心与我的活动
+- 角色权限与更细粒度的访问控制
+- 车辆 / 领队 / 排期等业务模块
+- 更完整的 API 文档与参数校验
+- 自动化测试与 CI 流程
+- 多语言与海外展示优化
+
+## Tech Stack
+
+前端：
+
+- Next.js 16
+- React 19
+- TypeScript
+- Tailwind CSS 4
+- Radix UI
+- Zustand
+- React Hook Form
+- Zod
+
+后端与接口：
+
+- Hono
+- Hono OpenAPI
+- Better Auth
+
+数据层：
+
+- Prisma
+- PostgreSQL
+
+其他能力：
+
+- MDX
+- Day.js
+- Faker（用于测试数据生成）
+
+## Architecture
+
+项目整体采用前后端一体化的全栈结构：
+
+- 使用 Next.js App Router 承担页面路由与应用壳层
+- 使用 Hono 组织 `/api` 下的接口路由
+- 使用 Prisma 作为数据库访问层
+- 使用 Better Auth 处理用户认证与会话管理
+- 前端通过页面组件、服务层和 API 客户端访问后端能力
+- 数据访问通过 DAO / Service 分层进行组织，降低页面与数据库实现的直接耦合
+
+当前架构重点在于验证以下能力：
+
+- 页面层与接口层解耦
+- 接口统一挂载与中间件保护
+- 数据模型与查询逻辑集中管理
+- 为后续继续扩展业务模块预留结构空间
+
+## Project Structure
+
+```text
+src/
+  app/                    Next.js 页面路由与布局
+  lib/
+    api/                  Hono API 路由与 OpenAPI 定义
+    auth/                 认证相关逻辑
+    components/           UI 组件与业务组件
+    database/             Prisma 客户端、DAO、schema、seed
+    service/              业务服务层
+    stores/               前端状态管理
+    types/                类型定义
+    utils/                通用工具函数
+    zod-check/            表单与接口校验
+prisma/                   Prisma 相关配置（如保留）
+public/                   静态资源
