@@ -11,8 +11,8 @@ export const editActivityCheck = z.object({
         (val) => !val || !isNaN(Date.parse(val)),
         {message: "Invalid date format"}
     ),
-    type: z.enum(ActivityTypes).describe('活动类型').optional(), // 改为可选
-    status: z.enum(ActivityStatus).describe('活动状态').optional(), // 改为可选
+    type: z.enum(ActivityTypes).describe('活动类型').default(ActivityTypes.未指定), // 改为可选
+    status: z.enum(ActivityStatus).describe('活动状态').default(ActivityStatus.未开始), // 改为可选
     desc: z.string().optional().describe('描述信息'), // 改为可选
     author: z.string().describe('创建人').optional(), // 改为可选
     content: z.string().describe('活动说明').optional(), // 改为可选

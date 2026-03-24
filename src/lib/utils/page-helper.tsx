@@ -1,13 +1,8 @@
-import { PaginateCondition } from "@/lib/types/pagination.ts";
-import { isNil } from 'lodash';
+import {DEFAULT_LIMIT, DEFAULT_PAGE} from "@/lib/constants.ts";
+import {PaginateCondition} from "@/lib/types/pagination.ts";
 
-export const pagination = (condition: PaginateCondition) => {
-    const limit = isNil(condition.limit) || condition.limit < 1 ? 5 : condition.limit
-    const page = isNil(condition.page) || condition.page < 1 ? 1 : condition.page;
-
-    const start = (page - 1) * limit;
-    
-    condition.start = start;
-    condition.limit = limit;
-    condition.page = page;
+export const calcOffset = (condition: PaginateCondition): number => {
+    const page = condition.page <= 0 ? DEFAULT_PAGE : condition.page;
+    const limit = condition.limit <= 0 ? DEFAULT_LIMIT : condition.limit;
+    return (page - 1) * limit;
 }

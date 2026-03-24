@@ -48,13 +48,12 @@
 计划中的功能包括：
 
 - 活动创建流程完善
-- 活动报名 / 订单能力
+- 订单管理能力
 - 用户个人中心与我的活动
 - 角色权限与更细粒度的访问控制
 - 车辆 / 领队 / 排期等业务模块
 - 更完整的 API 文档与参数校验
 - 自动化测试与 CI 流程
-- 多语言与海外展示优化
 
 ## Tech Stack
 
@@ -121,3 +120,80 @@ src/
     zod-check/            表单与接口校验
 prisma/                   Prisma 相关配置（如保留）
 public/                   静态资源
+``` 
+## Getting Started
+### 1. 安装依赖
+pnpm install
+### 2. 配置环境变量
+在项目根目录创建 .env 文件，并填写必要配置，例如：
+DATABASE_URL=your_database_url
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
+BETTER_AUTH_SECRET=your_secret
+BETTER_AUTH_URL=http://localhost:3000
+具体变量名请以项目实际代码为准，建议后续补充 .env.example。
+### 3. 初始化数据库
+根据当前项目脚本配置，可以使用 Prisma 进行迁移、生成与种子数据初始化。
+常用命令：
+pnpm run dbm
+pnpm run dbs
+pnpm run dbg
+### 4. 启动开发环境
+pnpm dev
+启动后访问：
+http://localhost:3000
+
+## Available Scripts
+常用脚本说明：
+- pnpm dev：启动开发环境
+- pnpm build：构建生产包
+- pnpm start：启动生产环境
+- pnpm lint：运行 ESLint 检查
+- pnpm run dbp：同步数据库结构
+- pnpm run dbm：执行 Prisma migrate dev
+- pnpm run dbs：执行种子数据
+- pnpm run dbg：生成 Prisma Client
+## API Documentation
+项目已接入 OpenAPI 相关能力，当前可通过以下地址查看接口文档：
+``` test
+/api/openapi
+```
+
+## Challenges and Trade-offs
+这个项目在实现过程中，主要遇到和思考过这些问题：
+1. 如何在 Next.js 项目中组织一个清晰的 API 分层，而不是把所有逻辑都直接写在页面里。
+2. 如何在快速推进业务功能的同时，尽量保持类型安全和可维护性。
+3. 如何让认证、接口保护、数据库访问和前端调用之间形成比较自然的边界。
+4. 如何在“先做功能”和“做工程化”之间平衡节奏。
+
+当前版本的取舍是：先完成活动管理与认证的主流程，再逐步补齐测试、CI、部署文档和更完整的业务模块。
+## What I Learned
+通过这个项目，我重点锻炼了以下工程能力：
+- 使用 Next.js App Router 组织页面、布局与路由结构
+- 在同一个项目中整合前端页面、API 路由与数据库访问
+- 使用 Prisma 进行数据建模、查询与迁移管理
+- 使用 Better Auth 实现注册、登录、会话与接口鉴权
+- 使用 Hono 组织接口路由，并尝试接入 OpenAPI 文档
+- 使用 React Hook Form + Zod 处理表单和校验逻辑
+- 尝试通过 DAO / Service 分层提升代码结构清晰度
+- 逐步意识到工程化细节的重要性，例如类型边界、错误处理、脚本设计、文档与可交付性
+
+更重要的是，这个项目让我从“功能实现”进一步转向“系统设计与工程交付”的思考方式：不仅要让代码跑起来，还要让项目可以被别人理解、运行、扩展和评估。
+## Roadmap
+接下来计划继续完善以下内容：
+- 完善活动创建、编辑、删除的完整闭环
+- 增加活动报名与订单能力
+- 增加角色权限与管理后台能力
+- 完善 OpenAPI 文档与接口校验
+- 增加单元测试与集成测试
+- 增加 GitHub Actions CI
+- 提供线上部署版本
+- 将 README、注释和界面文案进一步英文国际化
+## Known Issues
+当前项目仍有一些待完善的部分：
+- README 与项目实际功能的同步需要继续完善
+- 部分接口文档仍是演示性质，尚未完全与真实业务逻辑对齐
+- 自动化测试与 CI 仍未补齐
+- 部分代码命名、注释与工程细节仍需整理
+- 生产部署与环境隔离策略仍需进一步完善
+## License
+如后续开源，可补充 MIT License 或其他许可证。

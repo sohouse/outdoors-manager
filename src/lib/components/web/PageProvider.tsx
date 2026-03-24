@@ -1,14 +1,13 @@
 import { useActivityStore } from '@/lib/stores/activity-store.ts';
 import { Pagination, PaginationContent, PaginationItem, PaginationPrevious, PaginationLink, PaginationEllipsis, PaginationNext } from '../ui/pagination.tsx'
+import {DEFAULT_LIMIT} from "@/lib/constants.ts";
 
 const PageProvider = () => {
     const { paginateMeta, setPageCondition } = useActivityStore();
 
     // 处理页码点击事件
     const handlePageChange = (page: number) => {
-        setPageCondition({ page });
-        // if (page !== paginateMeta.currentPage && page >= 1 && page <= totalPages) {
-        // }
+        setPageCondition({ page, limit: DEFAULT_LIMIT });
     };
 
     return (
@@ -18,15 +17,15 @@ const PageProvider = () => {
                     <PaginationPrevious
                         onClick={(e) => {
                             e.preventDefault();
-                            handlePageChange(paginateMeta.currentPage - 1);
+                            handlePageChange(paginateMeta.page - 1);
                         }}
                         text='上一页'
-                        disabled={!paginateMeta.currentPage || paginateMeta.currentPage <= 1} />
+                        disabled={!paginateMeta.page || paginateMeta.page <= 1} />
                 </PaginationItem>
                 {
                     Array.from({ length: paginateMeta.totalPage }).map((_, index) => (
                         <PaginationItem key={`activity${index}`}>
-                            <PaginationLink isActive={index + 1 === paginateMeta.currentPage} onClick={(e) => {
+                            <PaginationLink isActive={index + 1 === paginateMeta.page} onClick={(e) => {
                                 e.preventDefault();
                                 handlePageChange(index + 1)
                             }}>
@@ -41,9 +40,9 @@ const PageProvider = () => {
                         text='下一页'
                         onClick={(e) => {
                             e.preventDefault();
-                            handlePageChange(paginateMeta.currentPage + 1)
+                            handlePageChange(paginateMeta.page + 1)
                         }}
-                        disabled={!paginateMeta.currentPage || paginateMeta.currentPage >= paginateMeta.totalPage} />
+                        disabled={!paginateMeta.page || paginateMeta.page >= paginateMeta.totalPage} />
                 </PaginationItem>
             </PaginationContent>
         </Pagination>

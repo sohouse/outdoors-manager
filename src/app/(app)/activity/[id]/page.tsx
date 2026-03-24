@@ -1,5 +1,4 @@
-import { getObjById } from '@/lib/service/activity-service.ts'
-import { Activity, ActivityStatus, ActivityTypes } from '@/lib/types/activity.ts'
+import {ActivityItem, ActivityStatus, ActivityTypes} from '@/lib/types/activity.ts'
 import dayjs from 'dayjs'
 import { notFound } from 'next/navigation'
 import { honoClient } from '@/lib/api/main.ts'
@@ -13,7 +12,7 @@ export default async function ActivityDetailPage({
   const { id } = await params
   // const activity = await getObjById('activity', id);
   const res = await honoClient.api.activity['getObjById'].$get({ id: id });
-        const {result: activity} = await res.json() as {result: Activity};
+        const {result: activity} = await res.json() as {result: ActivityItem};
   if (!activity) notFound()
 
   return (

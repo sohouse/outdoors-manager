@@ -1,8 +1,17 @@
-import { Activity, ActivityCondition, ActivityStatus, ActivityTypes } from '../types/activity.ts';
+import {
+    ActivityConditions,
+    ActivityItem,
+    ActivityStatus,
+    ActivityTypes,
+    CreateActivityInput, UpdateActivityInput
+} from '../types/activity.ts';
 import { getRandomInt } from '../utils/random.ts';
 import { base, en, Faker, zh_CN } from '@faker-js/faker';
 import { client } from "./client.ts"
 import { BaseDao } from "./IDao.tsx";
+import {DEFAULT_LIMIT, DEFAULT_PAGE} from "@/lib/constants.ts";
+import page from "@/app/(app)/page.tsx";
+import {calcOffset} from "@/lib/utils/page-helper.tsx";
 
 const faker = new Faker({
     locale: [zh_CN, en, base]
@@ -48,8 +57,10 @@ export const initActivity = async (): Promise<void> => {
     }
 }
 
-export class ActivityDao implements BaseDao<Activity, ActivityCondition> {
-    insertObj = async (activity: Activity): Promise<boolean> => {
+export class ActivityDao implements BaseDao<ActivityItem, CreateActivityInput, UpdateActivityInput, ActivityConditions> {
+
+
+    insertObj = async (activity: ActivityItem): Promise<boolean> => {
         try {
             await client.activity.create({
                 data: activity
@@ -61,18 +72,19 @@ export class ActivityDao implements BaseDao<Activity, ActivityCondition> {
         }
     }
 
-    countByCondition = async (condition: ActivityCondition): Promise<number> => {
-        const { page: _page, limit: _limit, start: _start, ...cleanCondition } = condition ?? {};
+    countByCondition = async (condition: ActivityConditions): Promise<number> => {
+        const { page: _page, limit: _limit, ...cleanCondition } = condition ?? {};
         return client.activity.count({
             where: cleanCondition
         });
     }
 
-    findByCondition = async (condition: ActivityCondition): Promise<{ items: Activity[], totalCount: number }> => {
-        const { page: _page, limit, start, ...cleanCondition } = condition;
+    findByCondition = async (condition: ActivityConditions): Promise<{ items: ActivityItem[], totalCount: number }> => {
+        const { page: _page, limit, ...cleanCondition } = condition;
+        const offset = calcOffset(condition);
         const activities = await client.activity.findMany({
             where: cleanCondition,
-            skip: start,
+            skip: offset,
             take: limit
         })
         // 转换为 Activity 类型
@@ -95,14 +107,14 @@ export class ActivityDao implements BaseDao<Activity, ActivityCondition> {
         }
         const totalCount = await this.countByCondition(condition);
         return {
-            items: mappedActivities as Activity[],
+            items: mappedActivities as ActivityItem[],
             totalCount
         };
     }
 
     // todo 完成修改逻辑
-    editObj = async (updateActivity: Activity): Promise<boolean> => {
-        const {items} = await this.findByCondition({ id: updateActivity.id }) || [];
+    editObj = async (updateActivity: UpdateActivityInput): Promise<boolean> => {
+        const {items} = await this.findByCondition({ id: updateActivity.id, limit: DEFAULT_LIMIT, page: DEFAULT_PAGE });
         if (!Array.isArray(items)) {
             throw new Error('读取数据失败');
         }
@@ -122,7 +134,7 @@ export class ActivityDao implements BaseDao<Activity, ActivityCondition> {
 
     deleteById = async (id: string): Promise<boolean> => {
         try {
-            const {items} = await this.findByCondition({ id: id }) || [];
+            const {items} = await this.findByCondition({ id: id, limit: DEFAULT_LIMIT, page: DEFAULT_PAGE }) || [];
             if (items.length > 0) {
                 await client.activity.delete({
                     where: {

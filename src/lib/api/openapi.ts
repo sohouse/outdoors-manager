@@ -45,13 +45,13 @@ openapiApp.openapi(getActivityRoute, async (c) => {
     const { id } = c.req.valid('query');
 
     // 业务逻辑
-    const activity = { id, title: 'John' };
+    const activity = { id, title: 'John', error: '', message: 'success' };
 
     if (!activity) {
         return c.json({ error: 'Not Found', message: 'Activity not found' }, 404);
     }
 
-    return c.json(activity);
+    return c.json(activity, 200);
 });
 
 // 生成 OpenAPI 文档

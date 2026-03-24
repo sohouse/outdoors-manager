@@ -16,22 +16,14 @@ import { Input } from '@/lib/components/ui/input.tsx'
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/lib/components/ui/select.tsx'
 import { Textarea } from '@/lib/components/ui/textarea.tsx'
 import { useActivityStore } from '@/lib/stores/activity-store.ts'
-import { Activity, ActivityStatus, ActivityTypes } from '@/lib/types/activity.ts'
+import {ActivityItem, ActivityStatus, ActivityTypes, UpdateActivityInput} from '@/lib/types/activity.ts'
 import { zodResolver } from '@hookform/resolvers/zod'
 import dayjs from 'dayjs'
 import { useRouter } from 'next/navigation'
 import { use, useEffect, useState } from 'react'
 import { Controller, useForm } from 'react-hook-form'
 import z from 'zod'
-import {Prisma, Activity as PrismaActivity} from '@prisma/client'
 import {COMMON_ROUTES} from "@/lib/config/routes.ts";
-
-const createInput: Prisma.ActivityCreateInput = {
-  title: "周末徒步",
-  author: "Will",
-  type: 1,
-  status: 0,
-};
 
 export default function ActivityDetailModal({
   params,
@@ -40,18 +32,7 @@ export default function ActivityDetailModal({
 }) {
   const { id } = use(params)
   const router = useRouter()
-  const [activity, setActivity] = useState<Activity>({
-    id: '',
-    content: '',
-    author: '',
-    title: '',
-    desc: '',
-    type: ActivityTypes.徒步,
-    status: ActivityStatus.未开始,
-    start_time: undefined,
-    end_time: undefined,
-    material: undefined
-  });
+  const [activity, setActivity] = useState<ActivityItem>({} as ActivityItem);
   const [isEdit, setEdit] = useState(false);
 
   const { setPageRefresh } = useActivityStore();
@@ -78,7 +59,7 @@ export default function ActivityDetailModal({
         alert({message: '用户未登录'})
         router.push(COMMON_ROUTES.LOGIN)
       }
-      const { result: fetchData } = await res.json() as { result: Activity };
+      const { result: fetchData } = await res.json() as { result: ActivityItem };
 
       // const fetchData = await getObjById('activity', id);
       setActivity(fetchData);
@@ -102,7 +83,7 @@ export default function ActivityDetailModal({
 
   const activityEditSubmit = async (data: z.infer<typeof editActivityCheck>) => {
     try {
-      const editActivity: Activity = {
+      const editActivity: UpdateActivityInput = {
         ...data,
         start_time: data.start_time ? new Date(data.start_time) : undefined,
         end_time: data.end_time ? new Date(data.end_time) : undefined

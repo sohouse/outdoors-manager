@@ -2,9 +2,9 @@
 // All models are defined in this file for Prisma 6.x compatibility
 
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   // output   = "../../node_modules/.prisma/client"
-  previewFeatures = [ "driverAdapters"]
+  previewFeatures = ["driverAdapters"]
 }
 
 datasource db {
@@ -17,17 +17,18 @@ datasource db {
 
 // Activity model - originally from ./models/activity.prisma
 model Activity {
-  id          String    @id @default(uuid())
-  title       String?
-  content     String?
-  author      String?
-  create_time DateTime? @default(now())
+  id          String   @id @default(uuid())
+  title       String
+  author      String
+  create_time DateTime @default(now())
   leader_id   String?
-  type        Int?      @default(0)
+  car_id      String?
+  content     String?
   desc        String?
-  status      Int?      @default(0)
-  start_time  DateTime? @default(now())
-  end_time    DateTime? @default(now())
+  type        Int      @default(0)
+  status      Int      @default(0)
+  start_time  DateTime @default(now())
+  end_time    DateTime @default(now())
 
   @@map("activity")
 }
