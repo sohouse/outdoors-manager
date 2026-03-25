@@ -1,5 +1,5 @@
-import {DEFAULT_LIMIT, DEFAULT_PAGE} from "@/lib/constants.ts";
-import {PaginateCondition} from "@/lib/types/pagination.ts";
+import {DEFAULT_LIMIT, DEFAULT_PAGE} from "../constants.ts";
+import {PaginateCondition} from "../types/pagination.ts";
 
 export const calcOffset = (condition: PaginateCondition): number => {
     const page = condition.page <= 0 ? DEFAULT_PAGE : condition.page;

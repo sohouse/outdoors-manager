@@ -11,7 +11,7 @@ export const signUp = async (form: UseFormReturn<z.infer<typeof signUpCheck>>) =
         name: loginKey,
         username: loginKey,
     }, {
-        onRequest: (ctc) => { },
+        // onRequest: (ctc) => { },
         onSuccess: (ctc) => {
             console.log(JSON.stringify(ctc));
             alert('注册成功');
@@ -31,7 +31,7 @@ export const logIn = async (form: UseFormReturn<z.infer<typeof signInCheck>>) =>
             password: form.getValues('pwd'),
             rememberMe: true
         }, {
-            onSuccess(ctx) { },
+            // onSuccess(ctx) { },
             onError(ctx) {
                 alert(ctx.error.message);
             },
@@ -41,7 +41,7 @@ export const logIn = async (form: UseFormReturn<z.infer<typeof signInCheck>>) =>
             username: loginKey,
             password: form.getValues('pwd')
         }, {
-            onSuccess(ctx) { },
+            // onSuccess(ctx) { },
             onError(ctx) {
                 alert(ctx.error.message);
             },

@@ -41,7 +41,7 @@ const getDarkTextColor = (type: number): string => {
 
 const ActivityPage: FC = () => {
 
-    const {condition: condition, setPaginateMeta, refreshFlag} = useActivityStore();
+    const {condition, setPaginateMeta, refreshFlag} = useActivityStore();
     const router = useRouter();
 
 
@@ -51,7 +51,12 @@ const ActivityPage: FC = () => {
             type FindByConditionResponse = InferResponseType<typeof honoClient.api.activity.findByCondition.$get, 200>
             const res = await honoClient.api.activity['findByCondition'].$get({query: condition});
             const {items, meta}: FindByConditionResponse = await res.json();
-            setActivities(items);
+            setActivities(items?.map(item => ({
+                ...item,
+                start_time: new Date(item.start_time),
+                end_time: new Date(item.end_time),
+                create_time: new Date(item.create_time),
+            })) ?? []);
             setPaginateMeta(meta);
         }
         loadActivities();
@@ -59,7 +64,12 @@ const ActivityPage: FC = () => {
 
     const reloadActivity = async () => {
         const {items, meta} = await findByCondition<ActivityConditions>('activity', condition);
-        setActivities(items);
+        setActivities(items?.map(item => ({
+            ...item,
+            start_time: new Date(item.start_time),
+            end_time: new Date(item.end_time),
+            create_time: new Date(item.create_time),
+        })) ?? []);
         setPaginateMeta(meta);
     }
 

@@ -81,23 +81,25 @@ export enum ActivityStatus {
 /**
  * 活动检索对象
  */
-export interface ActivityConditions extends PaginateCondition {
+export class ActivityConditions implements PaginateCondition {
+    page: number = 1;
+    limit: number = 10;
     // 活动id
-    id?: string;
+    id?: string = undefined;
     // 活动领队名称
-    leader_name?: string;
+    leader_name?: string = undefined;
     // 活动标题
-    title?: string,
+    title?: string = undefined;
     // 活动类型
-    type?: ActivityTypes;
+    type?: ActivityTypes = undefined;
     // 活动状态
-    status?: ActivityStatus;
+    status?: ActivityStatus = undefined;
     // 开始时间
-    start_time?:Date;
+    start_time?: Date = undefined;
     // 结束时间
-    end_time?:Date;
+    end_time?: Date = undefined;
     // 车辆牌照
-    car_id?: string;
+    car_id?: string = undefined;
 }
 
 /**

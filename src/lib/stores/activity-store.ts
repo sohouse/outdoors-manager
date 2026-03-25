@@ -1,6 +1,7 @@
 import { ActivityConditions } from '@/lib/types/activity.ts'
 import { PaginateCondition, PaginateMeta } from '@/lib/types/pagination.ts'
 import { create } from 'zustand'
+import {DEFAULT_LIMIT, DEFAULT_PAGE} from "@/lib/constants.ts";
 
 type activityStoreType = {
     condition: ActivityConditions,
@@ -12,7 +13,7 @@ type activityStoreType = {
 }
 
 const useActivityStore = create<activityStoreType>((set) => ({
-    condition: {page: 1, limit:5},
+    condition: {page: DEFAULT_PAGE, limit:DEFAULT_LIMIT},
     paginateMeta: {totalCount:0, limit:0, pageSize:0, totalPage:0, page:0},
     refreshFlag: 0,
     setPaginateMeta: (page) => set(() => ({

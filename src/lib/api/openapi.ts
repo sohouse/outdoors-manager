@@ -1,5 +1,6 @@
 import { createRoute, OpenAPIHono, z } from "@hono/zod-openapi";
-import { editActivityCheck } from "@/lib/zod-check/activity-check";
+import {listActivityCheck} from "@/lib/zod-check/activity-check";
+import {generateMock} from "@anatine/zod-mock";
 
 
 // 创建独立的 OpenAPIHono 实例
@@ -32,7 +33,7 @@ const getActivityRoute = createRoute({
     responses: {
         200: {
             description: 'Activity found',
-            content: { 'application/json': { schema: editActivityCheck } },
+            content: { 'application/json': { schema: listActivityCheck } },
         },
         404: {
             description: 'Activity not found',
@@ -42,10 +43,10 @@ const getActivityRoute = createRoute({
 });
 
 openapiApp.openapi(getActivityRoute, async (c) => {
-    const { id } = c.req.valid('query');
+    const fakerActivity = generateMock(listActivityCheck);
 
     // 业务逻辑
-    const activity = { id, title: 'John', error: '', message: 'success' };
+    const activity = fakerActivity;
 
     if (!activity) {
         return c.json({ error: 'Not Found', message: 'Activity not found' }, 404);

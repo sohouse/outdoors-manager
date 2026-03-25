@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem, SidebarTrigger } from "../ui/sidebar.tsx"
+import { Sidebar, SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuItem, SidebarTrigger } from "../ui/sidebar.tsx"
 import { buttonVariants } from "../ui/button.tsx"
 
 const items = [

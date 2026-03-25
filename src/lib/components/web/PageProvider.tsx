@@ -1,5 +1,5 @@
 import { useActivityStore } from '@/lib/stores/activity-store.ts';
-import { Pagination, PaginationContent, PaginationItem, PaginationPrevious, PaginationLink, PaginationEllipsis, PaginationNext } from '../ui/pagination.tsx'
+import { Pagination, PaginationContent, PaginationItem, PaginationPrevious, PaginationLink, PaginationNext } from '../ui/pagination.tsx'
 import {DEFAULT_LIMIT} from "@/lib/constants.ts";
 
 const PageProvider = () => {

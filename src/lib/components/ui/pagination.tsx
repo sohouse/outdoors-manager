@@ -107,11 +107,13 @@ function PaginationNext({
   )
 }
 
+type PaginationEllipsisProps = React.ComponentProps<"span"> & {text?: string};
+
 function PaginationEllipsis({
   className,
   text,
   ...props
-}: React.ComponentProps<"span">) {
+}: PaginationEllipsisProps) {
   return (
     <span
       aria-hidden

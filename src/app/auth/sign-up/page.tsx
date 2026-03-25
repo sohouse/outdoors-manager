@@ -7,7 +7,6 @@ import { Input } from "@/lib/components/ui/input.tsx"
 import { Button } from "@/lib/components/ui/button.tsx"
 import { signUpCheck } from "@/lib/zod-check/sign-up-check"
 import z from "zod"
-import { auth } from "@/lib/auth-client"
 import { useRouter } from "next/navigation"
 import { signUp } from "@/lib/service/auth-service"
 import Link from "next/link";

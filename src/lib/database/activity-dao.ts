@@ -9,9 +9,8 @@ import { getRandomInt } from '../utils/random.ts';
 import { base, en, Faker, zh_CN } from '@faker-js/faker';
 import { client } from "./client.ts"
 import { BaseDao } from "./IDao.tsx";
-import {DEFAULT_LIMIT, DEFAULT_PAGE} from "@/lib/constants.ts";
-import page from "@/app/(app)/page.tsx";
-import {calcOffset} from "@/lib/utils/page-helper.tsx";
+import {DEFAULT_LIMIT, DEFAULT_PAGE} from "../constants.ts";
+import {calcOffset} from "../utils/page-helper.tsx";
 
 const faker = new Faker({
     locale: [zh_CN, en, base]

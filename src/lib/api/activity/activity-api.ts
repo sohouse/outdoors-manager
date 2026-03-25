@@ -3,22 +3,21 @@ import {ActivityConditions, ActivityItem, UpdateActivityInput} from "@/lib/types
 import { simpleObjCover } from "@/lib/utils/object-helper.ts";
 import {PageResult, PaginateMeta} from "@/lib/types/pagination.ts";
 import { Hono } from "hono";
+import {DEFAULT_LIMIT} from "@/lib/constants.ts";
 
 const app = new Hono();
 export const activityApi = app
   .get('/findByCondition', async (context) => {
     try {
       const query = context.req.query();
-      const queryCondition = {} as ActivityConditions;
-      const condition = simpleObjCover(query, queryCondition as unknown as Record<string, unknown>);
+      const condition = simpleObjCover(query, ActivityConditions);
 
       const daoFactory = daoRegistry['activity']();
       const { items, totalCount } = await daoFactory.findByCondition(condition);
 
       const meta: PaginateMeta = {
         totalCount,
-        limit: items.length,
-        pageSize: condition.limit,
+        limit: condition.limit,
         totalPage: Math.ceil(totalCount / (condition.limit ?? 1)),
         page: condition.page,
       };
@@ -31,7 +30,9 @@ export const activityApi = app
       return context.json({
         items: [] as ActivityItem[], meta: {
           totalCount: 0,
-          currentCount: 1
+          limit: DEFAULT_LIMIT,
+          totalPage: 0,
+          page: 0,
         }
       }, 500);
     }

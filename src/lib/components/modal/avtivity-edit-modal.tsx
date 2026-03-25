@@ -7,7 +7,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@radix-ui/react-dialog";
 import { DialogHeader } from "../ui/dialog.tsx";
 
-const AvtivityDetailModal: FC<{ title: string, match: string[], className?: string, children: ReactNode, id: string }> = ({ title, match, className, children, id }) => {
+const ActivityDetailModal: FC<{ title: string, match: string[], className?: string, children: ReactNode, id: string }> = ({ match, children }) => {
     const pathname = usePathname();
     const router = useRouter();
     // 优化项：使用useMemo的缓存结果来替代useEffect+useState组合
@@ -38,4 +38,4 @@ const AvtivityDetailModal: FC<{ title: string, match: string[], className?: stri
     ) : null;
 }
 
-export default AvtivityDetailModal
+export default ActivityDetailModal
