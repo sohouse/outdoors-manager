@@ -78,7 +78,7 @@ const Header = () => {
                     <div className="flex items-center gap-8">
                         <Link href="/public">
                             <h1 className="md:text-3xl font-bold text-base">
-                                My<span className="text-blue-500">Website</span>
+                                Go<span className="text-blue-500">Hiking</span>
                             </h1>
                         </Link>
 

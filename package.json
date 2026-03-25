@@ -1,5 +1,5 @@
 {
-  "name": "my-website",
+  "name": "outdoor-manager",
   "version": "0.1.0",
   "type": "module",
   "private": true,
@@ -15,6 +15,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "test:unit": "node --import 'data:text/javascript,import { register } from \"node:module\"; import { pathToFileURL } from \"node:url\"; register(\"ts-node/esm\", pathToFileURL(\"./\"));' --test src/**/*.test.ts",
     "type": "tsc --noEmit --project tsconfig.json",
     "------------------ db command": "----",
     "---generate---": "生成客户端",

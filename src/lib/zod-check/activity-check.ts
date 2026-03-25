@@ -1,5 +1,5 @@
 import z from "zod";
-import { ActivityStatus, ActivityTypes } from "../types/activity";
+import { ActivityStatus, ActivityTypes } from "../types/activity.ts";
 
 export const editActivityCheck = z.object({
     start_time: z.string().describe('活动开始时间').optional().refine(
