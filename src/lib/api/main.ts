@@ -15,6 +15,7 @@ honoApp.use('/activity/*', authMiddleware);
 honoApp.get('/', (c) => c.text('main api'));
 honoApp.notFound((c) => c.json({ message: 'not found', ok: false }, 404));
 // 分发业务路由请求
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const routes = honoApp.route('activity', activityApi);
 // 挂载openapi文档到 /api/openapi 前缀
 honoApp.route('/openapi', openapiApp);

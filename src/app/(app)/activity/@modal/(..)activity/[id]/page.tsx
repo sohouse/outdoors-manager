@@ -71,7 +71,7 @@ export default function ActivityDetailModal({
     }
 
     fetchActivity(id);
-  }, [id, form.reset, isEdit])
+  }, [id, form.reset, isEdit, form, router])
 
   const onOpenChange = (open: boolean) => {
     if (!open) router.back()
