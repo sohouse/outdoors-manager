@@ -1,5 +1,5 @@
 import { client } from '../client.ts'
-import {initActivity} from '../activity-dao.ts'
+import {initActivity} from '../../features/activity/dao/activity-dao.ts'
 
 const seed = async () => {
     try {

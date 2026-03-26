@@ -4,7 +4,6 @@ import { client } from "./database/client";
 import { openAPI, username } from 'better-auth/plugins';
 import { nextCookies } from 'better-auth/next-js';
 
-// const NextCookiesPlugin = nextCookies();
 export const auth = betterAuth({
     database: prismaAdapter(client, {
         provider: "postgresql",
@@ -24,10 +23,3 @@ export const auth = betterAuth({
         nextCookies(),
     ],
 });
-
-// nextjs的cookie仿问插件
-// auth.options.plugins.push(NextCookiesPlugin);
-// export interface AuthType {
-//     user: typeof auth.$Infer.Session.user | null;
-//     session: typeof auth.$Infer.Session.session | null;
-// }

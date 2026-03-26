@@ -1,9 +1,9 @@
-import {ActivityConditions, ActivityItem, UpdateActivityInput} from "@/lib/types/activity.ts";
+import {ActivityConditions, ActivityItem, UpdateActivityInput} from "@/lib/features/activity/shared/activity.ts";
 import { simpleObjCover } from "@/lib/utils/object-helper.ts";
 import {PageResult, PaginateMeta} from "@/lib/types/pagination.ts";
 import { Hono } from "hono";
 import {DEFAULT_LIMIT} from "@/lib/constants.ts";
-import { daoRegistry } from "@/lib/types/daoRegister";
+import { daoRegistry } from "@/lib/database/daoRegister.ts";
 
 const app = new Hono();
 export const activityApi = app

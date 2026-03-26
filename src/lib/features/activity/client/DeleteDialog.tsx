@@ -1,8 +1,8 @@
 'use client'
 import React, { FC } from "react";
-import { AlertDialogHeader, AlertDialogFooter, AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogTitle, AlertDialogDescription, AlertDialogCancel, AlertDialogAction } from "../ui/alert-dialog.tsx"
-import { Button } from "../ui/button.tsx"
-import { deleteById } from "@/lib/service/activity-service.ts";
+import { AlertDialogHeader, AlertDialogFooter, AlertDialog, AlertDialogTrigger, AlertDialogContent, AlertDialogTitle, AlertDialogDescription, AlertDialogCancel, AlertDialogAction } from "../../../components/ui/alert-dialog.tsx"
+import { Button } from "../../../components/ui/button.tsx"
+import { deleteById } from "@/lib/features/activity/service/activity-service.ts";
 
 const DeleteDialog: FC<{ id: string, title: string, reloadActivity: () => void }> = ({ id, title, reloadActivity }) => {
 

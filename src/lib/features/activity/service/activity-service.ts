@@ -1,6 +1,6 @@
-import {ActivityConditions, ActivityItem, CreateActivityInput, UpdateActivityInput} from '@/lib/types/activity.ts';
+import {ActivityConditions, ActivityItem, CreateActivityInput, UpdateActivityInput} from '@/lib/features/activity/shared/activity.ts';
 import { PageResult, PaginateCondition, PaginateMeta } from '@/lib/types/pagination.ts';
-import { daoRegistry } from '../types/daoRegister';
+import { daoRegistry } from '../../../database/daoRegister.ts';
 
 export async function deleteById(
   id: string

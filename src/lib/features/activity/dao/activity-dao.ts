@@ -4,13 +4,13 @@ import {
     ActivityStatus,
     ActivityTypes,
     CreateActivityInput, UpdateActivityInput
-} from '../types/activity.ts';
-import { getRandomInt } from '../utils/random.ts';
+} from '../shared/activity.ts';
+import { getRandomInt } from '../../../utils/random.ts';
 import { base, en, Faker, zh_CN } from '@faker-js/faker';
-import { client } from "./client.ts"
-import { BaseDao } from "./BaseDao.tsx";
-import {DEFAULT_LIMIT, DEFAULT_PAGE} from "../constants.ts";
-import {calcOffset} from "../utils/page-helper.tsx";
+import { client } from "../../../database/client.ts"
+import { BaseDao } from "../../../database/BaseDao.tsx";
+import {DEFAULT_LIMIT, DEFAULT_PAGE} from "../../../constants.ts";
+import {calcOffset} from "../../../utils/page-helper.tsx";
 
 const faker = new Faker({
     locale: [zh_CN, en, base]

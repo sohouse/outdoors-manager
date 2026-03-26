@@ -1,7 +1,7 @@
 'use client'
 
 import { honoClient } from '@/lib/api/main.ts'
-import {editActivityCheck} from '@/lib/zod-check/activity-check'
+import {editActivityCheck} from '@/lib/features/activity/check/activity-check.ts'
 import { Button } from '@/lib/components/ui/button.tsx'
 import {
   Dialog,
@@ -15,8 +15,8 @@ import { Field, FieldError, FieldGroup, FieldLabel } from '@/lib/components/ui/f
 import { Input } from '@/lib/components/ui/input.tsx'
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from '@/lib/components/ui/select.tsx'
 import { Textarea } from '@/lib/components/ui/textarea.tsx'
-import { useActivityStore } from '@/lib/stores/activity-store.ts'
-import {ActivityItem, ActivityStatus, ActivityTypes, UpdateActivityInput} from '@/lib/types/activity.ts'
+import { useActivityStore } from '@/lib/features/activity/shared/activity-store.ts'
+import {ActivityItem, ActivityStatus, ActivityTypes, UpdateActivityInput} from '@/lib/features/activity/shared/activity.ts'
 import { zodResolver } from '@hookform/resolvers/zod'
 import dayjs from 'dayjs'
 import { useRouter } from 'next/navigation'
@@ -70,7 +70,7 @@ export default function ActivityDetailModal({
       })
     }
 
-    fetchActivity(id);
+    void fetchActivity(id);
   }, [id, form.reset, isEdit, form, router])
 
   const onOpenChange = (open: boolean) => {
@@ -92,16 +92,9 @@ export default function ActivityDetailModal({
       const res = await honoClient.api.activity['updateObj'].$post({json: editActivity});
       const { result: success } = await res.json() as { result: boolean };
 
-      // const result = await updateObj('activity', editActivity);
-      // const success = result.success;
-
       if (success) {
         // 关闭模态框（触发onOpenChange）
         onOpenChange(false);
-        // 使用setTimeout确保导航完成后再刷新
-        // setTimeout(() => {
-        //   router.refresh();
-        // }, 100);
         setPageRefresh();
       }
 

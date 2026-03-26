@@ -1,4 +1,4 @@
-import {ActivityItem, ActivityStatus, ActivityTypes} from '@/lib/types/activity.ts'
+import {ActivityItem, ActivityStatus, ActivityTypes} from '@/lib/features/activity/shared/activity.ts'
 import dayjs from 'dayjs'
 import { notFound } from 'next/navigation'
 import { honoClient } from '@/lib/api/main.ts'

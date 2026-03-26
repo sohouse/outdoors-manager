@@ -1,6 +1,6 @@
 import { UseFormReturn } from "react-hook-form";
-import { auth } from "../auth-client";
-import { signInCheck, signUpCheck } from "@/lib/zod-check/sign-up-check";
+import { auth } from "../../../auth-client.ts";
+import { signInCheck, signUpCheck } from "@/lib/features/auth/check/sign-up-check.ts";
 import z from "zod";
 
 export const signUp = async (form: UseFormReturn<z.infer<typeof signUpCheck>>) => {

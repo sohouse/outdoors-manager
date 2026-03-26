@@ -5,10 +5,10 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { Field, FieldError, FieldGroup, FieldLabel } from "@/lib/components/ui/field.tsx"
 import { Input } from "@/lib/components/ui/input.tsx"
 import { Button } from "@/lib/components/ui/button.tsx"
-import { signUpCheck } from "@/lib/zod-check/sign-up-check"
+import { signUpCheck } from "@/lib/features/auth/check/sign-up-check.ts"
 import z from "zod"
 import { useRouter } from "next/navigation"
-import { signUp } from "@/lib/service/auth-service"
+import { signUp } from "@/lib/features/auth/service/auth-service"
 import Link from "next/link";
 import {ACTIVITY_ROUTES} from "@/lib/config/routes.ts";
 

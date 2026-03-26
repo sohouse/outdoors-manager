@@ -1,10 +1,10 @@
-import { activityApi } from "@/lib/api/activity/activity-api.ts";
+import { activityApi } from "@/lib/features/activity/api/activity-api.ts";
 import { OpenAPIHono } from '@hono/zod-openapi';
 import { hc } from 'hono/client';
 // 为了使用导入值的具名导入
 import { prettyJSON } from 'hono/pretty-json';
 import { openapiApp } from "./openapi.ts";
-import { authMiddleware } from "../middlewares/auth.ts";
+import { authMiddleware } from "../middlewares/authMiddleware.ts";
 
 // 路由注册中心，接收动态兜底路由转过来的业务请求，在注册路由中进行分发
 // const app = new Hono().basePath('/api');

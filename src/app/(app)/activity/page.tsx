@@ -1,14 +1,13 @@
 'use client'
 
 import {Card, CardContent, CardFooter, CardHeader} from "@/lib/components/ui/card.tsx";
-import {ActivityConditions, ActivityItem, ActivityStatus, ActivityTypes} from "@/lib/types/activity.ts";
+import {ActivityItem, ActivityStatus, ActivityTypes} from "@/lib/features/activity/shared/activity.ts";
 import dayjs from 'dayjs'
-import {FC, useEffect, useState} from "react";
-import ActivityFilterBar from "@/lib/components/web/ActivitySearch.tsx";
+import {FC, useCallback, useEffect, useState} from "react";
+import ActivityFilterBar from "@/lib/features/activity/client/ActivitySearch.tsx";
 import PageProvider from "@/lib/components/web/PageProvider.tsx";
-import {useActivityStore} from "@/lib/stores/activity-store.ts";
-import {findByCondition} from "@/lib/service/activity-service.ts";
-import DeleteDialog from "@/lib/components/web/DeleteDialog.tsx";
+import {useActivityStore} from "@/lib/features/activity/shared/activity-store.ts";
+import DeleteDialog from "@/lib/features/activity/client/DeleteDialog.tsx";
 import {useRouter} from "next/navigation";
 import {honoClient} from "@/lib/api/main.ts";
 import {ACTIVITY_ROUTES} from "@/lib/config/routes.ts";
@@ -39,6 +38,7 @@ const getDarkTextColor = (type: number): string => {
     return colorMap[type] || 'dark:text-foreground';
 };
 
+type FindByConditionResponse = InferResponseType<typeof honoClient.api.activity.findByCondition.$get, 200>;
 const ActivityPage: FC = () => {
 
     const {condition, setPaginateMeta, refreshFlag} = useActivityStore();
@@ -46,32 +46,44 @@ const ActivityPage: FC = () => {
 
 
     const [activities, setActivities] = useState<ActivityItem[]>([]);
-    useEffect(() => {
-        const loadActivities = async () => {
-            type FindByConditionResponse = InferResponseType<typeof honoClient.api.activity.findByCondition.$get, 200>
-            const res = await honoClient.api.activity['findByCondition'].$get({query: condition});
-            const {items, meta}: FindByConditionResponse = await res.json();
-            setActivities(items?.map(item => ({
-                ...item,
-                start_time: new Date(item.start_time),
-                end_time: new Date(item.end_time),
-                create_time: new Date(item.create_time),
-            })) ?? []);
-            setPaginateMeta(meta);
-        }
-        loadActivities();
-    }, [condition, setPaginateMeta, refreshFlag])
 
-    const reloadActivity = async () => {
-        const {items, meta} = await findByCondition<ActivityConditions>(condition);
-        setActivities(items?.map(item => ({
+    const fetchActivities = useCallback(async () => {
+        const res = await honoClient.api.activity['findByCondition'].$get({query: condition});
+        const {items, meta}: FindByConditionResponse = await res.json();
+
+        const normalizedItems = items?.map(item => ({
             ...item,
             start_time: new Date(item.start_time),
             end_time: new Date(item.end_time),
             create_time: new Date(item.create_time),
-        })) ?? []);
+        })) ?? [];
+
+        return {
+            items: normalizedItems,
+            meta
+        }
+    }, [condition])
+
+    const reloadActivity = useCallback(async () => {
+        const {items, meta} = await fetchActivities();
+
+        setActivities(items);
         setPaginateMeta(meta);
-    }
+    }, [fetchActivities, setPaginateMeta]);
+
+    useEffect(() => {
+        let cancelled = false;
+        const load = async () => {
+            const {items, meta} = await fetchActivities();
+            if (cancelled) return;
+            setActivities(items);
+            setPaginateMeta(meta);
+        };
+        void load();
+        return () => {
+            cancelled = true
+        }
+    }, [fetchActivities, setPaginateMeta, refreshFlag])
 
     // 路由被(..)activity拦截，到了并行modal路由下的activity/[id]/page.tsx中，
     // 展示page中的Dialog模态框

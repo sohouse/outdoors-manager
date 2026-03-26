@@ -1,14 +1,14 @@
 'use client'
 import { Card, CardContent, CardFooter, CardHeader } from "@/lib/components/ui/card.tsx"
 import * as z from 'zod'
-import { signInCheck } from '@/lib/zod-check/sign-up-check.ts'
+import { signInCheck } from '@/lib/features/auth/check/sign-up-check.ts'
 import { Controller, useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { Field, FieldError, FieldGroup, FieldLabel } from "@/lib/components/ui/field.tsx"
 import { Input } from "@/lib/components/ui/input.tsx"
 import { Button } from "@/lib/components/ui/button.tsx"
 import { useRouter } from "next/navigation"
-import { logIn } from "@/lib/service/auth-service"
+import { logIn } from "@/lib/features/auth/service/auth-service"
 import Link from "next/link";
 import {COMMON_ROUTES} from "@/lib/config/routes.ts";
 

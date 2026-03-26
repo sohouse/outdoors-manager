@@ -1,4 +1,4 @@
-import { useActivityStore } from '@/lib/stores/activity-store.ts';
+import { useActivityStore } from '@/lib/features/activity/shared/activity-store.ts';
 import { Pagination, PaginationContent, PaginationItem, PaginationPrevious, PaginationLink, PaginationNext } from '../ui/pagination.tsx'
 import {DEFAULT_LIMIT} from "@/lib/constants.ts";
 

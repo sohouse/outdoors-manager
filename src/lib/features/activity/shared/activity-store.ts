@@ -1,4 +1,4 @@
-import { ActivityConditions } from '@/lib/types/activity.ts'
+import { ActivityConditions } from '@/lib/features/activity/shared/activity.ts'
 import { PaginateCondition, PaginateMeta } from '@/lib/types/pagination.ts'
 import { create } from 'zustand'
 import {DEFAULT_LIMIT, DEFAULT_PAGE} from "@/lib/constants.ts";
