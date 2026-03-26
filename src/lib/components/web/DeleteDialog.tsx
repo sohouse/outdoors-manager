@@ -8,7 +8,7 @@ const DeleteDialog: FC<{ id: string, title: string, reloadActivity: () => void }
 
     const deleteActivity = async (event:React.MouseEvent) => {
         stopPopup(event);
-        const actionResult = await deleteById('activity', id);
+        const actionResult = await deleteById(id);
         if (actionResult) {
             reloadActivity()
         }

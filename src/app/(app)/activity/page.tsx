@@ -63,7 +63,7 @@ const ActivityPage: FC = () => {
     }, [condition, setPaginateMeta, refreshFlag])
 
     const reloadActivity = async () => {
-        const {items, meta} = await findByCondition<ActivityConditions>('activity', condition);
+        const {items, meta} = await findByCondition<ActivityConditions>(condition);
         setActivities(items?.map(item => ({
             ...item,
             start_time: new Date(item.start_time),

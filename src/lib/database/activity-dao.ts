@@ -8,7 +8,7 @@ import {
 import { getRandomInt } from '../utils/random.ts';
 import { base, en, Faker, zh_CN } from '@faker-js/faker';
 import { client } from "./client.ts"
-import { BaseDao } from "./IDao.tsx";
+import { BaseDao } from "./BaseDao.tsx";
 import {DEFAULT_LIMIT, DEFAULT_PAGE} from "../constants.ts";
 import {calcOffset} from "../utils/page-helper.tsx";
 

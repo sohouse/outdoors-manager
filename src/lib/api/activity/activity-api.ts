@@ -1,9 +1,9 @@
-import { daoRegistry } from "@/lib/database/IDao.tsx";
 import {ActivityConditions, ActivityItem, UpdateActivityInput} from "@/lib/types/activity.ts";
 import { simpleObjCover } from "@/lib/utils/object-helper.ts";
 import {PageResult, PaginateMeta} from "@/lib/types/pagination.ts";
 import { Hono } from "hono";
 import {DEFAULT_LIMIT} from "@/lib/constants.ts";
+import { daoRegistry } from "@/lib/types/daoRegister";
 
 const app = new Hono();
 export const activityApi = app
@@ -12,7 +12,8 @@ export const activityApi = app
       const query = context.req.query();
       const condition = simpleObjCover(query, ActivityConditions);
 
-      const daoFactory = daoRegistry['activity']();
+      // const daoFactory = daoRegistry['activity']();
+      const daoFactory = daoRegistry.activity();
       const { items, totalCount } = await daoFactory.findByCondition(condition);
 
       const meta: PaginateMeta = {

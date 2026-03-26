@@ -27,7 +27,7 @@
   }
 
   .main-header {
-    @apply w-full flex items-center justify-between h-full transition-[background-color] ease-in-out duration-300 border-b-2 border-gray-500 border-solid;
+    @apply w-full flex items-center justify-between h-full transition-[background-color] ease-in-out duration-300 border-b-2 border-gray-500 border-solid pb-2;
   }
 
   .main-header-scroll {

@@ -1,18 +1,19 @@
 import {ActivityConditions, ActivityItem, CreateActivityInput, UpdateActivityInput} from '@/lib/types/activity.ts';
 import { PageResult, PaginateCondition, PaginateMeta } from '@/lib/types/pagination.ts';
-import { daoRegistry } from '@/lib/database/IDao.tsx';
+import { daoRegistry } from '../types/daoRegister';
 
 export async function deleteById(
-  daoType: string,
   id: string
 ): Promise<boolean> {
-  const daoFactory = daoRegistry[daoType]();
+  // const daoFactory = daoRegistry[daoType]();
+  const daoFactory = daoRegistry.activity();
   return daoFactory.deleteById(id)
 }
 
-export async function findByCondition<ConditionType extends PaginateCondition>(daoType: string, condition: ConditionType): Promise<PageResult<ActivityItem>> {
+export async function findByCondition<ConditionType extends PaginateCondition>(condition: ConditionType): Promise<PageResult<ActivityItem>> {
   // 组装分页条件
-  const daoFactory = daoRegistry[daoType]();
+  // const daoFactory = daoRegistry[daoType]();
+  const daoFactory = daoRegistry.activity();
 
   const { items, totalCount } = await daoFactory.findByCondition(condition);
 
@@ -29,8 +30,9 @@ export async function findByCondition<ConditionType extends PaginateCondition>(d
   };
 }
 
-export async function getObjById(daoType: string, id: string): Promise<ActivityItem | null> {
-  const dao = daoRegistry[daoType]();
+export async function getObjById(id: string): Promise<ActivityItem | null> {
+  // const dao = daoRegistry[daoType]();
+  const dao = daoRegistry.activity();
   try {
 
     const { items } = await dao.findByCondition({ id: id } as ActivityConditions);
@@ -42,8 +44,9 @@ export async function getObjById(daoType: string, id: string): Promise<ActivityI
   }
 }
 
-export async function updateObj(daoType: string, activity: UpdateActivityInput) {
-  const dao = daoRegistry[daoType]();
+export async function updateObj(activity: UpdateActivityInput) {
+  // const dao = daoRegistry[daoType]();
+  const dao = daoRegistry.activity();
   try {
     const success = await dao.editObj(activity);
     return { success, data: activity };
@@ -53,9 +56,10 @@ export async function updateObj(daoType: string, activity: UpdateActivityInput) 
   }
 }
 
-export async function createObj(daoType: string, activity: CreateActivityInput) {
+export async function createObj(activity: CreateActivityInput) {
 
-  const dao = daoRegistry[daoType]();
+  // const dao = daoRegistry[daoType]();
+  const dao = daoRegistry.activity();
   try {
     const success = await dao.insertObj(activity);
     return { success, data: activity };
