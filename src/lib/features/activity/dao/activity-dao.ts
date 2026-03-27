@@ -11,6 +11,8 @@ import { client } from "../../../database/client.ts"
 import { BaseDao } from "../../../database/BaseDao.tsx";
 import {DEFAULT_LIMIT, DEFAULT_PAGE} from "../../../constants.ts";
 import {calcOffset} from "../../../utils/page-helper.tsx";
+import {ApplicationException} from "@/lib/types/ApplicationException.ts";
+import {INTERNAL_ERROR} from "@/lib/types/ErrorType.ts";
 
 const faker = new Faker({
     locale: [zh_CN, en, base]
@@ -50,8 +52,8 @@ export const initActivity = async (): Promise<void> => {
     try {
         await client.activity.deleteMany();
         await generatorActivities();
-    } catch (error) {
-        throw error;
+    } catch {
+        throw new ApplicationException(INTERNAL_ERROR);
     }
 }
 
@@ -64,8 +66,8 @@ export class ActivityDao implements BaseDao<ActivityItem, CreateActivityInput, U
                 data: activity
             })
             return true;
-        } catch (e) {
-            throw e;
+        } catch {
+            throw new ApplicationException(INTERNAL_ERROR);
         }
     }
 
@@ -122,8 +124,8 @@ export class ActivityDao implements BaseDao<ActivityItem, CreateActivityInput, U
                 data: updateActivity
             })
             return true;
-        } catch (e) {
-            throw e;
+        } catch {
+            throw new ApplicationException(INTERNAL_ERROR);
         }
     }
 
@@ -140,8 +142,8 @@ export class ActivityDao implements BaseDao<ActivityItem, CreateActivityInput, U
             } else {
                 return false;
             }
-        } catch (e) {
-            throw e;
+        } catch {
+            throw new ApplicationException(INTERNAL_ERROR);
         }
     }
 }

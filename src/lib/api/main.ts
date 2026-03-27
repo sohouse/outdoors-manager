@@ -1,30 +1,68 @@
-import { activityApi } from "@/lib/features/activity/api/activity-api.ts";
-import { OpenAPIHono } from '@hono/zod-openapi';
-import { hc } from 'hono/client';
-// 为了使用导入值的具名导入
-import { prettyJSON } from 'hono/pretty-json';
-import { openapiApp } from "./openapi.ts";
-import { authMiddleware } from "../middlewares/authMiddleware.ts";
+import {activityApi} from "@/lib/features/activity/api/activity-api.ts";
+import {OpenAPIHono} from '@hono/zod-openapi';
+import {hc} from 'hono/client';
+import {prettyJSON} from 'hono/pretty-json';
+import {openapiApp} from "./openapi.ts";
+import {authMiddleware} from "../middlewares/authMiddleware.ts";
+import {authApi} from "@/lib/features/auth/api/auth-api.ts";
+import {ApplicationException} from "@/lib/types/ApplicationException.ts";
+import {UNKNOWN_ERROR} from '@/lib/types/ErrorType.ts'
+import {ApplicationResponse} from "@/lib/types/ApplicationResponse.ts";
 
-// 路由注册中心，接收动态兜底路由转过来的业务请求，在注册路由中进行分发
-// const app = new Hono().basePath('/api');
-const honoApp = new OpenAPIHono().basePath('/api');
-honoApp.use(prettyJSON());
-// 路由保护
-honoApp.use('/activity/*', authMiddleware);
-honoApp.get('/', (c) => c.text('main api'));
-honoApp.notFound((c) => c.json({ message: 'not found', ok: false }, 404));
-// 分发业务路由请求
+const honoService = new OpenAPIHono().basePath('/api');
+// 中间件注册
+honoService.use(prettyJSON());
+honoService.use('/activity/*', authMiddleware);
+
+// 环绕拦截
+honoService.use('*', async (c, next) => {
+    const startTime = Date.now();
+    await next();
+    const duration = Date.now() - startTime;
+
+    if (duration > 1000) {
+        console.warn(`'慢请求' ${c.req.method} ${c.req.path} ${duration}ms`);
+    }
+    const originalRes = c.res;
+    const status = originalRes.status;
+
+    // 尝试解析响应体
+    let data;
+    try {
+        data = await originalRes.clone().json();
+    } catch {
+        data = await originalRes.clone().text();
+    }
+
+    // 包装成功响应（状态码 200-299）
+    if (status >= 200 && status < 300) {
+        c.res = c.json(new ApplicationResponse(0, 'success', true, data));
+    }
+
+});
+
+// 全局错误处理
+honoService.onError((err, c) => {
+    if (err instanceof ApplicationException) {
+        return c.json(new ApplicationResponse(err.code, err.message, false, err.stack));
+    } else {
+        return c.json(new ApplicationResponse(UNKNOWN_ERROR.code, UNKNOWN_ERROR.message, false, err.stack));
+    }
+})
+
+// get请求注册
+honoService.get('/', (c) => c.text('main api'));
+
+// 404请求注册
+honoService.notFound((c) => c.json({message: 'not found', ok: false}, 404));
+
+// 挂载子路由
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const routes = honoApp.route('activity', activityApi);
-// 挂载openapi文档到 /api/openapi 前缀
-honoApp.route('/openapi', openapiApp);
-type AppType = typeof routes;
-const honoClient = hc<AppType>(process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000');
+const routes = honoService.route('activity', activityApi)
+    .route('/openapi', openapiApp)
+    .route('/auth', authApi);
 
-// 只为了让代码执行的副作用导入，需要在 app 定义之后用动态 import
-// import('./openapi.ts');
-// 静态副作用导入： import '' -> 模块加载时提前执行
-// 动态副作用导入： import ('') -> 顺序执行
+type Routes = typeof routes;
+const honoClient = hc<Routes>(process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000');
 
-export { honoApp, honoClient };
+export {honoService, honoClient};

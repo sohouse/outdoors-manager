@@ -1,26 +1,21 @@
 import z from "zod";
 
 export const signUpCheck = z.object({
-    name: z
-        .string()
+    name: z.string()
         .min(5, 'name must be at least 5 characters.'),
 
-    email: z
-        .email(),
+    email: z.email(),
 
-    pwd: z
-        .string()
+    pwd: z.string()
         .min(8, 'password must be at least 8 characters.')
         .regex(/^(?=.*[a-zA-Z])(?=.*\d).+$/, 'must include letter and number.')
 })
 
-export const signInCheck = z.object({
-    name: z
-        .string()
+export const logInCheck = z.object({
+    name: z.string()
         .min(5, 'name must be at least 5 characters.'),
 
-    pwd: z
-        .string()
+    pwd: z.string()
         .min(8, 'password must be at least 8 characters.')
         .regex(/^(?=.*[a-zA-Z])(?=.*\d).+$/, 'must include letter and number.')
 })

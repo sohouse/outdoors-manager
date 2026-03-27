@@ -4,14 +4,14 @@ import Link from "next/link"
 import {buttonVariants} from "../ui/button.tsx"
 import {ModeToggle} from "./ModeToggle.tsx"
 import {useRouter, useSearchParams} from "next/navigation"
-import {useEffect, useMemo, useState} from "react"
+import React, {useEffect, useMemo, useState} from "react"
 import {useScroll} from "@/lib/hooks/use-scroll.ts"
 import {cn} from "@/lib/utils/tailwind-helper.ts"
 import {Home, LogInIcon, LogOutIcon, UserPlus} from "lucide-react"
-import {logOut} from "@/lib/features/auth/service/auth-service.ts"
 import {auth} from "@/lib/auth-client.ts";
 import Image from "next/image";
 import {COMMON_ROUTES} from "@/lib/config/routes.ts";
+import {honoClient} from "@/lib/api/main.ts";
 
 type loginUser = {
     id: string;
@@ -40,7 +40,7 @@ const Header = () => {
             }
         }
 
-        loadUser();
+        void loadUser();
     }, [])
 
     // 保存当前路径
@@ -57,9 +57,9 @@ const Header = () => {
 
     const scrolled = useScroll(10);
 
-    const userLogOut = (e: React.MouseEvent) => {
+    const userLogOut = async (e: React.MouseEvent) => {
         e.preventDefault();
-        logOut();
+        await honoClient.api.auth['logOut'].$get()
         route.push(COMMON_ROUTES.LOGIN)
     }
 

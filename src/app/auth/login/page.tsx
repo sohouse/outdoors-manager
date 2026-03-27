@@ -1,31 +1,36 @@
 'use client'
-import { Card, CardContent, CardFooter, CardHeader } from "@/lib/components/ui/card.tsx"
+import {Card, CardContent, CardFooter, CardHeader} from "@/lib/components/ui/card.tsx"
 import * as z from 'zod'
-import { signInCheck } from '@/lib/features/auth/check/sign-up-check.ts'
-import { Controller, useForm } from "react-hook-form"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { Field, FieldError, FieldGroup, FieldLabel } from "@/lib/components/ui/field.tsx"
-import { Input } from "@/lib/components/ui/input.tsx"
-import { Button } from "@/lib/components/ui/button.tsx"
-import { useRouter } from "next/navigation"
-import { logIn } from "@/lib/features/auth/service/auth-service"
+import {logInCheck} from '@/lib/features/auth/check/auth-check.ts'
+import {Controller, useForm} from "react-hook-form"
+import {zodResolver} from "@hookform/resolvers/zod"
+import {Field, FieldError, FieldGroup, FieldLabel} from "@/lib/components/ui/field.tsx"
+import {Input} from "@/lib/components/ui/input.tsx"
+import {Button} from "@/lib/components/ui/button.tsx"
+import {useRouter} from "next/navigation"
 import Link from "next/link";
 import {COMMON_ROUTES} from "@/lib/config/routes.ts";
+import {honoClient} from "@/lib/api/main.ts";
 
 const SignUp = () => {
-  const route = useRouter();
-  const form = useForm<z.infer<typeof signInCheck>>({
-    resolver: zodResolver(signInCheck),
-    defaultValues: {
-      name: "",
-      pwd: ""
-    }
-  });
+    const route = useRouter();
+    const form = useForm<z.infer<typeof logInCheck>>({
+        resolver: zodResolver(logInCheck),
+        defaultValues: {
+            name: "",
+            pwd: ""
+        }
+    });
 
-  const submitForm = async () => {
-    await logIn(form);
-    route.push(COMMON_ROUTES.HOME);
-  }
+    const submitForm = async () => {
+        const loginFormData = form.getValues();
+        const loginResult = await honoClient.api.auth['logIn'].$post(loginFormData);
+        if (loginResult) {
+            route.push(COMMON_ROUTES.HOME);
+        } else {
+            alert('登陆失败');
+        }
+    }
 
     return (
         <Card>
@@ -54,7 +59,7 @@ const SignUp = () => {
                         <Button type="submit">Submit</Button>
                         <div className="flex flex-row justify-end">
                             <span>没有账号?</span>
-                            <Link href={'/auth/sign-up'} rel="noopener noreferrer" className="text-blue-500 pl-1" >
+                            <Link href={'/auth/sign-up'} rel="noopener noreferrer" className="text-blue-500 pl-1">
                                 注册
                             </Link>
                         </div>
