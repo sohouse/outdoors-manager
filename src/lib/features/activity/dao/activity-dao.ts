@@ -51,7 +51,6 @@ export const initActivity = async (): Promise<void> => {
         await client.activity.deleteMany();
         await generatorActivities();
     } catch (error) {
-        console.error(error);
         throw error;
     }
 }
@@ -66,8 +65,7 @@ export class ActivityDao implements BaseDao<ActivityItem, CreateActivityInput, U
             })
             return true;
         } catch (e) {
-            console.error(e);
-            return false;
+            throw e;
         }
     }
 
@@ -87,31 +85,30 @@ export class ActivityDao implements BaseDao<ActivityItem, CreateActivityInput, U
             take: limit
         })
         // 转换为 Activity 类型
-        const mappedActivities = activities.map(activity => ({
-            id: activity.id,
-            content: activity.content || undefined,
-            author: activity.author || undefined,
-            create_time: activity.create_time || undefined,
-            title: activity.title || undefined,
-            leader_id: activity.leader_id || undefined,
-            type: activity.type || undefined,
-            desc: activity.desc || undefined,
-            status: activity.status || undefined,
-            start_time: activity.start_time || undefined,
-            end_time: activity.end_time || undefined
-        }));
+        // const mappedActivities = activities.map(activity => ({
+        //     id: activity.id,
+        //     content: activity.content || undefined,
+        //     author: activity.author || undefined,
+        //     create_time: activity.create_time || undefined,
+        //     title: activity.title || undefined,
+        //     leader_id: activity.leader_id || undefined,
+        //     type: activity.type || undefined,
+        //     desc: activity.desc || undefined,
+        //     status: activity.status || undefined,
+        //     start_time: activity.start_time || undefined,
+        //     end_time: activity.end_time || undefined
+        // }));
 
-        if (!Array.isArray(mappedActivities)) {
+        if (!Array.isArray(activities)) {
             throw new Error('读取数据失败');
         }
         const totalCount = await this.countByCondition(condition);
         return {
-            items: mappedActivities as ActivityItem[],
+            items: activities as ActivityItem[],
             totalCount
         };
     }
 
-    // todo 完成修改逻辑
     editObj = async (updateActivity: UpdateActivityInput): Promise<boolean> => {
         const {items} = await this.findByCondition({ id: updateActivity.id, limit: DEFAULT_LIMIT, page: DEFAULT_PAGE });
         if (!Array.isArray(items)) {
@@ -126,8 +123,7 @@ export class ActivityDao implements BaseDao<ActivityItem, CreateActivityInput, U
             })
             return true;
         } catch (e) {
-            console.error(e);
-            return false;
+            throw e;
         }
     }
 
@@ -145,8 +141,7 @@ export class ActivityDao implements BaseDao<ActivityItem, CreateActivityInput, U
                 return false;
             }
         } catch (e) {
-            console.error(e);
-            return false;
+            throw e;
         }
     }
 }
