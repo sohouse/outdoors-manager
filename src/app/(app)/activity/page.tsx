@@ -1,7 +1,7 @@
 'use client'
 
 import {Card, CardContent, CardFooter, CardHeader} from "@/lib/components/ui/card.tsx";
-import {ActivityItem, ActivityStatus, ActivityTypes} from "@/lib/features/activity/shared/activity.ts";
+import {ActivityStatus, ActivityTypes, ActivityVO} from "@/lib/features/activity/shared/activity.ts";
 import dayjs from 'dayjs'
 import {FC, useCallback, useEffect, useState} from "react";
 import ActivityFilterBar from "@/lib/features/activity/client/ActivitySearch.tsx";
@@ -13,6 +13,10 @@ import {honoClient} from "@/lib/api/main.ts";
 import {ACTIVITY_ROUTES} from "@/lib/config/routes.ts";
 import {clsx} from "clsx";
 import {InferResponseType} from "hono";
+import { unwrapResponse } from "@/lib/api/response";
+import ErrorAlert from "@/lib/components/web/ErrorAlert";
+import { ApplicationException } from "@/lib/types/ApplicationException";
+import { COMMON_ERRORS } from "@/lib/types/ErrorType";
 
 // 根据活动类型获取文字颜色（在对应背景图片上显示效果好）
 const getTextColor = (type: number): string => {
@@ -45,22 +49,24 @@ const ActivityPage: FC = () => {
     const router = useRouter();
 
 
-    const [activities, setActivities] = useState<ActivityItem[]>([]);
+    const [activities, setActivities] = useState<ActivityVO[]>([]);
+    const [errorInfo, setErrorInfo] = useState<{title: number; desc: string} | null>(null);
+
 
     const fetchActivities = useCallback(async () => {
-        const res = await honoClient.api.activity['findByCondition'].$get({query: condition});
-        const {items, meta}: FindByConditionResponse = await res.json();
+        try {
+            const res = await honoClient.api.activity['findByCondition'].$get({query: condition});
+            const {items, meta}: FindByConditionResponse = await unwrapResponse<FindByConditionResponse>(res);
 
-        const normalizedItems = items?.map(item => ({
-            ...item,
-            start_time: new Date(item.start_time),
-            end_time: new Date(item.end_time),
-            create_time: new Date(item.create_time),
-        })) ?? [];
-
-        return {
-            items: normalizedItems,
-            meta
+            return {
+                items,
+                meta
+            }
+        } catch (error) {
+            const message = error instanceof ApplicationException ? error.message : '加载活动列表失败';
+            const code = error instanceof ApplicationException ? error.code : COMMON_ERRORS.UNKNOWN_ERROR.code;
+            setErrorInfo({ title: code, desc: message });
+            throw error;
         }
     }, [condition])
 
@@ -92,6 +98,8 @@ const ActivityPage: FC = () => {
     }
 
     return (
+        errorInfo ? 
+        <ErrorAlert title={errorInfo.title} desc={errorInfo.desc} /> :
         <div className="w-full flex flex-col gap-5 max-w-4xl mx-auto md:gap-5">
             <ActivityFilterBar/>
             {

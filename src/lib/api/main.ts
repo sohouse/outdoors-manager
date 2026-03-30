@@ -2,7 +2,7 @@ import {activityApi} from "@/lib/features/activity/api/activity-api.ts";
 import {OpenAPIHono} from '@hono/zod-openapi';
 import {hc} from 'hono/client';
 import {prettyJSON} from 'hono/pretty-json';
-import {openapiApp} from "./openapi.ts";
+import {openapiApp} from "../features/openapi/api/openapi.ts";
 import {authMiddleware} from "../middlewares/authMiddleware.ts";
 import {authApi} from "@/lib/features/auth/api/auth-api.ts";
 import {ApplicationException} from "@/lib/types/ApplicationException.ts";
@@ -38,15 +38,15 @@ honoService.use('*', async (c, next) => {
     if (status >= 200 && status < 300) {
         c.res = c.json(new ApplicationResponse(0, 'success', true, data));
     }
-
+    
 });
 
 // 全局错误处理
 honoService.onError((err, c) => {
     if (err instanceof ApplicationException) {
-        return c.json(new ApplicationResponse(err.code, err.message, false, err.stack));
+        return c.json(new ApplicationResponse(err.code, err.message, false, err.stack), 500);
     } else {
-        return c.json(new ApplicationResponse(UNKNOWN_ERROR.code, UNKNOWN_ERROR.message, false, err.stack));
+        return c.json(new ApplicationResponse(UNKNOWN_ERROR.code, UNKNOWN_ERROR.message, false, err.stack), 500);
     }
 })
 

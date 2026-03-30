@@ -1,4 +1,5 @@
 import { PaginateCondition } from "../../../types/pagination.ts";
+import {DEFAULT_LIMIT, DEFAULT_PAGE} from "@/lib/constants.ts";
 
 export enum ActivityTypes {
     未指定 = 0,
@@ -21,8 +22,8 @@ export enum ActivityStatus {
  * 活动检索对象
  */
 export class ActivityConditions implements PaginateCondition {
-    page: number = 1;
-    limit: number = 10;
+    page: number = DEFAULT_PAGE;
+    limit: number = DEFAULT_LIMIT;
     // 活动id
     id?: string = undefined;
     // 活动领队名称
@@ -69,6 +70,21 @@ export interface ActivityItem {
     create_time: Date;
     // 活动创建人
     author: string;
+}
+
+type DateToString<T> = {
+    [K in keyof T]: T[K] extends Date ? string : T[K]
+}
+
+export type ActivityVO = DateToString<ActivityItem>;
+
+export function toActivityVO(item: ActivityItem): ActivityVO {
+    return {
+        ...item,
+        start_time: item.start_time instanceof Date ? item.start_time.toISOString() : item.start_time,
+        end_time: item.end_time instanceof Date ? item.end_time.toISOString() : item.end_time,
+        create_time: item.create_time instanceof Date ? item.create_time.toISOString() : item.create_time,
+    }
 }
 
 /**

@@ -39,5 +39,5 @@ export interface PaginateMeta {
  */
 export interface PageResult<T>{
   meta: PaginateMeta;
-  items?: T[]
+  items: T[]
 }

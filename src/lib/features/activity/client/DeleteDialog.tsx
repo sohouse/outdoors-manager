@@ -8,7 +8,7 @@ const DeleteDialog: FC<{ id: string, title: string, reloadActivity: () => void }
 
     const deleteActivity = async (event:React.MouseEvent) => {
         stopPopup(event);
-        const actionResult = await honoClient.api.activity['deleteById'].$post({query: id});
+        const actionResult = await honoClient.api.activity['deleteById'].$delete({query: id});
 
         if (actionResult) {
             reloadActivity()

@@ -24,9 +24,9 @@ import {
 import {Textarea} from '@/lib/components/ui/textarea.tsx'
 import {useActivityStore} from '@/lib/features/activity/shared/activity-store.ts'
 import {
-    ActivityItem,
     ActivityStatus,
     ActivityTypes,
+    ActivityVO,
     UpdateActivityInput
 } from '@/lib/features/activity/shared/activity.ts'
 import {zodResolver} from '@hookform/resolvers/zod'
@@ -35,7 +35,6 @@ import {useRouter} from 'next/navigation'
 import {use, useCallback, useEffect, useState} from 'react'
 import {Controller, useForm} from 'react-hook-form'
 import z from 'zod'
-import {COMMON_ROUTES} from "@/lib/config/routes.ts";
 import {generateMock} from "@anatine/zod-mock";
 
 export default function ActivityDetailModal({
@@ -45,7 +44,7 @@ export default function ActivityDetailModal({
 }) {
     const {id} = use(params)
     const router = useRouter()
-    const [activity, setActivity] = useState<ActivityItem>({} as ActivityItem);
+    const [activity, setActivity] = useState<ActivityVO>({} as ActivityVO);
     const [isEdit, setEdit] = useState(false);
 
     const {setPageRefresh} = useActivityStore();
@@ -58,17 +57,13 @@ export default function ActivityDetailModal({
 
     const fetchActivity = useCallback(async (id: string) => {
         const res = await honoClient.api.activity['getObjById'].$get({id: id});
-        if (res.status === 401) {
-            alert({message: '用户未登录'})
-            router.push(COMMON_ROUTES.LOGIN)
-        }
-        return await res.json() as { result: ActivityItem };
+        return await res.json();
 
-    }, [router])
+    }, [])
 
     useEffect(() => {
         const load = async (id: string) => {
-            const {result: fetchData} = await fetchActivity(id);
+            const fetchData = await fetchActivity(id);
 
             setActivity(fetchData);
             form.reset({
@@ -97,8 +92,8 @@ export default function ActivityDetailModal({
                 end_time: data.end_time ? new Date(data.end_time) : undefined
             };
 
-            const res = await honoClient.api.activity['updateObj'].$post({json: editActivity});
-            const {result: success} = await res.json() as { result: boolean };
+            const res = await honoClient.api.activity['updateObj'].$put({json: editActivity});
+            const success = await res.json();
 
             if (success) {
                 // 关闭模态框（触发onOpenChange）

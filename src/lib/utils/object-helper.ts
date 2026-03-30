@@ -1,10 +1,13 @@
+import {ApplicationException} from "@/lib/types/ApplicationException.ts";
+import {COMMON_ERRORS} from "@/lib/types/ErrorType.ts";
+
 type Constructor<T> = new () => T;
 
 export function simpleObjCover<T extends object>(
     fromObj: Record<string, unknown>,
     TargetClass: Constructor<T>,
 ): T {
-    if (!fromObj || typeof fromObj !== 'object') throw new Error('待转换对象空');
+    if (!fromObj || typeof fromObj !== 'object') throw new ApplicationException(COMMON_ERRORS.INVALID_PARAMS);
 
     const targetObj = new TargetClass() as T & Record<keyof T, unknown>;
     const resultObj = new TargetClass() as T & Record<keyof T, unknown>;
