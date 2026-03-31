@@ -43,6 +43,7 @@ honoService.use('*', async (c, next) => {
 
 // 全局错误处理
 honoService.onError((err, c) => {
+    console.error(err.stack)
     if (err instanceof ApplicationException) {
         return c.json(new ApplicationResponse(err.code, err.message, false, err.stack), 500);
     } else {
