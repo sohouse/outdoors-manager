@@ -56,7 +56,7 @@ const ActivityPage: FC = () => {
     const fetchActivities = useCallback(async () => {
         try {
             const res = await honoClient.api.activity['findByCondition'].$get({query: condition});
-            const {items, meta}: FindByConditionResponse = await unwrapResponse<FindByConditionResponse>(res);
+            const {items, meta} = await unwrapResponse<FindByConditionResponse>(res);
 
             return {
                 items,

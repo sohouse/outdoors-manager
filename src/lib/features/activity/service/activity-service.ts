@@ -34,7 +34,8 @@ export async function findByCondition<ConditionType extends PaginateCondition>(c
 }
 
 export async function getObjById(id: string): Promise<ActivityItem> {
-    const {items} = await activityDao.findByCondition({id: id} as ActivityConditions);
+    const condition = {id: id} as ActivityConditions;
+    const {items} = await activityDao.findByCondition(condition);
     const [item] = items;
     if (!item) {
         throw new ApplicationException(COMMON_ERRORS.NOT_FOUND);
