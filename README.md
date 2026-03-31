@@ -1,12 +1,12 @@
 # Outdoors Manager
 
-一个面向户外活动场景的活动管理平台原型项目，聚焦活动发布、筛选查询、详情查看、用户注册登录与基础权限控制等核心流程。项目基于 Next.js App Router 构建，结合 Hono、Prisma、PostgreSQL 与 Better Auth，目标是实现一个支撑前端体验的后端工程化的全栈项目。
+一个面向户外活动场景的活动管理平台原型项目，聚焦活动管理、筛选查询、详情查看、用户注册登录与基础权限控制等核心流程。项目基于 Next.js App Router 构建，结合 Hono、Prisma、PostgreSQL 与 Better Auth，实现前后端一体化的全栈应用。
 
 ## Overview
 
-这个项目的核心目标，是围绕“户外活动管理”场景，构建一个具备实际业务雏形的全栈应用。当前已实现活动列表、详情查看、条件筛选、基础编辑能力，以及用户注册登录和接口鉴权等模块。
+这个项目围绕“户外活动管理”场景展开，当前已完成活动列表、详情查看、条件筛选、活动编辑/删除、用户注册登录和接口鉴权等基础能力。
 
-相比单纯的页面展示项目，这个项目更强调完整链路：从前端页面、服务层、接口层，到数据库访问、认证授权与文档化接口定义，尽量形成一个可运行、可扩展、可继续演进的工程结构。
+整体结构采用 Next.js 页面层、Hono API 层与 Prisma 数据层组合的方式，覆盖页面展示、接口访问、会话认证和数据库读写等主要链路。
 
 ## Demo
 
@@ -18,15 +18,15 @@
 
 ## Why This Project
 
-这个项目来源于一个比较明确的业务想法：户外活动管理通常不只是“发一条活动信息”这么简单，背后会涉及活动组织、用户参与、时间安排、领队与资源分配等一整套流程。
+这个项目来源于户外活动管理这一类相对贴近真实业务的场景：除了活动信息展示本身，还会涉及活动组织、用户参与、时间安排、领队与资源分配等后续扩展需求。
 
-我选择以这个方向做项目，主要有三个原因：
+当前版本以活动管理主线为核心，主要覆盖以下方向：
 
 1. 它比博客、待办清单这类经典练手项目更接近真实业务场景。
 2. 它天然适合拆分出多角色、多模块、多状态流转等工程问题，能体现系统设计能力。
 3. 它可以覆盖我希望重点训练的全栈能力，包括前端交互、接口设计、数据库建模、认证鉴权和项目工程化。
 
-当前版本先聚焦“活动管理”这条主线，优先完成活动展示与用户认证等关键链路，后续再逐步扩展订单、车辆、领队、排期等模块。
+后续可以在现有基础上继续扩展订单、车辆、领队、排期等业务模块。
 
 ## Features
 
@@ -42,7 +42,6 @@
 - 基于 Prisma 的数据库访问层封装
 - 基于 Hono 的 API 路由组织
 - OpenAPI 文档的初步接入
-- MDX 能力与基础内容渲染支持
 - 基础主题切换与部分通用 UI 组件抽象
 
 计划中的功能包括：
@@ -81,7 +80,6 @@
 
 其他能力：
 
-- MDX
 - Day.js
 - Faker（用于测试数据生成）
 
@@ -109,15 +107,15 @@
 src/
   app/                    Next.js 页面路由与布局
   lib/
-    api/                  Hono API 路由与 OpenAPI 定义
-    auth/                 认证相关逻辑
+    api/                  Hono API 主入口与客户端定义
+    auth.ts               Better Auth 配置
     components/           UI 组件与业务组件
     database/             Prisma 客户端、DAO、schema、seed
-    service/              业务服务层
-    stores/               前端状态管理
+    features/             按功能划分的业务模块
+    middlewares/          Hono 中间件
     types/                类型定义
     utils/                通用工具函数
-    zod-check/            表单与接口校验
+    config/               路由与基础配置
 prisma/                   Prisma 相关配置（如保留）
 public/                   静态资源
 ``` 
@@ -127,16 +125,16 @@ pnpm install
 ### 2. 配置环境变量
 在项目根目录创建 .env 文件，并填写必要配置，例如：
 DATABASE_URL=your_database_url
-NEXT_PUBLIC_BASE_URL=http://localhost:3000
+DIRECT_URL=your_direct_database_url
 BETTER_AUTH_SECRET=your_secret
 BETTER_AUTH_URL=http://localhost:3000
-具体变量名请以项目实际代码为准，建议后续补充 .env.example。
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
 ### 3. 初始化数据库
 根据当前项目脚本配置，可以使用 Prisma 进行迁移、生成与种子数据初始化。
 常用命令：
-pnpm run dbm
-pnpm run dbs
-pnpm run dbg
+pnpm db:gen
+pnpm db:push
+pnpm db:seed
 ### 4. 启动开发环境
 pnpm dev
 启动后访问：
@@ -148,10 +146,13 @@ http://localhost:3000
 - pnpm build：构建生产包
 - pnpm start：启动生产环境
 - pnpm lint：运行 ESLint 检查
-- pnpm run dbp：同步数据库结构
-- pnpm run dbm：执行 Prisma migrate dev
-- pnpm run dbs：执行种子数据
-- pnpm run dbg：生成 Prisma Client
+- pnpm type：执行 TypeScript 类型检查
+- pnpm test:unit：执行单元测试
+- pnpm db:gen：生成 Prisma Client
+- pnpm db:push：同步数据库结构
+- pnpm db:dev：执行 Prisma migrate dev
+- pnpm db:reset：重置数据库
+- pnpm db:seed：执行种子数据
 ## API Documentation
 项目已接入 OpenAPI 相关能力，当前可通过以下地址查看接口文档：
 ``` test
@@ -159,15 +160,15 @@ http://localhost:3000
 ```
 
 ## Challenges and Trade-offs
-这个项目在实现过程中，主要遇到和思考过这些问题：
+这个项目在实现过程中，主要关注这些问题：
 1. 如何在 Next.js 项目中组织一个清晰的 API 分层，而不是把所有逻辑都直接写在页面里。
 2. 如何在快速推进业务功能的同时，尽量保持类型安全和可维护性。
 3. 如何让认证、接口保护、数据库访问和前端调用之间形成比较自然的边界。
 4. 如何在“先做功能”和“做工程化”之间平衡节奏。
 
-当前版本的取舍是：先完成活动管理与认证的主流程，再逐步补齐测试、CI、部署文档和更完整的业务模块。
+当前版本先完成活动管理与认证的主流程，再逐步补齐测试、CI、部署文档和更完整的业务模块。
 ## What I Learned
-通过这个项目，我重点锻炼了以下工程能力：
+这个项目当前主要体现了以下实践方向：
 - 使用 Next.js App Router 组织页面、布局与路由结构
 - 在同一个项目中整合前端页面、API 路由与数据库访问
 - 使用 Prisma 进行数据建模、查询与迁移管理
@@ -175,9 +176,7 @@ http://localhost:3000
 - 使用 Hono 组织接口路由，并尝试接入 OpenAPI 文档
 - 使用 React Hook Form + Zod 处理表单和校验逻辑
 - 尝试通过 DAO / Service 分层提升代码结构清晰度
-- 逐步意识到工程化细节的重要性，例如类型边界、错误处理、脚本设计、文档与可交付性
-
-更重要的是，这个项目让我从“功能实现”进一步转向“系统设计与工程交付”的思考方式：不仅要让代码跑起来，还要让项目可以被别人理解、运行、扩展和评估。
+- 类型边界、错误处理、脚本设计与文档整理
 ## Roadmap
 接下来计划继续完善以下内容：
 - 完善活动创建、编辑、删除的完整闭环
@@ -190,7 +189,6 @@ http://localhost:3000
 - 将 README、注释和界面文案进一步英文国际化
 ## Known Issues
 当前项目仍有一些待完善的部分：
-- README 与项目实际功能的同步需要继续完善
 - 部分接口文档仍是演示性质，尚未完全与真实业务逻辑对齐
 - 自动化测试与 CI 仍未补齐
 - 部分代码命名、注释与工程细节仍需整理

@@ -29,8 +29,56 @@ model Activity {
   status      Int      @default(0)
   start_time  DateTime @default(now())
   end_time    DateTime @default(now())
+  creator_id  String?
 
   @@map("activity")
+}
+
+// Role model
+model Role {
+  id String @id @default(uuid())
+  name String 
+  type String
+  create_time DateTime @default(now())
+  update_time DateTime @default(now())
+}
+
+// User_Role model
+model User_Role {
+  id String @id @default(uuid())
+  user_id String
+  Role_id String
+  create_time DateTime @default(now())
+  update_time DateTime @default(now())
+}
+
+model Permission {
+  id String @id @default(uuid())
+  key String
+  name String
+  create_time DateTime @default(now())
+  update_time DateTime @default(now())
+}
+
+model Role_Permission {
+  id String @id @default(uuid())
+  Role_id String
+  Permission_id String
+  create_time DateTime @default(now())
+  update_time DateTime @default(now())
+}
+
+model Audit_Log {
+  id String @id @default(uuid())
+  operator_id String
+  action String
+  resource_type String
+  resource_id String
+  before_json String
+  after_json String
+  success Boolean
+  error_message String
+  create_time DateTime @default(now())
 }
 
 model User {
