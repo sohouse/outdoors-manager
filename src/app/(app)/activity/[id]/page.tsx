@@ -1,9 +1,8 @@
 import { ActivityStatus, ActivityTypes, ActivityVO } from '@/lib/features/activity/shared/activity.ts'
 import dayjs from 'dayjs'
 import { notFound } from 'next/navigation'
-import { honoClient } from '@/lib/api/main.ts'
-import { unwrapResponse } from '@/lib/api/response'
 import ErrorAlert from '@/lib/components/web/ErrorAlert'
+import { fetchActivityDetail } from '@/lib/features/activity/service/fetch-activity-detail'
 import { ApplicationException } from '@/lib/types/ApplicationException'
 import { COMMON_ERRORS } from '@/lib/types/ErrorType'
 
@@ -14,21 +13,30 @@ export default async function ActivityDetailPage({
     params: Promise<{ id: string }>
 }) {
     const { id } = await params
-    let activity = {} as ActivityVO;
+    let activity: ActivityVO | null = null
+    let errorInfo: { title: number; desc: string } | null = null
+
     try {
-        const res = await honoClient.api.activity['getObjById'].$get({query: { id: id} });
-        activity = await unwrapResponse(res);
+        activity = await fetchActivityDetail(id)
         if (!activity) notFound()
     } catch (error) {
-        const message = error instanceof ApplicationException ? error.message : '活动查询失败';
-        const code = error instanceof ApplicationException ? error.code : COMMON_ERRORS.UNKNOWN_ERROR.code;
-        return <ErrorAlert title={code} desc={message} />
+        const message = error instanceof ApplicationException ? error.message : '活动查询失败'
+        const code = error instanceof ApplicationException ? error.code : COMMON_ERRORS.UNKNOWN_ERROR.code
+        errorInfo = { title: code, desc: message }
+    }
+
+    if (errorInfo) {
+        return <ErrorAlert title={errorInfo.title} desc={errorInfo.desc} />
+    }
+
+    if (!activity) {
+        return <ErrorAlert title={COMMON_ERRORS.UNKNOWN_ERROR.code} desc='活动查询失败' />
     }
 
     return (
-        <div className="max-w-2xl mx-auto p-6 space-y-4">
-            <h1 className="text-2xl font-semibold">{activity.title}</h1>
-            <p className="text-muted-foreground">
+        <div className='max-w-2xl mx-auto p-6 space-y-4'>
+            <h1 className='text-2xl font-semibold'>{activity.title}</h1>
+            <p className='text-muted-foreground'>
                 {dayjs(activity.start_time).format('YYYY-MM-DD HH:mm')} -{' '}
                 {dayjs(activity.end_time).format('YYYY-MM-DD HH:mm')}
             </p>
