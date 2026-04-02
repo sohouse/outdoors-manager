@@ -31,7 +31,7 @@ import {
     SelectValue,
 } from '@/lib/components/ui/select.tsx'
 import { Textarea } from '@/lib/components/ui/textarea.tsx'
-import { editActivityCheck } from '@/lib/features/activity/check/activity-check.ts'
+import { editActivityCheck } from '@/lib/features/activity/shared/activity-check.ts'
 import { useActivityStore } from '@/lib/features/activity/shared/activity-store.ts'
 import {
     ActivityStatus,
@@ -39,8 +39,12 @@ import {
     ActivityVO,
     UpdateActivityInput,
 } from '@/lib/features/activity/shared/activity.ts'
-import { ApplicationException } from '@/lib/types/ApplicationException'
-import { COMMON_ERRORS } from '@/lib/types/ErrorType'
+import {
+    canManageOwnedResource,
+    UserRolePermission,
+} from '@/lib/features/role-permission/shared/role-permission.ts'
+import { ApplicationException } from '@/lib/types/application-exception.ts'
+import { COMMON_ERRORS } from '@/lib/types/error-type.ts'
 
 type ActivityUpdateResult = {
     success: boolean
@@ -52,6 +56,7 @@ type EditActivityFormValues = z.output<typeof editActivityCheck>
 
 type ActivityDetailModalClientProps = {
     activity: ActivityVO
+    authz: UserRolePermission
 }
 
 const toFormValues = (activity: ActivityVO): EditActivityFormValues => ({
@@ -63,6 +68,7 @@ const toFormValues = (activity: ActivityVO): EditActivityFormValues => ({
 
 export default function ActivityDetailModalClient({
     activity: initialActivity,
+    authz,
 }: ActivityDetailModalClientProps) {
     const router = useRouter()
     const [activity] = useState<ActivityVO>(initialActivity)
@@ -70,6 +76,18 @@ export default function ActivityDetailModalClient({
     const [errorInfo, setErrorInfo] = useState<{ title: number; desc: string } | null>(null)
 
     const { setPageRefresh } = useActivityStore()
+    const canEdit = canManageOwnedResource({
+        permissions: authz.permissions,
+        ownPermission: 'activity:update.own',
+        anyPermission: 'activity:update.any',
+        ownerId: initialActivity.creator_id,
+        ownerName: initialActivity.author,
+        user: {
+            id: authz.userId,
+            name: authz.name,
+            username: authz.username,
+        },
+    })
 
     const form = useForm<EditActivityFormInput, undefined, EditActivityFormValues>({
         resolver: zodResolver(editActivityCheck),
@@ -110,13 +128,13 @@ export default function ActivityDetailModalClient({
     return errorInfo ? (
         <ErrorAlert title={errorInfo.title} desc={errorInfo.desc} />
     ) : (
-        <Dialog open={true} onOpenChange={onOpenChange}>
+            <Dialog open={true} onOpenChange={onOpenChange}>
             <DialogContent className='w-full !max-w-4xl'>
                 <DialogHeader>
                     <DialogTitle>
-                        {activity.title ? (
+                        {canEdit ? (
                             <Button onClick={changeEditMode}>{isEdit ? '查看' : '编辑'}</Button>
-                        ) : '加载中...'}
+                        ) : activity.title || '加载中...'}
                     </DialogTitle>
                 </DialogHeader>
                 <form
@@ -299,7 +317,7 @@ export default function ActivityDetailModalClient({
                         />
                     </FieldGroup>
                 </form>
-                {isEdit ? (
+                {isEdit && canEdit ? (
                     <DialogFooter>
                         <DialogClose asChild>
                             <Button variant='outline'>取消</Button>

@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import '@/styles/globals.css'
 import { Metadata } from 'next'
-import { ThemeProvider } from '@/lib/components/ThemeProvider.tsx';
+import { ThemeProvider } from '@/lib/components/theme-provider.tsx';
 import { SidebarProvider } from '@/lib/components/ui/sidebar.tsx';
 import AppSidebar from '@/lib/components/web/Sidebar.tsx';
 import Header from '@/lib/components/web/Header.tsx';

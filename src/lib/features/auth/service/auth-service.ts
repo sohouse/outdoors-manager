@@ -1,8 +1,8 @@
 import {auth} from "../../../auth-client.ts";
 import {logInCheck, signUpCheck} from "@/lib/features/auth/check/auth-check.ts";
 import z from "zod";
-import {ApplicationException} from "@/lib/types/ApplicationException.ts";
-import {LOGIN_ERROR, USER_ALREADY_EXISTS} from "@/lib/types/ErrorType.ts";
+import {ApplicationException} from "@/lib/types/application-exception.ts";
+import {LOGIN_ERROR, USER_ALREADY_EXISTS} from "@/lib/types/error-type.ts";
 
 export const signUp = async (formData: z.infer<typeof signUpCheck>): Promise<boolean> => {
     const loginKey = formData.name;

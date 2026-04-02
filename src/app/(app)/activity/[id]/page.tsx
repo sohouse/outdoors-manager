@@ -3,8 +3,8 @@ import dayjs from 'dayjs'
 import { notFound } from 'next/navigation'
 import ErrorAlert from '@/lib/components/web/ErrorAlert'
 import { fetchActivityDetail } from '@/lib/features/activity/service/fetch-activity-detail'
-import { ApplicationException } from '@/lib/types/ApplicationException'
-import { COMMON_ERRORS } from '@/lib/types/ErrorType'
+import { ApplicationException } from '@/lib/types/application-exception.ts'
+import { COMMON_ERRORS } from '@/lib/types/error-type.ts'
 
 // 而没有在并行路由中的page页面则处理直接的activity/[id]路由访问
 export default async function ActivityDetailPage({

@@ -1,18 +1,20 @@
-import {activityApi} from "@/lib/features/activity/api/activity-api.ts";
-import {OpenAPIHono} from '@hono/zod-openapi';
-import {hc} from 'hono/client';
-import {prettyJSON} from 'hono/pretty-json';
-import {openapiApp} from "../features/openapi/api/openapi.ts";
-import {authMiddleware} from "../middlewares/authMiddleware.ts";
-import {authApi} from "@/lib/features/auth/api/auth-api.ts";
-import {ApplicationException} from "@/lib/types/ApplicationException.ts";
-import {UNKNOWN_ERROR} from '@/lib/types/ErrorType.ts'
-import {ApplicationResponse} from "@/lib/types/ApplicationResponse.ts";
+import { activityApi } from "@/lib/features/activity/api/activity-api.ts";
+import { OpenAPIHono } from '@hono/zod-openapi';
+import { hc } from 'hono/client';
+import { prettyJSON } from 'hono/pretty-json';
+import { openapiApp } from "../features/openapi/api/openapi.ts";
+import { authMiddleware } from "../middlewares/auth-middleware.ts";
+import { authApi } from "@/lib/features/auth/api/auth-api.ts";
+import { ApplicationException } from "@/lib/types/application-exception.ts";
+import { UNKNOWN_ERROR } from '@/lib/types/error-type.ts'
+import { ApplicationResponse } from "@/lib/types/application-response.ts";
+import { rolePermissionApi } from "../features/role-permission/api/role-permission-api.ts";
 
 const honoService = new OpenAPIHono().basePath('/api');
 // 中间件注册
 honoService.use(prettyJSON());
 honoService.use('/activity/*', authMiddleware);
+honoService.use('/rolePermission/*', authMiddleware);
 
 // 环绕拦截
 honoService.use('*', async (c, next) => {
@@ -38,32 +40,37 @@ honoService.use('*', async (c, next) => {
     if (status >= 200 && status < 300) {
         c.res = c.json(new ApplicationResponse(0, 'success', true, data));
     }
-    
+
 });
 
 // 全局错误处理
 honoService.onError((err, c) => {
     console.error(err.stack)
     if (err instanceof ApplicationException) {
-        return c.json(new ApplicationResponse(err.code, err.message, false, err.stack), 500);
+        const status = err.code === 2003 ? 401
+            : err.code === 2004 ? 403
+                : err.code === 1002 ? 400
+                    : err.code === 1003 ? 404
+                        : 500;
+
+        return c.json(new ApplicationResponse(err.code, err.message, false, err.stack), status);
     } else {
         return c.json(new ApplicationResponse(UNKNOWN_ERROR.code, UNKNOWN_ERROR.message, false, err.stack), 500);
     }
 })
 
-// get请求注册
-honoService.get('/', (c) => c.text('main api'));
-
 // 404请求注册
-honoService.notFound((c) => c.json({message: 'not found', ok: false}, 404));
+honoService.notFound((c) => c.json({ message: 'not found', ok: false }, 404));
 
 // 挂载子路由
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const routes = honoService.route('activity', activityApi)
+const routes = honoService
+    .route('/activity', activityApi)
     .route('/openapi', openapiApp)
-    .route('/auth', authApi);
+    .route('/auth', authApi)
+    .route('/rolePermission', rolePermissionApi);
 
 type Routes = typeof routes;
 const honoClient = hc<Routes>(process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000');
 
-export {honoService, honoClient};
+export { honoService, honoClient };

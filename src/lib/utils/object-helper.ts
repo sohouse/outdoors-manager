@@ -1,5 +1,5 @@
-import {ApplicationException} from "@/lib/types/ApplicationException.ts";
-import {COMMON_ERRORS} from "@/lib/types/ErrorType.ts";
+import {ApplicationException} from "@/lib/types/application-exception.ts";
+import {COMMON_ERRORS} from "@/lib/types/error-type.ts";
 
 type Constructor<T> = new () => T;
 

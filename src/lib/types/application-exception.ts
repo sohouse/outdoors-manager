@@ -1,5 +1,5 @@
 
-import type { ErrorType } from './ErrorType.ts';
+import type { ErrorType } from './error-type.ts';
 
 /**
  * 应用异常类

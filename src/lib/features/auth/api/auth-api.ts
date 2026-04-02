@@ -1,8 +1,8 @@
 import {Hono} from "hono";
 import {logInMethod, logOut, signUp} from "@/lib/features/auth/service/auth-service.ts";
 import {logInCheck, signUpCheck} from "@/lib/features/auth/check/auth-check.ts";
-import {ApplicationException} from "@/lib/types/ApplicationException.ts";
-import {LOGIN_ERROR, LOGOUT_ERROR} from "@/lib/types/ErrorType.ts";
+import {ApplicationException} from "@/lib/types/application-exception.ts";
+import {LOGIN_ERROR, LOGOUT_ERROR} from "@/lib/types/error-type.ts";
 
 const app = new Hono();
 export const authApi = app

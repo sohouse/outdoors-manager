@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 
-import { editActivityCheck } from './activity-check.ts';
+import { editActivityCheck } from '../shared/activity-check.ts';
 import { ActivityStatus, ActivityTypes } from '../shared/activity.ts';
 
 test('editActivityCheck should parse valid activity payload', () => {

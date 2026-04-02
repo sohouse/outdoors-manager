@@ -4,8 +4,8 @@ import { AlertDialogHeader, AlertDialogFooter, AlertDialog, AlertDialogTrigger, 
 import { Button } from "../../../components/ui/button.tsx"
 import { honoClient } from "@/lib/api/main.ts";
 import ErrorAlert from "@/lib/components/web/ErrorAlert.tsx";
-import { ApplicationException } from "@/lib/types/ApplicationException.ts";
-import { COMMON_ERRORS } from "@/lib/types/ErrorType.ts";
+import { ApplicationException } from "@/lib/types/application-exception.ts";
+import { COMMON_ERRORS } from "@/lib/types/error-type.ts";
 import { unwrapResponse } from "@/lib/api/response.ts";
 
 const DeleteDialog: FC<{ id: string, title: string, reloadActivity: () => void }> = ({ id, title, reloadActivity }) => {

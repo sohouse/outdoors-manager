@@ -13,8 +13,8 @@ import { ACTIVITY_ROUTES } from "@/lib/config/routes.ts";
 import { honoClient } from "@/lib/api/main.ts";
 import { useState } from "react"
 import ErrorAlert from "@/lib/components/web/ErrorAlert"
-import { ApplicationException } from "@/lib/types/ApplicationException"
-import { COMMON_ERRORS } from "@/lib/types/ErrorType"
+import { ApplicationException } from "@/lib/types/application-exception.ts"
+import { COMMON_ERRORS } from "@/lib/types/error-type.ts"
 import { unwrapResponse } from "@/lib/api/response"
 
 const SignUp = () => {

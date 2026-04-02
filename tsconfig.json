@@ -1,10 +1,5 @@
 {
   "compilerOptions": {
-    // debug config
-    "sourceMap": true,
-    "outDir": "./dist",
-    "rootDir": "./src",
-    // debug config
     "target": "ES2017",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -36,9 +31,13 @@
     ".next/types/**/*.ts",
     ".next/dev/types/**/*.ts",
     "**/*.mts",
-    "src/lib/types/**/*.ts"
-,
-    "src/lib/mdxs/page.tsx"
-, "src/lib/auth.ts", "src/lib/utils/nodemailer.cjs"  ],
-  "exclude": ["node_modules"]
+    "src/lib/types/**/*.ts",
+    "src/lib/mdxs/page.tsx", 
+    "src/lib/auth.ts", 
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.cjs",
+    "**/*.js"
+  ]
 }

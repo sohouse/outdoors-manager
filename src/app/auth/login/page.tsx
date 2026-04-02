@@ -12,8 +12,8 @@ import Link from "next/link";
 import { COMMON_ROUTES } from "@/lib/config/routes.ts";
 import { honoClient } from "@/lib/api/main.ts";
 import { useState } from "react"
-import { ApplicationException } from "@/lib/types/ApplicationException"
-import { COMMON_ERRORS } from "@/lib/types/ErrorType"
+import { ApplicationException } from "@/lib/types/application-exception.ts"
+import { COMMON_ERRORS } from "@/lib/types/error-type.ts"
 import ErrorAlert from "@/lib/components/web/ErrorAlert"
 import { unwrapResponse } from "@/lib/api/response"
 

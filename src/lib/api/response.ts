@@ -1,7 +1,7 @@
 import type { ClientResponse } from 'hono/client'
-import { ApplicationResponse } from '../types/ApplicationResponse'
-import { ApplicationException } from '../types/ApplicationException'
-import { createErrorType } from '../types/ErrorType'
+import { ApplicationResponse } from '../types/application-response.ts'
+import { ApplicationException } from '../types/application-exception.ts'
+import { createErrorType } from '../types/error-type.ts'
 
 export async function unwrapResponse<T>(
     res: ClientResponse<unknown>

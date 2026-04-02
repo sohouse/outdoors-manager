@@ -4,10 +4,10 @@ import {Card, CardContent, CardFooter, CardHeader} from "@/lib/components/ui/car
 import {ActivityStatus, ActivityTypes, ActivityVO} from "@/lib/features/activity/shared/activity.ts";
 import dayjs from 'dayjs'
 import {FC, useCallback, useEffect, useState} from "react";
-import ActivityFilterBar from "@/lib/features/activity/client/ActivitySearch.tsx";
+import ActivityFilterBar from "@/lib/features/activity/client/activity-search.tsx";
 import PageProvider from "@/lib/components/web/PageProvider.tsx";
 import {useActivityStore} from "@/lib/features/activity/shared/activity-store.ts";
-import DeleteDialog from "@/lib/features/activity/client/DeleteDialog.tsx";
+import DeleteDialog from "@/lib/features/activity/client/delete-dialog.tsx";
 import {useRouter} from "next/navigation";
 import {honoClient} from "@/lib/api/main.ts";
 import {ACTIVITY_ROUTES} from "@/lib/config/routes.ts";
@@ -15,8 +15,12 @@ import {clsx} from "clsx";
 import {InferResponseType} from "hono";
 import { unwrapResponse } from "@/lib/api/response";
 import ErrorAlert from "@/lib/components/web/ErrorAlert";
-import { ApplicationException } from "@/lib/types/ApplicationException";
-import { COMMON_ERRORS } from "@/lib/types/ErrorType";
+import { ApplicationException } from "@/lib/types/application-exception.ts";
+import { COMMON_ERRORS } from "@/lib/types/error-type.ts";
+import {
+    canManageOwnedResource,
+    UserRolePermission,
+} from "@/lib/features/role-permission/shared/role-permission.ts";
 
 // 根据活动类型获取文字颜色（在对应背景图片上显示效果好）
 const getTextColor = (type: number): string => {
@@ -50,6 +54,7 @@ const ActivityPage: FC = () => {
 
 
     const [activities, setActivities] = useState<ActivityVO[]>([]);
+    const [authz, setAuthz] = useState<UserRolePermission | null>(null);
     const [errorInfo, setErrorInfo] = useState<{title: number; desc: string} | null>(null);
 
 
@@ -91,10 +96,57 @@ const ActivityPage: FC = () => {
         }
     }, [fetchActivities, setPaginateMeta, refreshFlag])
 
+    useEffect(() => {
+        let cancelled = false;
+
+        const loadAuthz = async () => {
+            try {
+                const res = await honoClient.api.rolePermission.currentUserRolePermission.$get();
+                const result = await unwrapResponse<UserRolePermission>(res);
+
+                if (!cancelled) {
+                    setAuthz(result);
+                }
+            } catch (error) {
+                const message = error instanceof ApplicationException ? error.message : '权限信息加载失败';
+                const code = error instanceof ApplicationException ? error.code : COMMON_ERRORS.UNKNOWN_ERROR.code;
+
+                if (!cancelled) {
+                    setErrorInfo({ title: code, desc: message });
+                }
+            }
+        };
+
+        void loadAuthz();
+
+        return () => {
+            cancelled = true;
+        };
+    }, []);
+
     // 路由被(..)activity拦截，到了并行modal路由下的activity/[id]/page.tsx中，
     // 展示page中的Dialog模态框
     const goActivityDetail = (id: string) => {
         router.push(ACTIVITY_ROUTES.GET_BY_ID(id))
+    }
+
+    const canDeleteActivity = (item: ActivityVO): boolean => {
+        if (!authz) {
+            return false;
+        }
+
+        return canManageOwnedResource({
+            permissions: authz.permissions,
+            ownPermission: 'activity:delete.own',
+            anyPermission: 'activity:delete.any',
+            ownerId: item.creator_id,
+            ownerName: item.author,
+            user: {
+                id: authz.userId,
+                name: authz.name,
+                username: authz.username,
+            },
+        });
     }
 
     return (
@@ -146,11 +198,13 @@ const ActivityPage: FC = () => {
                                 className={`${getTextColor(item.type)} ${getDarkTextColor(item.type)} opacity-90 inline`}>
                                 {item.leader_name} - {dayjs(item.start_time).format('YYYY-MM-DD HH:mm:ss')}
                             </div>
-                            <DeleteDialog
-                                id={item.id}
-                                title={item.title}
-                                reloadActivity={reloadActivity}
-                            />
+                            {canDeleteActivity(item) ? (
+                                <DeleteDialog
+                                    id={item.id}
+                                    title={item.title}
+                                    reloadActivity={reloadActivity}
+                                />
+                            ) : null}
                         </CardFooter>
                     </Card>
                 ))

@@ -1,5 +1,5 @@
 import { PaginateCondition } from "../../../types/pagination.ts";
-import {DEFAULT_LIMIT, DEFAULT_PAGE} from "@/lib/constants.ts";
+import {DEFAULT_LIMIT, DEFAULT_PAGE} from "../../../../lib/constants.ts";
 
 export enum ActivityTypes {
     未指定 = 0,
@@ -70,6 +70,8 @@ export interface ActivityItem {
     create_time: Date;
     // 活动创建人
     author: string;
+    // 活动创建者id
+    creator_id?: string;
 }
 
 type DateToString<T> = {

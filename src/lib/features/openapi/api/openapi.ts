@@ -1,5 +1,5 @@
 import { createRoute, OpenAPIHono, z } from "@hono/zod-openapi";
-import {listActivityCheck} from "@/lib/features/activity/check/activity-check.ts";
+import {listActivityCheck} from "@/lib/features/activity/shared/activity-check.ts";
 import {generateMock} from "@anatine/zod-mock";
 
 

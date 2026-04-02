@@ -4,7 +4,7 @@ import { ArrowLeft } from "lucide-react"
 import Link from "next/link"
 import { MouseEventHandler, ReactNode, useCallback, useEffect, useState } from "react"
 import '@/styles/globals.css'
-import { ThemeProvider } from "@/lib/components/ThemeProvider.tsx"
+import { ThemeProvider } from "@/lib/components/theme-provider.tsx"
 import { useRouter } from "next/navigation"
 
 const AuthLayout = ({ children }: { children: ReactNode }) => {

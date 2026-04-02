@@ -1,5 +1,5 @@
 import { ActivityDao } from "../features/activity/dao/activity-dao.ts";
-import { BaseDao } from "./BaseDao.tsx";
+import { BaseDao } from "./base-dao.tsx";
 import { ActivityItem, CreateActivityInput, UpdateActivityInput } from "../features/activity/shared/activity.ts";
 import { PaginateCondition } from "../types/pagination.ts";
 

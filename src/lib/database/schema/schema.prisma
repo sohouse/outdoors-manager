@@ -36,36 +36,58 @@ model Activity {
 
 // Role model
 model Role {
-  id String @id @default(uuid())
-  name String 
-  type String
-  create_time DateTime @default(now())
-  update_time DateTime @default(now())
+  id               String           @id @default(uuid())
+  name             String
+  type             String
+  create_time      DateTime         @default(now())
+  update_time      DateTime         @default(now()) @updatedAt
+  userRoles        UserRole[]
+  rolePermissions  RolePermission[]
+
+  @@map("role")
 }
 
-// User_Role model
-model User_Role {
-  id String @id @default(uuid())
-  user_id String
-  Role_id String
+model UserRole {
+  id          String   @id @default(uuid())
+  user_id     String
+  role_id     String
   create_time DateTime @default(now())
-  update_time DateTime @default(now())
+  update_time DateTime @default(now()) @updatedAt
+  user        User     @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  role        Role     @relation(fields: [role_id], references: [id], onDelete: Cascade)
+
+  @@unique([user_id, role_id])
+  @@index([user_id])
+  @@index([role_id])
+
+  @@map("user_role")
 }
 
 model Permission {
-  id String @id @default(uuid())
-  key String
-  name String
-  create_time DateTime @default(now())
-  update_time DateTime @default(now())
+  id              String           @id @default(uuid())
+  key             String           @unique
+  name            String
+  create_time     DateTime         @default(now())
+  update_time     DateTime         @default(now()) @updatedAt
+  rolePermissions RolePermission[]
+
+  @@map("permission")
 }
 
-model Role_Permission {
-  id String @id @default(uuid())
-  Role_id String
-  Permission_id String
-  create_time DateTime @default(now())
-  update_time DateTime @default(now())
+model RolePermission {
+  id            String      @id @default(uuid())
+  role_id       String
+  permission_id String
+  create_time   DateTime    @default(now())
+  update_time   DateTime    @default(now()) @updatedAt
+  role          Role        @relation(fields: [role_id], references: [id], onDelete: Cascade)
+  permission    Permission  @relation(fields: [permission_id], references: [id], onDelete: Cascade)
+
+  @@unique([role_id, permission_id])
+  @@index([role_id])
+  @@index([permission_id])
+
+  @@map("role_permission")
 }
 
 model Audit_Log {
@@ -79,20 +101,23 @@ model Audit_Log {
   success Boolean
   error_message String
   create_time DateTime @default(now())
+
+  @@map("audit_log")
 }
 
 model User {
-  id            String    @id @default(uuid())
-  name          String
-  username      String?   @unique
+  id              String     @id @default(uuid())
+  name            String
+  username        String?    @unique
   displayUsername String?
-  email         String
-  emailVerified Boolean   @default(false)
-  image         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
-  sessions      Session[]
-  accounts      Account[]
+  email           String
+  emailVerified   Boolean    @default(false)
+  image           String?
+  createdAt       DateTime   @default(now())
+  updatedAt       DateTime   @updatedAt
+  sessions        Session[]
+  accounts        Account[]
+  userRoles       UserRole[]
 
   @@unique([email])
   @@map("user")
