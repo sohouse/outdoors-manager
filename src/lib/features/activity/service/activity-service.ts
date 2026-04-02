@@ -16,7 +16,7 @@ import {
 
 const activityDao = daoRegistry.activity();
 
-type ActivityPermissionContext = PermissionUserLike & {
+export type ActivityPermissionContext = PermissionUserLike & {
     permissions: string[];
 };
 

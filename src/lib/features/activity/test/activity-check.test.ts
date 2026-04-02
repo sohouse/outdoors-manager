@@ -1,5 +1,4 @@
-import test from 'node:test';
-import assert from 'node:assert/strict';
+import { expect, test } from 'vitest';
 
 import { editActivityCheck } from '../shared/activity-check.ts';
 import { ActivityStatus, ActivityTypes } from '../shared/activity.ts';
@@ -15,11 +14,11 @@ test('editActivityCheck should parse valid activity payload', () => {
         status: ActivityStatus.报名中,
     });
 
-    assert.equal(result.success, true);
+    expect(result.success).toBe(true);
     if (result.success) {
-        assert.equal(result.data.id, 'activity-1');
-        assert.equal(result.data.type, ActivityTypes.徒步);
-        assert.equal(result.data.status, ActivityStatus.报名中);
+        expect(result.data.id).toBe('activity-1');
+        expect(result.data.type).toBe(ActivityTypes.徒步);
+        expect(result.data.status).toBe(ActivityStatus.报名中);
     }
 });
 
@@ -29,10 +28,10 @@ test('editActivityCheck should fill default enum values when omitted', () => {
         title: '默认值校验',
     });
 
-    assert.equal(result.success, true);
+    expect(result.success).toBe(true);
     if (result.success) {
-        assert.equal(result.data.type, ActivityTypes.未指定);
-        assert.equal(result.data.status, ActivityStatus.未开始);
+        expect(result.data.type).toBe(ActivityTypes.未指定);
+        expect(result.data.status).toBe(ActivityStatus.未开始);
     }
 });
 
@@ -42,9 +41,9 @@ test('editActivityCheck should reject invalid date string', () => {
         start_time: 'not-a-date',
     });
 
-    assert.equal(result.success, false);
+    expect(result.success).toBe(false);
     if (!result.success) {
-        assert.equal(result.error.issues[0]?.message, 'Invalid date format');
-        assert.equal(result.error.issues[0]?.path[0], 'start_time');
+        expect(result.error.issues[0]?.message).toBe('Invalid date format');
+        expect(result.error.issues[0]?.path[0]).toBe('start_time');
     }
 });

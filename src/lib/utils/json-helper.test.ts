@@ -1,5 +1,4 @@
-import test from 'node:test';
-import assert from 'node:assert/strict';
+import { expect, test } from 'vitest';
 
 import { createFilter } from './json-helper.ts';
 
@@ -19,7 +18,7 @@ test('createFilter should match items by exact primitive value', () => {
 
     const result = activities.filter(filter);
 
-    assert.deepEqual(result, [activities[0]]);
+    expect(result).toEqual([activities[0]]);
 });
 
 test('createFilter should match items when array field includes the filter value', () => {
@@ -27,7 +26,7 @@ test('createFilter should match items when array field includes the filter value
 
     const result = activities.filter(filter);
 
-    assert.deepEqual(result, [activities[1]]);
+    expect(result).toEqual([activities[1]]);
 });
 
 test('createFilter should ignore filter fields that do not exist on the item', () => {
@@ -38,5 +37,5 @@ test('createFilter should ignore filter fields that do not exist on the item', (
 
     const result = activities.filter(filter);
 
-    assert.deepEqual(result, [activities[0]]);
+    expect(result).toEqual([activities[0]]);
 });

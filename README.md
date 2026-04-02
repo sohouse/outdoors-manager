@@ -147,12 +147,21 @@ http://localhost:3000
 - pnpm start：启动生产环境
 - pnpm lint：运行 ESLint 检查
 - pnpm type：执行 TypeScript 类型检查
-- pnpm test:unit：执行单元测试
+- pnpm test:unit：使用 Vitest 执行单元测试
+- pnpm test:unit:file -- <file>：执行单个测试文件
+- pnpm test:unit:name -- "<pattern>" [file]：按测试名过滤执行
 - pnpm db:gen：生成 Prisma Client
 - pnpm db:push：同步数据库结构
 - pnpm db:dev：执行 Prisma migrate dev
 - pnpm db:reset：重置数据库
 - pnpm db:seed：执行种子数据
+
+单元测试示例：
+```bash
+pnpm test:unit
+pnpm test:unit:file -- src/lib/features/activity/test/activity-check.test.ts
+pnpm test:unit:name -- "editActivityCheck should reject invalid date string" src/lib/features/activity/test/activity-check.test.ts
+```
 ## API Documentation
 项目已接入 OpenAPI 相关能力，当前可通过以下地址查看接口文档：
 ``` test
