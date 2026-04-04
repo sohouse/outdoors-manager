@@ -30,7 +30,8 @@
     "---reset---": "重置数据库 + 生成数据",
     "db:reset": "NODE_ENV=development prisma migrate reset -f",
     "---seed---": "生成数据",
-    "db:seed": "NODE_ENV=development prisma db seed"
+    "db:seed": "NODE_ENV=development prisma db seed",
+    "prepare": "husky"
   },
   "dependencies": {
     "@anatine/zod-mock": "^3.14.0",
@@ -94,6 +95,7 @@
     "cross-env": "^10.1.0",
     "eslint": "^9",
     "eslint-config-next": "16.1.4",
+    "husky": "^9.1.7",
     "prisma": "6.12.0",
     "tailwindcss": "^4",
     "ts-node": "^10.9.2",
