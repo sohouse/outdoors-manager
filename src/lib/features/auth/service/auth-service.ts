@@ -2,50 +2,59 @@ import {auth} from "../../../auth-client.ts";
 import {logInCheck, signUpCheck} from "@/lib/features/auth/check/auth-check.ts";
 import z from "zod";
 import {ApplicationException} from "@/lib/types/application-exception.ts";
-import {LOGIN_ERROR, USER_ALREADY_EXISTS} from "@/lib/types/error-type.ts";
+import type { ErrorType } from "@/lib/types/error-type.ts";
+import {LOGIN_ERROR, LOGOUT_ERROR, USER_ALREADY_EXISTS} from "@/lib/types/error-type.ts";
+
+type SessionUser = NonNullable<Awaited<ReturnType<typeof auth.getSession>>["data"]>["user"];
+
+const unwrapAuthResult = (
+    result: { error: { message?: string } | null },
+    errorType: ErrorType
+) => {
+    if (result.error) {
+        throw new ApplicationException(errorType, result.error.message ?? errorType.message);
+    }
+};
 
 export const signUp = async (formData: z.infer<typeof signUpCheck>): Promise<boolean> => {
     const loginKey = formData.name;
-    try {
-        await auth.signUp.email({
-            email: formData.email,
-            password: formData.pwd,
-            name: loginKey,
-            username: loginKey,
-        });
-        return true;
-    } catch {
-        throw new ApplicationException(USER_ALREADY_EXISTS);
-    }
+    const result = await auth.signUp.email({
+        email: formData.email,
+        password: formData.pwd,
+        name: loginKey,
+        username: loginKey,
+    });
+
+    unwrapAuthResult(result, USER_ALREADY_EXISTS);
+    return true;
 }
 
-export const logInMethod = async (formData: z.infer<typeof logInCheck>): Promise<boolean> => {
+export const login = async (formData: z.infer<typeof logInCheck>): Promise<boolean> => {
     const loginKey = formData.name;
     const pwd = formData.pwd;
 
-    try {
-        if (loginKey.includes('@')) {
-            await auth.signIn.email({
-                email: loginKey,
-                password: pwd,
-                rememberMe: true
-            });
-        } else {
-            await auth.signIn.username({
-                username: loginKey,
-                password: pwd
-            });
-        }
-        return true; // await 之后没有抛异常，说明成功
-    } catch (error) {
-        // 失败时抛出异常
-        if (error instanceof ApplicationException) {
-            throw error;
-        }
-        throw new ApplicationException(LOGIN_ERROR);
-    }
+    const result = loginKey.includes('@')
+        ? await auth.signIn.email({
+            email: loginKey,
+            password: pwd,
+            rememberMe: true
+        })
+        : await auth.signIn.username({
+            username: loginKey,
+            password: pwd
+        });
+
+    unwrapAuthResult(result, LOGIN_ERROR);
+    return true;
 }
 
-export const logOut = async () => {
-    await auth.signOut();
+export const logout = async (): Promise<boolean> => {
+    const result = await auth.signOut();
+    unwrapAuthResult(result, LOGOUT_ERROR);
+    return true;
+}
+
+export const getCurrentSession = async (): Promise<SessionUser | null> => {
+    const { data } = await auth.getSession();
+    return data?.user ?? null;
 }

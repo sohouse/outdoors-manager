@@ -8,12 +8,12 @@ import React, { useEffect, useMemo, useState } from "react"
 import { useScroll } from "@/lib/hooks/use-scroll.ts"
 import { cn } from "@/lib/utils/tailwind-helper.ts"
 import { Home, LogInIcon, LogOutIcon, UserPlus } from "lucide-react"
-import { auth } from "@/lib/auth-client.ts";
 import Image from "next/image";
 import { COMMON_ROUTES } from "@/lib/config/routes.ts";
 import { ApplicationException } from "@/lib/types/application-exception.ts"
-import { COMMON_ERRORS, LOGOUT_ERROR } from "@/lib/types/error-type.ts"
+import { COMMON_ERRORS } from "@/lib/types/error-type.ts"
 import ErrorAlert from "./ErrorAlert.tsx"
+import { getCurrentSession, logout } from "@/lib/features/auth/service/auth-service.ts";
 
 type loginUser = {
     id: string;
@@ -35,9 +35,9 @@ const Header = () => {
 
     useEffect(() => {
         const loadUser = async () => {
-            const { data } = await auth.getSession();
-            if (data) {
-                const user: loginUser = data.user;
+            const currentUser = await getCurrentSession();
+            if (currentUser) {
+                const user: loginUser = currentUser;
                 setUser(user);
             } else {
                 setUser(null);
@@ -65,10 +65,7 @@ const Header = () => {
     const userLogOut = async (e: React.MouseEvent) => {
         try {
             e.preventDefault();
-            const result = await auth.signOut();
-            if (result.error) {
-                throw new ApplicationException(LOGOUT_ERROR, result.error.message ?? LOGOUT_ERROR.message);
-            }
+            await logout();
             setUser(null);
             route.push(COMMON_ROUTES.LOGIN)
             route.refresh();
