@@ -1,4 +1,4 @@
-import { RolePermissionDao } from "@/lib/features/role-permission/dao/role-permission-seed";
+import { RolePermissionDao } from "@/lib/features/role-permission/dao/role-permission-dao";
 import { UserRolePermission } from "@/lib/features/role-permission/shared/role-permission.ts";
 import {
     getCachedUserRolePermission,
