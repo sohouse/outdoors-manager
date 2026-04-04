@@ -1,6 +1,6 @@
 import { prismaClient } from './prisma-client.ts'
 import {initActivity} from '../features/activity/dao/activity-seed.ts'
-import { initPermission } from '../features/role-permission/dao/role-permission-dao.ts';
+import { initPermission } from '../features/role-permission/dao/role-permission-seed.ts';
 
 const seed = async () => {
     try {
