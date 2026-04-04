@@ -1,6 +1,6 @@
 import { prismaClient } from "../../../database/prisma-client.ts";
 import { ApplicationException } from "../../../types/application-exception.ts";
-import { INTERNAL_ERROR } from "../../../types/error-type";
+import { INTERNAL_ERROR } from "../../../types/error-type.ts";
 
 const PERMISSIONS = [
     { key: "activity:read", name: "查看活动" },
