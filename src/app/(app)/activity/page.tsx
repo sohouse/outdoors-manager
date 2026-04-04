@@ -87,7 +87,6 @@ const ActivityPage: FC = () => {
         const load = async () => {
             const {items, meta} = await fetchActivities();
             if (cancelled) return;
-            console.log('items------------:' + JSON.stringify(items));
             setActivities(items);
             setPaginateMeta(meta);
         };
