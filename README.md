@@ -35,6 +35,7 @@
 - 用户注册与登录
 - 基于 Better Auth 的会话认证
 - API 接口鉴权中间件
+- 基于 Redis 的权限缓存与失效入口
 - 活动列表展示
 - 活动详情查看
 - 活动条件筛选与分页查询
@@ -82,6 +83,7 @@
 
 - Day.js
 - Faker（用于测试数据生成）
+- Upstash Redis（权限缓存）
 
 ## Architecture
 
@@ -129,6 +131,9 @@ DIRECT_URL=your_direct_database_url
 BETTER_AUTH_SECRET=your_secret
 BETTER_AUTH_URL=http://localhost:3000
 NEXT_PUBLIC_BASE_URL=http://localhost:3000
+UPSTASH_REDIS_REST_URL=your_upstash_redis_rest_url
+UPSTASH_REDIS_REST_TOKEN=your_upstash_redis_rest_token
+AUTHZ_CACHE_TTL_SECONDS=300
 ### 3. 初始化数据库
 根据当前项目脚本配置，可以使用 Prisma 进行迁移、生成与种子数据初始化。
 常用命令：
@@ -166,6 +171,13 @@ pnpm test:unit:name -- "editActivityCheck should reject invalid date string" src
 项目已接入 OpenAPI 相关能力，当前可通过以下地址查看接口文档：
 ``` test
 /api/openapi
+```
+
+权限缓存失效入口：
+``` test
+DELETE /api/rolePermission/cache?userId=<userId>
+DELETE /api/rolePermission/cache?userId=<userId>&type=role
+DELETE /api/rolePermission/cache?userId=<userId>&type=permission&name=activity:read
 ```
 
 ## Challenges and Trade-offs
