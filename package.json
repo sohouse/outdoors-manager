@@ -13,7 +13,7 @@
   "scripts": {
     "dev": "rimraf -rf .next src/lib/database/activity.json && next dev --turbopack",
     "postinstall": "prisma generate",
-    "build": "next build",
+    "build": "prisma migrate deploy --schema src/lib/database/schema/schema.prisma && next build",
     "start": "next start",
     "lint": "eslint",
     "test:unit": "vitest run",
