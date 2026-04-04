@@ -4,7 +4,12 @@ import { prismaClient } from "./database/prisma-client.ts";
 import { openAPI, username } from 'better-auth/plugins';
 import { nextCookies } from 'better-auth/next-js';
 
+const authSecret = process.env.BETTER_AUTH_SECRET;
+const authBaseURL = process.env.BETTER_AUTH_URL ?? process.env.NEXT_PUBLIC_BASE_URL;
+
 export const auth = betterAuth({
+    secret: authSecret,
+    baseURL: authBaseURL,
     database: prismaAdapter(prismaClient, {
         provider: "postgresql",
     }),

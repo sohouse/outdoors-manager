@@ -10,12 +10,11 @@ import { Button } from "@/lib/components/ui/button.tsx"
 import { useRouter } from "next/navigation"
 import Link from "next/link";
 import { COMMON_ROUTES } from "@/lib/config/routes.ts";
-import { honoClient } from "@/lib/api/main.ts";
 import { useState } from "react"
 import { ApplicationException } from "@/lib/types/application-exception.ts"
-import { COMMON_ERRORS } from "@/lib/types/error-type.ts"
+import { COMMON_ERRORS, LOGIN_ERROR } from "@/lib/types/error-type.ts"
 import ErrorAlert from "@/lib/components/web/ErrorAlert"
-import { unwrapResponse } from "@/lib/api/response"
+import { auth } from "@/lib/auth-client.ts";
 
 const SignUp = () => {
     const route = useRouter();
@@ -31,16 +30,27 @@ const SignUp = () => {
     const submitForm = async () => {
         try {
             const loginFormData = form.getValues();
-            const res = await honoClient.api.auth['logIn'].$post(loginFormData);
-            const loginResult = await unwrapResponse(res);
-            if (loginResult) {
-                route.push(COMMON_ROUTES.HOME);
+            const result = loginFormData.name.includes('@')
+                ? await auth.signIn.email({
+                    email: loginFormData.name,
+                    password: loginFormData.pwd,
+                    rememberMe: true,
+                })
+                : await auth.signIn.username({
+                    username: loginFormData.name,
+                    password: loginFormData.pwd,
+                });
+
+            if (result.error) {
+                throw new ApplicationException(LOGIN_ERROR, result.error.message ?? LOGIN_ERROR.message);
             }
+
+            route.push(COMMON_ROUTES.HOME);
+            route.refresh();
         } catch (error) {
             const message = error instanceof ApplicationException ? error.message : '登陆失败';
             const code = error instanceof ApplicationException ? error.code : COMMON_ERRORS.UNKNOWN_ERROR.code;
             setErrorInfo({ title: code, desc: message });
-            throw error;
         }
     }
 

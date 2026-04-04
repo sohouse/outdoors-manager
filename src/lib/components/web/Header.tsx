@@ -11,11 +11,9 @@ import { Home, LogInIcon, LogOutIcon, UserPlus } from "lucide-react"
 import { auth } from "@/lib/auth-client.ts";
 import Image from "next/image";
 import { COMMON_ROUTES } from "@/lib/config/routes.ts";
-import { honoClient } from "@/lib/api/main.ts";
 import { ApplicationException } from "@/lib/types/application-exception.ts"
-import { COMMON_ERRORS } from "@/lib/types/error-type.ts"
+import { COMMON_ERRORS, LOGOUT_ERROR } from "@/lib/types/error-type.ts"
 import ErrorAlert from "./ErrorAlert.tsx"
-import { unwrapResponse } from "@/lib/api/response.ts"
 
 type loginUser = {
     id: string;
@@ -31,7 +29,7 @@ const Header = () => {
 
     const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
-    const [user, setUser] = useState({} as loginUser);
+    const [user, setUser] = useState<loginUser | null>(null);
 
     const route = useRouter();
 
@@ -41,6 +39,8 @@ const Header = () => {
             if (data) {
                 const user: loginUser = data.user;
                 setUser(user);
+            } else {
+                setUser(null);
             }
         }
 
@@ -65,15 +65,18 @@ const Header = () => {
     const userLogOut = async (e: React.MouseEvent) => {
         try {
             e.preventDefault();
-            const res = await honoClient.api.auth['logOut'].$get()
-            unwrapResponse(res);
+            const result = await auth.signOut();
+            if (result.error) {
+                throw new ApplicationException(LOGOUT_ERROR, result.error.message ?? LOGOUT_ERROR.message);
+            }
+            setUser(null);
             route.push(COMMON_ROUTES.LOGIN)
+            route.refresh();
         }
         catch (error) {
             const message = error instanceof ApplicationException ? error.message : '登出失败';
             const code = error instanceof ApplicationException ? error.code : COMMON_ERRORS.UNKNOWN_ERROR.code;
             setErrorInfo({ title: code, desc: message });
-            throw error;
         }
     }
 

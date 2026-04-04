@@ -10,12 +10,11 @@ import z from "zod"
 import { useRouter } from "next/navigation"
 import Link from "next/link";
 import { ACTIVITY_ROUTES } from "@/lib/config/routes.ts";
-import { honoClient } from "@/lib/api/main.ts";
 import { useState } from "react"
 import ErrorAlert from "@/lib/components/web/ErrorAlert"
 import { ApplicationException } from "@/lib/types/application-exception.ts"
-import { COMMON_ERRORS } from "@/lib/types/error-type.ts"
-import { unwrapResponse } from "@/lib/api/response"
+import { COMMON_ERRORS, USER_ALREADY_EXISTS } from "@/lib/types/error-type.ts"
+import { auth } from "@/lib/auth-client.ts"
 
 const SignUp = () => {
     const form = useForm<z.infer<typeof signUpCheck>>({
@@ -32,18 +31,26 @@ const SignUp = () => {
     const submitForm = async () => {
         try {
             const signUpData = form.getValues();
-            const res = await honoClient.api.auth['signUp'].$post(signUpData)
-            const signUpResult = await unwrapResponse(res);
-            if (signUpResult) {
-                route.push(ACTIVITY_ROUTES.LIST);
-            } else {
-                alert('注册失败');
+            const result = await auth.signUp.email({
+                email: signUpData.email,
+                password: signUpData.pwd,
+                name: signUpData.name,
+                username: signUpData.name,
+            });
+
+            if (result.error) {
+                throw new ApplicationException(
+                    USER_ALREADY_EXISTS,
+                    result.error.message ?? USER_ALREADY_EXISTS.message
+                );
             }
+
+            route.push(ACTIVITY_ROUTES.LIST);
+            route.refresh();
         } catch (error) {
             const message = error instanceof ApplicationException ? error.message : '注册失败';
             const code = error instanceof ApplicationException ? error.code : COMMON_ERRORS.UNKNOWN_ERROR.code;
             setErrorInfo({ title: code, desc: message });
-            throw error;
         }
     }
 

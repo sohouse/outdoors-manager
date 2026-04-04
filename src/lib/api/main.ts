@@ -4,7 +4,6 @@ import { hc } from 'hono/client';
 import { prettyJSON } from 'hono/pretty-json';
 import { openapiApp } from "../features/openapi/api/openapi.ts";
 import { authMiddleware } from "../middlewares/auth-middleware.ts";
-import { authApi } from "@/lib/features/auth/api/auth-api.ts";
 import { ApplicationException } from "@/lib/types/application-exception.ts";
 import { UNKNOWN_ERROR } from '@/lib/types/error-type.ts'
 import { ApplicationResponse } from "@/lib/types/application-response.ts";
@@ -67,10 +66,13 @@ honoService.notFound((c) => c.json({ message: 'not found', ok: false }, 404));
 const routes = honoService
     .route('/activity', activityApi)
     .route('/openapi', openapiApp)
-    .route('/auth', authApi)
     .route('/rolePermission', rolePermissionApi);
 
 type Routes = typeof routes;
-const honoClient = hc<Routes>(process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000');
+const honoBaseURL = typeof window !== 'undefined'
+    ? window.location.origin
+    : process.env.NEXT_PUBLIC_BASE_URL ?? process.env.BETTER_AUTH_URL ?? 'http://localhost:3000';
+
+const honoClient = hc<Routes>(honoBaseURL);
 
 export { honoService, honoClient };
