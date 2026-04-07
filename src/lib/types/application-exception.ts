@@ -1,5 +1,5 @@
 
-import type { ResponseType } from './error-type.ts';
+import type { HttpStatusCode, ResponseType } from './error-type.ts';
 
 /**
  * 应用异常类
@@ -18,11 +18,14 @@ export class ApplicationException extends Error {
    */
   public readonly errorType: ResponseType;
 
+  public readonly status: HttpStatusCode;
+
   constructor(errorType: ResponseType, message?: string) {
     super(message ?? errorType.message);
     this.code = errorType.code;
     this.errorType = errorType;
     this.name = 'ApplicationException';
+    this.status = errorType.status;
 
     // 在支持的环境中捕获堆栈轨迹
     if (Error.captureStackTrace) {

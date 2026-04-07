@@ -8,14 +8,14 @@ const app = new Hono();
 
 export const rolePermissionApi = app
     .get('/currentUserRolePermission', async (context) => {
-        const user = context.get('user') as { id?: string } | undefined;
+        const {userId} = context.get('authz');
 
-        if (!user?.id) {
+        if (!userId) {
             throw new ApplicationException(COMMON_RESPONSE.UNAUTHORIZED);
         }
 
-        const result = await userRolePermission(user.id);
-        return context.json(result, 200);
+        const result = await userRolePermission(userId);
+        return context.json(result);
     })
     .get('/userRolePermission', async (context) => {
         const { id } = context.req.query();
@@ -25,12 +25,12 @@ export const rolePermissionApi = app
         }
 
         const result = await userRolePermission(id);
-        return context.json(result, 200);
+        return context.json(result);
     })
     .delete('/cache', async (context) => {
-        const { userId, type, name } = context.req.query();
-        const currentUser = context.get('user') as { id?: string } | undefined;
-        const targetUserId = userId ?? currentUser?.id;
+        const { id, type, name } = context.req.query();
+        const {userId} = context.get('authz');
+        const targetUserId = id ?? userId;
         const targetType = type === 'role' || type === 'permission' ? type : undefined;
 
         if (!targetUserId) {
@@ -52,5 +52,5 @@ export const rolePermissionApi = app
             type: targetType ?? 'all',
             name: name ?? null,
             deletedKeys,
-        }, 200);
+        });
     });

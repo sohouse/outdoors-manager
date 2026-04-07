@@ -140,9 +140,8 @@ const ActivityPage: FC = () => {
             ownPermission: 'activity:delete.own',
             anyPermission: 'activity:delete.any',
             ownerId: item.creator_id,
-            ownerName: item.author,
             user: {
-                id: authz.userId,
+                userId: authz.userId,
                 name: authz.name,
                 username: authz.username,
             },

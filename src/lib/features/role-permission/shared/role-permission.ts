@@ -12,7 +12,7 @@ export interface UserRolePermission {
 }
 
 export interface PermissionUserLike {
-    id: string;
+    userId: string;
     name?: string;
     username?: string | null;
 }
@@ -25,40 +25,34 @@ export const hasAnyPermission = (permissions: string[], requiredPermissions: str
     return requiredPermissions.some((permission) => hasPermission(permissions, permission));
 };
 
+// check resource owner
 export const isOwner = ({
     ownerId,
-    ownerName,
     user,
 }: {
     ownerId?: string | null;
-    ownerName?: string | null;
     user: PermissionUserLike;
 }): boolean => {
-    if (ownerId && ownerId === user.id) {
-        return true;
-    }
-
-    return Boolean(ownerName && [user.name, user.username].filter(Boolean).includes(ownerName));
+    return Boolean(ownerId && ownerId === user.userId);
 };
 
+// check resource role, different with isOwner, include anyPermission check
 export const canManageOwnedResource = ({
     permissions,
     ownPermission,
     anyPermission,
     ownerId,
-    ownerName,
     user,
 }: {
     permissions: string[];
     ownPermission: string;
     anyPermission: string;
     ownerId?: string | null;
-    ownerName?: string | null;
     user: PermissionUserLike;
 }): boolean => {
     if (hasPermission(permissions, anyPermission)) {
         return true;
     }
 
-    return hasPermission(permissions, ownPermission) && isOwner({ ownerId, ownerName, user });
+    return hasPermission(permissions, ownPermission) && isOwner({ ownerId, user });
 };

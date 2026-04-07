@@ -8,16 +8,15 @@ export const authMiddleware = createMiddleware(async (c, next) => {
     const sessionContext = await auth.api.getSession({ headers: c.req.raw.headers });
 
     if (!sessionContext) {
-        throw new ApplicationException(COMMON_RESPONSE.LOGIN_ERROR);
+        throw new ApplicationException(COMMON_RESPONSE.UNAUTHORIZED);
     }
     const user = sessionContext.user;
     const session = sessionContext.session;
+    // role & permission from db
     const authz = await userRolePermission(user.id);
 
-    c.set("user", user);
-    c.set("session", session);
     c.set("authz", authz);
-    c.set("permissions", authz.permissions);
+    c.set("auth", {user, session})
 
     return next();
 })

@@ -6,44 +6,32 @@ import { activityConditionCheck, editActivityCheck, activityById, activityPageRe
 const app = new Hono();
 export const activityApi = app
     .get('/findByCondition', async (context) => {
-        const currentUser = {
-            ...(context.get('user') as { id: string; name?: string; username?: string | null }),
-            permissions: (context.get('permissions') as string[] | undefined) ?? [],
-        };
+        const currentUser = context.get('authz');
         const query = activityConditionCheck.parse(context.req.query());
         const result = await findByCondition(query, currentUser);
         const response = {
             ...result,
             items: result.items.map(toActivityVO),
         };
-        
-        return context.json(activityPageResponseSchema.parse(response), 200);
+
+        return context.json(activityPageResponseSchema.parse(response));
     })
     .get('/getObjById', async (context) => {
-        const currentUser = {
-            ...(context.get('user') as { id: string; name?: string; username?: string | null }),
-            permissions: (context.get('permissions') as string[] | undefined) ?? [],
-        };
+        const currentUser = context.get('authz');
         const { id } = activityById.parse(context.req.query());
         const result = await getObjById(id, currentUser);
-        return context.json(toActivityVO(result), 200);
+        return context.json(toActivityVO(result));
     })
     .put('/updateObj', async (context) => {
-        const currentUser = {
-            ...(context.get('user') as { id: string; name?: string; username?: string | null }),
-            permissions: (context.get('permissions') as string[] | undefined) ?? [],
-        };
+        const currentUser = context.get('authz');
         const activity = editActivityCheck.parse(await context.req.json());
         const success = await updateObj(activity, currentUser);
-        return context.json(success, 200);
+        return context.json(success);
     })
     .delete('/deleteById', async (context) => {
-        const currentUser = {
-            ...(context.get('user') as { id: string; name?: string; username?: string | null }),
-            permissions: (context.get('permissions') as string[] | undefined) ?? [],
-        };
+        const currentUser = context.get('authz');
         const { id } = activityById.parse(context.req.query());
         const success = await deleteById(id, currentUser);
-        return context.json(success, 200);
+        return context.json(success);
     })
     ;

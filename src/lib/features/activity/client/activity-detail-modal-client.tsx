@@ -81,9 +81,8 @@ export default function ActivityDetailModalClient({
         ownPermission: 'activity:update.own',
         anyPermission: 'activity:update.any',
         ownerId: initialActivity.creator_id,
-        ownerName: initialActivity.author,
         user: {
-            id: authz.userId,
+            userId: authz.userId,
             name: authz.name,
             username: authz.username,
         },

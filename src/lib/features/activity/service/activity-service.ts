@@ -8,18 +8,14 @@ import {COMMON_RESPONSE} from "@/lib/types/error-type.ts";
 import {
     canManageOwnedResource,
     hasAnyPermission,
-    PermissionUserLike,
+    UserRolePermission,
 } from "@/lib/features/role-permission/shared/role-permission.ts";
 import z from 'zod';
 import { activityConditionCheck, editActivityCheck, insertActivityCheck } from '../shared/activity-check';
 
 const activityDao = daoRegistry.activity();
 
-export type ActivityPermissionContext = PermissionUserLike & {
-    permissions: string[];
-};
-
-const assertCanReadActivity = (currentUser: ActivityPermissionContext): void => {
+const assertCanReadActivity = (currentUser: UserRolePermission): void => {
     if (!hasAnyPermission(currentUser.permissions, ['activity:read'])) {
         throw new ApplicationException(COMMON_RESPONSE.FORBIDDEN);
     }
@@ -32,7 +28,7 @@ const assertCanManageActivity = ({
     anyPermission,
 }: {
     activity: ActivityItem;
-    currentUser: ActivityPermissionContext;
+    currentUser: UserRolePermission;
     ownPermission: string;
     anyPermission: string;
 }): boolean => {
@@ -41,7 +37,6 @@ const assertCanManageActivity = ({
         ownPermission,
         anyPermission,
         ownerId: activity.creator_id,
-        ownerName: activity.author,
         user: currentUser,
     });
 
@@ -54,10 +49,10 @@ const assertCanManageActivity = ({
 
 export async function deleteById(
     id: string,
-    currentUser: ActivityPermissionContext
+    currentUser: UserRolePermission
 ): Promise<boolean> {
     const activity = await getObjById(id, currentUser);
-
+    
     assertCanManageActivity({
         activity,
         currentUser,
@@ -70,7 +65,7 @@ export async function deleteById(
 
 export async function findByCondition(
     condition: z.infer<typeof activityConditionCheck>,
-    currentUser: ActivityPermissionContext
+    currentUser: UserRolePermission
 ): Promise<PageResult<ActivityItem>> {
     assertCanReadActivity(currentUser);
 
@@ -89,10 +84,8 @@ export async function findByCondition(
     };
 }
 
-export async function getObjById(id: string, currentUser?: ActivityPermissionContext): Promise<ActivityItem> {
-    if (currentUser) {
-        assertCanReadActivity(currentUser);
-    }
+export async function getObjById(id: string, currentUser: UserRolePermission): Promise<ActivityItem> {
+    assertCanReadActivity(currentUser);
 
     const condition = activityConditionCheck.parse({id});
     const {items} = await activityDao.findByCondition(condition);
@@ -103,7 +96,7 @@ export async function getObjById(id: string, currentUser?: ActivityPermissionCon
     return item;
 }
 
-export async function updateObj(activity: z.infer<typeof editActivityCheck>, currentUser: ActivityPermissionContext) {
+export async function updateObj(activity: z.infer<typeof editActivityCheck>, currentUser: UserRolePermission) {
     const currentActivity = await getObjById(activity.id, currentUser);
     const hasAnyPermission = assertCanManageActivity({
         activity: currentActivity,

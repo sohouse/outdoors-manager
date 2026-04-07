@@ -1,18 +1,15 @@
 import { UserRolePermission } from '@/lib/features/role-permission/shared/role-permission.ts'
+import { Session, User } from 'better-auth'
+
+export type AuthContextValue = {
+    user: User
+    session: Session
+}
 
 declare module 'hono' {
     interface ContextVariableMap {
-        user: {
-            id: string
-            name?: string
-            username?: string | null
-        }
-        session: {
-            id: string
-            userId: string
-        }
+        auth: AuthContextValue
         authz: UserRolePermission
-        permissions: string[]
     }
 }
 

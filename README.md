@@ -34,7 +34,8 @@
 
 - 用户注册与登录
 - 基于 Better Auth 的会话认证
-- API 接口鉴权中间件
+- 基于 Hono middleware 的统一认证上下文注入
+- 基于角色权限与资源 owner 的 RBAC 判定
 - 基于 Redis 的权限缓存与失效入口
 - 活动列表展示
 - 活动详情查看
@@ -101,7 +102,40 @@
 - 页面层与接口层解耦
 - 接口统一挂载与中间件保护
 - 数据模型与查询逻辑集中管理
+- 认证上下文、授权上下文与业务 service 解耦
 - 为后续继续扩展业务模块预留结构空间
+
+## Auth & RBAC
+
+当前版本的认证与授权链路分为两层：
+
+- Authentication：由 Better Auth 负责会话校验，Hono `authMiddleware` 从请求头中读取 session，并在通过认证后将 `auth` 与 `authz` 注入到请求 context。
+- Authorization：由 `userRolePermission(user.id)` 聚合当前用户的角色与权限，业务 service 直接消费 `UserRolePermission`，不再在 route 层手动拼接 `user + permissions`。
+
+当前 context 约定如下：
+
+- `auth`：认证成功后的 `user` 与 `session`
+- `authz`：当前用户聚合后的角色与权限结果
+
+活动模块当前采用 owner-aware RBAC：
+
+- `activity:read`：允许读取活动列表和详情
+- `activity:update.own`：允许修改自己创建的活动
+- `activity:update.any`：允许修改任意活动
+- `activity:delete.own`：允许删除自己创建的活动
+- `activity:delete.any`：允许删除任意活动
+
+owner 判定当前统一以 `ownerId === authz.userId` 为准，不再回退到 `ownerName`、`name` 或 `username` 的字符串匹配。这样可以避免同名用户、用户名变更等情况带来的误判，也让权限说明更容易讲清楚。
+
+错误边界当前约定如下：
+
+- `400 Bad Request`：参数缺失、参数格式错误、非法枚举值
+- `401 Unauthorized`：未登录、session 无效、认证失败
+- `403 Forbidden`：已登录但权限不足
+- `404 Not Found`：目标资源不存在
+- `500 Internal Server Error`：未显式处理的服务端异常
+
+项目中的业务错误对象已内置 HTTP status，`ApplicationException` 会直接携带状态码，Hono 全局错误处理会使用错误对象绑定的状态码返回响应，避免在入口层重复维护 code-to-status 映射。
 
 ## Project Structure
 
@@ -175,10 +209,29 @@ pnpm test:unit:name -- "editActivityCheck should reject invalid date string" src
 
 权限缓存失效入口：
 ``` test
-DELETE /api/rolePermission/cache?userId=<userId>
-DELETE /api/rolePermission/cache?userId=<userId>&type=role
-DELETE /api/rolePermission/cache?userId=<userId>&type=permission&name=activity:read
+DELETE /api/rolePermission/cache?id=<userId>
+DELETE /api/rolePermission/cache?id=<userId>&type=role
+DELETE /api/rolePermission/cache?id=<userId>&type=permission&name=activity:read
 ```
+
+## Testing
+
+当前单元测试主要覆盖三类能力：
+
+- schema / check：参数校验、默认值、格式转换
+- service：权限判断、owner / own / any 分支、资源不存在分支
+- route：认证中间件链路、401 / 403 / 404 响应边界、context 注入后的行为
+
+当前已补充的关键测试包括：
+
+- `activity-service.test.ts`：覆盖 `activity:read`、`update.own`、`update.any`、`delete.own`、`delete.any`、`404 not found`
+- `role-permission.test.ts`：覆盖 `isOwner` 与 `canManageOwnedResource`
+- `role-permission-api.test.ts`：覆盖 `authz` context 读取与参数校验
+- `auth-route.test.ts`：覆盖未登录 `401`、无权限 `403`、资源不存在 `404`
+
+编写业务代码时，当前采用的测试原则是：
+
+- 所有会影响最终结果、错误类型、权限判定或副作用的执行分支，都应该有对应测试覆盖
 
 ## Challenges and Trade-offs
 这个项目在实现过程中，主要关注这些问题：

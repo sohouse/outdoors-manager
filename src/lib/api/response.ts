@@ -1,7 +1,7 @@
 import type { ClientResponse } from 'hono/client'
 import type { ApplicationResponse } from '../types/application-response.ts'
 import { ApplicationException } from '../types/application-exception.ts'
-import { COMMON_RESPONSE, createResponseType } from '../types/error-type.ts'
+import { COMMON_RESPONSE, createResponseType, HttpStatusCode } from '../types/error-type.ts'
 
 function isApplicationResponse(value: unknown): value is ApplicationResponse<unknown> {
     if (!value || typeof value !== 'object') {
@@ -23,7 +23,7 @@ export async function unwrapResponse<T>(
     const result = payload
 
     if (!result.success) {
-        const errorType = createResponseType(result.code, result.message)
+        const errorType = createResponseType(result.code, result.message, res.status as HttpStatusCode)
         throw new ApplicationException(errorType, result.message)
     }
 

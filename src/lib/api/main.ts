@@ -5,7 +5,7 @@ import { prettyJSON } from 'hono/pretty-json';
 import { openapiApp } from "../features/openapi/api/openapi.ts";
 import { authMiddleware } from "../middlewares/auth-middleware.ts";
 import { ApplicationException } from "@/lib/types/application-exception.ts";
-import { COMMON_RESPONSE, UNKNOWN_ERROR } from '@/lib/types/error-type.ts'
+import { COMMON_RESPONSE, HTTP_STATUS, UNKNOWN_ERROR } from '@/lib/types/error-type.ts'
 import { createErrorApplicationResponse, createSuccessApplicationResponse } from "@/lib/types/application-response.ts";
 import { rolePermissionApi } from "../features/role-permission/api/role-permission-api.ts";
 
@@ -46,19 +46,14 @@ honoService.use('*', async (c, next) => {
 honoService.onError((err, c) => {
     console.error(err.stack)
     if (err instanceof ApplicationException) {
-        const status = err.code === 2003 ? 401
-            : err.code === 2004 ? 403
-                : err.code === 1002 ? 400
-                    : err.code === 1003 ? 404
-                        : 500;
-        return c.json(createErrorApplicationResponse(err.code, err.message), status);
+        return c.json(createErrorApplicationResponse(err.code, err.message), err.status);
     } else {
-        return c.json(createErrorApplicationResponse(UNKNOWN_ERROR.code, UNKNOWN_ERROR.message), 500);
+        return c.json(createErrorApplicationResponse(UNKNOWN_ERROR.code, UNKNOWN_ERROR.message), HTTP_STATUS.INTERNAL_SERVER_ERROR);
     }
 })
 
 // 404请求注册
-honoService.notFound((c) => c.json(createErrorApplicationResponse(COMMON_RESPONSE.NOT_FOUND.code, COMMON_RESPONSE.NOT_FOUND.message), 404));
+honoService.notFound((c) => c.json(createErrorApplicationResponse(COMMON_RESPONSE.NOT_FOUND), HTTP_STATUS.NOT_FOUND));
 
 // 挂载子路由
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
