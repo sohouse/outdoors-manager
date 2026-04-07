@@ -26,8 +26,7 @@ export const activityApi = app
         };
         const { id } = activityById.parse(context.req.query());
         const result = await getObjById(id, currentUser);
-        const vo = toActivityVO(result);
-        return context.json(vo, 200);
+        return context.json(toActivityVO(result), 200);
     })
     .put('/updateObj', async (context) => {
         const currentUser = {

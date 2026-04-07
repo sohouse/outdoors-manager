@@ -1,5 +1,5 @@
 import {ApplicationException} from "@/lib/types/application-exception.ts";
-import {COMMON_ERRORS} from "@/lib/types/error-type.ts";
+import {COMMON_RESPONSE} from "@/lib/types/error-type.ts";
 
 type Constructor<T> = new () => T;
 
@@ -7,7 +7,7 @@ export function simpleObjCover<T extends object>(
     fromObj: Record<string, unknown>,
     TargetClass: Constructor<T>,
 ): T {
-    if (!fromObj || typeof fromObj !== 'object') throw new ApplicationException(COMMON_ERRORS.INVALID_PARAMS);
+    if (!fromObj || typeof fromObj !== 'object') throw new ApplicationException(COMMON_RESPONSE.INVALID_PARAMS);
 
     const targetObj = new TargetClass() as T & Record<keyof T, unknown>;
     const resultObj = new TargetClass() as T & Record<keyof T, unknown>;

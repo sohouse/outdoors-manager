@@ -2,7 +2,7 @@ import { Hono } from "hono";
 
 import { invalidateRolePermissionCache, userRolePermission } from "@/lib/features/role-permission/service/role-permission-service.ts";
 import { ApplicationException } from "@/lib/types/application-exception.ts";
-import { COMMON_ERRORS } from "@/lib/types/error-type.ts";
+import { COMMON_RESPONSE } from "@/lib/types/error-type.ts";
 
 const app = new Hono();
 
@@ -11,7 +11,7 @@ export const rolePermissionApi = app
         const user = context.get('user') as { id?: string } | undefined;
 
         if (!user?.id) {
-            throw new ApplicationException(COMMON_ERRORS.UNAUTHORIZED);
+            throw new ApplicationException(COMMON_RESPONSE.UNAUTHORIZED);
         }
 
         const result = await userRolePermission(user.id);
@@ -21,7 +21,7 @@ export const rolePermissionApi = app
         const { id } = context.req.query();
 
         if (!id) {
-            throw new ApplicationException(COMMON_ERRORS.INVALID_PARAMS);
+            throw new ApplicationException(COMMON_RESPONSE.INVALID_PARAMS);
         }
 
         const result = await userRolePermission(id);
@@ -34,11 +34,11 @@ export const rolePermissionApi = app
         const targetType = type === 'role' || type === 'permission' ? type : undefined;
 
         if (!targetUserId) {
-            throw new ApplicationException(COMMON_ERRORS.INVALID_PARAMS, 'userId is required');
+            throw new ApplicationException(COMMON_RESPONSE.INVALID_PARAMS, 'userId is required');
         }
 
         if (type && !targetType) {
-            throw new ApplicationException(COMMON_ERRORS.INVALID_PARAMS, 'type must be role or permission');
+            throw new ApplicationException(COMMON_RESPONSE.INVALID_PARAMS, 'type must be role or permission');
         }
 
         const deletedKeys = await invalidateRolePermissionCache({

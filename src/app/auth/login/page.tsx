@@ -12,7 +12,7 @@ import Link from "next/link";
 import { COMMON_ROUTES } from "@/lib/config/routes.ts";
 import { useState } from "react"
 import { ApplicationException } from "@/lib/types/application-exception.ts"
-import { COMMON_ERRORS } from "@/lib/types/error-type.ts"
+import { COMMON_RESPONSE } from "@/lib/types/error-type.ts"
 import ErrorAlert from "@/lib/components/web/ErrorAlert"
 import { login } from "@/lib/features/auth/service/auth-service.ts";
 
@@ -35,7 +35,7 @@ const SignUp = () => {
             route.refresh();
         } catch (error) {
             const message = error instanceof ApplicationException ? error.message : '登陆失败';
-            const code = error instanceof ApplicationException ? error.code : COMMON_ERRORS.UNKNOWN_ERROR.code;
+            const code = error instanceof ApplicationException ? error.code : COMMON_RESPONSE.UNKNOWN_ERROR.code;
             setErrorInfo({ title: code, desc: message });
         }
     }

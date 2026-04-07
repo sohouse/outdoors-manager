@@ -2,14 +2,14 @@ import {auth} from "../../../auth-client.ts";
 import {logInCheck, signUpCheck} from "@/lib/features/auth/check/auth-check.ts";
 import z from "zod";
 import {ApplicationException} from "@/lib/types/application-exception.ts";
-import type { ErrorType } from "@/lib/types/error-type.ts";
+import type { ResponseType } from "@/lib/types/error-type.ts";
 import {LOGIN_ERROR, LOGOUT_ERROR, USER_ALREADY_EXISTS} from "@/lib/types/error-type.ts";
 
 type SessionUser = NonNullable<Awaited<ReturnType<typeof auth.getSession>>["data"]>["user"];
 
 const unwrapAuthResult = (
     result: { error: { message?: string } | null },
-    errorType: ErrorType
+    errorType: ResponseType
 ) => {
     if (result.error) {
         throw new ApplicationException(errorType, result.error.message ?? errorType.message);

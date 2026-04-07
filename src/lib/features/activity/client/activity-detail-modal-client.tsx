@@ -44,7 +44,7 @@ import {
     UserRolePermission,
 } from '@/lib/features/role-permission/shared/role-permission.ts'
 import { ApplicationException } from '@/lib/types/application-exception.ts'
-import { COMMON_ERRORS } from '@/lib/types/error-type.ts'
+import { COMMON_RESPONSE } from '@/lib/types/error-type.ts'
 
 type ActivityUpdateResult = {
     success: boolean
@@ -119,7 +119,7 @@ export default function ActivityDetailModalClient({
             }
         } catch (error) {
             const message = error instanceof ApplicationException ? error.message : '加载活动列表失败'
-            const code = error instanceof ApplicationException ? error.code : COMMON_ERRORS.UNKNOWN_ERROR.code
+            const code = error instanceof ApplicationException ? error.code : COMMON_RESPONSE.UNKNOWN_ERROR.code
             setErrorInfo({ title: code, desc: message })
             throw error
         }

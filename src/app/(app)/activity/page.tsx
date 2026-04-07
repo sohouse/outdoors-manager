@@ -16,7 +16,7 @@ import {InferResponseType} from "hono";
 import { unwrapResponse } from "@/lib/api/response";
 import ErrorAlert from "@/lib/components/web/ErrorAlert";
 import { ApplicationException } from "@/lib/types/application-exception.ts";
-import { COMMON_ERRORS } from "@/lib/types/error-type.ts";
+import { COMMON_RESPONSE } from "@/lib/types/error-type.ts";
 import {
     canManageOwnedResource,
     UserRolePermission,
@@ -69,7 +69,7 @@ const ActivityPage: FC = () => {
             }
         } catch (error) {
             const message = error instanceof ApplicationException ? error.message : '加载活动列表失败';
-            const code = error instanceof ApplicationException ? error.code : COMMON_ERRORS.UNKNOWN_ERROR.code;
+            const code = error instanceof ApplicationException ? error.code : COMMON_RESPONSE.UNKNOWN_ERROR.code;
             setErrorInfo({ title: code, desc: message });
             throw error;
         }
@@ -109,7 +109,7 @@ const ActivityPage: FC = () => {
                 }
             } catch (error) {
                 const message = error instanceof ApplicationException ? error.message : '权限信息加载失败';
-                const code = error instanceof ApplicationException ? error.code : COMMON_ERRORS.UNKNOWN_ERROR.code;
+                const code = error instanceof ApplicationException ? error.code : COMMON_RESPONSE.UNKNOWN_ERROR.code;
 
                 if (!cancelled) {
                     setErrorInfo({ title: code, desc: message });

@@ -11,7 +11,7 @@ import { Home, LogInIcon, LogOutIcon, UserPlus } from "lucide-react"
 import Image from "next/image";
 import { COMMON_ROUTES } from "@/lib/config/routes.ts";
 import { ApplicationException } from "@/lib/types/application-exception.ts"
-import { COMMON_ERRORS } from "@/lib/types/error-type.ts"
+import { COMMON_RESPONSE } from "@/lib/types/error-type.ts"
 import ErrorAlert from "./ErrorAlert.tsx"
 import { getCurrentSession, logout } from "@/lib/features/auth/service/auth-service.ts";
 
@@ -72,7 +72,7 @@ const Header = () => {
         }
         catch (error) {
             const message = error instanceof ApplicationException ? error.message : '登出失败';
-            const code = error instanceof ApplicationException ? error.code : COMMON_ERRORS.UNKNOWN_ERROR.code;
+            const code = error instanceof ApplicationException ? error.code : COMMON_RESPONSE.UNKNOWN_ERROR.code;
             setErrorInfo({ title: code, desc: message });
         }
     }

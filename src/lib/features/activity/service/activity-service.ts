@@ -4,7 +4,7 @@ import {
 import {PageResult, PaginateMeta} from '@/lib/types/pagination.ts';
 import {daoRegistry} from '@/lib/database/dao-register.ts'
 import {ApplicationException} from "@/lib/types/application-exception.ts";
-import {COMMON_ERRORS} from "@/lib/types/error-type.ts";
+import {COMMON_RESPONSE} from "@/lib/types/error-type.ts";
 import {
     canManageOwnedResource,
     hasAnyPermission,
@@ -21,7 +21,7 @@ export type ActivityPermissionContext = PermissionUserLike & {
 
 const assertCanReadActivity = (currentUser: ActivityPermissionContext): void => {
     if (!hasAnyPermission(currentUser.permissions, ['activity:read'])) {
-        throw new ApplicationException(COMMON_ERRORS.FORBIDDEN);
+        throw new ApplicationException(COMMON_RESPONSE.FORBIDDEN);
     }
 };
 
@@ -46,7 +46,7 @@ const assertCanManageActivity = ({
     });
 
     if (!canManage) {
-        throw new ApplicationException(COMMON_ERRORS.FORBIDDEN);
+        throw new ApplicationException(COMMON_RESPONSE.FORBIDDEN);
     }
 
     return currentUser.permissions.includes(anyPermission);
@@ -98,7 +98,7 @@ export async function getObjById(id: string, currentUser?: ActivityPermissionCon
     const {items} = await activityDao.findByCondition(condition);
     const [item] = items;
     if (!item) {
-        throw new ApplicationException(COMMON_ERRORS.NOT_FOUND);
+        throw new ApplicationException(COMMON_RESPONSE.NOT_FOUND);
     }
     return item;
 }

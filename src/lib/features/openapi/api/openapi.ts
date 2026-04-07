@@ -12,7 +12,7 @@ const ErrorSchema = z.object({
 });
 
 // GET 路由 - query 参数自动验证
-const getActivityRoute = createRoute({
+const getActivityRoute = createRoute({ 
     method: 'get',
     path: '/api/activity/getObjById',
     tags: ['Activity'],

@@ -1,5 +1,5 @@
 
-import type { ErrorType } from './error-type.ts';
+import type { ResponseType } from './error-type.ts';
 
 /**
  * 应用异常类
@@ -16,9 +16,9 @@ export class ApplicationException extends Error {
   /**
    * 原始错误类型
    */
-  public readonly errorType: ErrorType;
+  public readonly errorType: ResponseType;
 
-  constructor(errorType: ErrorType, message?: string) {
+  constructor(errorType: ResponseType, message?: string) {
     super(message ?? errorType.message);
     this.code = errorType.code;
     this.errorType = errorType;

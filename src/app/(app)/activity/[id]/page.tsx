@@ -4,7 +4,7 @@ import { notFound } from 'next/navigation'
 import ErrorAlert from '@/lib/components/web/ErrorAlert'
 import { fetchActivityDetail } from '@/lib/features/activity/service/fetch-activity-detail'
 import { ApplicationException } from '@/lib/types/application-exception.ts'
-import { COMMON_ERRORS } from '@/lib/types/error-type.ts'
+import { COMMON_RESPONSE } from '@/lib/types/error-type.ts'
 
 // 而没有在并行路由中的page页面则处理直接的activity/[id]路由访问
 export default async function ActivityDetailPage({
@@ -21,7 +21,7 @@ export default async function ActivityDetailPage({
         if (!activity) notFound()
     } catch (error) {
         const message = error instanceof ApplicationException ? error.message : '活动查询失败'
-        const code = error instanceof ApplicationException ? error.code : COMMON_ERRORS.UNKNOWN_ERROR.code
+        const code = error instanceof ApplicationException ? error.code : COMMON_RESPONSE.UNKNOWN_ERROR.code
         errorInfo = { title: code, desc: message }
     }
 
@@ -30,7 +30,7 @@ export default async function ActivityDetailPage({
     }
 
     if (!activity) {
-        return <ErrorAlert title={COMMON_ERRORS.UNKNOWN_ERROR.code} desc='活动查询失败' />
+        return <ErrorAlert title={COMMON_RESPONSE.UNKNOWN_ERROR.code} desc='活动查询失败' />
     }
 
     return (

@@ -1,6 +1,6 @@
 import z from 'zod';
 import { ApplicationException } from '../../../../lib/types/application-exception.ts';
-import { COMMON_ERRORS, INTERNAL_ERROR } from "../../../../lib/types/error-type.ts";
+import { COMMON_RESPONSE, INTERNAL_ERROR } from "../../../../lib/types/error-type.ts";
 import { DEFAULT_LIMIT, DEFAULT_PAGE } from "../../../constants.ts";
 import { BaseDao } from "../../../database/base-dao.tsx";
 import { prismaClient } from "../../../database/prisma-client.ts";
@@ -32,7 +32,7 @@ export class ActivityDao implements BaseDao<ActivityItem, z.infer<typeof insertA
             where: cleanCondition
         });
         if (result <= 0) {
-            throw new ApplicationException(COMMON_ERRORS.NOT_FOUND, '未找到指定数据');
+            throw new ApplicationException(COMMON_RESPONSE.NOT_FOUND, '未找到指定数据');
         }
         return result;
     }
