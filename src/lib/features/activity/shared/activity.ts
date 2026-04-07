@@ -1,5 +1,6 @@
 import { PaginateCondition } from "../../../types/pagination.ts";
 import {DEFAULT_LIMIT, DEFAULT_PAGE} from "../../../../lib/constants.ts";
+import { Prisma } from "@prisma/client";
 
 export enum ActivityTypes {
     未指定 = 0,
@@ -142,3 +143,10 @@ export interface UpdateActivityInput {
     // 结束时间
     end_time?:Date;
 }
+
+export interface DaoFindResult<T> {
+    totalCount: number;
+    items: T[]
+}
+
+export type ActivityRecord = Prisma.ActivityGetPayload<{select: null}>

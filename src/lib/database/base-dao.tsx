@@ -1,7 +1,7 @@
-import { PaginateCondition } from "@/lib/types/pagination.ts";
+import { DaoFindResult } from "../features/activity/shared/activity";
 
-export interface BaseDao<T, I, U, Condition extends PaginateCondition> {
-    findByCondition(condition: Condition): Promise<{items: T[], totalCount:number}>;
+export interface BaseDao<T, I, U, Condition> {
+    findByCondition(condition: Condition): Promise<DaoFindResult<T>>;
     countByCondition(condition: Condition): Promise<number>;
     insertObj(obj: I): Promise<boolean>;
     editObj(updateObj: U): Promise<boolean>;

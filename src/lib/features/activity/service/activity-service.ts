@@ -1,10 +1,7 @@
 import {
-    ActivityConditions,
     ActivityItem,
-    CreateActivityInput,
-    UpdateActivityInput
 } from '@/lib/features/activity/shared/activity.ts';
-import {PageResult, PaginateCondition, PaginateMeta} from '@/lib/types/pagination.ts';
+import {PageResult, PaginateMeta} from '@/lib/types/pagination.ts';
 import {daoRegistry} from '@/lib/database/dao-register.ts'
 import {ApplicationException} from "@/lib/types/application-exception.ts";
 import {COMMON_ERRORS} from "@/lib/types/error-type.ts";
@@ -13,6 +10,8 @@ import {
     hasAnyPermission,
     PermissionUserLike,
 } from "@/lib/features/role-permission/shared/role-permission.ts";
+import z from 'zod';
+import { activityConditionCheck, editActivityCheck, insertActivityCheck } from '../shared/activity-check';
 
 const activityDao = daoRegistry.activity();
 
@@ -69,13 +68,13 @@ export async function deleteById(
     return activityDao.deleteById(id)
 }
 
-export async function findByCondition<ConditionType extends PaginateCondition>(
-    condition: ConditionType,
+export async function findByCondition(
+    condition: z.infer<typeof activityConditionCheck>,
     currentUser: ActivityPermissionContext
 ): Promise<PageResult<ActivityItem>> {
     assertCanReadActivity(currentUser);
 
-    const {items, totalCount} = await activityDao.findByCondition(condition);
+    const { items, totalCount } = await activityDao.findByCondition(condition);
 
     const meta: PaginateMeta = {
         totalCount,
@@ -86,7 +85,7 @@ export async function findByCondition<ConditionType extends PaginateCondition>(
 
     return {
         meta,
-        items: items as ActivityItem[]
+        items
     };
 }
 
@@ -95,16 +94,16 @@ export async function getObjById(id: string, currentUser?: ActivityPermissionCon
         assertCanReadActivity(currentUser);
     }
 
-    const condition = {id: id} as ActivityConditions;
+    const condition = activityConditionCheck.parse({id});
     const {items} = await activityDao.findByCondition(condition);
     const [item] = items;
     if (!item) {
         throw new ApplicationException(COMMON_ERRORS.NOT_FOUND);
     }
-    return item as ActivityItem;
+    return item;
 }
 
-export async function updateObj(activity: UpdateActivityInput, currentUser: ActivityPermissionContext) {
+export async function updateObj(activity: z.infer<typeof editActivityCheck>, currentUser: ActivityPermissionContext) {
     const currentActivity = await getObjById(activity.id, currentUser);
     const hasAnyPermission = assertCanManageActivity({
         activity: currentActivity,
@@ -124,7 +123,7 @@ export async function updateObj(activity: UpdateActivityInput, currentUser: Acti
     return {success, data: payload};
 }
 
-export async function createObj(activity: CreateActivityInput) {
+export async function createObj(activity: z.infer<typeof insertActivityCheck>) {
     const success = await activityDao.insertObj(activity);
     return {success, data: activity};
 }

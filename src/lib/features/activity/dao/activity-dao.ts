@@ -1,19 +1,21 @@
+import z from 'zod';
 import { ApplicationException } from '../../../../lib/types/application-exception.ts';
 import { COMMON_ERRORS, INTERNAL_ERROR } from "../../../../lib/types/error-type.ts";
 import { DEFAULT_LIMIT, DEFAULT_PAGE } from "../../../constants.ts";
 import { BaseDao } from "../../../database/base-dao.tsx";
 import { prismaClient } from "../../../database/prisma-client.ts";
 import { calcOffset } from "../../../utils/page-helper.tsx";
+import { activityConditionCheck, editActivityCheck, insertActivityCheck } from '../shared/activity-check.ts';
 import {
-    ActivityConditions,
+    DaoFindResult,
     ActivityItem,
-    CreateActivityInput, UpdateActivityInput
 } from '../shared/activity.ts';
+import { toActivityDomainList } from './activity-mapper.ts';
 
-export class ActivityDao implements BaseDao<ActivityItem, CreateActivityInput, UpdateActivityInput, ActivityConditions> {
+export class ActivityDao implements BaseDao<ActivityItem, z.infer<typeof insertActivityCheck>, z.infer<typeof editActivityCheck>, z.infer<typeof activityConditionCheck>> {
 
 
-    insertObj = async (activity: ActivityItem): Promise<boolean> => {
+    insertObj = async (activity: z.infer<typeof insertActivityCheck>): Promise<boolean> => {
         try {
             await prismaClient.activity.create({
                 data: activity
@@ -24,7 +26,7 @@ export class ActivityDao implements BaseDao<ActivityItem, CreateActivityInput, U
         }
     }
 
-    countByCondition = async (condition: ActivityConditions): Promise<number> => {
+    countByCondition = async (condition: z.infer<typeof activityConditionCheck>): Promise<number> => {
         const { page: _page, limit: _limit, ...cleanCondition } = condition ?? {};
         const result = await prismaClient.activity.count({
             where: cleanCondition
@@ -35,7 +37,7 @@ export class ActivityDao implements BaseDao<ActivityItem, CreateActivityInput, U
         return result;
     }
 
-    findByCondition = async (condition: ActivityConditions): Promise<{ items: ActivityItem[], totalCount: number }> => {
+    findByCondition = async (condition: z.infer<typeof activityConditionCheck>): Promise<DaoFindResult<ActivityItem>> => {
         const { page: _page, limit, ...cleanCondition } = condition;
         const offset = calcOffset(condition);
         const totalCount = await this.countByCondition(condition);
@@ -45,12 +47,12 @@ export class ActivityDao implements BaseDao<ActivityItem, CreateActivityInput, U
             take: limit
         })
         return {
-            items: activities as ActivityItem[],
+            items: toActivityDomainList(activities),
             totalCount
         };
     }
 
-    editObj = async (updateActivity: UpdateActivityInput): Promise<boolean> => {
+    editObj = async (updateActivity: z.infer<typeof editActivityCheck>): Promise<boolean> => {
         try {
             await this.countByCondition({ id: updateActivity.id, limit: DEFAULT_LIMIT, page: DEFAULT_PAGE });
             await prismaClient.activity.update({

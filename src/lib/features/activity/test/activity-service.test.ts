@@ -1,6 +1,6 @@
 import { expect, test, vi } from 'vitest';
 
-import type { ActivityConditions, ActivityItem } from '../shared/activity.ts';
+import type { ActivityItem } from '../shared/activity.ts';
 import type { ActivityPermissionContext } from '../service/activity-service.ts';
 import { DEFAULT_LIMIT, DEFAULT_PAGE } from '@/lib/constants.ts';
 
@@ -19,7 +19,7 @@ vi.mock('@/lib/database/dao-register.ts', () => ({
 const { findByCondition } = await import('../service/activity-service.ts');
 
 test('test activity list service function', async () => {
-    const condition = { page: DEFAULT_PAGE, limit: DEFAULT_LIMIT } as ActivityConditions;
+    const condition = { page: DEFAULT_PAGE, limit: DEFAULT_LIMIT };
     const currentUser = { permissions: ['activity:read'] } as ActivityPermissionContext;
     const items = [{ id: 'activity-1' }] as ActivityItem[];
 
