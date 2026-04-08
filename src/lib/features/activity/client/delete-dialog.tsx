@@ -7,23 +7,28 @@ import ErrorAlert from "@/lib/components/web/ErrorAlert.tsx";
 import { ApplicationException } from "@/lib/types/application-exception.ts";
 import { COMMON_RESPONSE } from "@/lib/types/error-type.ts";
 import { unwrapResponse } from "@/lib/api/response.ts";
+import { useActivityStore } from "../shared/activity-store.ts";
 
-const DeleteDialog: FC<{ id: string, title: string, reloadActivity: () => void }> = ({ id, title, reloadActivity }) => {
-
+const DeleteDialog: FC<{ id: string, title: string }> = ({ id, title }) => {
+    const { setPageRefresh } = useActivityStore();
     const [errorInfo, setErrorInfo] = useState<{ title: number; desc: string } | null>(null);
+    const [isDeleting, setDeleting] = useState(false);
     const deleteActivity = async (event: React.MouseEvent) => {
         try {
             stopPopup(event);
-            const res = await honoClient.api.activity['deleteById'].$delete({ query: {id} });
+            setDeleting(true);
+            const res = await honoClient.api.activity['deleteById'].$delete({ query: { id } });
             const actionResult = await unwrapResponse(res);
             if (actionResult) {
-                reloadActivity()
+                setPageRefresh()
             }
         } catch (error) {
             const message = error instanceof ApplicationException ? error.message : '删除失败';
             const code = error instanceof ApplicationException ? error.code : COMMON_RESPONSE.UNKNOWN_ERROR.code;
             setErrorInfo({ title: code, desc: message });
             throw error;
+        } finally {
+            setDeleting(false);
         }
     }
 
@@ -46,8 +51,10 @@ const DeleteDialog: FC<{ id: string, title: string, reloadActivity: () => void }
                         </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                        <AlertDialogCancel onClick={stopPopup}>Cancel</AlertDialogCancel>
-                        <AlertDialogAction variant="destructive" onClick={deleteActivity}>Continue</AlertDialogAction>
+                        <AlertDialogCancel onClick={stopPopup}>取消</AlertDialogCancel>
+                        <AlertDialogAction variant="destructive" onClick={deleteActivity} disabled={isDeleting}>
+                            {isDeleting ? '删除中...' : '删除'}
+                        </AlertDialogAction>
                     </AlertDialogFooter>
                 </AlertDialogContent>
             </AlertDialog>

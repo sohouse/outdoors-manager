@@ -8,7 +8,7 @@ type activityStoreType = {
     paginateMeta: PaginateMeta,
     refreshFlag: number,
     setPaginateMeta: (meta: PaginateMeta) => void,
-    setPageCondition: (condition: PaginateCondition) => void,
+    setCondition: (condition: PaginateCondition) => void,
     setPageRefresh: () => void
 }
 
@@ -19,8 +19,9 @@ const useActivityStore = create<activityStoreType>((set) => ({
     setPaginateMeta: (page) => set(() => ({
         paginateMeta: {...page}
     })),
-    setPageCondition: (condition) => set(() => ({
-        condition: condition
+    setCondition: (patch: Partial<ActivityConditions>) => set((state) => ({
+        // 做筛选条件和分页条件的合并，不会冲掉筛选条件，后面的覆盖前面的同名属性
+        condition: {...state.condition, ...patch}
     })),
     setPageRefresh: () => set((state) => ({
         refreshFlag: state.refreshFlag + 1

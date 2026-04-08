@@ -3,7 +3,7 @@ import { Pagination, PaginationContent, PaginationItem, PaginationPrevious, Pagi
 import {DEFAULT_LIMIT} from "@/lib/constants.ts";
 
 const PageProvider = () => {
-    const { paginateMeta, setPageCondition } = useActivityStore();
+    const { paginateMeta, setCondition: setPageCondition } = useActivityStore();
 
     // 处理页码点击事件
     const handlePageChange = (page: number) => {

@@ -1,68 +1,38 @@
 'use client'
 
-import {Card, CardContent, CardFooter, CardHeader} from "@/lib/components/ui/card.tsx";
-import {ActivityStatus, ActivityTypes, ActivityVO} from "@/lib/features/activity/shared/activity.ts";
-import dayjs from 'dayjs'
-import {FC, useCallback, useEffect, useState} from "react";
+import { ActivityVO } from "@/lib/features/activity/shared/activity.ts";
+import { FC, useCallback, useEffect, useState } from "react";
 import ActivityFilterBar from "@/lib/features/activity/client/activity-search.tsx";
 import PageProvider from "@/lib/components/web/PageProvider.tsx";
-import {useActivityStore} from "@/lib/features/activity/shared/activity-store.ts";
-import DeleteDialog from "@/lib/features/activity/client/delete-dialog.tsx";
-import {useRouter} from "next/navigation";
-import {honoClient} from "@/lib/api/main.ts";
-import {ACTIVITY_ROUTES} from "@/lib/config/routes.ts";
-import {clsx} from "clsx";
-import {InferResponseType} from "hono";
+import { useActivityStore } from "@/lib/features/activity/shared/activity-store.ts";
+import { useRouter } from "next/navigation";
+import { honoClient } from "@/lib/api/main.ts";
+import { ACTIVITY_ROUTES } from "@/lib/config/routes.ts";
+import { InferResponseType } from "hono";
 import { unwrapResponse } from "@/lib/api/response";
 import ErrorAlert from "@/lib/components/web/ErrorAlert";
 import { ApplicationException } from "@/lib/types/application-exception.ts";
 import { COMMON_RESPONSE } from "@/lib/types/error-type.ts";
-import {
-    canManageOwnedResource,
-    UserRolePermission,
-} from "@/lib/features/role-permission/shared/role-permission.ts";
-
-// 根据活动类型获取文字颜色（在对应背景图片上显示效果好）
-const getTextColor = (type: number): string => {
-    const colorMap: Record<number, string> = {
-        1: 'text-amber-900',   // 徒步 - 暖色
-        2: 'text-slate-900',   // 攀岩 - 冷灰
-        3: 'text-emerald-900', // 攻防箭 - 绿色
-        4: 'text-orange-900',  // 体能训练 - 橙色
-        5: 'text-cyan-900',    // 攀冰 - 蓝冰色
-    };
-    return colorMap[type] || 'text-foreground';
-};
-
-// 暗色主题下的文字颜色
-const getDarkTextColor = (type: number): string => {
-    const colorMap: Record<number, string> = {
-        1: 'dark:text-amber-100',
-        2: 'dark:text-slate-100',
-        3: 'dark:text-emerald-100',
-        4: 'dark:text-orange-100',
-        5: 'dark:text-cyan-100',
-    };
-    return colorMap[type] || 'dark:text-foreground';
-};
+import { UserRolePermission } from "@/lib/features/role-permission/shared/role-permission.ts";
+import ActivityList from "@/lib/components/web/ActivityList";
 
 type FindByConditionResponse = InferResponseType<typeof honoClient.api.activity.findByCondition.$get, 200>;
 const ActivityPage: FC = () => {
 
-    const {condition, setPaginateMeta, refreshFlag} = useActivityStore();
+    const { condition, setPaginateMeta, refreshFlag } = useActivityStore();
     const router = useRouter();
 
 
     const [activities, setActivities] = useState<ActivityVO[]>([]);
     const [authz, setAuthz] = useState<UserRolePermission | null>(null);
-    const [errorInfo, setErrorInfo] = useState<{title: number; desc: string} | null>(null);
-
+    const [errorInfo, setErrorInfo] = useState<{ title: number; desc: string } | null>(null);
+    const [isLoading, setLoading] = useState(true);
 
     const fetchActivities = useCallback(async () => {
         try {
-            const res = await honoClient.api.activity['findByCondition'].$get({query: condition});
-            const {items, meta} = await unwrapResponse<FindByConditionResponse>(res);
-
+            setLoading(true);
+            const res = await honoClient.api.activity['findByCondition'].$get({ query: condition });
+            const { items, meta } = await unwrapResponse<FindByConditionResponse>(res);
             return {
                 items,
                 meta
@@ -72,20 +42,15 @@ const ActivityPage: FC = () => {
             const code = error instanceof ApplicationException ? error.code : COMMON_RESPONSE.UNKNOWN_ERROR.code;
             setErrorInfo({ title: code, desc: message });
             throw error;
+        } finally {
+            setLoading(false);
         }
     }, [condition])
-
-    const reloadActivity = useCallback(async () => {
-        const {items, meta} = await fetchActivities();
-
-        setActivities(items);
-        setPaginateMeta(meta);
-    }, [fetchActivities, setPaginateMeta]);
 
     useEffect(() => {
         let cancelled = false;
         const load = async () => {
-            const {items, meta} = await fetchActivities();
+            const { items, meta } = await fetchActivities();
             if (cancelled) return;
             setActivities(items);
             setPaginateMeta(meta);
@@ -130,86 +95,27 @@ const ActivityPage: FC = () => {
         router.push(ACTIVITY_ROUTES.GET_BY_ID(id))
     }
 
-    const canDeleteActivity = (item: ActivityVO): boolean => {
-        if (!authz) {
-            return false;
-        }
-
-        return canManageOwnedResource({
-            permissions: authz.permissions,
-            ownPermission: 'activity:delete.own',
-            anyPermission: 'activity:delete.any',
-            ownerId: item.creator_id,
-            user: {
-                userId: authz.userId,
-                name: authz.name,
-                username: authz.username,
-            },
-        });
-    }
-
     return (
-        errorInfo ? 
-        <ErrorAlert title={errorInfo.title} desc={errorInfo.desc} /> :
-        <div className="w-full flex flex-col gap-5 max-w-4xl mx-auto md:gap-5">
-            <ActivityFilterBar/>
-            {
-                activities.map(item => (
-                    <Card
-                        key={item.id}
-                        className="bg-cover bg-no-repeat bg-left cursor-pointer relative overflow-hidden"
-                        style={{
-                            backgroundImage: `url(/images/activity/${item.type}.png)`
-                        }}
-                        onClick={() => goActivityDetail(item.id)}
-                    >
-                        {/* 模糊背景层 */}
-                        <div
-                            className="absolute inset-0 bg-cover bg-no-repeat bg-center blur-2xl scale-110 -z-10 pointer-events-none"
-                            style={{backgroundImage: `url(/images/activity/${item.type}.png)`}}
-                        />
-                        {/* 亮色主题渐变覆盖层 */}
-                        <div
-                            className="absolute inset-0 bg-linear-to-r from-background/90 via-background/30 to-transparent md:from-background/60 md:via-background/10 pointer-events-none"/>
-                        {/* 暗色主题渐变覆盖层 */}
-                        <div
-                            className="absolute inset-0 bg-linear-to-r dark:from-foreground/80 dark:via-foreground/20 dark:to-transparent md:dark:from-foreground/40 md:dark:via-foreground/5 pointer-events-none"/>
-                        <CardHeader className={`${getTextColor(item.type)} ${getDarkTextColor(item.type)} opacity-80`}>
-                            <h2 className={clsx("text-lg md:text-xl truncate", {
-                                "line-through": item.status === ActivityStatus.已取消
-                            })}>
-                                {item.title}
-                            </h2>
-                            <div className="text-xs md:text-sm opacity-80">
-                                {`${dayjs(item.start_time).format('YYYY-MM-DD HH:mm:ss')}
-              - ${dayjs(item.end_time).format('YYYY-MM-DD HH:mm:ss')}`}
-                            </div>
-                            <div className="opacity-80">
-                                {`${ActivityTypes[item.type]} - ${ActivityStatus[item.status]}`}
-                            </div>
-                        </CardHeader>
-                        <CardContent
-                            className={`line-clamp-2 md:line-clamp-3 text-sm ${getTextColor(item.type)} ${getDarkTextColor(item.type)} opacity-90`}>
-                            {item.desc}
-                        </CardContent>
-                        <CardFooter className={`flex flex-row justify-between text-xs`}>
-                            <div
-                                className={`${getTextColor(item.type)} ${getDarkTextColor(item.type)} opacity-90 inline`}>
-                                {item.leader_name} - {dayjs(item.start_time).format('YYYY-MM-DD HH:mm:ss')}
-                            </div>
-                            {canDeleteActivity(item) ? (
-                                <DeleteDialog
-                                    id={item.id}
-                                    title={item.title}
-                                    reloadActivity={reloadActivity}
-                                />
-                            ) : null}
-                        </CardFooter>
-                    </Card>
-                ))
+        <>
+            {errorInfo && <ErrorAlert title={errorInfo.title} desc={errorInfo.desc} />}
+            {isLoading && <div className="w-full max-w-4xl mx-auto space-y-4 p-4">
+                <div className="h-5 bg-gray-200 rounded animate-pulse" />
+                <div className="h-28 bg-gray-200 rounded animate-pulse" />
+                <div className="h-28 bg-gray-200 rounded animate-pulse" />
+            </div>}
+            {!errorInfo && !isLoading && activities.length === 0 && <div >暂无数据</div>}
+            {!errorInfo && !isLoading && activities.length > 0 &&
+                <div className="w-full flex flex-col gap-5 max-w-4xl mx-auto md:gap-5">
+                    <ActivityFilterBar />
+                    <ActivityList
+                        activities={activities}
+                        authz={authz}
+                        onItemClick={goActivityDetail}
+                    />
+                    <PageProvider />
+                </div>
             }
-            <PageProvider/>
-        </div>
+        </>
     )
 }
 

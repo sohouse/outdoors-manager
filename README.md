@@ -105,6 +105,17 @@
 - 认证上下文、授权上下文与业务 service 解耦
 - 为后续继续扩展业务模块预留结构空间
 
+当前活动模块的前端结构也做了针对性整理，重点把列表页、详情弹窗和状态管理的职责拆开：
+
+- `src/app/(app)/activity/page.tsx`：活动页容器，负责拉取列表与权限数据，并统一编排 `loading / empty / error / success` 状态
+- `src/lib/components/web/ActivityList.tsx`：活动列表展示层，负责遍历数据并组合列表项
+- `src/lib/components/web/ActivityListItem.tsx`：单个活动卡片展示，承接卡片 UI、跳转详情和删除入口
+- `src/lib/features/activity/client/activity-detail-modal-client.tsx`：详情弹窗容器，负责关闭弹窗、编辑提交成功后的列表刷新以及编辑权限分支
+- `src/lib/features/activity/client/ActivityEditForm.tsx`：活动编辑表单，使用 React Hook Form + Zod 处理字段输入与提交状态
+- `src/lib/features/activity/client/ActivityDetailView.tsx`：活动详情只读展示
+- `src/lib/features/activity/shared/activity-store.ts`：通过 Zustand 保存列表查询条件、分页元数据与列表刷新标记，供列表页、分页和删除/编辑动作协作
+- `src/lib/features/activity/shared/activity-auth.ts`：集中封装活动编辑/删除权限判断，避免页面层重复拼接 RBAC 参数
+
 ## Auth & RBAC
 
 当前版本的认证与授权链路分为两层：
