@@ -98,7 +98,7 @@ export default function ActivityDetailModalClient({
                 </DialogHeader>
                 {canEdit &&
                     <ActivityEditForm
-                        handleEdit={activityEditSubmit}
+                        onSubmit={activityEditSubmit}
                         activity={activity}
                     />
                 }

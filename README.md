@@ -1,3 +1,8 @@
+<div align="center">
+  <span>中文</span> |
+  <a href="README.en.md">English</a>
+</div>
+
 # Outdoors Manager
 
 一个面向户外活动场景的活动管理平台原型项目，聚焦活动管理、筛选查询、详情查看、用户注册登录与基础权限控制等核心流程。项目基于 Next.js App Router 构建，结合 Hono、Prisma、PostgreSQL 与 Better Auth，实现前后端一体化的全栈应用。

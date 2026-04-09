@@ -14,11 +14,11 @@ import FormTextareaField from '@/lib/components/web/form-field/FormTextareaField
 import FormSelectField from '@/lib/components/web/form-field/FormSelectField'
 
 type ActivityEditProp = {
-    handleEdit: (data: z.output<typeof editActivityCheck>) => void
+    onSubmit: (data: z.output<typeof editActivityCheck>) => Promise<void>
     activity: ActivityVO
 }
 
-const ActivityEditForm = ({ handleEdit, activity }: ActivityEditProp) => {
+const ActivityEditForm = ({ onSubmit, activity }: ActivityEditProp) => {
     type EditActivityFormInput = z.input<typeof editActivityCheck>
     type EditActivityFormValues = z.output<typeof editActivityCheck>
 
@@ -40,7 +40,7 @@ const ActivityEditForm = ({ handleEdit, activity }: ActivityEditProp) => {
                 id='activity-edit-form'
                 onSubmit={form.handleSubmit(
                     (data) => {
-                        handleEdit(data)
+                        onSubmit(data)
                     },
                     (error) => {
                         console.error(error)
