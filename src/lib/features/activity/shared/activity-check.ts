@@ -2,6 +2,18 @@ import z from "zod";
 import { ActivityStatus, ActivityTypes } from "./activity.ts";
 import { DEFAULT_LIMIT, DEFAULT_PAGE } from "@/lib/constants.ts";
 
+const emptyToUndefined = (value: unknown) => {
+    if (value === "" || value == null) {
+        return undefined;
+    }
+    return value;
+};
+
+const datetimeInputSchema = z.string().refine(
+    (val) => val === "" || !isNaN(Date.parse(val)),
+    { message: "Invalid ISO datetime" }
+);
+
 export const editActivityCheck = z.object({
     start_time: z.string().describe('活动开始时间').optional().refine(
         (val) => !val || !isNaN(Date.parse(val)),
@@ -67,20 +79,21 @@ export const listActivityCheck = z.object({
 export const activityConditionCheck = z.object({
     page: z.coerce.number().optional().default(DEFAULT_PAGE).describe('page number'),
     limit: z.coerce.number().optional().default(DEFAULT_LIMIT).describe('page size'),
-    id: z.string().optional().describe('activity id'),
-    leader_name: z.string().optional().describe('leader\'s name'),
-    title: z.string().optional().describe('activity title'),
-    type: z.enum(ActivityTypes).describe('activity type').optional(),
-    status: z.enum(ActivityStatus).describe('activity status').optional(),
-    start_time: z.union([
-        z.literal(""),
-        z.iso.datetime()
-    ]).optional().describe('activity start time'),
-    end_time: z.union([
-        z.literal(""),
-        z.iso.datetime()
-    ]).optional().describe('activity start time'),
-    car_id: z.string().optional().describe('bus license plate')
+    id: z.preprocess(emptyToUndefined, z.string().optional()).describe('activity id'),
+    leader_name: z.preprocess(emptyToUndefined, z.string().optional()).describe('leader\'s name'),
+    author: z.preprocess(emptyToUndefined, z.string().optional()).describe('author'),
+    title: z.preprocess(emptyToUndefined, z.string().optional()).describe('activity title'),
+    type: z.preprocess((value) => {
+        const normalized = emptyToUndefined(value);
+        return normalized == null ? undefined : Number(normalized);
+    }, z.enum(ActivityTypes).optional()).describe('activity type'),
+    status: z.preprocess((value) => {
+        const normalized = emptyToUndefined(value);
+        return normalized == null ? undefined : Number(normalized);
+    }, z.enum(ActivityStatus).optional()).describe('activity status'),
+    start_time: z.preprocess(emptyToUndefined, datetimeInputSchema.optional()).describe('activity start time'),
+    end_time: z.preprocess(emptyToUndefined, datetimeInputSchema.optional()).describe('activity start time'),
+    car_id: z.preprocess(emptyToUndefined, z.string().optional()).describe('bus license plate')
 })
 
 export const activityById = z.object({

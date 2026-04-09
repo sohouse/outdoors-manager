@@ -12,8 +12,50 @@ import {
 } from '../shared/activity.ts';
 import { toActivityDomainList } from './activity-mapper.ts';
 
-export class ActivityDao implements BaseDao<ActivityItem, z.infer<typeof insertActivityCheck>, z.infer<typeof editActivityCheck>, z.infer<typeof activityConditionCheck>> {
+const buildActivityWhere = (condition: z.infer<typeof activityConditionCheck>) => {
+    const { page: _page, limit: _limit, ...cleanCondition } = condition ?? {};
+    const title = cleanCondition.title?.trim();
+    const author = cleanCondition.author?.trim();
 
+    return {
+        ...(title
+            ? {
+                title: {
+                    contains: title,
+                    mode: 'insensitive' as const,
+                },
+            }
+            : {}),
+        ...(cleanCondition.type !== undefined
+            ? { type: cleanCondition.type }
+            : {}),
+        ...(cleanCondition.id !== undefined
+            ? { id: cleanCondition.id }
+            : {}),
+        ...(author
+            ? { author }
+            : {}),
+        ...(cleanCondition.status !== undefined
+            ? { status: cleanCondition.status }
+            : {}),
+        ...(cleanCondition.start_time
+            ? {
+                start_time: {
+                    gte: new Date(cleanCondition.start_time),
+                },
+            }
+            : {}),
+        ...(cleanCondition.end_time
+            ? {
+                end_time: {
+                    lte: new Date(cleanCondition.end_time),
+                },
+            }
+            : {}),
+    };
+};
+
+export class ActivityDao implements BaseDao<ActivityItem, z.infer<typeof insertActivityCheck>, z.infer<typeof editActivityCheck>, z.infer<typeof activityConditionCheck>> {
 
     insertObj = async (activity: z.infer<typeof insertActivityCheck>): Promise<boolean> => {
         try {
@@ -21,28 +63,27 @@ export class ActivityDao implements BaseDao<ActivityItem, z.infer<typeof insertA
                 data: activity
             })
             return true;
-        } catch {
+        } catch (error) {
+            if (error instanceof ApplicationException) {
+                throw error;
+            }
             throw new ApplicationException(INTERNAL_ERROR);
         }
     }
 
     countByCondition = async (condition: z.infer<typeof activityConditionCheck>): Promise<number> => {
-        const { page: _page, limit: _limit, ...cleanCondition } = condition ?? {};
         const result = await prismaClient.activity.count({
-            where: cleanCondition
+            where: buildActivityWhere(condition)
         });
-        if (result <= 0) {
-            throw new ApplicationException(COMMON_RESPONSE.NOT_FOUND, '未找到指定数据');
-        }
         return result;
     }
 
     findByCondition = async (condition: z.infer<typeof activityConditionCheck>): Promise<DaoFindResult<ActivityItem>> => {
-        const { page: _page, limit, ...cleanCondition } = condition;
+        const { limit } = condition;
         const offset = calcOffset(condition);
         const totalCount = await this.countByCondition(condition);
         const activities = await prismaClient.activity.findMany({
-            where: cleanCondition,
+            where: buildActivityWhere(condition),
             skip: offset,
             take: limit
         })
@@ -54,7 +95,10 @@ export class ActivityDao implements BaseDao<ActivityItem, z.infer<typeof insertA
 
     editObj = async (updateActivity: z.infer<typeof editActivityCheck>): Promise<boolean> => {
         try {
-            await this.countByCondition({ id: updateActivity.id, limit: DEFAULT_LIMIT, page: DEFAULT_PAGE });
+            const count = await this.countByCondition({ id: updateActivity.id, limit: DEFAULT_LIMIT, page: DEFAULT_PAGE });
+            if (count <= 0) {
+                throw new ApplicationException(COMMON_RESPONSE.NOT_FOUND, '未找到指定数据');
+            }
             await prismaClient.activity.update({
                 where: {
                     id: updateActivity.id
@@ -62,21 +106,30 @@ export class ActivityDao implements BaseDao<ActivityItem, z.infer<typeof insertA
                 data: updateActivity
             })
             return true;
-        } catch {
+        } catch (error) {
+            if (error instanceof ApplicationException) {
+                throw error;
+            }
             throw new ApplicationException(INTERNAL_ERROR);
         }
     }
 
     deleteById = async (id: string): Promise<boolean> => {
         try {
-            await this.countByCondition({ id: id, limit: DEFAULT_LIMIT, page: DEFAULT_PAGE });
+            const count = await this.countByCondition({ id: id, limit: DEFAULT_LIMIT, page: DEFAULT_PAGE });
+            if (count <= 0) {
+                throw new ApplicationException(COMMON_RESPONSE.NOT_FOUND, '未找到指定数据');
+            }
             await prismaClient.activity.delete({
                 where: {
                     id: id
                 }
             });
             return true;
-        } catch {
+        } catch (error) {
+            if (error instanceof ApplicationException) {
+                throw error;
+            }
             throw new ApplicationException(INTERNAL_ERROR);
         }
     }

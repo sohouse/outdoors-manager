@@ -10,6 +10,9 @@ import ErrorAlert from '@/lib/components/web/ErrorAlert'
 import {
     Dialog,
     DialogContent,
+    DialogDescription,
+    DialogHeader,
+    DialogTitle,
 } from '@/lib/components/ui/dialog.tsx'
 import { editActivityCheck } from '@/lib/features/activity/shared/activity-check.ts'
 import { useActivityStore } from '@/lib/features/activity/shared/activity-store.ts'
@@ -87,6 +90,12 @@ export default function ActivityDetailModalClient({
     ) : (
         <Dialog open={true} onOpenChange={onOpenChange}>
             <DialogContent className='w-full !max-w-4xl max-h-[70vh] overflow-y-auto scroll-hide'>
+                <DialogDescription>当前{canEdit? '修改': '查看'}活动：{activity.title}</DialogDescription>
+                <DialogHeader>
+                    <DialogTitle>
+                        {canEdit ? '修改活动': '查看活动'}
+                    </DialogTitle>
+                </DialogHeader>
                 {canEdit &&
                     <ActivityEditForm
                         handleEdit={activityEditSubmit}

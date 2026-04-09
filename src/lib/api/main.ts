@@ -46,9 +46,9 @@ honoService.use('*', async (c, next) => {
 honoService.onError((err, c) => {
     console.error(err.stack)
     if (err instanceof ApplicationException) {
-        return c.json(createErrorApplicationResponse(err.code, err.message), err.status);
+        return c.json(createErrorApplicationResponse(err), err.status);
     } else {
-        return c.json(createErrorApplicationResponse(UNKNOWN_ERROR.code, UNKNOWN_ERROR.message), HTTP_STATUS.INTERNAL_SERVER_ERROR);
+        return c.json(createErrorApplicationResponse(UNKNOWN_ERROR), HTTP_STATUS.INTERNAL_SERVER_ERROR);
     }
 })
 

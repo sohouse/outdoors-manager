@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest';
 
-import { editActivityCheck } from '../shared/activity-check.ts';
+import { activityConditionCheck, editActivityCheck } from '../shared/activity-check.ts';
 import { ActivityStatus, ActivityTypes } from '../shared/activity.ts';
 
 test('editActivityCheck should parse valid activity payload', () => {
@@ -45,5 +45,39 @@ test('editActivityCheck should reject invalid date string', () => {
     if (!result.success) {
         expect(result.error.issues[0]?.message).toBe('Invalid date format');
         expect(result.error.issues[0]?.path[0]).toBe('start_time');
+    }
+});
+
+test('activityConditionCheck should accept datetime-local input', () => {
+    const result = activityConditionCheck.safeParse({
+        start_time: '2026-04-09T14:30',
+        end_time: '2026-04-09T16:45',
+    });
+
+    expect(result.success).toBe(true);
+    if (result.success) {
+        expect(result.data.start_time).toBe('2026-04-09T14:30');
+        expect(result.data.end_time).toBe('2026-04-09T16:45');
+    }
+});
+
+test('activityConditionCheck should treat empty search fields as undefined', () => {
+    const result = activityConditionCheck.safeParse({
+        author: '',
+        title: '',
+        start_time: '',
+        end_time: '',
+        type: '',
+        status: '',
+    });
+
+    expect(result.success).toBe(true);
+    if (result.success) {
+        expect(result.data.author).toBeUndefined();
+        expect(result.data.title).toBeUndefined();
+        expect(result.data.start_time).toBeUndefined();
+        expect(result.data.end_time).toBeUndefined();
+        expect(result.data.type).toBeUndefined();
+        expect(result.data.status).toBeUndefined();
     }
 });

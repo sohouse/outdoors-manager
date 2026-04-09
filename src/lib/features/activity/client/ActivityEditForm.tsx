@@ -7,8 +7,8 @@ import { editActivityCheck } from '@/lib/features/activity/shared/activity-check
 import { zodResolver } from '@hookform/resolvers/zod'
 import { generateMock } from '@anatine/zod-mock'
 import z from 'zod'
-import { DialogTitle, DialogClose } from '@radix-ui/react-dialog'
-import { DialogHeader, DialogFooter } from '../../../components/ui/dialog'
+import { DialogClose } from '@radix-ui/react-dialog'
+import { DialogFooter } from '../../../components/ui/dialog'
 import FormTextField from '@/lib/components/web/form-field/FormInputField'
 import FormTextareaField from '@/lib/components/web/form-field/FormTextareaField'
 import FormSelectField from '@/lib/components/web/form-field/FormSelectField'
@@ -36,11 +36,6 @@ const ActivityEditForm = ({ handleEdit, activity }: ActivityEditProp) => {
     const { isSubmitting } = form.formState;
     return (
         <>
-            <DialogHeader>
-                <DialogTitle>
-                    修改活动
-                </DialogTitle>
-            </DialogHeader>
             <form
                 id='activity-edit-form'
                 onSubmit={form.handleSubmit(

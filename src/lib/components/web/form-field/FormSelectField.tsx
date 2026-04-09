@@ -8,6 +8,7 @@ type FormTextareaFieldProps<T extends FieldValues> = {
   label: string
   className?: string
   entries: Record<string, string | number>
+  showTitle?: boolean
 }
 
 function FormSelectField<T extends FieldValues>({
@@ -15,22 +16,23 @@ function FormSelectField<T extends FieldValues>({
   name,
   label,
   className,
-  entries
+  entries,
+  showTitle = true
 }: FormTextareaFieldProps<T>) {
   return (
     <>
-      <FieldLabel>{label}</FieldLabel>
+      {showTitle && <FieldLabel>{label}</FieldLabel>}
       <Controller
         name={name}
         control={control}
         render={({ field }) => (
           <Field>
             <Select
-              value={field.value?.toString()}
+              value={field.value == null ? "" : field.value.toString()}
               onValueChange={(value) => field.onChange(Number(value))}
             >
               <SelectTrigger className={className}>
-                <SelectValue placeholder='选择活动类型' />
+                <SelectValue placeholder={label} />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>

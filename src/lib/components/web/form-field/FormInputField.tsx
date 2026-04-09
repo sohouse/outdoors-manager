@@ -8,6 +8,7 @@ type FormTextFieldProps<T extends FieldValues> = {
   label: string
   className?: string
   type?: React.HTMLInputTypeAttribute
+  showTitle?: boolean
 }
 
 function FormTextField<T extends FieldValues>({
@@ -16,10 +17,11 @@ function FormTextField<T extends FieldValues>({
   label,
   className,
   type = 'text',
+  showTitle = true
 }: FormTextFieldProps<T>) {
   return (
     <>
-      <FieldLabel>{label}</FieldLabel>
+      {showTitle && <FieldLabel>{label}</FieldLabel>}
       <Controller
         name={name}
         control={control}
@@ -31,6 +33,7 @@ function FormTextField<T extends FieldValues>({
               value={field.value ?? ''}
               onChange={(e) => field.onChange(e.target.value)}
               className={className}
+              placeholder={label}
             />
             {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
           </Field>
