@@ -230,6 +230,24 @@ DELETE /api/rolePermission/cache?id=<userId>&type=role
 DELETE /api/rolePermission/cache?id=<userId>&type=permission&name=activity:read
 ```
 
+## Documentation
+
+除了根目录 `README.md`，项目还在 [docs/README.md](/home/will/workspace/outdoor-manager/docs/README.md) 下维护了分层文档，用于沉淀产品目标、架构、开发约定、交接信息、剩余工作和方案记录。
+
+推荐阅读顺序：
+
+- [docs/PRODUCT.md](/home/will/workspace/outdoor-manager/docs/PRODUCT.md)：项目目标、当前阶段优先级、明确先做什么和暂时不做什么
+- [docs/ARCHITECTURE.md](/home/will/workspace/outdoor-manager/docs/ARCHITECTURE.md)：系统结构、关键链路、主要约束与设计取舍
+- [docs/DEVELOPMENT.md](/home/will/workspace/outdoor-manager/docs/DEVELOPMENT.md)：开发约定、分层原则、最小验证要求
+- [docs/ENGINEERING_HANDOFF.md](/home/will/workspace/outdoor-manager/docs/ENGINEERING_HANDOFF.md)：本地运行、验证与排障 runbook
+- [docs/REMAINING_WORK.md](/home/will/workspace/outdoor-manager/docs/REMAINING_WORK.md)：下一阶段路线图
+
+补充材料：
+
+- [docs/interview-notes.md](/home/will/workspace/outdoor-manager/docs/interview-notes.md)：项目介绍、demo 路线、面试深问
+- [docs/ts-fullstack-prep.md](/home/will/workspace/outdoor-manager/docs/ts-fullstack-prep.md)：围绕当前项目的 TS/React/Next 高频问法
+- [docs/plans/README.md](/home/will/workspace/outdoor-manager/docs/plans/README.md)：方案文档目录与命名约定
+
 ## Testing
 
 当前单元测试主要覆盖三类能力：
