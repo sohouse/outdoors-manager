@@ -4,8 +4,7 @@ import clsx from "clsx";
 import { isMatch } from 'micromatch'
 import { trim } from "lodash";
 import { usePathname, useRouter } from "next/navigation";
-import { Dialog, DialogContent, DialogDescription, DialogTitle } from "@radix-ui/react-dialog";
-import { DialogHeader } from "../../../components/ui/dialog.tsx";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "../../../components/ui/dialog.tsx";
 
 const ActivityEditModal: FC<{ title: string, match: string[], className?: string, children: ReactNode, id: string }> = ({ match, children }) => {
     const pathname = usePathname();
