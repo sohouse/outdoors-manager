@@ -50,4 +50,4 @@ next-env.d.ts
 src/lib/database/dev.db
 .env
 
-/src/docs/project/
+/docs/project/
