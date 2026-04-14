@@ -1,4 +1,4 @@
-import { ReactNode } from 'react'
+import { ReactNode, Suspense } from 'react'
 import '@/styles/globals.css'
 import { Metadata } from 'next'
 import { ThemeProvider } from '@/lib/components/theme-provider.tsx';
@@ -22,7 +22,9 @@ const RootLayout = async ({ children }: { children: ReactNode }) => {
                     <SidebarProvider className='border-amber-50'>
                         <AppSidebar />
                         <main className='px-4 md:px-6 lg:px-8 w-full mx-auto flex flex-col'>
-                            <Header />
+                            <Suspense fallback={null}>
+                                <Header />
+                            </Suspense>
                             <div className='flex-1 flex flex-col items-center'>
                                 {children}
                             </div>
