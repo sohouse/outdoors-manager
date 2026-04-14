@@ -20,6 +20,7 @@
     "test:unit:file": "sh -c 'shift; vitest run \"$@\"' --",
     "test:unit:name": "sh -c 'shift; pattern=\"$1\"; shift; vitest run -t \"$pattern\" \"$@\"' --",
     "type": "tsc --noEmit --project tsconfig.json",
+    "preonline": "pnpm type && pnpm test:unit && pnpm build",
     "------------------ db command": "----",
     "---generate---": "生成客户端",
     "db:gen": "NODE_ENV=development prisma generate",

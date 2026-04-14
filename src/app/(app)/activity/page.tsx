@@ -75,6 +75,13 @@ const ActivityPage: FC = () => {
                     setAuthz(result);
                 }
             } catch (error) {
+                if (error instanceof ApplicationException && error.status === COMMON_RESPONSE.UNAUTHORIZED.status) {
+                    if (!cancelled) {
+                        setAuthz(null);
+                    }
+                    return;
+                }
+
                 const message = error instanceof ApplicationException ? error.message : '权限信息加载失败';
                 const code = error instanceof ApplicationException ? error.code : COMMON_RESPONSE.UNKNOWN_ERROR.code;
 

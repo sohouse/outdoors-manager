@@ -21,9 +21,13 @@ export default async function ActivityDetailModal({
         activity = await fetchActivityDetail(id)
         authz = await fetchCurrentUserRolePermission()
     } catch (error) {
+        if (error instanceof ApplicationException && error.status === COMMON_RESPONSE.UNAUTHORIZED.status) {
+            authz = null
+        } else {
         const message = error instanceof ApplicationException ? error.message : '活动查询失败'
         const code = error instanceof ApplicationException ? error.code : COMMON_RESPONSE.UNKNOWN_ERROR.code
         errorInfo = { title: code, desc: message }
+        }
     }
 
     if (errorInfo) {
@@ -32,10 +36,6 @@ export default async function ActivityDetailModal({
 
     if (!activity) {
         return <ErrorAlert title={COMMON_RESPONSE.UNKNOWN_ERROR.code} desc='活动查询失败' />
-    }
-
-    if (!authz) {
-        return <ErrorAlert title={COMMON_RESPONSE.UNKNOWN_ERROR.code} desc='权限信息查询失败' />
     }
 
     return <ActivityDetailModalClient activity={activity} authz={authz} />

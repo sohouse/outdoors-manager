@@ -19,7 +19,11 @@ export const canDeleteActivity = (activity: ActivityVO, authz: UserRolePermissio
     });
 }
 
-export const canEditActivity = (authz: UserRolePermission, activity: ActivityVO) => {
+export const canEditActivity = (authz: UserRolePermission | null, activity: ActivityVO) => {
+    if (!authz) {
+        return false;
+    }
+
     const canEdit = canManageOwnedResource({
         permissions: authz.permissions,
         ownPermission: 'activity:update.own',
