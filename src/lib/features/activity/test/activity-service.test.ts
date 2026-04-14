@@ -180,11 +180,11 @@ describe('activity ownership authorization', () => {
 });
 
 test('getObjById should throw not found when activity does not exist', async () => {
-    const currentUser = createUser(['activity:read']);
+    // const currentUser = createUser(['activity:read']);
 
     findByConditionMock.mockResolvedValueOnce({ items: [], totalCount: 0 });
 
-    await expect(getObjById('missing-id', currentUser)).rejects.toMatchObject({
+    await expect(getObjById('missing-id')).rejects.toMatchObject({
         code: COMMON_RESPONSE.NOT_FOUND.code,
         status: COMMON_RESPONSE.NOT_FOUND.status,
     } satisfies Partial<ApplicationException>);

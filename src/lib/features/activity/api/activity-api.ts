@@ -8,9 +8,9 @@ import { COMMON_RESPONSE } from "@/lib/types/error-type.ts";
 const app = new Hono();
 export const activityApi = app
     .get('/findByCondition', async (context) => {
-        const currentUser = context.get('authz');
+        // const currentUser = context.get('authz');
         const query = activityConditionCheck.parse(context.req.query());
-        const result = await findByCondition(query, currentUser);
+        const result = await findByCondition(query);
         const response = {
             ...result,
             items: result.items.map(toActivityVO),
@@ -19,9 +19,9 @@ export const activityApi = app
         return context.json(activityPageResponseSchema.parse(response));
     })
     .get('/getObjById', async (context) => {
-        const currentUser = context.get('authz');
+        // const currentUser = context.get('authz');
         const { id } = activityById.parse(context.req.query());
-        const result = await getObjById(id, currentUser);
+        const result = await getObjById(id);
         return context.json(toActivityVO(result));
     })
     .put('/updateObj', async (context) => {
