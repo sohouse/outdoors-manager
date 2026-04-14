@@ -2,6 +2,7 @@ import { Hono } from 'hono';
 import { beforeEach, describe, expect, test, vi } from 'vitest';
 
 import { activityApi } from '@/lib/features/activity/api/activity-api.ts';
+import { rolePermissionApi } from '@/lib/features/role-permission/api/role-permission-api.ts';
 import { authMiddleware } from '@/lib/middlewares/auth-middleware.ts';
 import { ApplicationException } from '@/lib/types/application-exception.ts';
 import {
@@ -41,7 +42,7 @@ vi.mock('@/lib/database/dao-register.ts', () => ({
 const buildApp = () => {
     const app = new Hono();
 
-    app.use('/activity/*', authMiddleware);
+    app.use('/rolePermission/*', authMiddleware);
     app.use('*', async (c, next) => {
         await next();
 
@@ -66,6 +67,7 @@ const buildApp = () => {
     });
 
     app.route('/activity', activityApi);
+    app.route('/rolePermission', rolePermissionApi);
     return app;
 };
 
@@ -74,48 +76,49 @@ beforeEach(() => {
 });
 
 describe('auth middleware route behavior', () => {
-    test('should return 401 when session is missing', async () => {
-        getSessionMock.mockResolvedValueOnce(null);
+    test('should allow anonymous read for activity detail route', async () => {
+        findByConditionMock.mockResolvedValueOnce({
+            items: [{
+                id: 'activity-1',
+                title: 'Weekend Hiking',
+                type: 1,
+                status: 1,
+                start_time: new Date('2026-04-01T09:00:00.000Z'),
+                end_time: new Date('2026-04-01T12:00:00.000Z'),
+                create_time: new Date('2026-04-01T08:00:00.000Z'),
+                author: 'Will',
+            }],
+            totalCount: 1,
+        });
 
         const res = await buildApp().request('/activity/getObjById?id=activity-1');
+
+        expect(res.status).toBe(200);
+    });
+
+    test('should return 401 when anonymous user updates activity', async () => {
+        const res = await buildApp().request('/activity/updateObj', {
+            method: 'PUT',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({ id: 'activity-1', title: 'Updated title' }),
+        });
         const body = await res.json() as { code: number };
 
         expect(res.status).toBe(COMMON_RESPONSE.UNAUTHORIZED.status);
         expect(body.code).toBe(COMMON_RESPONSE.UNAUTHORIZED.code);
     });
 
-    test('should return 403 when user lacks read permission', async () => {
-        getSessionMock.mockResolvedValueOnce({
-            user: { id: 'user-1', name: 'Will', username: 'will' },
-            session: { id: 'session-1', userId: 'user-1' },
-        });
-        userRolePermissionMock.mockResolvedValueOnce({
-            userId: 'user-1',
-            name: 'Will',
-            username: 'will',
-            roles: [],
-            permissions: [],
-        });
+    test('should return 401 when session is missing for protected role permission route', async () => {
+        getSessionMock.mockResolvedValueOnce(null);
 
-        const res = await buildApp().request('/activity/getObjById?id=activity-1');
+        const res = await buildApp().request('/rolePermission/currentUserRolePermission');
         const body = await res.json() as { code: number };
 
-        expect(res.status).toBe(COMMON_RESPONSE.FORBIDDEN.status);
-        expect(body.code).toBe(COMMON_RESPONSE.FORBIDDEN.code);
+        expect(res.status).toBe(COMMON_RESPONSE.UNAUTHORIZED.status);
+        expect(body.code).toBe(COMMON_RESPONSE.UNAUTHORIZED.code);
     });
 
     test('should return 404 when resource does not exist', async () => {
-        getSessionMock.mockResolvedValueOnce({
-            user: { id: 'user-1', name: 'Will', username: 'will' },
-            session: { id: 'session-1', userId: 'user-1' },
-        });
-        userRolePermissionMock.mockResolvedValueOnce({
-            userId: 'user-1',
-            name: 'Will',
-            username: 'will',
-            roles: [],
-            permissions: ['activity:read'],
-        });
         findByConditionMock.mockResolvedValueOnce({
             items: [],
             totalCount: 0,

@@ -50,6 +50,9 @@ const SignUp = () => {
                 <CardContent>
                     <form onSubmit={form.handleSubmit(submitForm)}>
                         <FieldGroup>
+                            <div className="rounded-md border border-amber-300 bg-amber-50 px-4 py-3 text-sm text-amber-900">
+                                默认账号：admin；密码：a1234567
+                            </div>
                             <Controller name="name" control={form.control} render={({ field, fieldState }) => (
                                 <Field data-invalid={fieldState.invalid}>
                                     <FieldLabel>your name:</FieldLabel>

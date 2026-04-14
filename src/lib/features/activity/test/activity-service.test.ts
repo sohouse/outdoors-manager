@@ -47,7 +47,6 @@ beforeEach(() => {
 
 test('test activity list service function', async () => {
     const condition = { page: DEFAULT_PAGE, limit: DEFAULT_LIMIT };
-    const currentUser = createUser(['activity:read']);
     const items = [{ id: 'activity-1' }] as ActivityItem[];
 
     findByConditionMock.mockResolvedValueOnce({
@@ -55,7 +54,7 @@ test('test activity list service function', async () => {
         totalCount: 1,
     });
 
-    const result = await findByCondition(condition, currentUser);
+    const result = await findByCondition(condition);
 
     expect(findByConditionMock).toHaveBeenCalledWith(condition);
     expect(result.items).toEqual(items);
@@ -67,17 +66,14 @@ test('test activity list service function', async () => {
     });
 });
 
-test('findByCondition should throw forbidden when user lacks read permission', async () => {
-    const condition = { page: DEFAULT_PAGE, limit: DEFAULT_LIMIT };
-    const currentUser = createUser([]);
-
-    await expect(findByCondition(condition, currentUser)).rejects.toMatchObject({
-        code: COMMON_RESPONSE.FORBIDDEN.code,
-        status: COMMON_RESPONSE.FORBIDDEN.status,
-    } satisfies Partial<ApplicationException>);
-});
-
 describe('activity ownership authorization', () => {
+    test('deleteById should throw unauthorized when user is anonymous', async () => {
+        await expect(deleteById('activity-1')).rejects.toMatchObject({
+            code: COMMON_RESPONSE.UNAUTHORIZED.code,
+            status: COMMON_RESPONSE.UNAUTHORIZED.status,
+        } satisfies Partial<ApplicationException>);
+    });
+
     test('deleteById should allow owner with own permission', async () => {
         const currentUser = createUser(['activity:read', 'activity:delete.own']);
         const activity = createActivity();
@@ -166,6 +162,20 @@ describe('activity ownership authorization', () => {
             success: true,
             data: payload,
         });
+    });
+
+    test('updateObj should throw unauthorized when user is anonymous', async () => {
+        await expect(
+            updateObj({
+                id: 'activity-1',
+                title: 'Updated Title',
+                type: ActivityTypes.徒步,
+                status: ActivityStatus.报名中,
+            })
+        ).rejects.toMatchObject({
+            code: COMMON_RESPONSE.UNAUTHORIZED.code,
+            status: COMMON_RESPONSE.UNAUTHORIZED.status,
+        } satisfies Partial<ApplicationException>);
     });
 });
 

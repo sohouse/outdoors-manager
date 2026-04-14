@@ -12,7 +12,6 @@ import { rolePermissionApi } from "../features/role-permission/api/role-permissi
 const honoService = new OpenAPIHono().basePath('/api');
 // 中间件注册
 honoService.use(prettyJSON());
-honoService.use('/activity/*', authMiddleware);
 honoService.use('/rolePermission/*', authMiddleware);
 
 // 环绕拦截

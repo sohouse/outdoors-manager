@@ -36,7 +36,7 @@ type EditActivityFormValues = z.output<typeof editActivityCheck>
 
 type ActivityDetailModalClientProps = {
     activity: ActivityVO
-    authz: UserRolePermission
+    authz: UserRolePermission | null
 }
 
 export default function ActivityDetailModalClient({
