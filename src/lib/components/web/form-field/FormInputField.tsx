@@ -9,6 +9,8 @@ type FormTextFieldProps<T extends FieldValues> = {
   className?: string
   type?: React.HTMLInputTypeAttribute
   showTitle?: boolean
+  readOnly?: boolean
+  disabled?: boolean
 }
 
 function FormTextField<T extends FieldValues>({
@@ -17,7 +19,9 @@ function FormTextField<T extends FieldValues>({
   label,
   className,
   type = 'text',
-  showTitle = true
+  showTitle = true,
+  readOnly = false,
+  disabled = false,
 }: FormTextFieldProps<T>) {
   return (
     <>
@@ -34,6 +38,8 @@ function FormTextField<T extends FieldValues>({
               onChange={(e) => field.onChange(e.target.value)}
               className={className}
               placeholder={label}
+              readOnly={readOnly}
+              disabled={disabled}
             />
             {fieldState.invalid && <FieldError errors={[fieldState.error]} />}
           </Field>

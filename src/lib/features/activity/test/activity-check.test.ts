@@ -1,6 +1,6 @@
 import { expect, test } from 'vitest';
 
-import { activityConditionCheck, editActivityCheck } from '../shared/activity-check.ts';
+import { activityConditionCheck, createActivityRequestCheck, editActivityCheck } from '../shared/activity-check.ts';
 import { ActivityStatus, ActivityTypes } from '../shared/activity.ts';
 
 test('editActivityCheck should parse valid activity payload', () => {
@@ -79,5 +79,20 @@ test('activityConditionCheck should treat empty search fields as undefined', () 
         expect(result.data.end_time).toBeUndefined();
         expect(result.data.type).toBeUndefined();
         expect(result.data.status).toBeUndefined();
+    }
+});
+
+test('createActivityRequestCheck should reject empty datetime values', () => {
+    const result = createActivityRequestCheck.safeParse({
+        title: '新活动',
+        start_time: '',
+        end_time: '',
+        type: ActivityTypes.徒步,
+        status: ActivityStatus.报名中,
+    });
+
+    expect(result.success).toBe(false);
+    if (!result.success) {
+        expect(result.error.issues.map((issue) => issue.path[0])).toEqual(['start_time', 'end_time']);
     }
 });

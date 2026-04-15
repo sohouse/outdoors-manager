@@ -1,4 +1,4 @@
-import { ActivityTypes, ActivityStatus, ActivityVO } from '@/lib/features/activity/shared/activity'
+import { ActivityVO } from '@/lib/features/activity/shared/activity'
 import dayjs from 'dayjs'
 import { Button } from '@/lib/components/ui/button.tsx'
 import { useForm } from 'react-hook-form'
@@ -10,8 +10,7 @@ import z from 'zod'
 import { DialogClose } from '@radix-ui/react-dialog'
 import { DialogFooter } from '../../../components/ui/dialog'
 import FormTextField from '@/lib/components/web/form-field/FormInputField'
-import FormTextareaField from '@/lib/components/web/form-field/FormTextareaField'
-import FormSelectField from '@/lib/components/web/form-field/FormSelectField'
+import ActivityFormFields from '@/lib/features/activity/client/ActivityFormFields'
 
 type ActivityEditProp = {
     onSubmit: (data: z.output<typeof editActivityCheck>) => Promise<void>
@@ -48,49 +47,7 @@ const ActivityEditForm = ({ onSubmit, activity }: ActivityEditProp) => {
                 )}
             >
                 <FieldGroup>
-                    <FormTextField
-                        control={form.control}
-                        name='start_time'
-                        label='开始时间'
-                        type='datetime-local'
-                        className='w-fit editable-field'
-                    />
-
-                    <FormTextField
-                        control={form.control}
-                        name='end_time'
-                        label='结束时间'
-                        type='datetime-local'
-                        className='w-fit editable-field'
-                    />
-
-                    <FormSelectField 
-                        label='活动类型'
-                        name='type'
-                        control={form.control}
-                        entries={ActivityTypes}
-                    />
-
-                    <FormSelectField 
-                        label='活动状态'
-                        name='status'
-                        control={form.control}
-                        entries={ActivityStatus}
-                    />
-
-                    <FormTextareaField
-                        control={form.control}
-                        name='desc'
-                        label='活动描述'
-                        className='w-fit editable-field'
-                    />
-
-                    <FormTextareaField
-                        control={form.control}
-                        name='content'
-                        label='活动正文'
-                        className='editable-field'
-                    />
+                    <ActivityFormFields control={form.control} />
                     <FormTextField
                         control={form.control}
                         name='author'
