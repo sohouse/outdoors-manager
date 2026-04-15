@@ -42,13 +42,19 @@ export const insertActivityCheck = z.object({
     type: z.enum(ActivityTypes).describe('活动类型').default(ActivityTypes.未指定),
     status: z.enum(ActivityStatus).describe('活动状态').default(ActivityStatus.未开始),
     start_time: z.string().describe('活动开始时间').refine(
-        (val) => !val || !isNaN(Date.parse(val)),
+        (val) => !isNaN(Date.parse(val)),
         { message: "Invalid date format" }
     ),
     end_time: z.string().describe('活动结束时间').refine(
-        (val) => !val || !isNaN(Date.parse(val)),
+        (val) => !isNaN(Date.parse(val)),
         { message: "Invalid date format" }
     ),
+    creator_id: z.string().optional(),
+})
+
+export const createActivityRequestCheck = insertActivityCheck.omit({
+    author: true,
+    creator_id: true,
 })
 
 export const listActivityCheck = z.object({

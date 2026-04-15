@@ -106,6 +106,8 @@ export interface CreateActivityInput {
     title: string,
     // 活动创建人
     author: string;
+    // 活动创建者id
+    creator_id?: string;
     // 活动类型
     type: ActivityTypes;
     // 活动状态

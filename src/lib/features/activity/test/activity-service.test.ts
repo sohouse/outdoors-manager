@@ -6,10 +6,11 @@ import { UserRolePermission } from '../../role-permission/shared/role-permission
 import { ApplicationException } from '@/lib/types/application-exception.ts';
 import { COMMON_RESPONSE } from '@/lib/types/error-type.ts';
 
-const { findByConditionMock, editObjMock, deleteByIdMock } = vi.hoisted(() => ({
+const { findByConditionMock, editObjMock, deleteByIdMock, insertObjMock } = vi.hoisted(() => ({
     findByConditionMock: vi.fn(),
     editObjMock: vi.fn(),
     deleteByIdMock: vi.fn(),
+    insertObjMock: vi.fn(),
 }));
 
 vi.mock('@/lib/database/dao-register.ts', () => ({
@@ -18,11 +19,12 @@ vi.mock('@/lib/database/dao-register.ts', () => ({
             findByCondition: findByConditionMock,
             editObj: editObjMock,
             deleteById: deleteByIdMock,
+            insertObj: insertObjMock,
         }),
     },
 }));
 
-const { deleteById, findByCondition, getObjById, updateObj } = await import('../service/activity-service.ts');
+const { createObj, deleteById, findByCondition, getObjById, updateObj } = await import('../service/activity-service.ts');
 
 const createUser = (permissions: string[], overrides?: Partial<UserRolePermission>): UserRolePermission => ({
     userId: 'user-1',
@@ -63,6 +65,28 @@ test('test activity list service function', async () => {
         limit: DEFAULT_LIMIT,
         totalPage: 1,
         page: DEFAULT_PAGE,
+    });
+});
+
+test('createObj should persist activity payload', async () => {
+    const payload = {
+        title: 'New Hiking Activity',
+        author: 'Will',
+        creator_id: 'user-1',
+        type: ActivityTypes.徒步,
+        status: ActivityStatus.报名中,
+        start_time: '2026-04-20T09:00:00.000Z',
+        end_time: '2026-04-20T12:00:00.000Z',
+    };
+
+    insertObjMock.mockResolvedValueOnce(true);
+
+    const result = await createObj(payload);
+
+    expect(insertObjMock).toHaveBeenCalledWith(payload);
+    expect(result).toEqual({
+        success: true,
+        data: payload,
     });
 });
 

@@ -9,7 +9,7 @@ import { useScroll } from "@/lib/hooks/use-scroll.ts"
 import { cn } from "@/lib/utils/tailwind-helper.ts"
 import { Home, LogInIcon, LogOutIcon, UserPlus } from "lucide-react"
 import Image from "next/image";
-import { COMMON_ROUTES } from "@/lib/config/routes.ts";
+import { ACTIVITY_ROUTES, COMMON_ROUTES } from "@/lib/config/routes.ts";
 import { ApplicationException } from "@/lib/types/application-exception.ts"
 import { COMMON_RESPONSE } from "@/lib/types/error-type.ts"
 import ErrorAlert from "./ErrorAlert.tsx"
@@ -109,7 +109,7 @@ const Header = () => {
                                 <Link className={`${buttonVariants({ variant: "destructive" })} hidden! md:inline!`}
                                     href={`/activity${urlQuery}`}>Activity</Link>
                                 <Link className={`${buttonVariants({ variant: "destructive" })} hidden! md:inline!`}
-                                    href="/topics/create">Create</Link>
+                                    href={user ? ACTIVITY_ROUTES.ADD : COMMON_ROUTES.LOGIN}>Create</Link>
                             </div>
                         </div>
 

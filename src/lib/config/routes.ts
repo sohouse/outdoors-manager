@@ -8,7 +8,7 @@ export const COMMON_ROUTES = {
 export const ACTIVITY_ROUTES = {
     LIST: '/activity',
     EDIT: '/edit',
-    ADD: '/add',
+    ADD: '/activity/add',
     GET_BY_ID: (id:string) => `/activity/${id}`,
     DELETE: '/delete',
 }

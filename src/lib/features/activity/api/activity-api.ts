@@ -1,9 +1,10 @@
 import { toActivityVO } from "@/lib/features/activity/shared/activity.ts";
 import { Hono } from "hono";
-import { deleteById, findByCondition, getObjById, updateObj } from "@/lib/features/activity/service/activity-service.ts";
-import { activityConditionCheck, editActivityCheck, activityById, activityPageResponseSchema } from "../shared/activity-check";
+import { createObj, deleteById, findByCondition, getObjById, updateObj } from "@/lib/features/activity/service/activity-service.ts";
+import { activityConditionCheck, createActivityRequestCheck, editActivityCheck, activityById, activityPageResponseSchema, insertActivityCheck } from "../shared/activity-check";
 import { ApplicationException } from "@/lib/types/application-exception.ts";
 import { COMMON_RESPONSE } from "@/lib/types/error-type.ts";
+import { authMiddleware } from "@/lib/middlewares/auth-middleware.ts";
 
 const app = new Hono();
 export const activityApi = app
@@ -24,7 +25,19 @@ export const activityApi = app
         const result = await getObjById(id);
         return context.json(toActivityVO(result));
     })
-    .put('/updateObj', async (context) => {
+    .post('/createObj', authMiddleware, async (context) => {
+        const currentUser = context.get('auth');
+        const activityRequest = createActivityRequestCheck.parse(await context.req.json());
+        const activity = insertActivityCheck.parse({
+            ...activityRequest,
+            author: currentUser.user.name,
+            creator_id: currentUser.user.id,
+        });
+
+        const success = await createObj(activity);
+        return context.json(success);
+    })
+    .put('/updateObj', authMiddleware, async (context) => {
         const currentUser = context.get('authz');
         if (!currentUser) {
             throw new ApplicationException(COMMON_RESPONSE.UNAUTHORIZED);
@@ -33,7 +46,7 @@ export const activityApi = app
         const success = await updateObj(activity, currentUser);
         return context.json(success);
     })
-    .delete('/deleteById', async (context) => {
+    .delete('/deleteById', authMiddleware, async (context) => {
         const currentUser = context.get('authz');
         if (!currentUser) {
             throw new ApplicationException(COMMON_RESPONSE.UNAUTHORIZED);

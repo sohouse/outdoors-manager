@@ -60,13 +60,18 @@ export class ActivityDao implements BaseDao<ActivityItem, z.infer<typeof insertA
     insertObj = async (activity: z.infer<typeof insertActivityCheck>): Promise<boolean> => {
         try {
             await prismaClient.activity.create({
-                data: activity
+                data: {
+                    ...activity,
+                    start_time: new Date(activity.start_time),
+                    end_time: new Date(activity.end_time),
+                }
             })
             return true;
         } catch (error) {
             if (error instanceof ApplicationException) {
                 throw error;
             }
+            console.error(error);
             throw new ApplicationException(INTERNAL_ERROR);
         }
     }
@@ -84,6 +89,9 @@ export class ActivityDao implements BaseDao<ActivityItem, z.infer<typeof insertA
         const totalCount = await this.countByCondition(condition);
         const activities = await prismaClient.activity.findMany({
             where: buildActivityWhere(condition),
+            orderBy: {
+                create_time: 'desc',
+            },
             skip: offset,
             take: limit
         })

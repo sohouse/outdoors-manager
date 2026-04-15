@@ -11,10 +11,11 @@ import {
 } from '@/lib/types/application-response.ts';
 import { COMMON_RESPONSE, HTTP_STATUS } from '@/lib/types/error-type.ts';
 
-const { getSessionMock, userRolePermissionMock, findByConditionMock } = vi.hoisted(() => ({
+const { getSessionMock, userRolePermissionMock, findByConditionMock, insertObjMock } = vi.hoisted(() => ({
     getSessionMock: vi.fn(),
     userRolePermissionMock: vi.fn(),
     findByConditionMock: vi.fn(),
+    insertObjMock: vi.fn(),
 }));
 
 vi.mock('@/lib/auth.ts', () => ({
@@ -35,6 +36,7 @@ vi.mock('@/lib/database/dao-register.ts', () => ({
             findByCondition: findByConditionMock,
             editObj: vi.fn(),
             deleteById: vi.fn(),
+            insertObj: insertObjMock,
         }),
     },
 }));
@@ -101,6 +103,24 @@ describe('auth middleware route behavior', () => {
             method: 'PUT',
             headers: { 'content-type': 'application/json' },
             body: JSON.stringify({ id: 'activity-1', title: 'Updated title' }),
+        });
+        const body = await res.json() as { code: number };
+
+        expect(res.status).toBe(COMMON_RESPONSE.UNAUTHORIZED.status);
+        expect(body.code).toBe(COMMON_RESPONSE.UNAUTHORIZED.code);
+    });
+
+    test('should return 401 when anonymous user creates activity', async () => {
+        const res = await buildApp().request('/activity/createObj', {
+            method: 'POST',
+            headers: { 'content-type': 'application/json' },
+            body: JSON.stringify({
+                title: 'New activity',
+                type: 1,
+                status: 1,
+                start_time: '2026-04-20T09:00:00.000Z',
+                end_time: '2026-04-20T12:00:00.000Z',
+            }),
         });
         const body = await res.json() as { code: number };
 
